@@ -1,0 +1,3 @@
+node_id,chapter_id,label,name,code,summary,source_id,source_locator,priority,review_status
+CH06-N001,CH06,Process,生产质量系统监管,,示例节点，需根据官方原文和专业意见修改,CH06-S001,第21.137条,high,pending
+CH06-N002,CH06,Organization,生产批准持有人,,示例节点，需根据官方原文和专业意见修改,CH06-S001,第21.137条,medium,pending

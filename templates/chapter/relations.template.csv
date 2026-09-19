@@ -1,0 +1,2 @@
+relation_id,from_node_id,type,to_node_id,source_id,evidence,review_status
+CH06-R001,CH06-N001,APPLIES_TO,CH06-N002,CH06-S001,示例关系，需由专业成员依据原文确认,pending

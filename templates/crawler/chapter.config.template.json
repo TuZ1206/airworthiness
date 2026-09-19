@@ -1,0 +1,19 @@
+{
+  "chapter_id": "CHXX",
+  "chapter_name": "章节名称",
+  "allowed_hosts": [
+    "gov.cn",
+    ".gov.cn"
+  ],
+  "seed_urls": [
+    "https://www.caac.gov.cn/"
+  ],
+  "keywords": [
+    "填写本章关键词",
+    "填写法规或程序文号"
+  ],
+  "output_directory": "data/chapters/chXX/documents",
+  "request_interval_seconds": 2,
+  "max_pages": 100,
+  "save_raw_binary": false
+}
