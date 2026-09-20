@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第6章: 质量体系与供应链适航监管 - 适航法规知识图谱</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', 'Microsoft YaHei', sans-serif;
+            line-height: 1.7;
+            color: #334155;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* 头部导航 */
+        .header {
+            background: linear-gradient(135deg, rgba(219, 234, 254, 0.9) 0%, rgba(237, 233, 254, 0.9) 100%);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(165, 180, 252, 0.1);
+        }
+
+        .nav-breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            font-size: 0.9em;
+            color: #64748b;
+        }
+
+        .nav-breadcrumb a {
+            color: #4f46e5;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-breadcrumb a:hover {
+            color: #7c3aed;
+        }
+
+        .chapter-header {
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .chapter-number {
+            font-size: 1.2em;
+            color: #4f46e5;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .chapter-title {
+            font-size: 2.2em;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+
+        .chapter-description {
+            font-size: 1.1em;
+            color: #64748b;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* 内容区域 */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .main-content {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .info-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .section-title {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #a5b4fc;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* 知识内容样式 */
+        .knowledge-content {
+            line-height: 1.8;
+            color: #475569;
+        }
+
+        .knowledge-content h3 {
+            color: #334155;
+            margin: 25px 0 15px;
+            font-size: 1.4em;
+        }
+
+        .knowledge-content p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        .knowledge-content ul, .knowledge-content ol {
+            margin: 15px 0;
+            padding-left: 25px;
+        }
+
+        .knowledge-content li {
+            margin-bottom: 8px;
+        }
+
+        /* 关联项目样式 */
+        .related-items {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .related-item {
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+        }
+
+        .related-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .item-article {
+            border-left-color: #10b981;
+            background: rgba(16, 185, 129, 0.05);
+        }
+
+        .item-concept {
+            border-left-color: #f59e0b;
+            background: rgba(245, 158, 11, 0.05);
+        }
+
+        .item-method {
+            border-left-color: #8b5cf6;
+            background: rgba(139, 92, 246, 0.05);
+        }
+
+        .item-block {
+            border-left-color: #ef4444;
+            background: rgba(239, 68, 68, 0.05);
+        }
+
+        .item-title {
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 5px;
+        }
+
+        .item-desc {
+            font-size: 0.9em;
+            color: #64748b;
+        }
+
+        /* 导航按钮 */
+        .chapter-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .nav-btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-btn-prev {
+            background: linear-gradient(135deg, #a5b4fc, #818cf8);
+            color: white;
+        }
+
+        .nav-btn-next {
+            background: linear-gradient(135deg, #c4b5fd, #a78bfa);
+            color: white;
+            margin-left: auto;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(165, 180, 252, 0.3);
+        }
+
+        /* 可视化区域 */
+        .visualization-section {
+            margin-top: 40px;
+        }
+
+        #chapter-graph {
+            height: 400px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 968px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .chapter-title {
+                font-size: 1.8em;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+
+            .chapter-navigation {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-btn {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 头部导航 -->
+        <div class="header">
+            <div class="nav-breadcrumb">
+                <a href="/"><i class="fas fa-home"></i> 首页</a>
+                <i class="fas fa-chevron-right"></i>
+                <a href="/">知识体系</a>
+                <i class="fas fa-chevron-right"></i>
+                <span>第6章</span>
+            </div>
+
+            <div class="chapter-header">
+                <div class="chapter-number">第 6 章</div>
+                <h1 class="chapter-title">质量体系与供应链适航监管</h1>
+                <p class="chapter-description">本章系统阐述了航空器制造商及其供应商在质量管理体系、生产批准、过程控制、数据追溯等方面的适航监管要求，确保从原材料到最终产品的全供应链符合安全与质量规范。</p>
+            </div>
+        </div>
+
+        <!-- 主要内容区域 -->
+        <div class="content-grid">
+            <!-- 左侧主要内容 -->
+            <div class="main-content">
+                <h2 class="section-title">
+                    <i class="fas fa-book-open"></i> 知识内容
+                </h2>
+
+                <div class="knowledge-content">
+                    <h3>6.1 供应商质量管理</h3>
+                    <p><strong>核心要求概述</strong></p>
+                    <p>生产批准持有人(PAH)对其制造的产品和零部件的适航性负最终责任，必须建立有效的供应商控制程序。</p>
+
+                    <h4>6.1.1 FAA供应商控制要求</h4>
+                    <p>根据 14 CFR Part 21.137 和 AC 21-43:</p>
+                    <ol>
+                        <li><strong>供应商控制程序</strong>: 确保每个供应商提供的产品、零部件或服务符合生产批准持有人的要求。</li>
+                        <li><strong>供应商报告流程</strong>: 建立流程，要求供应商报告已放行但随后发现不符合要求的产品。</li>
+                        <li><strong>供应商监督</strong>: 对供应商进行监督，确保其符合批准的设计数据和质量要求。</li>
+                        <li><strong>访问权</strong>: 组织、其客户和监管机构有权在供应链的任何层级访问适用设施和文件化信息。</li>
+                    </ol>
+
+                    <h4>6.1.2 CAAC供应商管理要求</h4>
+                    <p>根据 AP-21-AA-2010-04R4:</p>
+                    <ol>
+                        <li><strong>直接发货要求</strong>: 在满足特定条件（如PAH有经批准的质量系统、提供书面授权）时，允许供应商直接发货。</li>
+                        <li><strong>第三方监督</strong>: 在满足程序要求的情况下，可使用第三方对供应商进行监督。</li>
+                    </ol>
+
+                    <h4>6.1.3 NASA供应商质量管理</h4>
+                    <p>根据 NASA-STD-7919.1 附录P:</p>
+                    <ol>
+                        <li><strong>合同要求</strong>: 确保将适航和构型控制审查流程纳入外部供应商合同。</li>
+                        <li><strong>质量管理体系(QMS)</strong>: 关键件、工艺和服务供应商必须维持符合以下标准之一的QMS：
+                            <ul>
+                                <li>AS9100D (首选)</li>
+                                <li>ISO 9001:2015</li>
+                                <li>AS9003A</li>
+                                <li>ISO/IEC 17025:2017 (实验室首选)</li>
+                            </ul>
+                        </li>
+                        <li><strong>供应商批准与要求传递</strong>: 建立供应商批准流程，并将要求明确传递给供应商。</li>
+                    </ol>
+
+                    <h3>6.2 生产批准 (POA/PC)</h3>
+                    <p><strong>核心要求概述</strong></p>
+                    <p>生产批准是局方对组织按照经批准的设计进行持续、稳定生产能力的官方认证。</p>
+
+                    <h4>6.2.1 FAA生产批准体系</h4>
+                    <p>根据 14 CFR Part 21:</p>
+                    <ol>
+                        <li><strong>生产证书(PC)</strong>: 证明组织符合批准的生产流程和质量系统。</li>
+                        <li><strong>零部件制造商批准(PMA)</strong>: 针对替换和改装零部件的特定认证。</li>
+                        <li><strong>技术标准规定(TSO)</strong>: 针对机载设备的批准。</li>
+                        <li><strong>质量管理体系</strong>: 需包含文件化程序、校准、受控环境、材料追溯、不合格品管理等措施。</li>
+                    </ol>
+
+                    <h4>6.2.2 CAAC生产许可要求</h4>
+                    <p>根据 CCAR-21 和 AP-21-31:</p>
+                    <ol>
+                        <li><strong>生产许可证(PC)</strong>: 局方颁发，允许按照经批准的设计和质量系统批量生产。</li>
+                        <li><strong>先决条件</strong>: 通常需先获得型号合格证(TC)，但申请可同步进行。</li>
+                        <li><strong>质量系统</strong>: 企业通常需获得AS9100质量体系认证。</li>
+                    </ol>
+
+                    <h4>6.2.3 EASA生产组织批准(POA)</h4>
+                    <p>根据 EASA Part 21 Subpart G:</p>
+                    <ol>
+                        <li><strong>系统控制供应商</strong>: 要求生产组织实施系统控制供应商，确保符合型号设计。</li>
+                        <li><strong>供应链可追溯性</strong>: 在整个供应链中保持零部件和材料的可追溯性。</li>
+                    </ol>
+
+                    <h3>6.3 质量控制与审查要点</h3>
+
+                    <h4>6.3.1 FAA质量控制要求</h4>
+                    <p>根据 AC 21-43 和 AC 20-154A:</p>
+                    <ol>
+                        <li><strong>接收检验系统</strong>: 确保接收的零部件适航，核查供应商文件与可追溯性。</li>
+                        <li><strong>供应商评估</strong>: 使用核查清单和评估矩阵。</li>
+                        <li><strong>内部审核与变更管理</strong>: 对质量系统内的变更进行管理。</li>
+                        <li><strong>检验/测试与记录保存</strong>: 执行检验测试并保存记录以确保可追溯性。</li>
+                        <li><strong>不合格品管理</strong>: 控制不合格品，防止其进入供应链。</li>
+                    </ol>
+
+                    <h4>6.3.2 NASA质量控制要求</h4>
+                    <p>根据 NASA-STD-7919.1:</p>
+                    <ol>
+                        <li><strong>质量保证办公室(QAO)监督</strong>: QAO负责持续监督飞行操作的适航性与安全。</li>
+                        <li><strong>质量管理体系</strong>: 负责航空器维护的组织应有符合AS9100D或AS9110C的维护程序。</li>
+                        <li><strong>审核、监督与趋势分析</strong>: 通过审核、监督和趋势分析监控维护活动。</li>
+                        <li><strong>工作指令验证与构型确认</strong>: QA验证工作指令，并确保航空器构型和部件得到正确维护与记录。</li>
+                    </ol>
+
+                    <h3>6.4 数据追溯与合规记录</h3>
+                    <p><strong>核心要求概述</strong></p>
+                    <p>强调全生命周期的可追溯性与合规记录保存，以证明产品适航性。</p>
+
+                    <h4>6.4.1 FAA记录保存要求</h4>
+                    <p>根据 14 CFR Part 43.9 和 AC 21-43:</p>
+                    <ol>
+                        <li><strong>维护与生产记录</strong>: 保存维护、改装和生产记录。</li>
+                        <li><strong>符合性声明</strong>: 供应商必须提供符合性声明。</li>
+                        <li><strong>文件证明</strong>: 每个生产阶段的合规性都需有文件证明。</li>
+                    </ol>
+
+                    <h4>6.4.2 CAAC追溯信息报告</h4>
+                    <p>根据 AP-21-AA-2010-04R4:</p>
+                    <ol>
+                        <li><strong>追溯信息报告</strong>: 生产批准持有人应要求供应商报告已交付的、因设计原因影响安全的产品的追溯信息。</li>
+                        <li><strong>供应商提供信息</strong>: 供应商需提供货物的追溯信息。</li>
+                    </ol>
+
+                    <h4>6.4.3 NASA记录管理要求</h4>
+                    <p>根据 NASA-STD-7919.1:</p>
+                    <ol>
+                        <li><strong>记录管理流程</strong>: 建立流程管理设计、文件和工艺要求。</li>
+                        <li><strong>关键记录内容</strong>: 包括工程证明文档、材料符合性记录、设计审查文档、危险分析、重量与平衡数据等。</li>
+                        <li><strong>可追溯性</strong>: 确保所有记录可追溯到相关的已关闭工作包。</li>
+                        <li><strong>构型管理</strong>: 由NAMIS系统提供支持，QAO归档。</li>
+                    </ol>
+                </div>
+
+                <!-- 章节导航 -->
+                <div class="chapter-navigation">
+                    <a href="/chapter/5/detail" class="nav-btn nav-btn-prev">
+                        <i class="fas fa-arrow-left"></i>
+                        上一章: 第五章 等同验证与变更管理
+                    </a>
+                    <!-- 下一章链接暂缺，可根据需要添加 -->
+                </div>
+            </div>
+
+            <!-- 右侧边栏 -->
+            <div class="sidebar">
+                <!-- 相关法规 -->
+                <div class="info-card">
+                    <h3 class="section-title">
+                        <i class="fas fa-gavel"></i> 相关法规
+                    </h3>
+                    <div class="related-items">
+                        <div class="related-item item-article">
+                            <div class="item-title">14 CFR Part 21.137 / AC 21-43</div>
+                            <div class="item-desc">FAA供应商控制、生产批准与质量管理的核心要求。</div>
+                        </div>
+                        <div class="related-item item-article">
+                            <div class="item-title">AC 20-154A</div>
+                            <div class="item-desc">FAA接收检验系统指南。</div>
+                        </div>
+                        <div class="related-item item-article">
+                            <div class="item-title">CCAR-21 / AP-21-AA-2010-04R4</div>
+                            <div class="item-desc">CAAC生产批准、供应商监督与追溯信息报告要求。</div>
+                        </div>
+                        <div class="related-item item-article">
+                            <div class="item-title">AP-21-31</div>
+                            <div class="item-desc">CAAC生产许可证(PC)审定程序。</div>
+                        </div>
+                        <div class="related-item item-article">
+                            <div class="item-title">NASA-STD-7919.1</div>
+                            <div class="item-desc">NASA供应商质量管理、质量控制与记录管理的综合要求。</div>
+                        </div>
+                        <div class="related-item item-article">
+                            <div class="item-title">EASA Part 21 Subpart G</div>
+                            <div class="item-desc">EASA生产组织批准(POA)要求。</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 核心概念 -->
+                <div class="info-card">
+                    <h3 class="section-title">
+                        <i class="fas fa-lightbulb"></i> 核心概念
+                    </h3>
+                    <div class="related-items">
+                        <div class="related-item item-concept">
+                            <div class="item-title">生产批准持有人 (PAH)</div>
+                            <div class="item-desc">持有PC、PMA等生产批准证书，对其产品适航性负最终责任的组织。</div>
+                        </div>
+                        <div class="related-item item-concept">
+                            <div class="item-title">生产批准</div>
+                            <div class="item-desc">局方对组织批量生产符合经批准设计产品的能力的批准，如PC、PMA、POA。</div>
+                        </div>
+                        <div class="related-item item-concept">
+                            <div class="item-title">供应商控制程序</div>
+                            <div class="item-desc">PAH为确保供应商产品符合要求而建立的管理程序，包括批准、监督和报告机制。</div>
+                        </div>
+                        <div class="related-item item-concept">
+                            <div class="item-title">直接发货 (Drop Shipping)</div>
+                            <div class="item-desc">在满足严格条件下，允许供应商直接将货物发往PAH的客户，PAH仍承担适航责任。</div>
+                        </div>
+                        <div class="related-item item-concept">
+                            <div class="item-title">数据追溯性</div>
+                            <div class="item-desc">记录并保持产品从原材料到最终交付的全生命周期历史、应用或位置的能力。</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 合规方法 -->
+                <div class="info-card">
+                    <h3 class="section-title">
+                        <i class="fas fa-check-circle"></i> 合规方法
+                    </h3>
+                    <div class="related-items">
+                        <div class="related-item item-method">
+                            <div class="item-title">建立与运行供应商控制程序</div>
+                            <div class="item-desc">制定书面程序，对供应商进行批准、评估、监督，并建立不合格品报告流程，确保供应链受控。</div>
+                        </div>
+                        <div class="related-item item-method">
+                            <div class="item-title">实施接收检验</div>
+                            <div class="item-desc">对购入的零部件/产品进行文件审查和实物检验，验证其符合性声明与适航要求，确保可追溯性。</div>
+                        </div>
+                        <div class="related-item item-method">
+                            <div class="item-title">构建完整的质量记录体系</div>
+                            <div class="item-desc">系统化地生成、收集、保存生产、检验、测试、维护及供应商管理的全流程记录，确保可审计和可追溯。</div>
+                        </div>
+                        <div class="related-item item-method">
+                            <div class="item-title">不合格品控制与纠正措施</div>
+                            <div class="item-desc">识别、隔离、记录不合格品，分析根本原因并实施纠正措施，防止 recurrence。</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 可视化图谱 -->
+        <div class="visualization-section">
+            <h2 class="section-title">
+                <i class="fas fa-project-diagram"></i> 知识关联图谱
+            </h2>
+            <div id="chapter-graph"></div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+    <script>
+        // 加载章节子图可视化
+        async function loadChapterGraph() {
+            try {
+                const response = await fetch(`/api/chapter/6/graph`);
+                const data = await response.json();
+
+                if (data.chapter) {
+                    renderChapterGraph(data);
+                }
+            } catch (error) {
+                console.error('加载章节图谱失败:', error);
+            }
+        }
+
+        function renderChapterGraph(graphData) {
+            const container = document.getElementById('chapter-graph');
+            const nodes = [];
+            const edges = [];
+
+            // 添加中心节点（当前章节）
+            nodes.push({
+                id: 'chapter',
+                label: `第6章\n质量体系与供应链适航监管`,
+                title: '本章系统阐述了航空器制造商及其供应商在质量管理体系、生产批准、过程控制、数据追溯等方面的适航监管要求，确保从原材料到最终产品的全供应链符合安全与质量规范。',
+                color: {
+                    background: '#3498db',
+                    border: '#2980b9'
+                },
+                font: { size: 16 },
+                shape: 'dot',
+                size: 35
+            });
+
+            // 添加相关节点
+            if (graphData.related_nodes) {
+                graphData.related_nodes.forEach((node, index) => {
+                    const nodeId = `node-${index}`;
+                    let color = '#95a5a6';
+                    let label = node.title || node.name || node.code;
+
+                    if (node.labels && node.labels.includes('Article')) {
+                        color = '#2ecc71';
+                    } else if (node.labels && node.labels.includes('Concept')) {
+                        color = '#e67e22';
+                    } else if (node.labels && node.labels.includes('ComplianceMethod')) {
+                        color = '#9b59b6';
+                    } else if (node.labels && node.labels.includes('BuildingBlock')) {
+                        color = '#e74c3c';
+                    }
+
+                    nodes.push({
+                        id: nodeId,
+                        label: label.substring(0, 20) + (label.length > 20 ? '...' : ''),
+                        title: node.description || node.content || '',
+                        color: { background: color },
+                        font: { size: 12 },
+                        shape: 'dot',
+                        size: 25
+                    });
+
+                    // 添加边
+                    edges.push({
+                        from: 'chapter',
+                        to: nodeId,
+                        arrows: 'to',
+                        color: '#95a5a6'
+                    });
+                });
+            }
+
+            const data = { nodes: nodes, edges: edges };
+            const options = {
+                layout: {
+                    improvedLayout: true
+                },
+                physics: {
+                    enabled: true,
+                    stabilization: { iterations: 100 }
+                },
+                interaction: {
+                    hover: true
+                }
+            };
+
+            new vis.Network(container, data, options);
+        }
+
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            loadChapterGraph();
+        });
+    </script>
+</body>
+</html>

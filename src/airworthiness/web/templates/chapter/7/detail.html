@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第7章: 积木式验证方法 - 适航法规知识图谱</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', 'Microsoft YaHei', sans-serif;
+            line-height: 1.7;
+            color: #334155;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* 头部导航 */
+        .header {
+            background: linear-gradient(135deg, rgba(219, 234, 254, 0.9) 0%, rgba(237, 233, 254, 0.9) 100%);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(165, 180, 252, 0.1);
+        }
+
+        .nav-breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            font-size: 0.9em;
+            color: #64748b;
+        }
+
+        .nav-breadcrumb a {
+            color: #4f46e5;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-breadcrumb a:hover {
+            color: #7c3aed;
+        }
+
+        .chapter-header {
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .chapter-number {
+            font-size: 1.2em;
+            color: #4f46e5;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .chapter-title {
+            font-size: 2.2em;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+
+        .chapter-description {
+            font-size: 1.1em;
+            color: #64748b;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* 内容区域 */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .main-content {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .info-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .section-title {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #a5b4fc;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* 知识内容样式 */
+        .knowledge-content {
+            line-height: 1.8;
+            color: #475569;
+        }
+
+        .knowledge-content h3 {
+            color: #334155;
+            margin: 25px 0 15px;
+            font-size: 1.4em;
+        }
+
+        .knowledge-content p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        .knowledge-content ul, .knowledge-content ol {
+            margin: 15px 0;
+            padding-left: 25px;
+        }
+
+        .knowledge-content li {
+            margin-bottom: 8px;
+        }
+
+        /* 关联项目样式 */
+        .related-items {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .related-item {
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+        }
+
+        .related-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .item-article {
+            border-left-color: #10b981;
+            background: rgba(16, 185, 129, 0.05);
+        }
+
+        .item-concept {
+            border-left-color: #f59e0b;
+            background: rgba(245, 158, 11, 0.05);
+        }
+
+        .item-method {
+            border-left-color: #8b5cf6;
+            background: rgba(139, 92, 246, 0.05);
+        }
+
+        .item-block {
+            border-left-color: #ef4444;
+            background: rgba(239, 68, 68, 0.05);
+        }
+
+        .item-title {
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 5px;
+        }
+
+        .item-desc {
+            font-size: 0.9em;
+            color: #64748b;
+        }
+
+        /* 导航按钮 */
+        .chapter-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .nav-btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-btn-prev {
+            background: linear-gradient(135deg, #a5b4fc, #818cf8);
+            color: white;
+        }
+
+        .nav-btn-next {
+            background: linear-gradient(135deg, #c4b5fd, #a78bfa);
+            color: white;
+            margin-left: auto;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(165, 180, 252, 0.3);
+        }
+
+        /* 可视化区域 */
+        .visualization-section {
+            margin-top: 40px;
+        }
+
+        #chapter-graph {
+            height: 400px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 968px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .chapter-title {
+                font-size: 1.8em;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+
+            .chapter-navigation {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-btn {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 头部导航 -->
+        <div class="header">
+            <div class="nav-breadcrumb">
+                <a href="/"><i class="fas fa-home"></i> 首页</a>
+                <i class="fas fa-chevron-right"></i>
+                <a href="/">知识体系</a>
+                <i class="fas fa-chevron-right"></i>
+                <span>第7章</span>
+            </div>
+
+            <div class="chapter-header">
+                <div class="chapter-number">第 7 章</div>
+                <h1 class="chapter-title">积木式验证方法</h1>
+                <p class="chapter-description">本章系统阐述了复合材料结构适航符合性验证中采用的“积木式”方法，包括其层级结构、核心原则、在静强度与疲劳损伤容限验证中的应用，以及相关的试验计划制定与审查关注点。</p>
+            </div>
+        </div>
+
+        <!-- 主要内容区域 -->
+        <div class="content-grid">
+            <!-- 左侧主要内容 -->
+            <div class="main-content">
+                <h2 class="section-title">
+                    <i class="fas fa-book-open"></i> 知识内容
+                </h2>
+
+                <div class="knowledge-content">
+                    <h3>7.1 积木式方法概述</h3>
+                    <p><strong>核心定义与层级</strong></p>
+                    <p>“积木式”方法是一种通过一系列复杂程度逐渐增加的试验件，结合分析和验证试验，可靠确定复合材料结构强度的系统性方法。</p>
+                    <ol>
+                        <li><strong>标准层级</strong>：试样(Coupon) → 元件(Element) → 典型结构件/细节(Detail/Subcomponent) → 全尺寸部件(Full-scale Component)。</li>
+                        <li><strong>目的与优势</strong>：
+                            <ul>
+                                <li>经济有效地获取用于充分分析相关性和量化更大结构尺度变异性的数据。</li>
+                                <li>通过初级试验的经验，避免在更复杂、成本更高的全尺寸试验中过早失效。</li>
+                            </ul>
+                        </li>
+                        <li><strong>解决的问题</strong>：该方法用于说明变异性、环境、结构不连续（如接头、开口）、损伤、制造缺陷以及特定的设计或工艺细节问题。</li>
+                    </ol>
+                    <p><strong>核心法规依据</strong></p>
+                    <ol>
+                        <li><strong>HB8605-2021《飞机复合材料结构适航符合性验证通用要求》第5.3节</strong>：明确了积木式方法的应用要求，并给出了固定翼和尾桨叶的典型试验简图。</li>
+                        <li><strong>AC 20-107B《Composite Aircraft Structure》第7.b段</strong>：FAA对积木式方法的官方指导，阐述了其原理、层级和目的。</li>
+                    </ol>
+
+                    <h3>7.2 试验计划与审查要求</h3>
+                    <p><strong>试验大纲编制与审批</strong> (依据AP-21-AA-2023-11R1)</p>
+                    <ol>
+                        <li><strong>提交时机</strong>：申请人应在验证试验前足够长的时间内，向审查组提交试验大纲。</li>
+                        <li><strong>核心内容</strong>：试验大纲应至少包含：试验目的（含拟验证条款）、试验依据、被试对象说明、试验设备清单及校验说明、测试设备精度、制造符合性要求、符合性说明、试验步骤、成功判据、记录项目、异常情况处理等。</li>
+                        <li><strong>批准流程</strong>：工程审查代表或委任工程代表（DER）使用型号资料批准表批准试验大纲。</li>
+                    </ol>
+                    <p><strong>制造符合性检查</strong></p>
+                    <ol>
+                        <li><strong>申请人责任</strong>：对用于生成符合性数据的试验产品进行100%的制造符合性检查。</li>
+                        <li><strong>局方检查</strong>：工程审查代表识别关键特征，并请求局方制造符合性检查。检查深度基于申请人检查记录质量、结果对比、工作重要性和复杂性等因素确定。</li>
+                    </ol>
+                    <p><strong>研发试验的认可</strong></p>
+                    <p>为获得审查组的信任，申请人应在研发试验前与审查组充分沟通，确保满足所有要求，这对于关键件或采用新技术的评审尤为重要。</p>
+
+                    <h3>7.3 疲劳与损伤容限验证考量</h3>
+                    <p><strong>基本要求</strong> (依据HB8605-2021, AC 20-107B)</p>
+                    <ol>
+                        <li><strong>验证目标</strong>：表明在飞机使用寿命期间，能避免由于疲劳、环境影响、制造缺陷或意外损伤引起的灾难性破坏。</li>
+                        <li><strong>依赖关系</strong>：复合材料损伤容限和疲劳性能与结构设计细节（如铺层顺序、连接细节、损伤抑制特性）密切相关。</li>
+                        <li><strong>验证层级</strong>：通常需要部件试验验证，除非有类似设计、材料和载荷的经验可证明由低层级试验支持的分析方法足够充分。</li>
+                    </ol>
+                    <p><strong>损伤分类与评估</strong></p>
+                    <ol>
+                        <li><strong>第1类损伤</strong>：允许的、在定期或定向外场检查中可能未被发现的损伤，以及允许的制造缺陷（如BVID）。必须证明在整个飞机结构寿命期内能承受极限载荷。</li>
+                        <li><strong>重复载荷试验</strong>：应对关键结构区域的细节、元件和典型结构件进行重复载荷试验，以定义结构对损伤扩展的敏感性，并可作为验证“无扩展”方法的基础。试验应评估环境对缺陷/损伤扩展特性的影响。</li>
+                    </ol>
+                    <p><strong>环境影响与检查</strong></p>
+                    <ol>
+                        <li><strong>环境影响确定</strong>：应通过试验（如加速环境试验）或服役数据，确定服役环境对材料静强度、疲劳和损伤容限性能的影响。</li>
+                        <li><strong>检查程序</strong>：应编制包括检查间隔、范围和方法的检查程序。检查间隔的确定，应使得在损伤从初始可检尺寸扩展到所要求剩余强度对应的极限尺寸的时间范围内，能可靠地检出损伤。</li>
+                    </ol>
+
+                    <h3>7.4 符合性验证方法集成</h3>
+                    <p><strong>积木式方法在符合性验证中的角色</strong></p>
+                    <p>“积木式”方法是实现复合材料结构静强度、疲劳和损伤容限符合性验证的核心技术路径。它并非单一的符合性方法，而是支撑多种符合性方法（尤其是试验）的系统性工程策略。</p>
+                    <ol>
+                        <li><strong>与符合性方法的关系</strong>：在型号合格审定中，积木式试验为表明对具体适航条款（如CCAR 25.305, 25.571）的符合性提供了关键证据，这些证据通常归类于“试验”符合性方法。</li>
+                        <li><strong>最终验证的整合</strong>：如果存在充分的积木式试验证据，确保所选的重复加载和静力加载顺序能代表服役情况或提供保守评估，则最终的静强度、疲劳和损伤容限验证可以在一个部件试验项目中完成。</li>
+                        <li><strong>分析验证的支持</strong>：低层级（试样、元件、典型结构件）试验为验证分析方法的预测能力（如局部应变、破坏模式）提供基础。当分析验证无法实现时，则需要额外的统计考虑（如重复的点设计试验、部件超载系数）。</li>
+                    </ol>
+                </div>
+
+                <!-- 章节导航 -->
+                <div class="chapter-navigation">
+                    <a href="/chapter/6/detail" class="nav-btn nav-btn-prev">
+                        <i class="fas fa-arrow-left"></i>
+                        上一章: 第六章 质量体系与供应链适航监管
+                    </a>
+                    <!-- 下一章链接暂缺，可根据需要添加 -->
+                </div>
+            </div>
+
+            <!-- 右侧边栏 -->
+            <div class="sidebar">
+                <!-- 相关法规 -->
+                <div class="info-card">
+                    <h3 class="section-title">
+                        <i class="fas fa-gavel"></i> 相关法规
+                    </h3>
+                    <div class="related-items">
+                        <div class="related-item item-article">
+                            <div class="item-title">HB8605-2021 第5.3节</div>
+                            <div class="item-desc">《飞机复合材料结构适航符合性验证通用要求》中对“积木式”方法的定义、要求和图示。</div>
+                        </div>
+                        <div class="related-item item-article">
+                            <div class="item-title">AC 20-107B 第7.b段</div>
+                            <div class="item-desc">FAA对积木式验证方法的核心指导，阐述其原理、层级和应用。</div>
+                        </div>
+                        <div class="related-item item-article">
+                            <div class="item-title">AP-21-AA-2023-11R1</div>
+                            <div class="item-desc">《型号合格审定程序》，规定了试验大纲编制、审批和制造符合性检查的流程。</div>
+                        </div>
+                        <div class="related-item item-article">
+                            <div class="item-title">CCAR-21-R4 第21.35条等</div>
+                            <div class="item-desc">规定了申请人提交飞行试验数据和报告的要求。</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 核心概念 -->
+                <div class="info-card">
+                    <h3 class="section-title">
+                        <i class="fas fa-lightbulb"></i> 核心概念
+                    </h3>
+                    <div class="related-items">
+                        <div class="related-item item-concept">
+                            <div class="item-title">积木式方法 (BBA)</div>
+                            <div class="item-desc">通过从简单试样到全尺寸部件的逐级、渐进式试验与分析，系统验证复合材料结构强度的工程方法。</div>
+                        </div>
+                        <div class="related-item item-concept">
+                            <div class="item-title">试样/元件/典型结构件/部件</div>
+                            <div class="item-desc">积木式方法的四个基本验证层级，分别解决材料性能、简单元件、结构细节和全尺寸系统集成问题。</div>
+                        </div>
+                        <div class="related-item item-concept">
+                            <div class="item-title">损伤分类 (如BVID)</div>
+                            <div class="item-desc">根据损伤的可检性和对结构剩余强度的影响对损伤进行分级，并规定不同的验证要求。</div>
+                        </div>
+                        <div class="related-item item-concept">
+                            <div class="item-title">制造符合性检查</div>
+                            <div class="item-desc">为确保试验产品构型、工艺与批准的设计数据一致而进行的检查，是试验数据有效性的前提。</div>
+                        </div>
+                        <div class="related-item item-concept">
+                            <div class="item-title">符合性验证方法</div>
+                            <div class="item-desc">表明适航条款符合性的十种途径（如试验、分析、检查）。“积木式”是支撑“试验”方法的具体策略。</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 合规方法 -->
+                <div class="info-card">
+                    <h3 class="section-title">
+                        <i class="fas fa-check-circle"></i> 合规方法
+                    </h3>
+                    <div class="related-items">
+                        <div class="related-item item-method">
+                            <div class="item-title">实施积木式验证计划</div>
+                            <div class="item-desc">规划和执行从试样到部件的分层级试验，系统获取统计数据和验证分析方法，以经济可靠地证明结构强度。</div>
+                        </div>
+                        <div class="related-item item-method">
+                            <div class="item-title">制定与报批试验大纲</div>
+                            <div class="item-desc">依据AP-21程序，编制包含目的、步骤、判据等要素的详细试验大纲，并在试验前获得审查代表批准。</div>
+                        </div>
+                        <div class="related-item item-method">
+                            <div class="item-title">进行损伤威胁评估与分类</div>
+                            <div class="item-desc">全面评估结构可能遭遇的损伤类型，并进行分类（如BVID），针对不同类别制定相应的验证和检查要求。</div>
+                        </div>
+                        <div class="related-item item-method">
+                            <div class="item-title">整合最终部件试验</div>
+                            <div class="item-desc">在充分的低层级试验证据支持下，设计一个部件试验项目，以合理的加载顺序同时完成静强度、疲劳和损伤容限的最终验证。</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 可视化图谱 -->
+        <div class="visualization-section">
+            <h2 class="section-title">
+                <i class="fas fa-project-diagram"></i> 知识关联图谱
+            </h2>
+            <div id="chapter-graph"></div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+    <script>
+        // 加载章节子图可视化
+        async function loadChapterGraph() {
+            try {
+                const response = await fetch(`/api/chapter/7/graph`);
+                const data = await response.json();
+
+                if (data.chapter) {
+                    renderChapterGraph(data);
+                }
+            } catch (error) {
+                console.error('加载章节图谱失败:', error);
+            }
+        }
+
+        function renderChapterGraph(graphData) {
+            const container = document.getElementById('chapter-graph');
+            const nodes = [];
+            const edges = [];
+
+            // 添加中心节点（当前章节）
+            nodes.push({
+                id: 'chapter',
+                label: `第7章\n积木式验证方法`,
+                title: '本章系统阐述了复合材料结构适航符合性验证中采用的“积木式”方法，包括其层级结构、核心原则、在静强度与疲劳损伤容限验证中的应用，以及相关的试验计划制定与审查关注点。',
+                color: {
+                    background: '#3498db',
+                    border: '#2980b9'
+                },
+                font: { size: 16 },
+                shape: 'dot',
+                size: 35
+            });
+
+            // 添加相关节点
+            if (graphData.related_nodes) {
+                graphData.related_nodes.forEach((node, index) => {
+                    const nodeId = `node-${index}`;
+                    let color = '#95a5a6';
+                    let label = node.title || node.name || node.code;
+
+                    if (node.labels && node.labels.includes('Article')) {
+                        color = '#2ecc71';
+                    } else if (node.labels && node.labels.includes('Concept')) {
+                        color = '#e67e22';
+                    } else if (node.labels && node.labels.includes('ComplianceMethod')) {
+                        color = '#9b59b6';
+                    } else if (node.labels && node.labels.includes('BuildingBlock')) {
+                        color = '#e74c3c';
+                    }
+
+                    nodes.push({
+                        id: nodeId,
+                        label: label.substring(0, 20) + (label.length > 20 ? '...' : ''),
+                        title: node.description || node.content || '',
+                        color: { background: color },
+                        font: { size: 12 },
+                        shape: 'dot',
+                        size: 25
+                    });
+
+                    // 添加边
+                    edges.push({
+                        from: 'chapter',
+                        to: nodeId,
+                        arrows: 'to',
+                        color: '#95a5a6'
+                    });
+                });
+            }
+
+            const data = { nodes: nodes, edges: edges };
+            const options = {
+                layout: {
+                    improvedLayout: true
+                },
+                physics: {
+                    enabled: true,
+                    stabilization: { iterations: 100 }
+                },
+                interaction: {
+                    hover: true
+                }
+            };
+
+            new vis.Network(container, data, options);
+        }
+
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            loadChapterGraph();
+        });
+    </script>
+</body>
+</html>

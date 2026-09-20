@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第5章: 等同验证与变更管理 - 适航法规知识图谱</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', 'Microsoft YaHei', sans-serif;
+            line-height: 1.7;
+            color: #334155;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* 头部导航 */
+        .header {
+            background: linear-gradient(135deg, rgba(219, 234, 254, 0.9) 0%, rgba(237, 233, 254, 0.9) 100%);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(165, 180, 252, 0.1);
+        }
+
+        .nav-breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            font-size: 0.9em;
+            color: #64748b;
+        }
+
+        .nav-breadcrumb a {
+            color: #4f46e5;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-breadcrumb a:hover {
+            color: #7c3aed;
+        }
+
+        .chapter-header {
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .chapter-number {
+            font-size: 1.2em;
+            color: #4f46e5;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .chapter-title {
+            font-size: 2.2em;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+
+        .chapter-description {
+            font-size: 1.1em;
+            color: #64748b;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* 内容区域 */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .main-content {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .info-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .section-title {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #a5b4fc;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* 知识内容样式 */
+        .knowledge-content {
+            line-height: 1.8;
+            color: #475569;
+        }
+
+        .knowledge-content h3 {
+            color: #334155;
+            margin: 25px 0 15px;
+            font-size: 1.4em;
+        }
+
+        .knowledge-content p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        .knowledge-content ul, .knowledge-content ol {
+            margin: 15px 0;
+            padding-left: 25px;
+        }
+
+        .knowledge-content li {
+            margin-bottom: 8px;
+        }
+
+        /* 关联项目样式 */
+        .related-items {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .related-item {
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+        }
+
+        .related-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .item-article {
+            border-left-color: #10b981;
+            background: rgba(16, 185, 129, 0.05);
+        }
+
+        .item-concept {
+            border-left-color: #f59e0b;
+            background: rgba(245, 158, 11, 0.05);
+        }
+
+        .item-method {
+            border-left-color: #8b5cf6;
+            background: rgba(139, 92, 246, 0.05);
+        }
+
+        .item-block {
+            border-left-color: #ef4444;
+            background: rgba(239, 68, 68, 0.05);
+        }
+
+        .item-title {
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 5px;
+        }
+
+        .item-desc {
+            font-size: 0.9em;
+            color: #64748b;
+        }
+
+        /* 导航按钮 */
+        .chapter-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .nav-btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-btn-prev {
+            background: linear-gradient(135deg, #a5b4fc, #818cf8);
+            color: white;
+        }
+
+        .nav-btn-next {
+            background: linear-gradient(135deg, #c4b5fd, #a78bfa);
+            color: white;
+            margin-left: auto;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(165, 180, 252, 0.3);
+        }
+
+        /* 可视化区域 */
+        .visualization-section {
+            margin-top: 40px;
+        }
+
+        #chapter-graph {
+            height: 400px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 968px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .chapter-title {
+                font-size: 1.8em;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+
+            .chapter-navigation {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-btn {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 头部导航 -->
+        <div class="header">
+            <div class="nav-breadcrumb">
+                <a href="/"><i class="fas fa-home"></i> 首页</a>
+                <i class="fas fa-chevron-right"></i>
+                <a href="/">知识体系</a>
+                <i class="fas fa-chevron-right"></i>
+                <span>第5章</span>
+            </div>
+
+            <div class="chapter-header">
+                <div class="chapter-number">第 5 章</div>
+                <h1 class="chapter-title">等同验证与变更管理</h1>
+                <p class="chapter-description">本章详细阐述了在航空器设计与制造中，确保材料、工艺、供应商及设计变更符合适航要求的“等同性”验证原则、管理框架与具体实施方法。</p>
+            </div>
+        </div>
+
+        <!-- 主要内容区域 -->
+        <div class="content-grid">
+            <!-- 左侧主要内容 -->
+            <div class="main-content">
+                <h2 class="section-title">
+                    <i class="fas fa-book-open"></i> 知识内容
+                </h2>
+
+                <div class="knowledge-content">
+                    <h3>5.1 材料等同 (Material Equivalency)</h3>
+                    <p><strong>核心要求概述</strong></p>
+                    <p>材料必须通过等效标准测试，证明功能等同性。全球主要监管机构（FAA、EASA、CAAC）的材料标准通常可认为完全等同，例如通过FAR 25.853（可燃性）测试的材料通常也满足空客和波音的基础适航要求。</p>
+
+                    <p><strong>关键法规与文件</strong></p>
+                    <ul>
+                        <li><strong>FAA</strong>: FAR 25.853 (14 CFR Part 25); DOT/FAA/AR-00/47 & AR-03/19 (材料合格审定与等效性程序); AC 23-20 (材料采购验收指南)。</li>
+                        <li><strong>CAAC</strong>: 依据CCAR-21框架，涵盖生产许可证(PC)和零部件制造人批准书(PMA)。经批准的零部件附有AAC-038批准标签。</li>
+                        <li><strong>NASA</strong>: NASA-STD-7919.1; NPR 7900.3。研究用航空器材料需通过适航工程师审查，确保符合适用的FAR、军用设计规范或批准的NASA适航指南，强调材料可追溯性和符合性验证。</li>
+                    </ul>
+
+                    <h4>5.1.1 FAA材料等同性详细要求</h4>
+                    <p>根据DOT/FAA/AR-00/47和DOT/FAA/AR-03/19 (AGATE计划):</p>
+                    <ol>
+                        <li><strong>材料合格审定计划</strong>: 建立详细的合格审定计划，包括统计方法。</li>
+                        <li><strong>建立与原始数据集的等同性</strong>。</li>
+                        <li><strong>等效程序</strong>: 提供组分变更、制造工艺变更的评估指南。</li>
+                        <li><strong>统计方法</strong>: 使用统计技术验证材料性能等同性。</li>
+                    </ol>
+
+                    <h4>5.1.2 NASA材料管理要求</h4>
+                    <p>根据NASA-STD-7919.1附录O (研究用航空器):</p>
+                    <ol>
+                        <li><strong>材料符合性</strong>: 用于主要和次要结构的材料必须进行符合性验证，其失效可能导致航空器损坏或人员伤亡。</li>
+                        <li><strong>文件要求</strong>: 需有工程证明文档和图纸、材料符合性记录。</li>
+                        <li><strong>供应商控制</strong>: 关键件供应商必须维持符合AS9100D、ISO9001或AS9003A的质量管理体系。</li>
+                    </ol>
+
+                    <h3>5.2 工艺等同 (Process Equivalency)</h3>
+                    <h4>5.2.1 FAA工艺等效性评估要点</h4>
+                    <p>根据 AC 21-43 和 AC 21-20C:</p>
+                    <ol>
+                        <li><strong>变更控制系统</strong>: 建立变更控制系统，通知可能影响适航性/符合性的供应商安排或质量系统的重大变更。</li>
+                        <li><strong>供应商监督</strong>: 对供应商进行监督，确保制造工艺符合批准的设计数据。</li>
+                        <li><strong>等效验证</strong>: 对制造工艺变更进行等效性验证，确保不影响产品适航性。</li>
+                    </ol>
+
+                    <h4>5.2.2 NASA工艺控制要求</h4>
+                    <p>根据 NASA-STD-7919.1:</p>
+                    <ol>
+                        <li><strong>构型管理</strong>: 使用NAMIS系统进行构型管理。</li>
+                        <li><strong>质量保证</strong>: 质量保证办公室(QAO)负责归档和监督。</li>
+                        <li><strong>工作指令验证</strong>: QA验证所有工作指令(除轻微航空器故障外)，并监督工作指令在航空器上的安装。</li>
+                    </ol>
+
+                    <h3>5.3 供应商变更适航影响</h3>
+                    <p><strong>核心要求概述</strong></p>
+                    <ul>
+                        <li><strong>FAA</strong>: 14 CFR §21.137(c) 要求供应商控制程序确保供应商产品符合要求，并建立供应商报告流程。</li>
+                        <li><strong>CAAC</strong>: 根据AP-21-AA-2010-04R4，要求提交供应商设计、制造方法及质量系统的变更说明，并报告追溯信息。</li>
+                        <li><strong>NASA</strong>: 根据NPR 7900.3和NASA-STD-7919.1，建立构型控制程序，确保修改有足够时间安全完成，构型得到完整记录和审查。</li>
+                    </ul>
+
+                    <h4>5.3.1 FAA变更分类与批准</h4>
+                    <p>根据 14CFR Part 21, Subpart D (§§ 21.93-21.101):</p>
+                    <ol>
+                        <li><strong>小改/大改分类</strong>: 对型号设计变更进行分类。</li>
+                        <li><strong>批准流程</strong>: §21.95(小改批准)、§21.97(大改批准)。</li>
+                        <li><strong>符合性验证</strong>: 对已更改产品进行符合性验证，确保适用适航要求。</li>
+                        <li><strong>适航影响评估</strong>: 确保证据数据完整，无不利适航影响。</li>
+                    </ol>
+
+                    <h4>5.3.2 CAAC供应商变更管理</h4>
+                    <p>根据AP-21-AA-2010-04R4:</p>
+                    <ol>
+                        <li><strong>设计变更提交</strong>: 实施前将供应商设计及其更改提交生产批准持有人批准。</li>
+                        <li><strong>制造方法变更</strong>: 提交供应商制造方法的更改。</li>
+                        <li><strong>质量系统变更</strong>: 提交可能影响产品检验、符合性及适航性的质量系统变更说明。</li>
+                        <li><strong>追溯信息报告</strong>: 要求供应商报告已交付的由于设计原因影响安全的产品的追溯信息。</li>
+                    </ol>
+
+                    <h4>5.3.3 NASA变更管理</h4>
+                    <p>根据 NASA-STD-7919.1:</p>
+                    <ol>
+                        <li><strong>适航批准</strong>: NASA指导的修改需基于中心批准的工程和安全分析结果。</li>
+                        <li><strong>文件要求</strong>: 最终批准应包含航空器构型描述、操作指令和程序、操作限制等。</li>
+                        <li><strong>危险分析</strong>: 识别可能导致人员受伤、系统损坏或环境损坏的真实或潜在条件。</li>
+                    </ol>
+
+                    <h3>5.4 配置控制与适航批准</h3>
+                    <p><strong>核心要求概述</strong></p>
+                    <ul>
+                        <li><strong>FAA</strong>: 通过生产证书(PC)和PMA进行配置控制。DOA和POA框架赋予被批准组织自我认证某些设计和生产活动的权限。</li>
+                        <li><strong>CAAC</strong>: 生产许可证(PC)是局方颁发的、允许按照批准的设计和质量系统生产的证书。获PC后可合法批量生产。</li>
+                        <li><strong>NASA</strong>: 通过研究车辆工作指令(RVWO)流程建立构型控制，使用NAMIS系统。基本航空器适航性由QAO监督。</li>
+                    </ul>
+
+                    <h4>5.4.1 FAA配置控制体系</h4>
+                    <ol>
+                        <li><strong>型号合格审定</strong>: Order 8110.4C规定相关程序。</li>
+                        <li><strong>设计更改批准</strong>: AC 20-115C和AC 21-16C涵盖设计和生产更改批准。</li>
+                        <li><strong>记录管理</strong>: 设计审查记录、工程图纸和飞行手册更改的管理。</li>
+                    </ol>
+
+                    <h4>5.4.2 NASA构型管理要求</h4>
+                    <p>根据 NASA-STD-7919.1:</p>
+                    <ol>
+                        <li><strong>航空器构型</strong>: 确保航空器和相关文件准确反映当前和批准的构型。</li>
+                        <li><strong>记录管理</strong>: 建立记录管理流程，管理设计、文件和工艺要求。</li>
+                        <li><strong>工程证明文档</strong>: 包括工程分析、设计标准、航空器载荷和安全限制。</li>
+                        <li><strong>可追溯性</strong>: 追溯到与改装相关的已关闭工作包。</li>
+                    </ol>
+                </div>
+
+                <!-- 章节导航 -->
+                <div class="chapter-navigation">
+                    <a href="/chapter/4/detail" class="nav-btn nav-btn-prev">
+                        <i class="fas fa-arrow-left"></i>
+                        上一章: 第四章 复合材料的工艺及验证
+                    </a>
+                    <!-- 下一章链接暂缺，可根据需要添加 -->
+                    <!-- <a href="/chapter/6/detail" class="nav-btn nav-btn-next">
+                        下一章: 第六章 ...
+                        <i class="fas fa-arrow-right"></i>
+                    </a> -->
+                </div>
+            </div>
+
+            <!-- 右侧边栏 -->
+            <div class="sidebar">
+                <!-- 相关法规 -->
+                <div class="info-card">
+                    <h3 class="section-title">
+                        <i class="fas fa-gavel"></i> 相关法规
+                    </h3>
+                    <div class="related-items">
+                        <div class="related-item item-article">
+                            <div class="item-title">FAR 25.853 / 14 CFR Part 25</div>
+                            <div class="item-desc">材料可燃性标准，全球等效性基础</div>
+                        </div>
+                        <div class="related-item item-article">
+                            <div class="item-title">DOT/FAA/AR-00/47 & 03/19</div>
+                            <div class="item-desc">聚合物基复合材料材料合格审定与等效性程序</div>
+                        </div>
+                        <div class="related-item item-article">
+                            <div class="item-title">14 CFR Part 21 / CCAR-21</div>
+                            <div class="item-desc">产品合格审定与生产批准的核心法规</div>
+                        </div>
+                        <div class="related-item item-article">
+                            <div class="item-title">AC 21-43</div>
+                            <div class="item-desc">FAA生产、供应商控制与变更管理指南</div>
+                        </div>
+                        <div class="related-item item-article">
+                            <div class="item-title">NASA-STD-7919.1</div>
+                            <div class="item-desc">NASA航空器适航、运行、维护与安全综合要求</div>
+                        </div>
+                        <div class="related-item item-article">
+                            <div class="item-title">AP-21-AA-2010-04R4</div>
+                            <div class="item-desc">CAAC生产批准与供应商监督程序</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 核心概念 -->
+                <div class="info-card">
+                    <h3 class="section-title">
+                        <i class="fas fa-lightbulb"></i> 核心概念
+                    </h3>
+                    <div class="related-items">
+                        <div class="related-item item-concept">
+                            <div class="item-title">材料等同 (Material Equivalency)</div>
+                            <div class="item-desc">通过标准测试和统计方法，证明新材料或变更后材料在功能和安全上与原批准材料等效。</div>
+                        </div>
+                        <div class="related-item item-concept">
+                            <div class="item-title">工艺等同 (Process Equivalency)</div>
+                            <div class="item-desc">对制造工艺变更进行评估和验证，确保其产出产品的适航性不受影响。</div>
+                        </div>
+                        <div class="related-item item-concept">
+                            <div class="item-title">配置控制 (Configuration Control)</div>
+                            <div class="item-desc">通过文件化和系统化的流程，识别、记录和控制产品（如航空器）的设计状态和变更。</div>
+                        </div>
+                        <div class="related-item item-concept">
+                            <div class="item-title">生产批准 (Production Approval)</div>
+                            <div class="item-desc">局方对组织按照经批准的设计进行持续、稳定生产的能力的批准，如PC、PMA、POA。</div>
+                        </div>
+                        <div class="related-item item-concept">
+                            <div class="item-title">供应商变更管理</div>
+                            <div class="item-desc">对供应链中设计、制造、质量体系的变更进行控制、评估、批准和通知的程序。</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 合规方法 -->
+                <div class="info-card">
+                    <h3 class="section-title">
+                        <i class="fas fa-check-circle"></i> 合规方法
+                    </h3>
+                    <div class="related-items">
+                        <div class="related-item item-method">
+                            <div class="item-title">变更分类与评估</div>
+                            <div class="item-desc">依据法规（如14 CFR Part 21）对设计、工艺、供应商变更进行“大改/小改”分类，并执行相应的符合性验证和批准流程。</div>
+                        </div>
+                        <div class="related-item item-method">
+                            <div class="item-title">统计等效性验证</div>
+                            <div class="item-desc">运用统计技术（如依据DOT/FAA/AR文件）对比新老材料数据集，以数值化方式证明性能等同。</div>
+                        </div>
+                        <div class="related-item item-method">
+                            <div class="item-title">供应商控制程序</div>
+                            <div class="item-desc">建立并执行程序，确保供应商产品符合要求，并包含变更通知、监督和问题报告机制。</div>
+                        </div>
+                        <div class="related-item item-method">
+                            <div class="item-title">构型管理与记录保存</div>
+                            <div class="item-desc">使用系统（如NAMIS）管理构型基线，确保所有变更、工程文档、符合性记录得到完整记录、批准和可追溯。</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 可视化图谱 -->
+        <div class="visualization-section">
+            <h2 class="section-title">
+                <i class="fas fa-project-diagram"></i> 知识关联图谱
+            </h2>
+            <div id="chapter-graph"></div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+    <script>
+        // 加载章节子图可视化
+        async function loadChapterGraph() {
+            try {
+                const response = await fetch(`/api/chapter/5/graph`);
+                const data = await response.json();
+
+                if (data.chapter) {
+                    renderChapterGraph(data);
+                }
+            } catch (error) {
+                console.error('加载章节图谱失败:', error);
+            }
+        }
+
+        function renderChapterGraph(graphData) {
+            const container = document.getElementById('chapter-graph');
+            const nodes = [];
+            const edges = [];
+
+            // 添加中心节点（当前章节）
+            nodes.push({
+                id: 'chapter',
+                label: `第5章\n等同验证与变更管理`,
+                title: '本章详细阐述了在航空器设计与制造中，确保材料、工艺、供应商及设计变更符合适航要求的“等同性”验证原则、管理框架与具体实施方法。',
+                color: {
+                    background: '#3498db',
+                    border: '#2980b9'
+                },
+                font: { size: 16 },
+                shape: 'dot',
+                size: 35
+            });
+
+            // 添加相关节点
+            if (graphData.related_nodes) {
+                graphData.related_nodes.forEach((node, index) => {
+                    const nodeId = `node-${index}`;
+                    let color = '#95a5a6';
+                    let label = node.title || node.name || node.code;
+
+                    if (node.labels && node.labels.includes('Article')) {
+                        color = '#2ecc71';
+                    } else if (node.labels && node.labels.includes('Concept')) {
+                        color = '#e67e22';
+                    } else if (node.labels && node.labels.includes('ComplianceMethod')) {
+                        color = '#9b59b6';
+                    } else if (node.labels && node.labels.includes('BuildingBlock')) {
+                        color = '#e74c3c';
+                    }
+
+                    nodes.push({
+                        id: nodeId,
+                        label: label.substring(0, 20) + (label.length > 20 ? '...' : ''),
+                        title: node.description || node.content || '',
+                        color: { background: color },
+                        font: { size: 12 },
+                        shape: 'dot',
+                        size: 25
+                    });
+
+                    // 添加边
+                    edges.push({
+                        from: 'chapter',
+                        to: nodeId,
+                        arrows: 'to',
+                        color: '#95a5a6'
+                    });
+                });
+            }
+
+            const data = { nodes: nodes, edges: edges };
+            const options = {
+                layout: {
+                    improvedLayout: true
+                },
+                physics: {
+                    enabled: true,
+                    stabilization: { iterations: 100 }
+                },
+                interaction: {
+                    hover: true
+                }
+            };
+
+            new vis.Network(container, data, options);
+        }
+
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            loadChapterGraph();
+        });
+    </script>
+</body>
+</html>

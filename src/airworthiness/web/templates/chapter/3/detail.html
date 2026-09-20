@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第3章: 复合材料的材料性能及验证 - 适航法规知识图谱</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', 'Microsoft YaHei', sans-serif;
+            line-height: 1.7;
+            color: #334155;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* 头部导航 */
+        .header {
+            background: linear-gradient(135deg, rgba(219, 234, 254, 0.9) 0%, rgba(237, 233, 254, 0.9) 100%);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(165, 180, 252, 0.1);
+        }
+
+        .nav-breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            font-size: 0.9em;
+            color: #64748b;
+        }
+
+        .nav-breadcrumb a {
+            color: #4f46e5;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-breadcrumb a:hover {
+            color: #7c3aed;
+        }
+
+        .chapter-header {
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .chapter-number {
+            font-size: 1.2em;
+            color: #4f46e5;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .chapter-title {
+            font-size: 2.2em;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+
+        .chapter-description {
+            font-size: 1.1em;
+            color: #64748b;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* 内容区域 */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .main-content {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .info-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .section-title {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #a5b4fc;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* 知识内容样式 */
+        .knowledge-content {
+            line-height: 1.8;
+            color: #475569;
+        }
+
+        .knowledge-content h3 {
+            color: #334155;
+            margin: 25px 0 15px;
+            font-size: 1.4em;
+        }
+
+        .knowledge-content p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        .knowledge-content ul, .knowledge-content ol {
+            margin: 15px 0;
+            padding-left: 25px;
+        }
+
+        .knowledge-content li {
+            margin-bottom: 8px;
+        }
+
+        /* 关联项目样式 */
+        .related-items {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .related-item {
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+        }
+
+        .related-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .item-article {
+            border-left-color: #10b981;
+            background: rgba(16, 185, 129, 0.05);
+        }
+
+        .item-concept {
+            border-left-color: #f59e0b;
+            background: rgba(245, 158, 11, 0.05);
+        }
+
+        .item-method {
+            border-left-color: #8b5cf6;
+            background: rgba(139, 92, 246, 0.05);
+        }
+
+        .item-block {
+            border-left-color: #ef4444;
+            background: rgba(239, 68, 68, 0.05);
+        }
+
+        .item-title {
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 5px;
+        }
+
+        .item-desc {
+            font-size: 0.9em;
+            color: #64748b;
+        }
+
+        /* 导航按钮 */
+        .chapter-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .nav-btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-btn-prev {
+            background: linear-gradient(135deg, #a5b4fc, #818cf8);
+            color: white;
+        }
+
+        .nav-btn-next {
+            background: linear-gradient(135deg, #c4b5fd, #a78bfa);
+            color: white;
+            margin-left: auto;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(165, 180, 252, 0.3);
+        }
+
+        /* 可视化区域 */
+        .visualization-section {
+            margin-top: 40px;
+        }
+
+        #chapter-graph {
+            height: 400px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 968px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .chapter-title {
+                font-size: 1.8em;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+
+            .chapter-navigation {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-btn {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 头部导航 -->
+        <div class="header">
+            <div class="nav-breadcrumb">
+                <a href="/"><i class="fas fa-home"></i> 首页</a>
+                <i class="fas fa-chevron-right"></i>
+                <a href="/">知识体系</a>
+                <i class="fas fa-chevron-right"></i>
+                <span>第3章</span>
+            </div>
+
+            <div class="chapter-header">
+                <div class="chapter-number">第 3 章</div>
+                <h1 class="chapter-title">复合材料的材料性能及验证</h1>
+                <p class="chapter-description">本章详细阐述了复合材料在民用飞机适航审定中，关于材料性能表征、统计评估方法、验证标准及材料规范的量化要求与技术指标。</p>
+            </div>
+        </div>
+
+        <!-- 主要内容区域 -->
+        <div class="content-grid">
+            <!-- 左侧主要内容 -->
+            <div class="main-content">
+                <h2 class="section-title">
+                    <i class="fas fa-book-open"></i> 知识内容
+                </h2>
+
+                <div class="knowledge-content">
+                    <h3>3.1 材料的适航标准</h3>
+                    <p><strong>核心法规依据</strong></p>
+                    <ol>
+                        <li><strong>CCAR-25-R4 25.303</strong>：规定材料设计许用值需基于统计方法确定，需提供材料性能的试验数据与置信区间。</li>
+                        <li><strong>CAAC AC 20-107B 5.1</strong>：复合材料需通过材料资质鉴定（MQR），包含原材料、预浸料、成型材料的全性能验证。</li>
+                        <li><strong>SAE AMS 3700</strong>：预浸料的存储、运输、使用规范的行业基准，被CAAC认可为等效技术标准。</li>
+                    </ol>
+                    <p><strong>量化指标</strong></p>
+                    <ol>
+                        <li><strong>资质鉴定试验样本量</strong>：A基准值试验样本数≥30个，B基准值试验样本数≥20个（AC 20-107B 5.2.1）。</li>
+                        <li><strong>材料性能稳定性</strong>：同批次预浸料的拉伸强度变异系数≤8%，压缩强度变异系数≤10%（HB 8605-2021 4.1.3）。</li>
+                        <li><strong>环境适应性验证</strong>：需覆盖-55℃~+70℃温度范围，以及85%RH湿热环境，至少开展1000小时老化试验（AC 20-107B 5.2.3）。</li>
+                    </ol>
+
+                    <h3>3.2 材料性能的表征</h3>
+                    <p><strong>测试方法与量化要求（依据 ASTM 标准）</strong></p>
+                    <ol>
+                        <li><strong>拉伸性能</strong>：按 ASTM D3039 测试，碳纤维/环氧树脂复合材料拉伸强度≥1500MPa，弹性模量≥130GPa（典型值）。</li>
+                        <li><strong>压缩性能</strong>：按 ASTM D6641 测试，压缩强度≥1000MPa，弹性模量≥120GPa（典型值）；试样长细比控制在10~15（AC 20-107B 5.3.2）。</li>
+                        <li><strong>层间剪切性能</strong>：按 ASTM D2344 测试，层间剪切强度≥70MPa，湿热老化后保留≥75%初始强度（HB 8605-2021 4.3.2）。</li>
+                        <li><strong>冲击后压缩性能（CAI）</strong>：按 ASTM D7136 测试，BVID级冲击后CAI强度≥250MPa（主承力结构要求，AC 20-107B 8.3.3）。</li>
+                    </ol>
+                    <p><strong>性能表征环境条件</strong></p>
+                    <ol>
+                        <li><strong>标准测试环境</strong>：23℃±2℃，50%RH±5%RH（ASTM D618）。</li>
+                        <li><strong>湿热老化条件</strong>：70℃+85%RH，老化时间1000h/3000h（分别对应短期/长期环境效应，AC 20-107B 5.2.3）。</li>
+                    </ol>
+
+                    <h3>3.3 基于统计算法的材料性能</h3>
+                    <p><strong>统计方法要求</strong></p>
+                    <ol>
+                        <li><strong>基准值计算</strong>：采用两参数威布尔分布或正态分布，A基准值公式：A = x̄ - k_A * s；B基准值公式：B = x̄ - k_B * s。其中k_A、k_B为置信系数，样本量30时k_A=2.457、k_B=1.645（CCAR-25.303）。</li>
+                        <li><strong>数据剔除</strong>：采用Grubbs检验（显著性水平0.05），异常数据剔除后需补充试验至规定样本量（HB 8605-2021 4.4.2）。</li>
+                    </ol>
+                    <p><strong>量化统计指标</strong></p>
+                    <ol>
+                        <li><strong>数据置信度</strong>：材料性能统计结果需达到95%置信水平，存活率按设计要求选取（99%/95%）。</li>
+                        <li><strong>变异系数上限</strong>：主承力结构材料性能变异系数≤10%，超出时需重新开展材料批次验证（AC 20-107B 5.2.2）。</li>
+                    </ol>
+
+                    <h3>3.4 复合材料的材料规范</h3>
+                    <p><strong>规范编制要求</strong></p>
+                    <ol>
+                        <li><strong>原材料规范</strong>：需明确纤维（如T700/IM7）、树脂（如EP21/RTM6）的牌号、供应商、技术指标，以及入厂检验项目（如纤维直径偏差≤±0.5μm）。</li>
+                        <li><strong>预浸料规范</strong>：规定树脂含量（35%±3%）、挥发分含量（≤0.5%）、凝胶时间（90~120s/120℃）等关键指标（HB 8605-2021 4.2.1）。</li>
+                        <li><strong>成型材料规范</strong>：蜂窝芯材密度偏差≤±5kg/m³，泡沫芯材压缩强度≥10MPa（AC 20-107B 6.1.3）。</li>
+                    </ol>
+                    <p><strong>规范更新与管控</strong></p>
+                    <ol>
+                        <li><strong>规范修订</strong>：材料供应商变更、配方调整时，需重新修订规范并通过等效性验证，验证试验至少包含10个试样的关键性能测试。</li>
+                        <li><strong>批次追溯</strong>：原材料需实现批次号-生产批次-检验报告全链路追溯，追溯记录保存至飞机退役后5年（CCAR-25.1529）。</li>
+                    </ol>
+                </div>
+
+                <!-- 章节导航 -->
+                <div class="chapter-navigation">
+                    <a href="/chapter/2/detail" class="nav-btn nav-btn-prev">
+                        <i class="fas fa-arrow-left"></i>
+                        上一章: 第二章 复合材料概述
+                    </a>
+                    <a href="/chapter/4/detail" class="nav-btn nav-btn-next">
+                        下一章: 第四章 复合材料的工艺及验证
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- 右侧边栏 -->
+            <div class="sidebar">
+                <!-- 相关法规 -->
+                <div class="info-card">
+                    <h3 class="section-title">
+                        <i class="fas fa-gavel"></i> 相关法规
+                    </h3>
+                    <div class="related-items">
+                        <div class="related-item item-article">
+                            <div class="item-title">CCAR-25-R4 25.303</div>
+                            <div class="item-desc">材料性能统计评估与设计许用值确定</div>
+                        </div>
+                        <div class="related-item item-article">
+                            <div class="item-title">CAAC AC 20-107B</div>
+                            <div class="item-desc">复合材料飞机结构，包含材料、工艺、验证与审定</div>
+                        </div>
+                        <div class="related-item item-article">
+                            <div class="item-title">HB 8605-2021</div>
+                            <div class="item-desc">民用飞机复合材料结构工艺质量控制</div>
+                        </div>
+                        <div class="related-item item-article">
+                            <div class="item-title">SAE AMS 3700</div>
+                            <div class="item-desc">预浸料材料规范行业标准</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 核心概念 -->
+                <div class="info-card">
+                    <h3 class="section-title">
+                        <i class="fas fa-lightbulb"></i> 核心概念
+                    </h3>
+                    <div class="related-items">
+                        <div class="related-item item-concept">
+                            <div class="item-title">材料适航标准</div>
+                            <div class="item-desc">适用于复合材料性能表征与验证的法规和行业标准</div>
+                        </div>
+                        <div class="related-item item-concept">
+                            <div class="item-title">材料性能表征</div>
+                            <div class="item-desc">通过标准化测试方法量化材料力学性能与环境适应性</div>
+                        </div>
+                        <div class="related-item item-concept">
+                            <div class="item-title">统计基准值</div>
+                            <div class="item-desc">基于统计分布（如威布尔分布）计算的、具有特定置信水平和存活率的设计许用值（A/B基准值）</div>
+                        </div>
+                        <div class="related-item item-concept">
+                            <div class="item-title">材料规范</div>
+                            <div class="item-desc">规定原材料、预浸料、成型材料技术指标、验收标准与管控要求的文件</div>
+                        </div>
+                        <div class="related-item item-concept">
+                            <div class="item-title">材料资质鉴定 (MQR)</div>
+                            <div class="item-desc">对复合材料体系从原材料到成型材料进行全性能验证的过程</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 合规方法 -->
+                <div class="info-card">
+                    <h3 class="section-title">
+                        <i class="fas fa-check-circle"></i> 合规方法
+                    </h3>
+                    <div class="related-items">
+                        <div class="related-item item-method">
+                            <div class="item-title">材料资质鉴定试验</div>
+                            <div class="item-desc">通过规定样本量的系统试验，建立材料性能数据库并通过MQR。</div>
+                        </div>
+                        <div class="related-item item-method">
+                            <div class="item-title">统计基准值计算</div>
+                            <div class="item-desc">运用威布尔或正态分布模型，计算满足95%置信水平和99%/95%存活率的设计许用值。</div>
+                        </div>
+                        <div class="related-item item-method">
+                            <div class="item-title">环境适应性验证</div>
+                            <div class="item-desc">在湿热、高低温等环境谱下进行规定时长的老化试验，评估性能保持率。</div>
+                        </div>
+                        <div class="related-item item-method">
+                            <div class="item-title">材料规范与追溯</div>
+                            <div class="item-desc">编制详细规范控制材料质量，并建立全生命周期批次追溯体系。</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 可视化图谱 -->
+        <div class="visualization-section">
+            <h2 class="section-title">
+                <i class="fas fa-project-diagram"></i> 知识关联图谱
+            </h2>
+            <div id="chapter-graph"></div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+    <script>
+        // 加载章节子图可视化
+        async function loadChapterGraph() {
+            try {
+                const response = await fetch(`/api/chapter/3/graph`);
+                const data = await response.json();
+
+                if (data.chapter) {
+                    renderChapterGraph(data);
+                }
+            } catch (error) {
+                console.error('加载章节图谱失败:', error);
+            }
+        }
+
+        function renderChapterGraph(graphData) {
+            const container = document.getElementById('chapter-graph');
+            const nodes = [];
+            const edges = [];
+
+            // 添加中心节点（当前章节）
+            nodes.push({
+                id: 'chapter',
+                label: `第3章\n复合材料的材料性能及验证`,
+                title: '本章详细阐述了复合材料在民用飞机适航审定中，关于材料性能表征、统计评估方法、验证标准及材料规范的量化要求与技术指标。',
+                color: {
+                    background: '#3498db',
+                    border: '#2980b9'
+                },
+                font: { size: 16 },
+                shape: 'dot',
+                size: 35
+            });
+
+            // 添加相关节点
+            if (graphData.related_nodes) {
+                graphData.related_nodes.forEach((node, index) => {
+                    const nodeId = `node-${index}`;
+                    let color = '#95a5a6';
+                    let label = node.title || node.name || node.code;
+
+                    if (node.labels && node.labels.includes('Article')) {
+                        color = '#2ecc71';
+                    } else if (node.labels && node.labels.includes('Concept')) {
+                        color = '#e67e22';
+                    } else if (node.labels && node.labels.includes('ComplianceMethod')) {
+                        color = '#9b59b6';
+                    } else if (node.labels && node.labels.includes('BuildingBlock')) {
+                        color = '#e74c3c';
+                    }
+
+                    nodes.push({
+                        id: nodeId,
+                        label: label.substring(0, 20) + (label.length > 20 ? '...' : ''),
+                        title: node.description || node.content || '',
+                        color: { background: color },
+                        font: { size: 12 },
+                        shape: 'dot',
+                        size: 25
+                    });
+
+                    // 添加边
+                    edges.push({
+                        from: 'chapter',
+                        to: nodeId,
+                        arrows: 'to',
+                        color: '#95a5a6'
+                    });
+                });
+            }
+
+            const data = { nodes: nodes, edges: edges };
+            const options = {
+                layout: {
+                    improvedLayout: true
+                },
+                physics: {
+                    enabled: true,
+                    stabilization: { iterations: 100 }
+                },
+                interaction: {
+                    hover: true
+                }
+            };
+
+            new vis.Network(container, data, options);
+        }
+
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            loadChapterGraph();
+        });
+    </script>
+</body>
+</html>

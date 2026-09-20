@@ -26,23 +26,30 @@ gov.cn / *.gov.cn 官方页面
 ```text
 airworthiness/
 ├─ src/airworthiness/
+│  ├─ __init__.py
 │  ├─ app.py                 # Flask 启动入口
-│  ├─ config.py              # 读取环境变量
-│  ├─ web/                   # 页面、路由、静态资源
-│  ├─ graph/                 # Neo4j 导入、查询、图谱服务
-│  └─ qa/                    # Dify API 调用和问答服务
+│  ├─ config.py              # 读取 .env 配置
+│  ├─ graph/
+│  │  ├─ __init__.py
+│  │  ├─ neo4j_setup.py      # Neo4j 连接与知识图谱构建
+│  │  └─ data_generator.py   # 测试数据生成与示例查询
+│  ├─ web/
+│  │  ├─ __init__.py
+│  │  ├─ templates/          # Flask HTML 模板
+│  │  ├─ concept/            # 概念词条页
+│  │  └─ image_file/         # 法规原文页
+│  └─ qa/
+│     └─ __init__.py         # 预留 Dify 问答服务
 ├─ data/chapters/
-│  ├─ ch01/
-│  ├─ ch02/
-│  ├─ ...
-│  └─ ch09/                  # 每章均采用下方“章节提交包”格式
+│  ├─ ch01/ ... ch09/        # 九章数据（sources/nodes/relations/glossary 等）
+├─ legacy/
+│  └─ neo4j_setup_v1.py      # 旧版 neo4j 实现，待合并后删除
 ├─ templates/
 │  ├─ chapter/               # 章节数据模板
 │  └─ crawler/               # 爬虫配置模板
 ├─ tests/
-│  ├─ graph/
-│  └─ qa/
-├─ docs/                     # 架构、演示和会议文档
+│  └─ __init__.py
+├─ docs/                     # 架构、部署、会议文档
 ├─ .env.example
 ├─ .gitignore
 ├─ requirements.txt
@@ -59,13 +66,13 @@ cd airworthiness
 py -3.11 -m venv .venv
 .\.venv\Scripts\Activate.ps1
 python -m pip install --upgrade pip
-pip install -r requirements.txt
+pip install -e .
 Copy-Item .env.example .env
 ```
 
 然后在本机 `.env` 中填写 Neo4j、Dify 和 DeepSeek 配置。`.env` 只保存在个人电脑，不得上传。
 
-当前旧版代码的具体启动方式可能随整理而变化；完成目录迁移后，应把唯一有效的启动命令固定为：
+`pip install -e .` 会按 `pyproject.toml` 安装依赖，并以可编辑方式注册 `airworthiness` 包（源码在 `src/` 下）。启动命令固定为：
 
 ```powershell
 python -m airworthiness.app
@@ -225,6 +232,13 @@ docs/repository-guidelines
 - [ ] 专业结论已记录在 `review.md`。
 - [ ] 未提交密钥、缓存、大型二进制文件或重复压缩包。
 
-## 十、旧文件处理原则
+## 十、旧文件处理结果
 
-当前仓库中的 `Web开发.zip`、根目录旧版 Python 文件及其中的重复内容先保留，等待团队共同确认。确认后再执行一次单独的迁移 PR：提取仍有价值的页面和数据，按目标目录拆分；验证新入口可运行后，才删除重复文件、缓存、压缩包和已泄露配置。不要在本次文档提交中删除它们。
+历史遗留文件已完成清理：
+
+- 根目录 `app.py`、`neo4j_setup.py`、`data_generator.py` 已归入 `src/airworthiness/`。
+- 原 `测试.py`（实际是另一版 neo4j 实现）归档到 `legacy/neo4j_setup_v1.py`，待团队确认后合并或删除。
+- `Web开发.zip` 已解压并分类到 `src/airworthiness/web/`，压缩包已删除。
+- 含密钥的 `.env` 已从仓库删除；该文件曾进入 Git 历史，相关密钥应尽快轮换。
+
+后续不要再提交 ZIP、缓存（`__pycache__`、`.pytest_cache`）或 `.env`。
