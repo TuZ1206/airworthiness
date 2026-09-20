@@ -42,8 +42,6 @@ airworthiness/
 │     └─ __init__.py         # 预留 Dify 问答服务
 ├─ data/chapters/
 │  ├─ ch01/ ... ch09/        # 九章数据（sources/nodes/relations/glossary 等）
-├─ legacy/
-│  └─ neo4j_setup_v1.py      # 旧版 neo4j 实现，待合并后删除
 ├─ templates/
 │  ├─ chapter/               # 章节数据模板
 │  └─ crawler/               # 爬虫配置模板
@@ -237,7 +235,7 @@ docs/repository-guidelines
 历史遗留文件已完成清理：
 
 - 根目录 `app.py`、`neo4j_setup.py`、`data_generator.py` 已归入 `src/airworthiness/`。
-- 原 `测试.py`（实际是另一版 neo4j 实现）归档到 `legacy/neo4j_setup_v1.py`，待团队确认后合并或删除。
+- 原 `测试.py`（实际是另一版 neo4j 实现）经对比确认是旧版且数据不全，已删除；当前保留 `src/airworthiness/graph/neo4j_setup.py` 作为唯一实现。
 - `Web开发.zip` 已解压并分类到 `src/airworthiness/web/`，压缩包已删除。
 - 含密钥的 `.env` 已从仓库删除；该文件曾进入 Git 历史，相关密钥应尽快轮换。
 
