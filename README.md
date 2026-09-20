@@ -100,6 +100,7 @@ ch06/
 ├─ sources.csv           # 官方来源清单
 ├─ nodes.csv             # 知识图谱节点
 ├─ relations.csv         # 知识图谱关系
+├─ glossary.csv          # 右侧名词索引（概念、定义、跳转）
 ├─ review.md             # 专业审核记录
 ├─ crawler_config.json   # 本章爬虫入口与关键词
 └─ documents/
@@ -118,7 +119,7 @@ source_id,title,document_code,document_status,publish_date,url,sha256,crawled_at
 ### `nodes.csv`
 
 ```text
-node_id,chapter_id,label,name,code,summary,source_id,source_locator,priority,review_status
+node_id,chapter_id,label,name,code,summary,display_type,source_id,source_locator,priority,review_status
 ```
 
 ### `relations.csv`
@@ -126,6 +127,14 @@ node_id,chapter_id,label,name,code,summary,source_id,source_locator,priority,rev
 ```text
 relation_id,from_node_id,type,to_node_id,source_id,evidence,review_status
 ```
+
+### `glossary.csv`
+
+```text
+term_id,term,aliases,definition,group,has_page,anchor_or_url,related_node_id,source_id,review_status
+```
+
+`glossary.csv` 是右侧名词索引表，与知识图谱节点分离：`term` 是名词，`definition` 是一句话解释，`group` 决定右侧栏分组，`has_page` 表示是否已有独立词条页，`anchor_or_url` 填正文锚点（如 `#s2-1`）或词条链接（如 `/concept/xxx`）。`related_node_id` 可选，用于把名词索引关联到 `nodes.csv` 中的图谱节点。
 
 统一状态值：
 
@@ -136,9 +145,22 @@ relation_id,from_node_id,type,to_node_id,source_id,evidence,review_status
 
 `document_status` 使用 `effective`、`abolished`、`unknown`；`priority` 使用 `high`、`medium`、`low`。
 
-编号规则：来源 `CH06-S001`，节点 `CH06-N001`，章内关系 `CH06-R001`，跨章关系 `CROSS-R001`。节点和关系编号一经合并不得重复使用或随意更换。
+`display_type` 用于前端图谱配色和分组，取值 `law`（法律）、`norm`（规范性文件）、`concept`（概念）、`process`（过程）、`material`（材料）。
+
+编号规则：来源 `CH06-S001`，节点 `CH06-N001`，名词 `CH06-T001`，章内关系 `CH06-R001`，跨章关系 `CROSS-R001`。编号一经合并不得重复使用或随意更换。
 
 示例行只展示格式，不代表专业结论；复制后必须根据原文修改并保持 `review_status=pending`，直到专业成员签字确认。
+
+### 前端展示数据对应
+
+每章详情页采用“正文 + 左侧目录 + 右侧名词索引 + 底部图谱”的布局，由以下数据渲染：
+
+- 正文：`documents/*.md`，标题层级 `##` / `###` / `####` 自动生成左侧目录和锚点。
+- 右侧名词索引：`glossary.csv`，提供名词、定义、分组、是否词条和跳转链接。
+- 图谱节点：`nodes.csv`，用 `display_type` 分色，`label` 保持 Neo4j 语义标签。
+- 图谱关系：`relations.csv`，边带 `type` 作为关系标签。
+
+目录和名词跳转都依赖正文标题锚点，因此正文标题不能随意改写；名词索引中的 `anchor_or_url` 必须能指向真实存在的正文锚点或词条页。
 
 ## 六、Neo4j 与 Dify 的数据边界
 
@@ -198,6 +220,7 @@ docs/repository-guidelines
 - [ ] `sources.csv` 中的 URL、文号、状态和哈希完整。
 - [ ] 每个节点能追溯到 `source_id` 和具体条款/段落。
 - [ ] 每条关系的起点、终点和来源均存在。
+- [ ] 每个名词的 `anchor_or_url` 能指向真实存在的正文锚点或词条页。
 - [ ] 示例内容已替换，编号在全仓库中唯一。
 - [ ] 专业结论已记录在 `review.md`。
 - [ ] 未提交密钥、缓存、大型二进制文件或重复压缩包。
