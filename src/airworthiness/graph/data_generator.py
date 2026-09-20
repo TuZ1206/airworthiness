@@ -164,51 +164,7 @@ def quick_setup():
     kg = AviationKnowledgeGraph()
 
     # 定义查询语句
-    predefined_queries = {
-        "所有章节": """
-        MATCH (c:Chapter)
-        RETURN c.id as id, c.title as title, c.description as description
-        ORDER BY c.id
-        """,
-
-        "章节及其引用的法规": """
-        MATCH (c:Chapter)-[:REFERENCES]->(a:Article)
-        RETURN c.id as chapter_id, c.title as chapter_title,
-               a.code as article_code, a.title as article_title
-        ORDER BY c.id, a.code
-        """,
-
-        "积木式验证层级": """
-        MATCH path = (bb1:BuildingBlock)-[:NEXT_LEVEL*]->(bb5:BuildingBlock)
-        RETURN bb1.level as start_level, bb1.name as start_name,
-               bb1.description as start_desc,
-               bb5.level as end_level, bb5.name as end_name,
-               bb5.description as end_desc
-        ORDER BY bb1.level
-        """,
-
-        "概念及其关联章节": """
-        MATCH (c:Chapter)-[:INCLUDES]->(con:Concept)
-        RETURN con.name as concept, con.description as description,
-               collect(c.title) as related_chapters
-        ORDER BY concept
-        """,
-
-        "条款的合规方法": """
-        MATCH (a:Article)-[:CAN_COMPLY_WITH]->(m:ComplianceMethod)
-        RETURN a.code as article_code, a.title as article_title,
-               collect(m.name) as compliance_methods
-        ORDER BY a.code
-        """,
-
-        "复杂查询：从材料到验证的完整路径": """
-        MATCH (mat:Chapter {id: 3})-[:NEXT_CHAPTER]->(proc:Chapter {id: 4})
-        MATCH (proc)-[:NEXT_CHAPTER]->(verify:Chapter {id: 7})
-        MATCH (verify)-[:USES_METHOD]->(bb:BuildingBlock)
-        RETURN mat.title as 材料性能, proc.title as 制造工艺,
-               verify.title as 验证方法, bb.name as 验证层级
-        """
-    }
+    predefined_queries = kg.generate_sample_queries()
 
     print("快速设置知识图谱查询系统")
     print("=" * 60)
