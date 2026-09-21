@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第9章: 结构设计审查与适航符合性分析 - 适航法规知识图谱</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', 'Microsoft YaHei', sans-serif;
+            line-height: 1.7;
+            color: #334155;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* 头部导航 */
+        .header {
+            background: linear-gradient(135deg, rgba(219, 234, 254, 0.9) 0%, rgba(237, 233, 254, 0.9) 100%);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(165, 180, 252, 0.1);
+        }
+
+        .nav-breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            font-size: 0.9em;
+            color: #64748b;
+        }
+
+        .nav-breadcrumb a {
+            color: #4f46e5;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-breadcrumb a:hover {
+            color: #7c3aed;
+        }
+
+        .chapter-header {
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .chapter-number {
+            font-size: 1.2em;
+            color: #4f46e5;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .chapter-title {
+            font-size: 2.2em;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+
+        .chapter-description {
+            font-size: 1.1em;
+            color: #64748b;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* 内容区域 */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .main-content {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .info-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .section-title {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #a5b4fc;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* 知识内容样式 */
+        .knowledge-content {
+            line-height: 1.8;
+            color: #475569;
+        }
+
+        .knowledge-content h3 {
+            color: #334155;
+            margin: 25px 0 15px;
+            font-size: 1.4em;
+        }
+
+        .knowledge-content h4 {
+            color: #334155;
+            margin: 20px 0 10px;
+            font-size: 1.2em;
+        }
+
+        .knowledge-content p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        .knowledge-content ul, .knowledge-content ol {
+            margin: 15px 0;
+            padding-left: 25px;
+        }
+
+        .knowledge-content li {
+            margin-bottom: 8px;
+        }
+
+        /* 关联项目样式 */
+        .related-items {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .related-item {
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+        }
+
+        .related-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .item-article {
+            border-left-color: #10b981;
+            background: rgba(16, 185, 129, 0.05);
+        }
+
+        .item-concept {
+            border-left-color: #f59e0b;
+            background: rgba(245, 158, 11, 0.05);
+        }
+
+        .item-method {
+            border-left-color: #8b5cf6;
+            background: rgba(139, 92, 246, 0.05);
+        }
+
+        .item-block {
+            border-left-color: #ef4444;
+            background: rgba(239, 68, 68, 0.05);
+        }
+
+        .item-title {
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 5px;
+        }
+
+        .item-desc {
+            font-size: 0.9em;
+            color: #64748b;
+        }
+
+        /* 导航按钮 */
+        .chapter-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .nav-btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-btn-prev {
+            background: linear-gradient(135deg, #a5b4fc, #818cf8);
+            color: white;
+        }
+
+        .nav-btn-next {
+            background: linear-gradient(135deg, #c4b5fd, #a78bfa);
+            color: white;
+            margin-left: auto;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(165, 180, 252, 0.3);
+        }
+
+        /* 可视化区域 */
+        .visualization-section {
+            margin-top: 40px;
+        }
+
+        #chapter-graph {
+            height: 400px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 968px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .chapter-title {
+                font-size: 1.8em;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+
+            .chapter-navigation {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-btn {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 头部导航 -->
+        <div class="header">
+            <div class="nav-breadcrumb">
+                <a href="/"><i class="fas fa-home"></i> 首页</a>
+                <i class="fas fa-chevron-right"></i>
+                <a href="/">知识体系</a>
+                <i class="fas fa-chevron-right"></i>
+                <span>第9章</span>
+            </div>
+
+            <div class="chapter-header">
+                <div class="chapter-number">第 9 章</div>
+                <h1 class="chapter-title">结构设计审查与适航符合性分析</h1>
+                <p class="chapter-description">本章系统阐述了针对运输类飞机结构的适航符合性审查核心原则、结构分类审查的重点内容、具体的验证方法与流程，并明确了设计修改与维修时的符合性要求，确保结构在全生命周期内的安全性。</p>
+            </div>
+        </div>
+
+        <!-- 主要内容区域 -->
+        <div class="content-grid">
+            <!-- 左侧主要内容 -->
+            <div class="main-content">
+                <h2 class="section-title">
+                    <i class="fas fa-book-open"></i> 知识内容
+                </h2>
+
+                <div class="knowledge-content">
+                    <h3>9.1 适航符合性的核心原则与适用范围</h3>
+                    <p><strong>1. 合规依据</strong></p>
+                    <p>本咨询通告为符合《联邦法规法典》第14篇第25部（FAR Part 25）相关要求提供指导，核心针对结构损伤容限、疲劳评估、广泛疲劳损伤（WFD）防控及工程数据有效期限确定。</p>
+
+                    <p><strong>2. 适用对象</strong></p>
+                    <p>适用于飞机制造商、改装商、外国民用航空主管部门及FAA运输类飞机型号认证工程师，明确了适航符合性验证的责任主体与应用场景。</p>
+
+                    <p><strong>3. 合规灵活性</strong></p>
+                    <p>本文件阐述的是“可接受的合规方法”而非唯一方法。FAA会考量申请人提出的其他合规方案，但需确保满足规章核心要求；若遵循本通告无法实现合规，FAA可要求额外验证材料或设计修改。</p>
+
+                    <h3>9.2 结构设计审查的核心内容</h3>
+                    <h4>9.2.1 结构分类与审查重点</h4>
+                    <p><strong>1. 关键结构界定</strong></p>
+                    <p>明确“主要结构件”、“疲劳关键结构”、“易发生广泛疲劳损伤的结构”的定义与范围，三者为设计审查的核心对象，且存在子集关系。</p>
+                    <ol>
+                        <li><strong>主要结构件</strong>：对承受飞行、地面或增压载荷起重要作用，且完整性关乎飞机整体结构安全的构件（如机翼、机身、起落架及其连接件等）。</li>
+                        <li><strong>疲劳关键结构</strong>：易发生疲劳裂纹且可能导致灾难性失效的结构，包括基线结构及维修或改装后新增的易损结构。</li>
+                        <li><strong>易发生广泛疲劳损伤的结构</strong>：可能出现多部位损伤或多构件损伤，进而导致结构剩余强度不达标的区域。</li>
+                    </ol>
+
+                    <p><strong>2. 设计审查核心维度</strong></p>
+                    <ol>
+                        <li><strong>损伤容限设计</strong>：需确保结构在疲劳、腐蚀或意外损伤后，剩余结构能承受合理载荷直至损伤被检测。优先采用多载荷路径设计、裂纹止裂件等设计特征。</li>
+                        <li><strong>疲劳设计</strong>：针对起落架等不适用于损伤容限设计的结构，需通过载荷谱分析、疲劳试验等确定安全寿命及更换时限，引入分散系数考量数据变异性。</li>
+                        <li><strong>广泛疲劳损伤（WFD）防控</strong>：设计需避免结构在有效性限制内出现WFD。通过全尺寸疲劳试验、拆解检查等验证结构抗疲劳性能。</li>
+                        <li><strong>离散源损伤应对</strong>：需确定离散源导致的最大损伤程度，验证剩余结构在后续飞行中的静强度达标。</li>
+                    </ol>
+
+                    <h4>9.2.2 设计审查的关键技术要求</h4>
+                    <ol>
+                        <li><strong>载荷与环境考量</strong>：设计审查需纳入飞行载荷、地面载荷、增压载荷等典型载荷谱，同时考量温度、湿度对结构疲劳性能的影响。载荷谱需基于实测数据或保守估算。</li>
+                        <li><strong>可检测性要求</strong>：结构设计需确保关键区域损伤可通过常规或专项检查手段检出。不可达区域需采取合理设计优化，避免因检测困难导致合规失效。</li>
+                        <li><strong>维修方案适配性</strong>：设计审查需同步明确结构的检查阈值、间隔、改装或更换时限。所有防控措施需纳入《持续适航文件》的《适航限制章节》，作为适航符合性的重要证明文件。</li>
+                    </ol>
+
+                    <h3>9.3 适航符合性验证方法与流程</h3>
+                    <h4>9.3.1 核心验证手段</h4>
+                    <p><strong>1. 试验验证</strong></p>
+                    <ol>
+                        <li><strong>全尺寸疲劳试验</strong>：针对易发生WFD的结构，需通过全尺寸疲劳试验提供合规证据。试验件需代表量产结构，加载需模拟实际运营载荷，试验时长需满足有效性限制相关要求。</li>
+                        <li><strong>专项试验</strong>：包括裂纹扩展试验、剩余强度试验、腐蚀防控验证等，用于支撑损伤容限分析、安全寿命确定及环境损伤应对的合规性。</li>
+                    </ol>
+
+                    <p><strong>2. 分析验证</strong></p>
+                    <ol>
+                        <li><strong>确定性分析</strong>：通过应力分析、疲劳寿命计算、裂纹扩展模拟等，验证结构在设计寿命内的性能达标。</li>
+                        <li><strong>概率性分析</strong>：针对多载荷路径结构，可采用风险分析等概率方法，需证明飞机失效概率极低且数据源于试验或运营经验。</li>
+                    </ol>
+
+                    <p><strong>3. 运营数据补充</strong></p>
+                    <p>可结合高机龄飞机的维修记录、拆解检查结果等运营数据，作为适航符合性的辅助验证依据，需确保数据的可信度与相关性。</p>
+
+                    <h4>9.3.2 合规流程</h4>
+                    <ol>
+                        <li><strong>结构范围界定</strong>：判断结构是否为疲劳关键结构。若非疲劳关键结构，则无需纳入本条款合规审查。</li>
+                        <li><strong>疲劳敏感性评估</strong>：识别结构是否易发生疲劳损伤。若不易发生则终止审查；若易发生，需预判疲劳裂纹是否可能在有效性限制内萌生。</li>
+                        <li><strong>检测可行性与措施制定</strong>：
+                            <ul>
+                                <li>若结构可可靠检测：针对小范围细节检查，制定检查阈值与间隔；针对大范围需同步制定结构改装或更换方案。</li>
+                                <li>若结构不可靠检测：直接制定结构改装或更换方案，明确时限要求。</li>
+                            </ul>
+                        </li>
+                        <li><strong>合规文件完善</strong>：将所有检查、改装更换要求及有效性限制纳入《适航限制章节》，作为适航符合性的最终证明文件。</li>
+                    </ol>
+
+                    <h3>9.4 设计修改与维修的适航符合性要求</h3>
+                    <p><strong>1. 设计修改</strong></p>
+                    <ol>
+                        <li>若修改涉及或新增易发生广泛疲劳损伤的结构，需通过试验或分析验证新结构及受影响结构在有效性限制内无WFD。合规方法可采用疲劳裂纹萌生分析或断裂力学裂纹扩展分析。</li>
+                        <li>需将新增的检查、改装要求纳入《适航限制章节》，确保全生命周期合规。</li>
+                    </ol>
+
+                    <p><strong>2. 重大维修</strong></p>
+                    <ol>
+                        <li>维修涉及或新增易发生广泛疲劳损伤的结构时，需验证维修后结构在有效性限制内无WFD；若维修不影响易损结构，可豁免额外WFD评估。</li>
+                        <li>维修方案需参考FAA批准的标准，确保与原设计的疲劳特性、应力水平一致性。</li>
+                    </ol>
+
+                    <h3>9.5 与外部适航标准的关联</h3>
+                    <p><strong>1. 与欧洲航空安全局的差异</strong></p>
+                    <p>FAA咨询通告AC 25.571-1D与EASA的可接受符合性方法（AMC 25.571）在条款要求、结构分类、试验要求及检查间隔等方面存在差异，申请人需根据认证区域选择适配的合规路径。</p>
+
+                    <p><strong>2. 与国内适航标准的呼应</strong></p>
+                    <p>中国民用航空规章CCAR-25部借鉴了FAR 25.571的核心要求，结构设计审查需满足“限制载荷无有害永久变形、极限载荷无失效”等共性原则，合规方法需经局方批准。</p>
+
+                    <p><strong>3. 特定系统的合规特例</strong></p>
+                    <p>如辅助动力装置安装系统，经安全性分析与航线故障统计，若其结构失效不影响飞机安全续航与着陆，可通过疲劳分析试验而非损伤容限分析满足FAR 25.571合规要求。</p>
+                </div>
+
+                <!-- 章节导航 -->
+                <div class="chapter-navigation">
+                    <a href="/chapter/8/detail" class="nav-btn nav-btn-prev">
+                        <i class="fas fa-arrow-left"></i>
+                        上一章: 第八章 疲劳与损伤容限要求
+                    </a>
+                    <!-- 下一章链接暂缺，可根据需要添加 -->
+                </div>
+            </div>
+
+            <!-- 右侧边栏 -->
+            <div class="sidebar">
+                <!-- 相关法规 -->
+                <div class="info-card">
+                    <h3 class="section-title">
+                        <i class="fas fa-gavel"></i> 相关法规
+                    </h3>
+                    <div class="related-items">
+                        <div class="related-item item-article">
+                            <div class="item-title">FAR 25.571 / CCAR-25.571</div>
+                            <div class="item-desc">损伤容限和疲劳评定，本章所有审查和验证工作的核心法规依据。</div>
+                        </div>
+                        <div class="related-item item-article">
+                            <div class="item-title">AC 25.571-1D</div>
+                            <div class="item-desc">FAA关于运输类飞机损伤容限和疲劳评定的咨询通告，提供了可接受的符合性方法。</div>
+                        </div>
+                        <div class="related-item item-article">
+                            <div class="item-title">EASA AMC 25.571</div>
+                            <div class="item-desc">欧洲航空安全局的可接受符合性方法，与FAA要求存在差异。</div>
+                        </div>
+                        <div class="related-item item-article">
+                            <div class="item-title">CCAR-25.305 / FAR 25.305</div>
+                            <div class="item-desc">强度和变形要求，是静强度（包括剩余强度）验证的基础。</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 核心概念 -->
+                <div class="info-card">
+                    <h3 class="section-title">
+                        <i class="fas fa-lightbulb"></i> 核心概念
+                    </h3>
+                    <div class="related-items">
+                        <div class="related-item item-concept">
+                            <div class="item-title">主要结构件</div>
+                            <div class="item-desc">对承受飞行、地面或增压载荷起重要作用，其完整性关乎飞机整体结构安全的构件。</div>
+                        </div>
+                        <div class="related-item item-concept">
+                            <div class="item-title">疲劳关键结构</div>
+                            <div class="item-desc">易发生疲劳裂纹且可能导致灾难性失效的结构，包括原始结构及维修改装后新增的易损部分。</div>
+                        </div>
+                        <div class="related-item item-concept">
+                            <div class="item-title">损伤容限设计</div>
+                            <div class="item-desc">要求结构在损伤（疲劳、腐蚀、意外）发生后，剩余结构仍能在定期检查间隔内承受规定的载荷。</div>
+                        </div>
+                        <div class="related-item item-concept">
+                            <div class="item-title">广泛疲劳损伤 (WFD)</div>
+                            <div class="item-desc">在结构中出现多处微小疲劳损伤，导致剩余强度下降到低于规定水平的状况。</div>
+                        </div>
+                        <div class="related-item item-concept">
+                            <div class="item-title">适航限制章节 (ALS)</div>
+                            <div class="item-desc">持续适航文件的一部分，强制性规定了检查阈值、间隔、改装或更换等限制，是符合性的最终证明文件。</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 合规方法 -->
+                <div class="info-card">
+                    <h3 class="section-title">
+                        <i class="fas fa-check-circle"></i> 合规方法
+                    </h3>
+                    <div class="related-items">
+                        <div class="related-item item-method">
+                            <div class="item-title">结构分类与系统性审查</div>
+                            <div class="item-desc">首先界定主要结构件、疲劳关键结构和WFD敏感结构，并针对不同类别，从损伤容限、疲劳、WFD防控、离散源损伤等维度进行系统性设计审查。</div>
+                        </div>
+                        <div class="related-item item-method">
+                            <div class="item-title">试验验证 (全尺寸/专项)</div>
+                            <div class="item-desc">对WFD敏感结构进行代表实际运营的全尺寸疲劳试验，并通过裂纹扩展、剩余强度等专项试验支撑损伤容限和安全寿命分析。</div>
+                        </div>
+                        <div class="related-item item-method">
+                            <div class="item-title">分析验证 (确定性/概率性)</div>
+                            <div class="item-desc">运用应力、疲劳寿命、裂纹扩展等确定性分析，或针对多载荷路径结构采用基于试验/运营数据的概率风险分析，证明结构符合性。</div>
+                        </div>
+                        <div class="related-item item-method">
+                            <div class="item-title">制定并纳入适航限制 (ALS)</div>
+                            <div class="item-desc">将审查得出的强制性要求，如检查阈值/间隔、改装更换时限、有效性限制等，编制成文并纳入飞机的持续适航文件的适航限制章节。</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 可视化图谱 -->
+        <div class="visualization-section">
+            <h2 class="section-title">
+                <i class="fas fa-project-diagram"></i> 知识关联图谱
+            </h2>
+            <div id="chapter-graph"></div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+    <script>
+        // 加载章节子图可视化
+        async function loadChapterGraph() {
+            try {
+                const response = await fetch(`/api/chapter/9/graph`);
+                const data = await response.json();
+
+                if (data.chapter) {
+                    renderChapterGraph(data);
+                }
+            } catch (error) {
+                console.error('加载章节图谱失败:', error);
+            }
+        }
+
+        function renderChapterGraph(graphData) {
+            const container = document.getElementById('chapter-graph');
+            const nodes = [];
+            const edges = [];
+
+            // 添加中心节点（当前章节）
+            nodes.push({
+                id: 'chapter',
+                label: `第9章\n结构设计审查与适航符合性分析`,
+                title: '本章系统阐述了针对运输类飞机结构的适航符合性审查核心原则、结构分类审查的重点内容、具体的验证方法与流程，并明确了设计修改与维修时的符合性要求，确保结构在全生命周期内的安全性。',
+                color: {
+                    background: '#3498db',
+                    border: '#2980b9'
+                },
+                font: { size: 16 },
+                shape: 'dot',
+                size: 35
+            });
+
+            // 添加相关节点
+            if (graphData.related_nodes) {
+                graphData.related_nodes.forEach((node, index) => {
+                    const nodeId = `node-${index}`;
+                    let color = '#95a5a6';
+                    let label = node.title || node.name || node.code;
+
+                    if (node.labels && node.labels.includes('Article')) {
+                        color = '#2ecc71';
+                    } else if (node.labels && node.labels.includes('Concept')) {
+                        color = '#e67e22';
+                    } else if (node.labels && node.labels.includes('ComplianceMethod')) {
+                        color = '#9b59b6';
+                    } else if (node.labels && node.labels.includes('BuildingBlock')) {
+                        color = '#e74c3c';
+                    }
+
+                    nodes.push({
+                        id: nodeId,
+                        label: label.substring(0, 20) + (label.length > 20 ? '...' : ''),
+                        title: node.description || node.content || '',
+                        color: { background: color },
+                        font: { size: 12 },
+                        shape: 'dot',
+                        size: 25
+                    });
+
+                    // 添加边
+                    edges.push({
+                        from: 'chapter',
+                        to: nodeId,
+                        arrows: 'to',
+                        color: '#95a5a6'
+                    });
+                });
+            }
+
+            const data = { nodes: nodes, edges: edges };
+            const options = {
+                layout: {
+                    improvedLayout: true
+                },
+                physics: {
+                    enabled: true,
+                    stabilization: { iterations: 100 }
+                },
+                interaction: {
+                    hover: true
+                }
+            };
+
+            new vis.Network(container, data, options);
+        }
+
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            loadChapterGraph();
+        });
+    </script>
+</body>
+</html>

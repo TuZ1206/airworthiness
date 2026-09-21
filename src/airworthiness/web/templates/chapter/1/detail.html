@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第1章: 适航法规体系与复合材料结构概论 - 适航法规知识图谱</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', 'Microsoft YaHei', sans-serif;
+            line-height: 1.7;
+            color: #334155;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            min-height: 100vh;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* 头部导航 */
+        .header {
+            background: linear-gradient(135deg, rgba(219, 234, 254, 0.9) 0%, rgba(237, 233, 254, 0.9) 100%);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(165, 180, 252, 0.1);
+        }
+
+        .nav-breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            font-size: 0.9em;
+            color: #64748b;
+            flex-wrap: wrap;
+        }
+
+        .nav-breadcrumb a {
+            color: #4f46e5;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-breadcrumb a:hover {
+            color: #7c3aed;
+        }
+
+        .chapter-header {
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .chapter-number {
+            font-size: 1.2em;
+            color: #4f46e5;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .chapter-title {
+            font-size: 2.2em;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+
+        .chapter-description {
+            font-size: 1.1em;
+            color: #64748b;
+            max-width: 900px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* ============ 目录（分页 → 锚点跳转） ============ */
+        .toc-bar {
+            background: rgba(255, 255, 255, 0.92);
+            border-radius: 12px;
+            padding: 18px 24px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+        .toc-bar-inner {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .toc-bar .toc-title {
+            font-weight: 700;
+            color: #4f46e5;
+            font-size: 1em;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+        }
+        .toc-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .toc-list a {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            border-radius: 999px;
+            background: rgba(165, 180, 252, 0.12);
+            color: #475569;
+            text-decoration: none;
+            font-size: 0.9em;
+            font-weight: 500;
+            transition: all 0.2s;
+            border: 1px solid transparent;
+        }
+        .toc-list a .toc-num {
+            color: #818cf8;
+            font-weight: 700;
+        }
+        .toc-list a:hover {
+            background: rgba(79, 70, 229, 0.12);
+            color: #4f46e5;
+        }
+        .toc-list a.active {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: #fff;
+            box-shadow: 0 3px 10px rgba(99, 102, 241, 0.3);
+        }
+        .toc-list a.active .toc-num {
+            color: #e0e7ff;
+        }
+
+        /* ============ 三栏主体：目录栏 | 正文 | 侧栏 ============ */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 200px 1fr 300px;
+            gap: 28px;
+            margin-bottom: 40px;
+            align-items: start;
+        }
+
+        /* 左侧锚点目录（桌面端 sticky） */
+        .left-toc {
+            position: sticky;
+            top: 92px;
+            max-height: calc(100vh - 110px);
+            overflow-y: auto;
+            padding-right: 6px;
+        }
+        .left-toc .lt-title {
+            font-size: 0.85em;
+            font-weight: 700;
+            color: #94a3b8;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            padding-left: 12px;
+        }
+        .left-toc ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            border-left: 2px solid #e2e8f0;
+        }
+        .left-toc li a {
+            display: block;
+            padding: 7px 12px;
+            color: #64748b;
+            text-decoration: none;
+            font-size: 0.88em;
+            line-height: 1.4;
+            border-left: 3px solid transparent;
+            margin-left: -2px;
+            transition: all 0.2s;
+        }
+        .left-toc li a:hover {
+            color: #4f46e5;
+            background: rgba(165, 180, 252, 0.08);
+        }
+        .left-toc li a.active {
+            color: #4f46e5;
+            font-weight: 600;
+            border-left-color: #6366f1;
+            background: rgba(165, 180, 252, 0.12);
+        }
+        .left-toc .lt-h3 { padding-left: 12px; }
+        .left-toc .lt-h4 { padding-left: 26px; font-size: 0.82em; color: #94a3b8; }
+
+        .main-content {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 12px;
+            padding: 36px 40px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            min-width: 0;
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            position: sticky;
+            top: 92px;
+            max-height: calc(100vh - 110px);
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+
+        .info-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .section-title {
+            font-size: 1.15em;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 14px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #a5b4fc;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* ============ 正文知识内容 ============ */
+        .knowledge-content {
+            line-height: 1.85;
+            color: #475569;
+        }
+        .knowledge-content section {
+            scroll-margin-top: 100px;
+        }
+        .knowledge-content h2.k-heading {
+            color: #1e293b;
+            font-size: 1.55em;
+            font-weight: 700;
+            margin: 40px 0 18px;
+            padding-left: 14px;
+            border-left: 5px solid #6366f1;
+            line-height: 1.35;
+        }
+        .knowledge-content h2.k-heading:first-child {
+            margin-top: 0;
+        }
+        .knowledge-content h3 {
+            color: #334155;
+            margin: 28px 0 12px;
+            font-size: 1.2em;
+            font-weight: 700;
+        }
+        .knowledge-content h4 {
+            color: #334155;
+            margin: 20px 0 10px;
+            font-size: 1.05em;
+            font-weight: 600;
+        }
+        .knowledge-content p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        .knowledge-content ul, .knowledge-content ol {
+            margin: 14px 0 18px;
+            padding-left: 26px;
+        }
+        .knowledge-content li {
+            margin-bottom: 8px;
+        }
+        .knowledge-content strong { color: #1e293b; }
+
+        /* ============ 右侧：动态分组关联（废除三大硬分类） ============ */
+        .group-block { margin-bottom: 18px; }
+        .group-block:last-child { margin-bottom: 0; }
+        .group-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95em;
+            font-weight: 700;
+            color: #334155;
+            margin-bottom: 10px;
+            padding-bottom: 6px;
+            border-bottom: 1px dashed #c7d2fe;
+        }
+        .group-title .gt-dot {
+            width: 9px; height: 9px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .related-items {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .related-item {
+            padding: 11px 13px;
+            border-radius: 8px;
+            border-left: 4px solid #cbd5e1;
+            background: rgba(248, 250, 252, 0.6);
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-decoration: none;
+            display: block;
+            color: inherit;
+        }
+        .related-item:hover {
+            transform: translateX(4px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        .item-title {
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 3px;
+            font-size: 0.92em;
+        }
+        .item-desc {
+            font-size: 0.82em;
+            color: #64748b;
+            line-height: 1.5;
+        }
+        .item-tag {
+            display: inline-block;
+            font-size: 0.7em;
+            padding: 1px 7px;
+            border-radius: 4px;
+            background: rgba(99, 102, 241, 0.1);
+            color: #6366f1;
+            margin-left: 6px;
+            font-weight: 500;
+            vertical-align: middle;
+        }
+        .item-title .fas {
+            font-size: 0.85em;
+            opacity: 0.7;
+            margin-left: 2px;
+        }
+
+        /* 导航按钮 */
+        .chapter-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
+        }
+        .nav-btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .nav-btn-prev { background: linear-gradient(135deg, #a5b4fc, #818cf8); color: white; }
+        .nav-btn-next { background: linear-gradient(135deg, #c4b5fd, #a78bfa); color: white; margin-left: auto; }
+        .nav-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(165, 180, 252, 0.3); }
+
+        /* ============ 可视化图谱（硬植入） ============ */
+        .visualization-section {
+            margin-top: 40px;
+        }
+        .graph-toolbar {
+            display: flex;
+            gap: 10px;
+            margin: 0 0 14px;
+            flex-wrap: wrap;
+        }
+        .graph-toolbar button {
+            padding: 6px 14px;
+            border-radius: 8px;
+            border: 1px solid #c7d2fe;
+            background: #fff;
+            color: #4f46e5;
+            font-size: 0.85em;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .graph-toolbar button:hover { background: #eef2ff; }
+        #chapter-graph {
+            height: 480px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            margin-top: 0;
+        }
+        .graph-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-top: 12px;
+            font-size: 0.82em;
+            color: #64748b;
+        }
+        .graph-legend span { display: inline-flex; align-items: center; gap: 6px; }
+        .graph-legend i { width: 12px; height: 12px; border-radius: 50%; display: inline-block; }
+
+        /* ============ 响应式 ============ */
+        @media (max-width: 1100px) {
+            .content-grid { grid-template-columns: 1fr 300px; }
+            .left-toc { display: none; }
+        }
+        @media (max-width: 820px) {
+            .content-grid { grid-template-columns: 1fr; }
+            .sidebar {
+                position: static;
+                max-height: none;
+            }
+            .chapter-title { font-size: 1.8em; }
+            .main-content { padding: 26px 22px; }
+        }
+        @media (max-width: 640px) {
+            .container { padding: 15px; }
+            .chapter-navigation { flex-direction: column; gap: 15px; }
+            .nav-btn { justify-content: center; }
+            .toc-bar { position: static; }
+            #chapter-graph { height: 360px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 头部导航 -->
+        <div class="header">
+            <div class="nav-breadcrumb">
+                <a href="/"><i class="fas fa-home"></i> 首页</a>
+                <i class="fas fa-chevron-right"></i>
+                <a href="/">知识体系</a>
+                <i class="fas fa-chevron-right"></i>
+                <span>第1章</span>
+            </div>
+
+            <div class="chapter-header">
+                <div class="chapter-number">第 1 章</div>
+                <h1 class="chapter-title">适航法规体系与复合材料结构概论</h1>
+                <p class="chapter-description">本章从航空器与适航的基本定义切入，梳理中国适航法规体系的五层金字塔结构，并剖析复合材料结构因各向异性、隐蔽损伤等特性对传统适航审定方法提出的特殊挑战。</p>
+            </div>
+        </div>
+
+        <!-- 顶部锚点目录条（始终可见，便于快速跳转） -->
+        <div class="toc-bar">
+            <div class="toc-bar-inner">
+                <span class="toc-title"><i class="fas fa-stream"></i> 本章目录</span>
+                <ul class="toc-list" id="tocList"><!-- JS 自动生成，与左侧栏同源 --></ul>
+            </div>
+        </div>
+
+        <!-- 主要内容区域 -->
+        <div class="content-grid">
+            <!-- 左侧锚点目录（桌面端 sticky） -->
+            <nav class="left-toc" aria-label="章节目录">
+                <div class="lt-title">本页导航</div>
+                <ul id="leftTocList"></ul>
+            </nav>
+
+            <!-- 中间正文（分页已废弃，全部铺开） -->
+            <div class="main-content">
+                <h2 class="section-title">
+                    <i class="fas fa-book-open"></i> 知识内容
+                </h2>
+
+                <article class="knowledge-content" id="knowledgeContent">
+
+                    <!-- ============ 第一节 ============ -->
+                    <section id="s1">
+                        <h2 class="k-heading">一、基本概念：航空器、民用航空器与适航</h2>
+
+                        <h3 id="s1-1">1.1 航空器的定义</h3>
+                        <p>在讨论适航之前，需要明确这是专属于民用航空器的问题，而定义民用航空器，首先需要明确航空器的定义。</p>
+                        <p>中国《民用航空器国籍登记规定》（CCAR-45-R1）指出：本规定所称航空器，是指任何能够凭借空气的反作用力获得在大气中的支承力、并由所载人员驾驶的飞行器械，包括固定翼航空器、旋翼航空器、载人气球、飞艇以及中国民用航空总局认定的其他飞行器械。</p>
+                        <p>需额外注意：中国的定义强调"由所载人员驾驶"，即严格意义上无人机并不属于 CCAR 定义的"航空器"，但这更多是管理意义上的区分。中国无人机的管理核心是《无人驾驶航空器飞行管理暂行条例》（国务院、中央军委令第 761 号），其框架跳出 CCAR-45，表明这种定义具有工具性——暂行条例属于对工具性定义的扩充，而在事实意义上无人机无疑属于航空器。</p>
+
+                        <h3 id="s1-2">1.2 民用航空器的界定</h3>
+                        <p>《中华人民共和国民用航空法》第二章第五条明确描述：本法所称民用航空器，是指除用于执行军事、海关、警察飞行任务外的航空器。</p>
+
+                        <h3 id="s1-3">1.3 适航的定义</h3>
+                        <p>在明确上述概念后，便可给出适航的定义。引用芝加哥公约（ICAO）附件 8《航空器适航性》：适航指航空器、（驾驶遥控台）、发动机、螺旋桨或部件符合其标准的设计、并处于安全运行状态的状况。关于安全运行状态，附件 8 解释了"预期运行条件"的概念。</p>
+                        <h4>预期运行条件</h4>
+                        <p>预期运行条件，考虑到航空器（或遥控驾驶站）所适宜的运行，是指从经验中获知、或在航空器（和遥控驾驶站）使用寿命期间可合理想象会发生的条件。所考虑的条件与大气的气象状况、地面形状、航空器（和遥控驾驶站）工作情况、人员效率和影响飞行安全的所有因素相关。预期运行条件<strong>不包括</strong>：</p>
+                        <ul>
+                            <li>a) 可以由操作程序有效避免的极端条件；和</li>
+                            <li>b) 极少发生的极端条件——以致要求在这种极端条件下符合标准，将使适航标准高于经验证实属于必要或实际可行的标准。</li>
+                        </ul>
+                        <p><em>注：括号内内容为 ICAO 为新定义增添的内容，自 2026 年 11 月 26 日起方适用。</em></p>
+                    </section>
+
+                    <!-- ============ 第二节 ============ -->
+                    <section id="s2">
+                        <h2 class="k-heading">二、中国适航法规体系的五层金字塔结构</h2>
+                        <p>中国的适航法规体系并非扁平的法律堆，而是层层叠加的五层金字塔结构：<strong>法律 → 行政法规 → 民航规章（CCAR）→ 规范性文件（AP / AC / MD 等）→ 行业标准与团体标准（HB、GB、TSO / CTSO）</strong>。此外，针对具体型号或新材料、新工艺，局方还会颁发专用条件（SC）和豁免，构成对第五层的补充。</p>
+
+                        <h3 id="s2-1">2.1 第一层：法律</h3>
+                        <p>主要指《中华人民共和国民用航空法》（1995 年颁布，2026 年 7 月 1 日起施行新版——本文采用 2025 年 12 月 27 日第十四届全国人大常委会第十九次会议修订的版本）。该法律是适航法律体系的最上层，规定监管方式、监管权力和机构，对具体技术细节和审查流程不作具体规定，作为整个适航法规体系的"母法"，主要确立基本原则、许可类型和框架性要求，搭建行政许可框架并将细则制定权授予国务院及民航局。</p>
+                        <p>针对适航，民用航空法的规定主要集中在第二章第三节"民用航空器适航管理"（第 26—35 条），围绕<strong>"设计—生产—维修—使用"全过程</strong>以及相关附属产品、所有人或承租人责任，构建了一套完整的适航行政许可体系：</p>
+                        <ul>
+                            <li><strong>设计环节</strong>：从事民用航空产品和零部件设计的机构，应申请取得设计机构许可证书，并要求建立设计保证系统，压实设计机构主体责任。取得许可的设计机构可根据批准权限为设计小改自行签发合格证明。</li>
+                            <li><strong>生产环节</strong>：生产机构应建立生产质量系统并取得生产机构许可证书，可在许可范围内为本单位生产的民用航空产品和零部件签发合格证明（取消了原"适航批准标签"这一行政许可）；也可接受民航局委托提供技术检查服务。仅涉及设计小改的零部件、按规定无需设计/生产机构许可的，应申请零部件制造人许可证书。</li>
+                            <li><strong>飞行准入</strong>：具有中国国籍的民用航空器，应取得适航证书方可飞行；尚未取得适航证书、为生产试飞等目的需飞行的，可申请特许飞行证书后在许可范围内飞行；租用外国民用航空器的，应对原国籍国适航证书申请审查认可或另行申请适航证书方可飞行；出口民用航空器，可申请出口适航证书。</li>
+                            <li><strong>化学产品与油料</strong>：民用航空化学产品的设计、生产，民用航空油料的供应、测试，相关单位应取得相关许可证书。</li>
+                            <li><strong>无人驾驶航空器</strong>：民用无人驾驶航空器的设计、生产、进口、维修和飞行活动，应申请取得适航许可（按规定无需取得的除外）；生产机构应为无人机设置唯一产品识别码。</li>
+                            <li><strong>使用责任</strong>：民用航空器的所有人或承租人应当按照适航证书规定的使用范围使用民用航空器，做好维修保养工作，保证民用航空器处于适航状态。</li>
+                        </ul>
+
+                        <h3 id="s2-2">2.2 第二层：行政法规</h3>
+                        <p>行政法规指依照上层法律、由国务院颁布的管理条例。在适航管理上，主要的奠基性行政法规是《中华人民共和国民用航空器适航管理条例》。条例共二十九条，构建了覆盖民用航空器全生命周期的适航监管制度，其宗旨正如第一条所言："为保障民用航空安全，维护公众利益，促进民用航空事业的发展。"</p>
+                        <ul>
+                            <li><strong>监管对象</strong>：在中华人民共和国境内从事民用航空器（含航空发动机和螺旋桨）的设计、生产、使用和维修的单位或个人；向我国出口民用航空器的单位或个人；在境外维修我国注册登记民用航空器的单位或个人。</li>
+                            <li><strong>监管主体</strong>：统一负责适航管理、执行适航标准和程序的监管主体为中国民用航空局（民航局）。</li>
+                            <li><strong>设计环节</strong>：明确了型号合格证制度——任何单位或个人设计民用航空器，须持航空工业部审核批准文件向民航局申请型号合格证；民航局进行型号合格审定，合格者颁发该证。</li>
+                            <li><strong>生产环节</strong>：确立了生产许可证与适航证制度。生产民用航空器须持型号合格证，经航空工业部同意后向民航局申请生产许可证；未取得生产许可证的不得生产（特殊需要须经民航局批准，且逐架审查发证）。</li>
+                            <li><strong>飞行准入</strong>：民用航空器审定合格后颁发生产许可证，并按规定颁发适航证；民用航空器必须持有民航局颁发的适航证方可飞行，适航证载明活动类别、有效期及安全限制条件。在境内飞行的民用航空器必须具有国籍登记证；在我国注册的具有中国国籍，由民航局颁发，并须在机身标明国籍登记识别标志。</li>
+                            <li><strong>进出口与租赁</strong>：首次进口外国型号用于民航活动的，出口方须向民航局申请型号审查，合格者颁发准予进口的型号认可证书；持生产许可证单位生产的航空器，经国务院有关主管部门批准出口时，由民航局签发出口适航证。租用外机必须经民航局对原登记国适航证审查认可、或另行颁发适航证后方可飞行。</li>
+                            <li><strong>持续适航</strong>：取得适航证的航空器，必须按照民航局有关规定和适航指令使用和维修，保证始终处于持续适航状态。加装或改装已取得适航证的航空器，须经民航局批准，重要部件、附件须经民航局审定。承担我国登记航空器维修业务的境内外维修单位，须取得民航局颁发的维修许可证。负责维修并放行的技术人员，须取得民航局或其授权单位考核颁发的维修人员执照。</li>
+                            <li><strong>法律责任与监督授权</strong>：民航局有权对生产、使用、维修单位及持证航空器进行定期或抽查；不合格的，除按规定处罚外，可吊销有关证件。适航审查可收取费用，办法由民航局会同财政部制定。</li>
+                        </ul>
+
+                        <h3 id="s2-3">2.3 第三层：民航规章（CCAR）</h3>
+                        <p>CCAR（China Civil Aviation Regulations，中国民用航空规章）是民航局依据上层法律制定发布的、涉及民用航空活动的专业性管理规章。相较于简洁明晰的上层法律和行政法规，民航规章涉及诸多程序规定和技术规范，涉及面广且深。目前 CCAR 类规章数目繁多，其中与适航管理直接相关的有：</p>
+                        <ul>
+                            <li><strong>CCAR-21《民用航空产品和零部件合格审定规定》</strong>：管理类规章，适航审定的管理总纲，型号合格证（TC）、生产许可证（PC）、单机适航证（AC）的申请与颁发总纲；复合材料结构制造质量体系要求的直接依据。</li>
+                            <li><strong>CCAR-23《正常类飞机适航规定》</strong>：技术类规章，针对乘客座位 19 座及以下、且最大审定起飞重量 8618 kg（19000 磅）及以下的飞机的适航审定规范，于 R4 引入 ASTM，转向基于目标的（objective-based）要求。</li>
+                            <li><strong>CCAR-25《运输类飞机适航标准》</strong>：运输类飞机必须符合的技术标准，复合材料主承力结构审定的核心依据；沿用规定式范式，对飞行性能、结构、动力装置、设备、系统等作出详尽的具体规定。</li>
+                            <li><strong>CCAR-26《运输类飞机持续适航和安全改进》</strong>：持续适航类规章。</li>
+                            <li><strong>CCAR-27《正常类旋翼航空器适航规定》/ CCAR-29《运输类旋翼航空器适航规定》</strong>：技术类规章，旋翼航空器适航规定。</li>
+                            <li><strong>CCAR-33《航空发动机适航规定》</strong>：技术类规章，颁发和更改航空发动机型号合格证用的适航标准。</li>
+                            <li><strong>CCAR-39《民用航空器适航指令规定》</strong>：持续适航类规章，持续适航的强制纠错机制——按照民航局的有关规定和适航指令使用和维修民用航空器，保证其始终处于持续适航状态。</li>
+                            <li><strong>CCAR-45《民用航空器国籍登记规定》</strong>：管理类规章，适航证颁发的前置条件。</li>
+                            <li><strong>CCAR-145《民用航空器维修单位合格审定规则》</strong>：程序适航类规章，维修单位合格审定的依据。</li>
+                            <li><strong>CCAR-183《民用航空器适航委任代表和委任单位代表规定》</strong>：管理类规章，委任代表参与符合性检查的法律基础。</li>
+                        </ul>
+                        <p>CCAR 适航类规章是一个<strong>"管理总纲 + 技术标准 + 维修运行 + 指令委任"四位一体</strong>的完整体系，覆盖从初始适航到持续适航的全生命周期；且 CCAR 设计了以证件管理为核心的管理方式：设计批准（TC）→ 生产批准（PC）→ 适航批准（CoA），再加适航指令、外国适航证认可书、特许飞行证等，构成完整的证件体系。</p>
+
+                        <h3 id="s2-4">2.4 第四层：规范性文件</h3>
+                        <p>一般认为规范性文件包括 AP / AC / MD / WM / IB，即：</p>
+                        <ul>
+                            <li><strong>AP 管理程序</strong>：局方的内部程序；</li>
+                            <li><strong>AC 咨询通告</strong>：可接受符合性方法；</li>
+                            <li><strong>MD 管理文件</strong>：局方内部管理文件；</li>
+                            <li><strong>WM 工作手册</strong>：具体审定操作指南；</li>
+                            <li><strong>IB 信息通报</strong>：技术信息分享。</li>
+                        </ul>
+                        <p>根据《中国民用航空总局职能部门规范性文件制定程序规定》第三条："职能部门制定规范性文件，必须遵守法律、法规和民航总局规章的规定，不得与法律、法规和民航总局规章相冲突。规范性文件与法律、法规和民航总局规章冲突的内容无效。"由此可知，规范性文件由民航局各职能部门发布，依据上层法律法规，是为执行上层规章而制定的实施细则与指导性文件，是局方将 CCAR"翻译"为具体程序和方法的关键，也是复合材料适航符合性验证方法的主要载体。</p>
+                        <ul>
+                            <li><strong>AP</strong>：把 CCAR 里的原则性要求进一步变成"具体怎么执行、怎么管理"的操作规则，明确"这件事按什么程序办、由谁来办、怎么审、怎么管"。它既是局方工作人员的管理依据，也是法人、其他经济组织和个人从事民航活动应当遵守的行为规则。如 <em>AP-21-AA-2011-03-R4《航空器型号合格审定程序》</em>：TC 取证全流程的局方工作程序。</li>
+                            <li><strong>AC</strong>：对 CCAR 规章条文所作的具体阐述，面向行业从业者，是推荐性指导文件，提供局方接受的符合性验证方法，但并不具有强制性——申请人仍可以提出等效的替代方案，但需额外论证其合理性并经局方批准。如 <em>AC-21-AA-2017-39《复合材料结构制造质量体系要求指南》</em>：给出复合材料结构制造质量体系的"可接受方法"。</li>
+                            <li><strong>MD</strong>：各职能部门就民用航空管理工作的重要事项作出的通知、决定或政策说明，常用于发布暂行规定或阶段性管理政策，针对特定阶段、特定事项，带有明显的"当前政策"属性。如《民用无人驾驶航空器系统空中交通管理办法》（MD-TM-2016-004）。</li>
+                            <li><strong>WM</strong>：各职能部门下发的、规范和指导民航行政机关工作人员具体行为的文件，仅对局方内部生效，属纯内部工作指导，规范监察员、审查员的现场行为。如《适航审定监察员手册》（2013 年 5 月 1 日颁布）。尽管对申请人并无约束意义，但局方人员会直接影响审定过程，间接影响不可忽视。</li>
+                            <li><strong>IB</strong>：反映民用航空活动中出现的新情况，以及国内外有关民航技术上存在的问题进行通报的文件。仅作为参考性信息，无强制约束力，但能及时传递行业动态、技术更新、政策变化。如《变更管制方式安全评估指导材料》（IB-TM-2011-006）。</li>
+                        </ul>
+                        <p><strong>编号规则</strong>：AP、AC 的编号由"文件种类英文简称 + 所属规章编号 + 职能部门英文代码 + 年份 + 顺序编号 + 修订序号"组成。例如 <code>AP-21-AA-2011-03-R4</code>：AP（管理程序）-21（CCAR-21 部）-AA（适航审定司）-2011（年份）-03（顺序号）-R4（第 4 次修订）。MD、WM、IB 的编号相对简化，由"文件种类英文简称 + 职能部门英文代码 + 年份 + 顺序编号"依次排列组成。</p>
+
+                        <h3 id="s2-5">2.5 第五层：行业标准与横向补充层（HB / GB / CTSO / 专用条件 / 团体标准）</h3>
+                        <p>行业标准与其横向补充可以看作是适航体系的"技术底座 + 个案补丁"——不规定整体流程和框架，而规范技术细节上的标准，以及现有规章覆盖不到的新设计。</p>
+                        <ul>
+                            <li><strong>CTSO</strong>：依据 CCAR-37《民用航空材料、零部件和机载设备技术标准规定》颁发，规定民用航空器上所用的航空材料、零部件或机载设备在申请适航批准时必须遵守的准则，是该类产品的最低性能标准（MPS），把抽象的整机安全目标拆解为具体零部件/机载设备可落地的最低性能标准。CTSO 具有双重属性——既是一个规定最低性能的标准，又是一条批准路径：制造商据此取得 CTSOA（技术标准规定项目批准书），这是局方颁发的设计与生产批准书。实行编号双轨制：CTSO-C 类与国际 TSO-C 类保持一致，便于双边适航合作；CTSO-2C 类用于中国民航认为需要但不属于国际 C 类的设备，体现"国际接轨 + 本国需求"的制度设计。<em>需注意：CTSOA 只证明该零部件本身符合最低性能标准，装机使用还需另外获得局方的装机批准。</em></li>
+                            <li><strong>HB</strong>：由工信部审批发布的航空行业标准，属行业标准类技术规范，主要用于规范技术细则，提供具体的设计规范、试验方法、判定指标。对 HB 类行业标准材料，若此前已在局方以 TC / STC / VTC / VSTC 方式认可的飞机上使用过，在型号合格审定中可通过"符合性说明（MOC1）"方式验证；若没有充分的使用经验和数据积累，申请人需进行"第一层次材料指标合理性确定 + 第二层次符合性验证"两层试验。不少 HB 的部分内容翻译自 RTCA DO、SAE ARP、EUROCAE ED 等筛选出的国际标准，提供本土化的翻译条文。</li>
+                            <li><strong>GB / GB-T</strong>：GB 是强制性国家标准，GB-T 是推荐性国家标准。作为国家标准，通用性更强；HB 作为航空行业专属标准，专业性更深。民航领域的 GB 数量相对较少。CCAR-21 对"标准件"的法定定义是"在完全符合国家标准或者行业规范的情况下生产的零部件，其中国家标准或者行业规范应当包含设计、生产和统一识别的要求"——GB 是判定"标准件"身份的核心依据之一。对国家标准类材料规范，若此种材料在局方认可的飞机上使用过，在型号合格审定过程中可以 MOC1 方式验证；若没有，则必须以 MOC4 试验方式验证。</li>
+                            <li><strong>专用条件（SC）</strong>：民航局针对具体产品的型号合格审定，因现有适航规章没有包含适当的或足够的安全要求而专门制定的补充要求。当满足以下任一条件时，专用条件需要被制定，并与适航规章、环境保护要求共同构成该产品的型号合格审定基础，应具有与适用的适航规章等效的安全水平，必要时应在颁发前征求公众意见：
+                                <ol>
+                                    <li>民用航空产品具有新颖或者独特的设计特点；</li>
+                                    <li>民用航空产品的预期用途是非常规的；</li>
+                                    <li>从类似产品使用经验表明可能产生不安全状况。</li>
+                                </ol>
+                            </li>
+                            <li><strong>团体标准</strong>：国家标准、行业标准和地方标准属政府主导制定的标准；团体标准、企业标准属市场主体自主制定的标准。相应地，后者具有独立的知识产权，属非公开内容，需注意版权。团体标准如 T/CSCM 等由学会、协会、产业技术联盟等社会团体制定，虽在法律层级上不等同于行业标准，但在适航技术体系的实际运作中扮演"横向补充层"的重要角色——属推荐性技术支撑文件，本身不具备强制约束力，不会自动成为适航审定基础的一部分，但可作为符合性验证方法提案提出并取得局方认可；局方认可后，该标准就通过 AC（咨询通告）或 AP（管理程序）的引用进入具体审定项目，此时它对这个项目而言便具有了"应当符合"的实际效力。团体标准紧扣适航规章、定位精准且细化，可在没有国家标准、行业标准和地方标准的情况下快速响应创新和市场对标准的需求，补充现有标准空白，且一般由产业龙头牵头、技术含量高、前瞻性强，可先行探索 eVTOL 等新业态的适航审定问题。</li>
+                        </ul>
+                    </section>
+
+                    <!-- ============ 第三节 ============ -->
+                    <section id="s3">
+                        <h2 class="k-heading">三、国际衔接：ICAO 与国际/双边适航</h2>
+
+                        <h3 id="s3-1">3.1 ICAO 与国际适航最低标准</h3>
+                        <p>国际民航组织（ICAO）是制定国际适航标准和指导文件的权威机构，这些标准提出了完整的国际通行适航最低标准，可由各缔约国通过其国内的航空法规所承认并予以实施。</p>
+                        <p>中国作为《国际民用航空公约》缔约国，ICAO 附件 8《航空器适航性》针对航空器、发动机、螺旋桨等航空产品类别分别给出"适航标准"的框架和最低要求。在中国民航局（CAAC）体系下，满足 ICAO 定义"至少能满足附件 8 适用标准"的"适航标准"，是以民用航空规章（CCAR）形式发布的——即 ICAO 附件 8 与 CCAR-21 / 23 / 25 / 27 / 29 / 33 / 35 等存在明确的对应关系。"在航空器跨境转移活动中，面对各国民航当局不同的适航法规体系和参差不齐的监管水平时，ICAO 现行适航标准可作为国家间相互承认、平等对话的平台"——这也意味着 ICAO 标准是中国民航走向国际市场必须度过的门槛，并提供了与国际接轨的基础。故即便 ICAO 标准在中国并没有直接的法律效力，但作为源头和底线，其间接影响很大。</p>
+
+                        <h3 id="s3-2">3.2 双边适航协议（BASA / IPA）</h3>
+                        <p>双边适航协议（Bilateral Airworthiness Agreement, BASA）及其配套的技术实施程序，在中国适航体系中处于"国内适航审定结果与国际市场准入之间的桥梁"地位。它不改变中国以 CCAR 系列规章为根基的适航审定主权，而是通过双边承认机制，使 CAAC 的审定结论在缔约方获得法律效力，从而打通国产航空产品的出海通道。</p>
+                        <ul>
+                            <li><strong>中美</strong>：自 2017 年 CAAC 与 FAA 签署新版《适航实施程序》（IPA）并生效后，两国民用航空产品已实现全面对等互认。</li>
+                            <li><strong>中欧</strong>：由于技术评估工作进展不一致等原因相对迟滞，但于 2019 年中国民航局局长冯正霖与欧盟代表在布鲁塞尔正式签署《中华人民共和国政府和欧洲联盟民用航空安全协定》及《关于航班若干方面的协定》——这是首个与欧盟在民航领域达成的协议，实现双方主管机关对合规认定和颁发的证书进行互认接受。</li>
+                        </ul>
+                        <h4>中美双边互认协议承诺</h4>
+                        <ol>
+                            <li>为相互接受对方的（a）民用航空产品适航批准和环境检测与批准、（b）飞行模拟机资格鉴定提供便利；</li>
+                            <li>为相互接受对方的维修设施及改装设施的批准与监督、机组人员、航空培训机构、飞行运行的批准与监督提供便利；</li>
+                            <li>在航空安全方面为保持同等水平的安全与环境目标提供合作。</li>
+                        </ol>
+                        <p>在民用航空产品的适航批准、环境批准与环境检测、维修设施的批准与监督、飞行运行和机组人员的批准与监督、飞行模拟机的评估与资格鉴定、航空培训机构的批准与监督 6 个技术领域开展评估，适航实施程序 IPA 上含有具体的实施方法。</p>
+                        <h4>中欧双边互认协议承诺</h4>
+                        <ol>
+                            <li>协议附件规定，双方主管机关对合规认定和颁发的证书进行互认接受；</li>
+                            <li>促进民航业的多国化发展；</li>
+                            <li>促进民用航空产品和服务的自由流通；</li>
+                            <li>促进合作，以实现高水平的民航安全和环境兼容性。</li>
+                        </ol>
+                        <p>规定范围涵盖：1）对符合性认定结果、证书和文件的互认；以及 2）关于以下事项的技术支持：(a) 民用航空产品（以下简称"产品"）的适航性和持续适航性；(b) 设计和生产组织；以及 (c) 噪声、燃油排放和废气排放，包括适用时的二氧化碳排放。单独考虑时的二手或翻新发动机、螺旋桨、零部件和器材不在范围内，但二手飞机在规定的范围内；根据中华人民共和国适航监督体系颁发的零部件制造人批准书不在规定的范围内。</p>
+                        <p><strong>需要注意</strong>：全面对等互认不等于自动免审，进出口的飞机仍然需要受到对应国家的审查。对中国而言，它的作用是将 CAAC 依据本国 CCAR 规章做出的型号合格证（TC）、生产许可证（PC）等审定结论，转化为进口国可接受的法定证据，从而避免资源浪费；而对具体项目采取何种认可方式，主要由双方对局方及工业部门能力的认定决定。总而言之，BASA 虽是两国民航当局之间签署的、旨在相互认可对方审定体系与审定结果的双边法律文件，但本质上是<strong>技术互认框架而非上位法</strong>。</p>
+                    </section>
+
+                    <!-- ============ 第四节 ============ -->
+                    <section id="s4">
+                        <h2 class="k-heading">四、复合材料的特殊性及其对适航审定的挑战</h2>
+                        <p>自上世纪六十年代起，波音 737、747 就采用玻璃纤维复合材料制作雷达罩、整流罩、地板等非承力件，而后逐渐扩展到次承力乃至主承力件——如空客 A330 / A340 使用复合材料襟翼、副翼、整流罩。如今以波音 787 为标志，复合材料在民机结构的使用已经进入主承力结构时代。复合材料含量占比正逐年上升，甚至已成为一种衡量民机先进程度的标准。</p>
+                        <p>从属性上讲，复合材料具有良好的减重效益，在比强度、比刚度上占优，相同强度下可充分减重；且抗疲劳、耐腐蚀、耐高温，耐久性良好，设计自由度高、集成度好，可实现复杂气动机构，共固化/共胶接减少零件和紧固件数量，降低装配成本、提高结构效率，并在阻燃、尺寸稳定性、电磁屏蔽等其它方面具有优势。</p>
+                        <p>然而复合材料并非"更好用的铝合金"——其诸多特性使得过去针对金属等传统材料使用的传统适航审定方法无法照搬。复合材料是一种在<strong>失效机理、制造控制、检测手段、维修策略</strong>上都与传统金属存在本质差异的材料体系，这些差异直接导致过去传统的适航法规在适用性上出现缺口，从而需要针对复合材料制定专门的适航条例。</p>
+
+                        <h3 id="s4-1">4.1 材料特性的根本差异：各向异性与非均质性</h3>
+                        <p>金属材料（铝合金、钛合金）可近似视为各向同性，设计简单、许用值单一；复合材料强度/刚度随铺层方向变化，同一构件在不同载荷方向下表现出完全不同的力学行为，设计时必须逐层定义方向、顺序、百分比。部分复合材料由纤维（增强相）和树脂（基体相）组成，两相性能差异巨大，界面（纤维—树脂界面）是薄弱环节，脱粘是最常见的初始失效模式之一；固化过程中纤维体积分数、孔隙率、固化度的空间分布不均，导致性能离散性远大于金属。所以，传统金属结构的设计许用值可基于少量试样的统计结果，而复合材料需建立<strong>积木式试验体系</strong>（试样 → 元件 → 组件 → 部件 → 全尺寸），且需要足够的设计裕度。</p>
+
+                        <h3 id="s4-2">4.2 独特的失效模式</h3>
+                        <ul>
+                            <li>复合材料受到<strong>低速冲击损伤</strong>时，表面几乎不可见，但内部结构和剩余强度指标已经受到影响；而金属受冲击后产生可见痕迹，可立即判断是否需要修理。</li>
+                            <li>会发生<strong>分层与脱粘</strong>的失效模式：分层指层与层之间分离，由冲击、制造缺陷（夹杂、富树脂区）、疲劳载荷引起；脱粘指复合材料与金属嵌件/蜂窝芯材的界面分离。且分层扩展的驱动力不同于金属裂纹——金属裂纹在拉应力下沿垂直于载荷方向扩展，分层在压应力下也可能扩展。</li>
+                            <li>其它特有失效模式，如<strong>基体开裂、纤维屈曲/微屈曲、湿热老化</strong>等。</li>
+                        </ul>
+
+                        <h3 id="s4-3">4.3 对制造工艺敏感</h3>
+                        <p>原材料的批次稳定性、环境条件、工艺质量控制对复合材料影响巨大：铺贴偏差、间隙/重叠、固化缺陷、热压罐均匀性等对性能影响十分显著，制造缺陷直接改变结构性能；而金属结构的设计与制造相对性能稳定、工艺成熟，适航审查重点在最终产品。因此局方要求对复合材料制造全过程进行<strong>过程控制审查</strong>。</p>
+
+                        <h3 id="s4-4">4.4 检测与维修困难</h3>
+                        <ul>
+                            <li>金属材料常用磁粉、涡流、射线等检测方法，信号解读相对简单；而由于复合材料结构复杂、损伤隐蔽且多样，需针对不同铺层方向、厚度、几何形状进行检测，无损检测或困难、或成本高昂。</li>
+                            <li>金属结构的修复（如焊接、铆接）有成熟的标准化流程，修理后强度恢复率高并可多次修补；复合材料修理需要精确去除受损区域、按特定方向逐层铺设补片、严格控制固化温度/压力/真空度，维修容易引入新的缺陷，修理方案需通过与原始结构同等严格的验证（分析 + 试验），成本较高。且一旦出现大面积分层或纤维断裂，局部修复很难保证载荷传递路径的连续性，往往只能整体更换。</li>
+                            <li>复合材料对湿热环境非常敏感，维修前必须进行严格的烘干处理；金属材料在相同环境下虽也会腐蚀，但可通过涂层等常规手段预防，而复合材料的吸湿问题更难监控和消除。</li>
+                            <li>金属结构有数十年的服役数据积累，可建立可靠的疲劳寿命曲线；复合材料自开始大规模服役至今历史也不过约 20 年，缺乏足够经验支撑。</li>
+                        </ul>
+
+                        <h3 id="s4-5">4.5 对环境敏感</h3>
+                        <p>复合材料对环境敏感，而适航审定要求考虑最严重环境条件，其需面临热湿、冷干、雷电、紫外线与化学暴露等多种复杂环境的考验；复杂的结构使其比起金属需要更严苛的试验。过去铝合金机身本身是良导体，天然具备防雷击能力；而如碳纤维导电性仅为铝的千分之一，雷电流沿表面传导导致树脂汽化、分层。</p>
+
+                        <h3 id="s4-6">4.6 复合材料适航体系的现状与前瞻</h3>
+                        <p>在针对复合材料的适航体系中，以 CCAR-25 为核心的基础民航规章框架中，复合材料完全可以套用对材料的要求，其特殊性主要在规范性文件中体现——更确切地说，是通过咨询通告（AC）和专用条件（SC）填补，法规正文的直接针对性不足。</p>
+                        <p>其中最主要的复合材料规范性文件为 <strong>AC-21-AA-2017-39《复合材料结构制造质量体系要求指南》</strong>，在技术上高度对标 FAA 的对应文件。随着自动化制造（如自动铺丝、自动铺带）发展和热塑性复合材料崛起，对其的适航认可路径需要一定补充。</p>
+                        <p><strong>结构健康监测（SHM）</strong>：在结构中植入传感器（光纤布拉格光栅 FBG、压电传感器、应变片），实时监测应变、温度、振动、声发射。SHM 已经相对成熟，对复合材料逐渐成为主力的民机而言，在监测复合材料的不可视损伤方面具有独到优势，但适航法规上仍未形成统一强制性条款，需要在后续发展中补充。</p>
+                    </section>
+
+                </article>
+
+                <!-- 章节导航 -->
+                <div class="chapter-navigation">
+                    <a href="/" class="nav-btn nav-btn-prev" style="visibility: hidden;">
+                        <i class="fas fa-arrow-left"></i> 上一章
+                    </a>
+                    <a href="/chapter/2/detail" class="nav-btn nav-btn-next">
+                        下一章: 第二章 <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- 右侧栏：废除三大硬分类，改为按内容动态分组归类 -->
+            <aside class="sidebar" id="sidebar">
+                <!-- 分组由 JS 根据关联关系数据渲染，法律文件优先链向词条 -->
+            </aside>
+        </div>
+
+        <!-- 知识关联图谱（废弃动态 fetch，改为硬植入章节子图） -->
+        <div class="visualization-section">
+            <h2 class="section-title">
+                <i class="fas fa-project-diagram"></i> 本章知识关联图谱
+            </h2>
+            <div class="graph-toolbar">
+                <button onclick="graphFocus('center')"><i class="fas fa-expand"></i> 整体视图</button>
+                <button onclick="graphFocus('layer')"><i class="fas fa-layer-group"></i> 聚焦法规层级</button>
+                <button onclick="graphFocus('material')"><i class="fas fa-atom"></i> 聚焦复合材料</button>
+            </div>
+            <div id="chapter-graph"></div>
+            <div class="graph-legend">
+                <span><i style="background:#6366f1"></i>本章中心</span>
+                <span><i style="background:#2ecc71"></i>法规文件</span>
+                <span><i style="background:#e67e22"></i>核心概念</span>
+                <span><i style="background:#9b59b6"></i>审定环节</span>
+                <span><i style="background:#e74c3c"></i>材料特性</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ 数据层：章节子图（硬植入，各章独立维护） ============ -->
+    <script>
+    /* 关联关系数据：按内容实际抽取、动态分组归类。
+     * type 决定颜色；hasConcept=true 表示已有对应词条，链向 /concept/xxx，
+     * 否则按 path 兜底（法律文件优先引导至词条页，再由词条进入镜像文件）。 */
+    const RELATIONS = {
+        groups: [
+            {
+                id: 'law',
+                title: '法规文件',
+                color: '#2ecc71',
+                icon: 'fa-gavel',
+                items: [
+                    { title: '中华人民共和国民用航空法', desc: '适航体系的"母法"，第二章第三节规定适航管理。', hasConcept: true,  path: '/concept/中华人民共和国民用航空法' },
+                    { title: '民用航空器适航管理条例', desc: '适航管理的奠基性行政法规。', hasConcept: true, path: '/concept/民用航空器适航管理条例' },
+                    { title: 'CCAR-21 合格审定规定', desc: '适航审定管理总纲，TC / PC / CoA 的申请与颁发。', hasConcept: true, path: '/concept/CCAR-21' },
+                    { title: 'CCAR-25 运输类飞机适航标准', desc: '复合材料主承力结构审定的核心依据。', hasConcept: true, path: '/concept/CCAR-25' },
+                    { title: '无人驾驶航空器飞行管理暂行条例', desc: '国务院、中央军委令第 761 号，无人机管理核心。', hasConcept: true, path: '/concept/无人驾驶航空器飞行管理暂行条例' }
+                ]
+            },
+            {
+                id: 'norm',
+                title: '规范性文件与标准',
+                color: '#0ea5e9',
+                icon: 'fa-file-alt',
+                items: [
+                    { title: 'AC-21-AA-2017-39', desc: '《复合材料结构制造质量体系要求指南》，对标 FAA。', hasConcept: true, path: '/concept/AC-21-AA-2017-39' },
+                    { title: 'AP 管理程序', desc: '把 CCAR 原则性要求变为可执行的操作规则。', hasConcept: false, path: '/concept/AP管理程序' },
+                    { title: 'CTSO / 最低性能标准', desc: '零部件装机前的技术底座。', hasConcept: true, path: '/concept/CTSO' },
+                    { title: 'HB / GB 行业标准', desc: '技术底座，MOC1 / MOC4 验证路径的依据。', hasConcept: true, path: '/concept/HB行业标准' },
+                    { title: '专用条件 SC', desc: '针对新颖/独特设计的个案补充要求。', hasConcept: true, path: '/concept/专用条件' }
+                ]
+            },
+            {
+                id: 'concept',
+                title: '核心概念',
+                color: '#e67e22',
+                icon: 'fa-lightbulb',
+                items: [
+                    { title: '航空器 / 民用航空器', desc: '由排除法界定，无人机属事实意义上的航空器。', hasConcept: true, path: '/concept/航空器' },
+                    { title: '适航 (Airworthiness)', desc: '符合经批准的设计并处于安全运行状态。', hasConcept: true, path: '/concept/适航' },
+                    { title: '预期运行条件', desc: '寿命期内可合理想象发生的运行条件。', hasConcept: false, path: '/concept/预期运行条件' },
+                    { title: '五层金字塔结构', desc: '法律→行政法规→CCAR→规范性文件→行业标准。', hasConcept: false, path: '#s2' }
+                ]
+            },
+            {
+                id: 'process',
+                title: '审定环节',
+                color: '#9b59b6',
+                icon: 'fa-clipboard-check',
+                items: [
+                    { title: '型号合格证 TC', desc: '对产品设计的批准。', hasConcept: true, path: '/concept/型号合格证' },
+                    { title: '生产许可证 PC', desc: '对批量生产能力的批准。', hasConcept: true, path: '/concept/生产许可证' },
+                    { title: '持续适航', desc: '全寿命期内始终处于安全运行状态。', hasConcept: true, path: '/concept/持续适航' },
+                    { title: '适航指令 (AD)', desc: '持续适航的强制纠错机制。', hasConcept: true, path: '/concept/适航指令' },
+                    { title: '双边适航协议 BASA', desc: '国内审定结果与国际市场准入的桥梁。', hasConcept: true, path: '/concept/双边适航协议' }
+                ]
+            },
+            {
+                id: 'material',
+                title: '复合材料特性',
+                color: '#e74c3c',
+                icon: 'fa-atom',
+                items: [
+                    { title: '各向异性 / 非均质', desc: '性能随铺层方向变化，需积木式试验体系。', hasConcept: true, path: '/concept/各向异性' },
+                    { title: '低速冲击损伤 / 分层', desc: '表面不可见的内部损伤，BVID 等分类。', hasConcept: false, path: '#s4-2' },
+                    { title: '积木式验证', desc: '试样→元件→组件→部件→全尺寸的渐进验证。', hasConcept: true, path: '/concept/积木式验证' },
+                    { title: '过程控制审查', desc: '对制造全过程的工艺敏感性与质量控制。', hasConcept: false, path: '#s4-3' },
+                    { title: '结构健康监测 SHM', desc: '植入传感器监测不可视损伤，尚无统一强制条款。', hasConcept: false, path: '#s4-6' }
+                ]
+            }
+        ]
+    };
+
+    /* 本章知识图谱数据（章节子图，硬植入，供后续合并入主图谱） */
+    const CHAPTER_GRAPH = {
+        center: { id: 'ch1', label: '第1章\n适航法规体系与\n复合材料结构概论' },
+        nodes: [
+            { id: 'ch1',      label: '第1章',                                type: 'center' },
+            { id: 'law',      label: '民用航空法',                           type: 'law' },
+            { id: 'reg',      label: '适航管理条例',                         type: 'law' },
+            { id: 'ccar21',   label: 'CCAR-21',                             type: 'law' },
+            { id: 'ccar25',   label: 'CCAR-25',                             type: 'law' },
+            { id: 'ac39',     label: 'AC-21-AA-2017-39',                    type: 'norm' },
+            { id: 'ctso',     label: 'CTSO / HB / GB',                      type: 'norm' },
+            { id: 'sc',       label: '专用条件 SC',                         type: 'norm' },
+            { id: 'airworth', label: '适航',                                 type: 'concept' },
+            { id: 'pyramid',  label: '五层金字塔',                           type: 'concept' },
+            { id: 'tc',       label: '型号合格 TC',                         type: 'process' },
+            { id: 'pc',       label: '生产许可 PC',                         type: 'process' },
+            { id: 'ca',       label: '持续适航',                             type: 'process' },
+            { id: 'basa',     label: '双边协议 BASA',                       type: 'process' },
+            { id: 'ani',      label: '各向异性',                             type: 'material' },
+            { id: 'damage',   label: '分层 / 低速冲击',                     type: 'material' },
+            { id: 'building', label: '积木式验证',                           type: 'material' },
+            { id: 'shm',      label: '结构健康监测 SHM',                    type: 'material' }
+        ],
+        edges: [
+            { from: 'ch1', to: 'pyramid', label: '体系框架' },
+            { from: 'pyramid', to: 'law', label: '第一层' },
+            { from: 'pyramid', to: 'reg', label: '第二层' },
+            { from: 'pyramid', to: 'ccar21', label: '第三层' },
+            { from: 'pyramid', to: 'ac39', label: '第四层' },
+            { from: 'pyramid', to: 'ctso', label: '第五层' },
+            { from: 'pyramid', to: 'sc', label: '横向补充' },
+            { from: 'law', to: 'airworth', label: '确立概念' },
+            { from: 'ccar21', to: 'tc', label: '设计批准' },
+            { from: 'ccar21', to: 'pc', label: '生产批准' },
+            { from: 'tc', to: 'ca', label: '持续监督' },
+            { from: 'ca', to: 'airworth', label: '维持状态' },
+            { from: 'ccar25', to: 'ani', label: '主承力结构' },
+            { from: 'ani', to: 'building', label: '验证方法' },
+            { from: 'ani', to: 'damage', label: '特有失效' },
+            { from: 'building', to: 'shm', label: '监测补充' },
+            { from: 'ac39', to: 'ani', label: '制造质量体系' },
+            { from: 'ccar21', to: 'basa', label: '国际衔接' }
+        ]
+    };
+    </script>
+
+    <script src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+    <script>
+    /* ============ 1. 目录（顶部条 + 左侧栏同源，自动从 section/h 抽取） ============ */
+    const tocData = [
+        { href: 's1', num: '01', text: '基本概念' },
+        { href: 's2', num: '02', text: '五层法规体系' },
+        { href: 's2-1', num: '', text: '法律层', sub: true },
+        { href: 's2-3', num: '', text: '民航规章 CCAR', sub: true },
+        { href: 's2-5', num: '', text: '行业标准与横向补充', sub: true },
+        { href: 's3', num: '03', text: '国际与双边适航' },
+        { href: 's4', num: '04', text: '复合材料的挑战' },
+        { href: 's4-1', num: '', text: '各向异性 / 失效模式', sub: true },
+        { href: 's4-6', num: '', text: '现状与 SHM 前瞻', sub: true }
+    ];
+
+    function renderToc() {
+        const bar = document.getElementById('tocList');
+        const left = document.getElementById('leftTocList');
+        const fragBar = document.createDocumentFragment();
+        const fragLeft = document.createDocumentFragment();
+        tocData.forEach(item => {
+            // 顶部条：仅一级
+            if (!item.sub) {
+                const li = document.createElement('li');
+                li.innerHTML = `<a href="#${item.href}"><span class="toc-num">${item.num}</span>${item.text}</a>`;
+                fragBar.appendChild(li);
+            }
+            // 左侧栏：含二级
+            const li = document.createElement('li');
+            li.innerHTML = `<a href="#${item.href}" class="${item.sub ? 'lt-h4' : 'lt-h3'}">${item.sub ? '· ' : ''}${item.text}</a>`;
+            fragLeft.appendChild(li);
+        });
+        bar.appendChild(fragBar);
+        left.appendChild(fragLeft);
+    }
+
+    /* ============ 2. 右侧栏：动态分组渲染 ============ */
+    function renderSidebar() {
+        const aside = document.getElementById('sidebar');
+        const cards = RELATIONS.groups.map(group => {
+            const items = group.items.map(it => {
+                const icon = it.hasConcept ? '<i class="fas fa-book"></i>' : '';
+                const tag = it.hasConcept ? '<span class="item-tag">词条</span>' : '';
+                return `
+                <a class="related-item" href="${it.path}">
+                    <div class="item-title">${it.title} ${tag} ${icon}</div>
+                    <div class="item-desc">${it.desc}</div>
+                </a>`;
+            }).join('');
+            return `
+            <div class="info-card group-block">
+                <div class="group-title">
+                    <span class="gt-dot" style="background:${group.color}"></span>
+                    <i class="fas ${group.icon}" style="color:${group.color}"></i>
+                    ${group.title}
+                </div>
+                <div class="related-items">${items}</div>
+            </div>`;
+        }).join('');
+        aside.innerHTML = cards;
+    }
+
+    /* ============ 3. 滚动高亮当前章节 ============ */
+    function setupScrollSpy() {
+        const links = document.querySelectorAll('.toc-list a, .left-toc a');
+        const map = new Map();
+        document.querySelectorAll('.knowledge-content section, .knowledge-content h3, .knowledge-content h4').forEach(el => {
+            if (el.id) map.set(el.id, el);
+        });
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach(en => {
+                if (en.isIntersecting) {
+                    const id = en.target.id;
+                    links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + id));
+                }
+            });
+        }, { rootMargin: '-30% 0px -60% 0px', threshold: 0 });
+        map.forEach(el => obs.observe(el));
+    }
+
+    /* ============ 4. 知识图谱（硬植入渲染） ============ */
+    let network = null;
+    const TYPE_COLOR = {
+        center: '#6366f1', law: '#2ecc71', norm: '#0ea5e9',
+        concept: '#e67e22', process: '#9b59b6', material: '#e74c3c'
+    };
+
+    function renderGraph() {
+        const container = document.getElementById('chapter-graph');
+        const nodes = CHAPTER_GRAPH.nodes.map(n => ({
+            id: n.id, label: n.label,
+            color: { background: TYPE_COLOR[n.type], border: TYPE_COLOR[n.type] },
+            font: { size: n.type === 'center' ? 16 : 12, color: '#fff' },
+            shape: 'dot',
+            size: n.type === 'center' ? 40 : (n.type === 'law' || n.type === 'material' ? 26 : 22)
+        }));
+        const edges = CHAPTER_GRAPH.edges.map(e => ({
+            from: e.from, to: e.to, label: e.label,
+            color: { color: '#cbd5e1', highlight: '#818cf8' },
+            font: { size: 9, color: '#64748b' },
+            arrows: { to: { enabled: true, scaleFactor: 0.6 } },
+            smooth: { type: 'curvedCW', roundness: 0.15 }
+        }));
+        network = new vis.Network(container, { nodes, edges }, {
+            layout: { improvedLayout: true },
+            physics: { enabled: true, barnesHut: { gravitationalConstant: -1800 }, stabilization: { iterations: 150 } },
+            interaction: { hover: true, tooltipDelay: 150 }
+        });
+    }
+
+    function graphFocus(mode) {
+        if (!network) return;
+        const central = ['ch1'];
+        const layer = ['ch1','pyramid','law','reg','ccar21','ccar25','ac39','ctso','sc'];
+        const material = ['ch1','ccar25','ani','building','damage','shm','ac39'];
+        const set = mode === 'layer' ? layer : (mode === 'material' ? material : null);
+        const allNodes = CHAPTER_GRAPH.nodes.map(n => n.id);
+        network.setVisible({ nodes: set || allNodes, edges: set ? CHAPTER_GRAPH.edges.filter(e => set.includes(e.from) && set.includes(e.to)) : CHAPTER_GRAPH.edges });
+        network.fit({ animation: true });
+    }
+
+    /* ============ 初始化 ============ */
+    document.addEventListener('DOMContentLoaded', () => {
+        renderToc();
+        renderSidebar();
+        setupScrollSpy();
+        renderGraph();
+    });
+    </script>
+</body>
+</html>

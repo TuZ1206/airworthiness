@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>智能查询 - 适航法规知识图谱</title>
+    <style>
+        /* 基础优化与字体 */
+        * {
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        /* 主容器 */
+        .chat-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+        }
+
+        /* 标题 */
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #4f6df5, #3b5bdb);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-size: 2.4em;
+            font-weight: 700;
+            padding-bottom: 15px;
+            position: relative;
+        }
+        h1:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(to right, transparent, #4f6df5, transparent);
+            border-radius: 2px;
+        }
+
+        /* 消息区域 */
+        .chat-messages {
+            height: 500px;
+            overflow-y: auto;
+            background: rgba(248, 250, 252, 0.7);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.02), 0 4px 20px rgba(0, 0, 0, 0.03);
+        }
+        /* 自定义滚动条 */
+        .chat-messages::-webkit-scrollbar {
+            width: 8px;
+        }
+        .chat-messages::-webkit-scrollbar-track {
+            background: rgba(241, 245, 249, 0.5);
+            border-radius: 10px;
+        }
+        .chat-messages::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #a5b4fc, #818cf8);
+            border-radius: 10px;
+        }
+
+        /* 用户消息 */
+        .user-message {
+            background: linear-gradient(135deg, #4f6df5, #3b5bdb);
+            color: white;
+            padding: 14px 18px;
+            border-radius: 20px 20px 6px 20px;
+            margin: 16px 0 16px auto;
+            max-width: 78%;
+            box-shadow: 0 6px 16px rgba(59, 91, 219, 0.2);
+            position: relative;
+            animation: messageAppear 0.3s ease-out;
+        }
+        .user-message:before {
+            content: '';
+            position: absolute;
+            right: -8px;
+            top: 0;
+            border-width: 0 0 20px 20px;
+            border-style: solid;
+            border-color: transparent transparent #3b5bdb transparent;
+        }
+
+        /* 助手消息 */
+        .assistant-message {
+            background: linear-gradient(135deg, #ffffff, #f8fafc);
+            padding: 14px 18px;
+            border-radius: 20px 20px 20px 6px;
+            margin: 16px auto 16px 0;
+            max-width: 78%;
+            border-left: 5px solid #67e8f9;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.04);
+            position: relative;
+            animation: messageAppear 0.4s ease-out;
+        }
+        .assistant-message:before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 0;
+            border-width: 0 20px 20px 0;
+            border-style: solid;
+            border-color: transparent #f8fafc transparent transparent;
+        }
+
+        @keyframes messageAppear {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 消息内文本样式 */
+        .user-message strong, .assistant-message strong {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.95em;
+            opacity: 0.95;
+        }
+        .user-message br, .assistant-message br {
+            margin-bottom: 6px;
+            display: block;
+            content: "";
+        }
+
+        /* 输入区域 */
+        .chat-input-area {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        .chat-input {
+            flex: 1;
+            padding: 16px 20px;
+            border: 2px solid rgba(165, 180, 252, 0.3);
+            border-radius: 16px;
+            font-size: 1.05em;
+            background: rgba(255, 255, 255, 0.9);
+            transition: all 0.3s ease;
+            color: #333;
+        }
+        .chat-input:focus {
+            outline: none;
+            border-color: #4f6df5;
+            box-shadow: 0 0 0 4px rgba(79, 109, 245, 0.15);
+            background: white;
+        }
+        .chat-input::placeholder {
+            color: #94a3b8;
+        }
+
+        /* 发送按钮 */
+        .send-button {
+            background: linear-gradient(135deg, #4f6df5, #3b5bdb);
+            color: white;
+            border: none;
+            padding: 16px 32px;
+            border-radius: 16px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1.05em;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(79, 109, 245, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .send-button:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(79, 109, 245, 0.4);
+            background: linear-gradient(135deg, #3b5bdb, #2d4bc4);
+        }
+        .send-button:active:not(:disabled) {
+            transform: translateY(0);
+        }
+        .send-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        /* 示例问题区域 */
+        .example-questions {
+            margin-top: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .example-question {
+            background: rgba(79, 109, 245, 0.08);
+            padding: 12px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 0.95em;
+            border: 1px solid rgba(79, 109, 245, 0.2);
+            color: #3b5bdb;
+            transition: all 0.25s ease;
+            backdrop-filter: blur(5px);
+        }
+        .example-question:hover {
+            background: rgba(79, 109, 245, 0.15);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(79, 109, 245, 0.1);
+            border-color: rgba(79, 109, 245, 0.4);
+        }
+
+        /* 加载指示器 */
+        #loading {
+            display: none;
+            text-align: center;
+            margin-top: 25px;
+        }
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(79, 109, 245, 0.1);
+            border-radius: 50%;
+            border-top-color: #4f6df5;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        #loading p {
+            color: #64748b;
+            font-size: 0.95em;
+            margin-top: 10px;
+        }
+
+        /* 响应式微调 */
+        @media (max-width: 768px) {
+            .chat-container {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            .user-message,
+            .assistant-message {
+                max-width: 90%;
+            }
+            .chat-input-area {
+                flex-direction: column;
+            }
+            .send-button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ！！！ 注意：以下所有HTML和JavaScript代码均保持原样，未作任何更改 ！！！ -->
+    <div class="chat-container">
+        <h1 style="text-align: center; margin-bottom: 20px;">
+            <i class="fas fa-robot"></i> 适航法规智能助手
+        </h1>
+
+        <div id="chatMessages" class="chat-messages">
+            <div class="assistant-message">
+                <strong>👋 欢迎使用适航法规智能助手！</strong><br><br>
+                我可以回答关于复合材料结构适航验证的各种问题，包括：<br>
+                • 📚 适航法规体系与标准<br>
+                • 🏗️ 积木式验证方法<br>
+                • 🔧 制造工艺符合性<br>
+                • ⚖️ 质量体系与监管<br>
+                • 🔄 等同验证与变更管理<br><br>
+                请提出您的问题，或点击下方的示例问题快速开始！
+            </div>
+        </div>
+
+        <div class="chat-input-area">
+            <input type="text" id="chatInput" class="chat-input"
+                   placeholder="请输入您的问题..." onkeypress="handleEnter(event)">
+            <button id="sendButton" class="send-button" onclick="sendMessage()">
+                <i class="fas fa-paper-plane"></i> 发送
+            </button>
+        </div>
+
+        <div class="example-questions">
+            <div class="example-question" onclick="useExample('积木式验证方法的具体步骤是什么？')">
+                积木式验证方法的具体步骤？
+            </div>
+            <div class="example-question" onclick="useExample('如何证明复合材料结构的损伤容限？')">
+                如何证明损伤容限？
+            </div>
+            <div class="example-question" onclick="useExample('CCAR-25.571条款的要求是什么？')">
+                CCAR-25.571条款要求
+            </div>
+            <div class="example-question" onclick="useExample('适航取证的全流程是怎样的？')">
+                适航取证全流程
+            </div>
+        </div>
+
+        <div id="loading" style="display: none; text-align: center; margin-top: 20px;">
+            <div class="spinner"></div>
+            <p>正在思考中...</p>
+        </div>
+    </div>
+
+    <script>
+        async function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+
+            if (!message) return;
+
+            // 添加用户消息
+            addMessage(message, 'user');
+            input.value = '';
+
+            // 禁用发送按钮
+            const sendButton = document.getElementById('sendButton');
+            sendButton.disabled = true;
+
+            // 显示加载
+            document.getElementById('loading').style.display = 'block';
+
+            try {
+                const response = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    addMessage(data.answer, 'assistant');
+                } else {
+                    addMessage(`❌ 错误: ${data.error}`, 'assistant');
+                }
+            } catch (error) {
+                addMessage('❌ 网络错误，请检查连接后重试', 'assistant');
+            } finally {
+                sendButton.disabled = false;
+                document.getElementById('loading').style.display = 'none';
+            }
+        }
+
+        function addMessage(content, type) {
+            const messagesDiv = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+
+            messageDiv.className = type === 'user' ? 'user-message' : 'assistant-message';
+            messageDiv.innerHTML = type === 'user' ?
+                `<strong>您：</strong><br>${content}` :
+                `<strong>🤖 助手：</strong><br>${content.replace(/\n/g, '<br>')}`;
+
+            messagesDiv.appendChild(messageDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+
+        function handleEnter(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        function useExample(question) {
+            document.getElementById('chatInput').value = question;
+        }
+    </script>
+    <!-- ！！！ 以上所有HTML和JavaScript代码均保持原样，未作任何更改 ！！！ -->
+</body>
+</html>
