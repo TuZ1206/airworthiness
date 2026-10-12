@@ -1,0 +1,16 @@
+{
+  "chapter": "ch08",
+  "review_status": "pending",
+  "allowed_domains": ["gov.cn", ".gov.cn"],
+  "seeds": [
+    "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/MHGZ/201606/t20160622_38638.html",
+    "https://std.samr.gov.cn/hb/search/stdHBDetailedCNF?id=09C9A09DA897FC93E06397BE0A0A1DFC",
+    "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/202403/t20240313_223201.html",
+    "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/201701/t20170119_41846.html",
+    "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/MHGZ/202404/t20240415_223517.html",
+    "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/GFXWJ/202207/t20220708_214043.html",
+    "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/GFXWJ/201511/t20151102_8386.html",
+    "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201511/t20151102_8170.html",
+    "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202607/t20260701_231208.html"
+  ]
+}

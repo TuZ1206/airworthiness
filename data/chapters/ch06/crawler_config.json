@@ -1,0 +1,26 @@
+{
+  "chapter_id": "ch06",
+  "review_status": "pending",
+  "allowed_host_rule": "host == 'gov.cn' or host.endswith('.gov.cn')",
+  "seeds": [
+    "https://www.caac.gov.cn/XXGK/XXGK/FLFG/202512/t20251227_229597.html",
+    "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/202403/t20240313_223201.html",
+    "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202607/t20260701_231207.html",
+    "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201511/t20151102_8373.html",
+    "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202607/t20260701_231203.html",
+    "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/201711/t20171116_47594.html",
+    "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201808/t20180831_191472.html",
+    "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201808/P020180831375722397987.pdf",
+    "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201801/t20180124_48751.html",
+    "https://www.caac.gov.cn/XXGK/XXGK/ZFGW/202503/t20250314_226931.html",
+    "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202607/t20260701_231206.html",
+    "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202607/t20260701_231204.html",
+    "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202609/t20260921_231762.html",
+    "https://www.caac.gov.cn/XXGK/XXGK/ZFGW/202602/t20260226_230124.html"
+  ],
+  "exclude_statuses": ["abolished", "unknown"],
+  "download_pdf": true,
+  "require_attachment_sha256": true,
+  "note": "查询实施日2026-09-30。专业审核和附件原始哈希完成前不得进入正式Neo4j或Dify；CH06-S016当前仅允许状态页核验。"
+}
+

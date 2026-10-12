@@ -1,0 +1,12 @@
+term_id,term,aliases,definition,group,has_page,anchor_or_url,related_node_id,source_id,review_status
+"CH04-T001","工艺规范","Process Specification","规定工艺适用范围、制造与控制、材料设备人员、质量控制、记录储存和防护要求的受控文件。","工艺基础","true","#process-specification","CH04-N010","CH04-S002","pending"
+"CH04-T002","工艺鉴定","Process Qualification","确认实施方具备所需生产和工艺能力并能保持稳定的活动。","工艺验证","true","#process-qualification","CH04-N011","CH04-S002","pending"
+"CH04-T003","工艺试验验证","Process Test Validation","以试验数据证明制造方法能够正确生产符合要求产品的活动。","工艺验证","true","#process-test-validation","CH04-N012","CH04-S002","pending"
+"CH04-T004","工艺窗口","Process Window","批准工艺规范给出的参数目标、允许范围以及超限处置边界。","过程控制","true","#process-window","CH04-N015","CH04-S003","pending"
+"CH04-T005","工艺控制试板","Process Control Coupon|Witness Coupon","随制造过程制备并按规范检验、用于持续监控过程状态的试板或见证件。","过程控制","true","#process-control-coupon","CH04-N021","CH04-S003","pending"
+"CH04-T006","外置时间","Out-time","材料离开规定储存环境后的累计暴露时间；具体限值由适用材料与工艺规范确定。","材料控制","true","#out-time","CH04-N025","CH04-S003","pending"
+"CH04-T007","首件检验","FAI|First Article Inspection","通过产品审查确认制造文件、过程和首件实际状态一致的活动；程序子条款待专业复核。","制造符合性","true","#first-article-inspection","CH04-N026","CH04-S006","pending"
+"CH04-T008","制造符合性","Manufacturing Conformity","确认材料、零件、制造过程、构造和装配符合设计资料及试验要求。","制造符合性","true","#manufacturing-conformity","CH04-N013","CH04-S004","pending"
+"CH04-T009","无损检测","NDI|NDT|Nondestructive Inspection|Nondestructive Testing","在不破坏被检对象预期用途的前提下识别制造缺陷并按验收准则评定的检验活动。","检验","true","#nondestructive-inspection","CH04-N019","CH04-S003","pending"
+"CH04-T010","返工","Rework","按批准制造资料使不合格产品恢复至原规定状态的处置；具体边界待专业审核。","不合格品处置","true","#rework-repair","CH04-N027","CH04-S006","pending"
+"CH04-T011","返修","Repair","通过经批准的修理资料使不合格产品达到可接受状态的处置；不得以返工规则替代设计批准。","不合格品处置","true","#rework-repair","CH04-N027","CH04-S006","pending"

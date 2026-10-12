@@ -29,3 +29,4 @@ Thumbs.db
 *.dump
 downloads/
 exports/
+.codex-tmp/

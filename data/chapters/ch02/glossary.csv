@@ -1,0 +1,11 @@
+term_id,term,aliases,definition,group,has_page,anchor_or_url,related_node_id,source_id,review_status
+CH02-T001,TC,型号合格证,型号合格证在第二章适航全流程中的接口术语，具体法律含义待专业审核。,型号设计批准,false,#type-certification,CH02-N001,CH02-S007,pending
+CH02-T002,STC,补充型号合格证,补充型号合格证在第二章适航全流程中的接口术语，具体法律含义待专业审核。,型号设计批准,false,#type-certification,CH02-N001,CH02-S007,pending
+CH02-T003,DOA,设计机构批准书,设计机构批准书在第二章适航全流程中的接口术语，具体法律含义待专业审核。,设计机构,false,#design-organization,CH02-N002,CH02-S006,pending
+CH02-T004,DAS,设计保证系统,设计保证系统在第二章适航全流程中的接口术语，具体法律含义待专业审核。,设计机构,false,#design-organization,CH02-N012,CH02-S001,pending
+CH02-T005,POA,生产机构批准,生产机构批准在第二章适航全流程中的接口术语，具体法律含义待专业审核。,生产批准,false,#production-approval,CH02-N003,CH02-S002,pending
+CH02-T006,AAC-038,批准放行证书,批准放行证书在第二章适航全流程中的接口术语，具体法律含义待专业审核。,适航批准,false,#airworthiness-approval,CH02-N004,CH02-S035,pending
+CH02-T007,ICA,持续适航文件,持续适航文件在第二章适航全流程中的接口术语，具体法律含义待专业审核。,持续适航,false,#continued-airworthiness,CH02-N006,CH02-S023,pending
+CH02-T008,AD,适航指令,适航指令在第二章适航全流程中的接口术语，具体法律含义待专业审核。,持续适航,false,#continued-airworthiness,CH02-N007,CH02-S032,pending
+CH02-T009,MRB,维修审查委员会,维修审查委员会在第二章适航全流程中的接口术语，具体法律含义待专业审核。,持续适航,false,#continued-airworthiness,CH02-N011,CH02-S057,pending
+CH02-T010,BBA,积木式验证方法,积木式验证方法在第二章适航全流程中的接口术语，具体法律含义待专业审核。,复合材料接口,false,#composite-interface,CH02-N008,CH02-S059,pending

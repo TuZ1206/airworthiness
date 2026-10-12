@@ -1,10 +1,13 @@
-# 第 7 章
+# 第七章审查数据
 
-本章数据尚未提交。
+本目录保存“积木式验证方法”的官方来源台账、知识节点、关系、名词索引、清洗摘录和审核记录。正式来源仅限 `gov.cn` 或 `.gov.cn`，全部新增记录均为 `pending`，专业成员批准前不得导入正式 Neo4j 或 Dify。
 
-请复制 `templates/chapter/` 下的模板到本目录，并按要求提交：
+正文采用六条主线：法规基础、验证层级、统计数据与设计值传递、试验支持分析、高层级结构验证、环境变异性及制造代表性、静强度与损伤容限及变更接口。
 
-- `sources.csv`、`nodes.csv`、`relations.csv`、`glossary.csv`
-- `documents/`、`review.md`、`crawler_config.json`
+运行检查：
 
-专业结论在审核前保持 `review_status=pending`。
+```bash
+python -m unittest tests.test_ch07_data -v
+```
+
+`documents/` 中的文件是审查摘录，不替代官方原文。`sources.csv` 的哈希对应仓库内清洗摘录；官方附件原始 SHA-256 尚待稳定下载后补录。
