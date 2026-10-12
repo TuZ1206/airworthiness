@@ -8,7 +8,7 @@ from urllib.parse import urlparse
 
 ROOT = Path(__file__).resolve().parents[1]
 CHAPTER_ROOT = ROOT / "data" / "chapters"
-CHAPTERS = ("ch02", "ch04", "ch05", "ch06", "ch07", "ch08")
+CHAPTERS = ("ch01", "ch02", "ch04", "ch05", "ch06", "ch07", "ch08")
 HEADERS = {
     "sources.csv": ["source_id", "title", "document_code", "document_status", "publish_date", "url", "sha256", "crawled_at", "review_status"],
     "nodes.csv": ["node_id", "chapter_id", "label", "name", "code", "summary", "display_type", "source_id", "source_locator", "priority", "review_status"],
@@ -87,6 +87,13 @@ class UnifiedChapterDataTests(unittest.TestCase):
 
     def test_ch02_crawl_result_count(self):
         self.assertEqual(len(rows(CHAPTER_ROOT / "ch02", "sources.csv")), 86)
+
+    def test_ch01_normalized_counts(self):
+        chapter = CHAPTER_ROOT / "ch01"
+        self.assertEqual(len(rows(chapter, "sources.csv")), 21)
+        self.assertEqual(len(rows(chapter, "nodes.csv")), 26)
+        self.assertEqual(len(rows(chapter, "relations.csv")), 26)
+        self.assertEqual(len(rows(chapter, "glossary.csv")), 20)
 
 
 if __name__ == "__main__":

@@ -1,0 +1,21 @@
+term_id,term,aliases,definition,group,has_page,anchor_or_url,related_node_id,source_id,review_status
+CH01-T001,适航,Airworthiness,航空产品符合适用设计要求并处于安全运行状态的制度概念，具体定义须结合适用法规。,基本概念,false,#scope,CH01-N003,CH01-S002,pending
+CH01-T002,民用航空器,Civil Aircraft,现行民用航空法第十一条规定范围内的航空器。,基本概念,false,#scope,CH01-N001,CH01-S001,pending
+CH01-T003,无人驾驶航空器,UAS;无人机,没有机载驾驶员、自备动力系统的航空器。,基本概念,false,#scope,CH01-N002,CH01-S003,pending
+CH01-T004,CCAR,中国民用航空规章,中国民用航空主管部门发布的民航规章体系。,法规层级,false,#hierarchy,CH01-N003,CH01-S005,pending
+CH01-T005,TC,型号合格证,表明民用航空产品型号设计符合适用要求的设计批准证件。,初始适航,false,#initial-airworthiness,CH01-N008,CH01-S005,pending
+CH01-T006,PC,生产机构许可证书;生产许可证,生产机构按批准设计组织生产并实施生产质量系统的许可接口。,初始适航,false,#initial-airworthiness,CH01-N009,CH01-S001,pending
+CH01-T007,CoA,适航证书;适航证,航空器完成适航批准后依法飞行所需的证书。,初始适航,false,#initial-airworthiness,CH01-N010,CH01-S001,pending
+CH01-T008,AP,管理程序,将规章要求转化为局方审定和管理程序的规范性文件类型。,规范性文件,false,#supplements,CH01-N020,CH01-S017,pending
+CH01-T009,AC,咨询通告,提供局方可接受的符合性方法或指导的规范性文件类型。,规范性文件,false,#supplements,CH01-N020,CH01-S018,pending
+CH01-T010,MD,管理文件,对适航审定管理事项作出要求或说明的规范性文件类型。,规范性文件,false,#supplements,CH01-N020,CH01-S017,pending
+CH01-T011,CTSO,中国民用航空技术标准规定,规定指定航空材料、零部件或机载设备最低性能标准的技术标准规定。,技术标准,false,#technical-standards,CH01-N015,CH01-S012,pending
+CH01-T012,CTSOA,技术标准规定项目批准书,按技术标准规定取得的项目设计和生产批准证件。,技术标准,false,#technical-standards,CH01-N015,CH01-S012,pending
+CH01-T013,SC,专用条件;Special Condition,适用适航规章没有包含适当或足够安全要求时制定的补充安全要求。,补充审定基础,false,#supplements,CH01-N021,CH01-S019,pending
+CH01-T014,ELOS,等效安全水平结论,针对替代符合方式是否达到适用要求安全水平作出的审定结论。,补充审定基础,false,#supplements,CH01-N021,CH01-S019,pending
+CH01-T015,AD,适航指令,针对不安全状态发布的强制检查、改正措施或使用限制。,持续适航,false,#continued-airworthiness,CH01-N017,CH01-S014,pending
+CH01-T016,持续适航,Continued Airworthiness,航空产品投入使用后持续保持符合适航要求和安全状态的管理活动。,持续适航,false,#continued-airworthiness,CH01-N016,CH01-S013,pending
+CH01-T017,委任代表,适航委任代表,由民航行政机关委派并在授权范围内从事适航审定、检验工作的个人。,监管机制,false,#continued-airworthiness,CH01-N019,CH01-S016,pending
+CH01-T018,委任单位代表,适航委任单位代表,由民航行政机关委派并在授权范围内从事适航审定、检验工作的单位或机构。,监管机制,false,#continued-airworthiness,CH01-N019,CH01-S016,pending
+CH01-T019,HB,航空行业标准,由政府标准平台登记的航空行业标准类别。,技术标准,false,#technical-standards,CH01-N022,CH01-S020,pending
+CH01-T020,BASA,双边航空安全协定;双边适航关系,国家间适航合作、技术协助和审定结果接受的协议或文件框架。,国际合作,false,#supplements,CH01-N024,CH01-S021,pending
