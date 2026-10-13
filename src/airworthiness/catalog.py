@@ -14,6 +14,9 @@ from .ingest import load_inputs
 from .reading import render_document
 
 PUBLIC_FIELDS = "source_id,title,chapter_id,chapter_title,document_code,document_status,publish_date,url,review_status,content_kind".split(",")
+NAVIGATION_NOTE = ("条款、章节定位依据正文的明确编号；PDF 页目录依据提取页码。"
+                   "自动阅读分段和普通段落仅用于导航，不代表原文条款。"
+                   "术语关键词匹配不等于释义核验；精确引文定位也不代表专业审核通过。")
 
 
 @contextmanager
@@ -27,14 +30,20 @@ def connect(path):
 
 
 def input_fingerprint(root):
-    paths = sorted((Path(root) / "data/chapters").rglob("*")) + sorted((Path(root) / "data/acquired").rglob("*"))
+    root = Path(root).resolve()
+    paths = [path for folder in ("chapters", "acquired", "verification")
+             for path in sorted((root / "data" / folder).rglob("*"))]
     digest = hashlib.sha256()
-    for module in ("catalog.py", "ingest.py", "reading.py"):
-        digest.update(Path(__file__).with_name(module).read_bytes())
+    for module in ("catalog.py", "ingest.py", "reading.py", "locators.py", "verification.py"):
+        path = Path(__file__).with_name(module)
+        digest.update(module.encode())
+        digest.update(path.read_bytes() if path.is_file() else b"<not-installed>")
     for path in paths:
         if path.is_file():
             stat = path.stat()
             digest.update(f"{path.relative_to(root)}:{stat.st_size}:{stat.st_mtime_ns}".encode())
+            if path.is_relative_to(root / "data/verification"):
+                digest.update(path.read_bytes())
     return digest.hexdigest()
 
 
@@ -163,6 +172,7 @@ def document(path, source_id):
         result = {**payload, **_public(payload)}
         result.pop("body")
         result["html"], result["toc"] = render_document(payload["body"], extracted=payload["content_kind"] == "extracted")
+        result["navigation_note"] = NAVIGATION_NOTE
         if payload["content_kind"] == "extracted":
             result["extraction_note"] += " 自动阅读分段仅用于导航，不代表原文条款。"
         result["glossary"] = [json.loads(x[0]) for x in db.execute("SELECT payload FROM terms WHERE source_id=? ORDER BY term_id", (source_id,))]
@@ -180,8 +190,15 @@ def quality(path):
         for key in ("generated_at", "issues", "errors"):
             result[key] = json.loads(db.execute("SELECT value FROM metadata WHERE key=?", (key,)).fetchone()[0])
         result["gaps"] = []
+        result["resolved_metadata"] = []
+        result["resolved_issues"] = []
         for row in db.execute("SELECT payload FROM documents ORDER BY source_id"):
             doc = json.loads(row[0])
+            result["resolved_issues"].extend(doc.get("resolved_issues", []))
+            result["resolved_metadata"].extend(
+                {**entry, "source_id": doc["source_id"]}
+                for entry in doc.get("metadata_verification", []) if isinstance(entry, dict)
+                and entry.get("application") in {"corrected", "already_matches", "explained", "confirmed"})
             if doc["content_kind"] in {"metadata", "excerpt"}:
                 result["gaps"].append({**_public(doc), "reason": doc["extraction_note"]})
     return result

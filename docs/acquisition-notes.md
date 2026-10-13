@@ -1,53 +1,61 @@
 # 官方来源离线采集记录
 
-执行日期：2026-10-13。仅机械提取原文，采集成功不代表专业审核、法规效力判定或批准。
+执行日期：2026-10-13。采集与技术核对不代表专业审核、法规效力判断或批准；所有资料仍为 `pending`。
 
-## 本次实际结果
+## 实际结果
 
-- 全量执行覆盖 189 条台账记录、135 个唯一来源 URL。
-- 加上现有文档指明的官方 PDF 附件，共请求 228 个不同官方 URL，产生 230 次实际网络尝试。每主机最多 2 个并发，请求启动间隔至少 0.4 秒。
-- 本机下载未成功：228 次 TLS 握手提前关闭，另有连接超时、读取超时各 1 次；两个超时已按上限重试。没有关闭 TLS 验证，没有把旧文档或模拟文本作为本次抓取成果。
-- 有限网络诊断确认 Python、curl、Node、Edge 和官方 DNS 地址直连均无法从本机取得目标内容。未改动系统代理、DNS 或凭据。
-- 远端 web 工具取得《中华人民共和国民用航空器适航管理条例》的 HTML 文字，来源 URL 与 CH01-S002 完全一致。机械选取工具返回的第 75—143 行，保存第一条至第二十九条；没有改写正文。
-- 最终 manifest：`fulltext=0`、`extracted=1`、`metadata=0`、`failed=188`；对应唯一来源 URL：`extracted=1`、`failed=134`。另有 3 次有限的远端失败探测，分别为民用航空法读取超时两次、政府网无人机条例页面 403 一次。
-- 无原始 PDF 成功下载，因此本次没有可供视觉对照的官方 PDF。PDF 分页与空文字页处理已用本地生成的测试 PDF 验证；不能把这些测试视为对实际官方 PDF 的核验。
+九章共 189 条来源登记、135 个唯一登记 URL。当前大厅显示：网页正文 9、提取正文 162、整理摘录 0、状态信息 18。171 条可读正文包含跨章引用，不等于独立法规数量，也不表示图表、公式或法律内容已逐字核实。
+
+最初本机对官方来源的下载受 TLS 连接提前关闭与超时影响。后续通过仓库 GitHub Actions 获取官方原始字节，下载产物并逐个校验缓存 URL、原始字节 SHA-256 后导入。没有关闭 TLS 校验，没有修改系统代理、DNS 或凭据。首次尝试的历史记录见 [初次采集](acquisition-initial-attempt.md)。
+
+- 全量成功运行：[38368418797](https://github.com/TuZ1206/airworthiness/actions/runs/38368418797)，取回 242 对原始缓存与元数据文件。
+- 定向附件补充：[38374275626](https://github.com/TuZ1206/airworthiness/actions/runs/38374275626)，获取 CCAR-25 独立附录、CCAR-26 及 CCAR-45 PDF。CCAR-45 合并文本未冒充原登记的修改决定。
+- 远端官方网页文字作为补充，独立保存工具快照哈希，不冒充原始 HTTP 字节哈希。
+
+## 特殊文件与限制
+
+| 文件 | 本轮处理 | 必须保留的限制 |
+| --- | --- | --- |
+| CCAR-25-R4 | 官方主文 434 页＋独立附录 82 页，共 516 页；分别提供原件 | 两套页码分开；文字提取不能还原全部图形和公式 |
+| AP-21-11R2 | 官方 RAR 唯一 PDF，233 页；RAR/PDF 双哈希 | PDF 物理第188、189页现有文字层存在错误，必须对照原件 |
+| AP-21-AA-2010-04R4 | 133 页扫描件本地 OCR | 第133页未取得识别文字，抽查为空白尾页；封面和表格仍有错字 |
+| AC-25.1529-1《审定维修要求》 | 21 页扫描件本地 OCR，修正登记题名的展示值 | 第10页概率公式存在指数丢失，不可直接据 OCR 引用数值或公式 |
+
+本地 OCR 使用 Tesseract 和 `chi_sim+eng` 模型；模型、原 PDF 和识别缓存都在忽略目录，不提交 Git。缓存绑定原 PDF、模型、引擎与参数，空页及错误页不会被当作成功完整文字。OCR 为 `extracted`，不是已校对全文。
+
+已导入的两份实际识别产物保留其真实 v1 缓存键和原PDF哈希；未为更新程序版本改写历史记录。当前OCR程序为v2，使用同一不可变字节快照计算哈希和渲染，每页最多45秒、最多三并发，未来重跑不复用v1缓存。原件接口也只发送重新验过哈希的固定字节快照。
+
+剩余 18 条状态信息对应 13 项标准：4 项有明确的采标版权文本限制；其余涉及动态下载入口、gov.cn 范围以外的官方链接目标或未确认详情。不能一概称“不公开”。逐项证据及实际访问结果见 [标准访问核对](standards-access.md) 和 [质量报告](data-quality-report.md)。HB 7736-2004 仍未确认同号同年的官方详情，查询无结果不能证明标准不存在。
 
 ## 文件与接入约定
 
-`data/acquired/manifest.json` 是 `source_id -> entry` 直接映射。`path` 位于 `data/acquired/documents/`，使用实际取得的规范化官方 URL 的 SHA-256 命名，同一 URL 共用一个正文路径。
+`data/acquired/manifest.json` 是 `source_id -> entry` 映射。来源绑定、正文和原字节采用不同哈希：
 
-- `sha256`：生成的 Markdown 文件 UTF-8 字节哈希，供离线目录验证。
-- `original_sha256`：经 HTTP 下载的原始文件字节哈希。远端工具只提供处理后的 HTML 文字，不能取得原始 HTML 字节，因此 CH01-S002 此字段明确留空，另以 `tool_snapshot_sha256` 记录工具快照哈希；不能将二者混淆。
-- `url`：成功取得正文的实际官方地址；失败项保留所尝试的来源地址，不能解释成下载成功。`landing_url` 保留该条台账的 URL。
-- `method=web-tool-html-text`：仅表示远端工具返回的 HTML 文字，固定标为 `extracted`、`review_status=pending`。原始 HTML、完整重定向链、图表及页面完整性未核验，不声称 `fulltext`。
-- `method=pymupdf-page-text`：只用于真实 PDF 字节的逐页提取，包含 `## 第 N 页`；任何空文字页都会明确列出，所有 PDF 提取均待核验。
-- `source_sha256`：采集读取 CSV 时的原记录哈希；不是本次下载的原始字节哈希。
+- `source_sha256`：当前上传 CSV 记录绑定的原稿哈希。
+- `sha256`：生成的 Markdown UTF-8 字节哈希。
+- `original_sha256`：实际 HTTP 原件字节哈希；远端工具文字没有原件字节时留空。
+- `tool_snapshot_sha256`：真实工具响应的序列化快照哈希，不等于原件哈希。
+- `archive_member_sha256`：RAR 内固定 PDF 的哈希，与 RAR 原件哈希分开。
+- `landing_url` 保留台账 URL；`url` 为实际取得内容的官方地址。跨 URL 导入逐 ID 绑定当前哈希、文号、日期，并检查原件中的版本引文。
 
-`report.json` 保留全量请求和来源结果，`counts` 表示当前 manifest；`unique_url_counts` 是首次本机全量采集的结果（135 个失败），远端补采另记在 `remote_imports`。`attempts.jsonl` 为追加式逐次尝试记录，保留本机失败、远端成功、远端失败及运行编号。网页成功但附件失败时，manifest 同时保留网页、附件错误和尝试列表。
+补采正文放在 `data/acquired/documents/`；新补充文件使用内容寻址路径，同一文件可以跨章引用。原上传 CSV 和原稿不被覆盖。元数据修正放在 `data/verification/metadata-findings.json`，保留原值、证据、修正或解释结论及原问题记录。
 
-原始下载和远端工具快照仅保存至 `.cache/acquisition/`，缓存目录自带忽略文件，仓库的父任务也已忽略 `.cache`。缓存读取重新验证官方 URL 和原始字节哈希。PDF 二进制不会写入 `data/acquired`。
+`report.json` 的 `counts` 表示当前采集 manifest，`unique_url_counts` 表示当前登记 URL 的最佳可用类型；旧的 `requests/results` 是对应采集运行历史，不代表最新失败清单。追加日志 `attempts.jsonl` 同时保留初次失败、重试与补采记录。大厅质量报告是最终合并后的阅读统计。
 
-HTML 提取限制在识别出的正文容器；标准平台页面固定为 `metadata`。通知中只引用单个条款不会被认作完整正文。只选择首个可提取的 PDF 附件，多个附件的未合并情况会记录；不会声称多附件已全部取得。HTML 图像、跨单元格表格结构和分页仍需核验。
+原始下载、工具快照、PDF 和 OCR 缓存只保存在 `.cache/`。本地原件接口只读取固定缓存路径，校验官方 URL、长度与哈希；不按任意路径读文件，不实时联网，不执行上传文件。其他电脑没有原件缓存时隐藏 PDF 入口，已提交的文字仍能阅读。
 
-重跑保留有有效本地哈希且质量更好的已有采集正文；重复来源或新的 URL 别名也不能覆盖该正文。原章节 CSV 和文档由父任务维护，本采集器不修改。CH04-S007 的父任务标题与哈希修正未撤销。
-
-## 复现
-
-从仓库根目录运行：
+## 复现与安全边界
 
 ```powershell
-.venv/Scripts/python.exe src/airworthiness/acquire.py --root . --workers 4 --per-host 2
-.venv/Scripts/python.exe -m unittest tests.test_acquire tests.test_chapter_data_format -q
+.venv/Scripts/python.exe -m airworthiness.acquire --root . --workers 4 --per-host 2
+.venv/Scripts/python.exe -m airworthiness.cli validate
+.venv/Scripts/python.exe -m airworthiness.cli build
+.venv/Scripts/python.exe -m airworthiness.cli report
+.venv/Scripts/python.exe -m unittest discover -s tests -v
 ```
 
-默认复用已验证的成功缓存；`--refresh` 强制重新请求，仍保留更好的已有正文。连接/读取超时为 3.5/9 秒，最多 1 次重试、5 次重定向、32 MiB 响应、8 个 PDF 候选、1500 页 PDF 提取上限；不对 TLS 错误反复重试。`--proxy` 仅接受明确指定且无凭据的代理 URL，不读取环境认证、`.netrc` 或其他凭据文件。
+本机网络若仍受限，可在 GitHub 运行 `source-acquisition.yml` 和 `source-supplement.yml` 后获取产物；Git 不包含下载产物。默认复用已验证成功缓存，`--refresh` 才重新请求。普通响应上限 32 MiB；已核对 RAR 成员的固定本地 PDF 上限 256 MiB。没有自动解包任意归档或绕过授权下载。
 
-`--import-web-json` 从标准输入接收已取得的真实远端 HTML 工具响应，不发网络请求。每条输入包括 `url`、`responses`、`line_start`、`line_end`、`captured_at`；逐个核验官方来源、HTML 类型及所选行的连续性，拒绝截断、冲突、导航标记及 PDF 响应。此次完整工具快照保存在忽略的 `.cache/acquisition/<canonical-url-hash>.web.json`，可用于复验；不包含该快照时，无法在纯离线环境重新取得官网原文。
+远端导入使用 `remote_import.import_remote_snapshot(root, snapshot)`，缓存导入使用 `cached_import.import_cached_original(root, url, source_ids, identity_evidence)`；严格输入格式见模块文档。CLI `--import-web-json` 使用同一严格入口，需要显式来源绑定，不自动把旧格式推测为同版本。只接受真实带行号的工具响应，拒绝缺页、冲突、截断、嵌入伪行号和不匹配版本；图像标记保留为缺失提示。
 
-网络层已拆到 `src/airworthiness/acquire_http.py`；`acquire.py` 保留 `Fetcher`、`AcquisitionError`、URL 验证等既有导出，父任务的 manifest 接入无需改变。
-
-## 验证结果
-
-29 项采集测试及 6 项原章节格式/哈希校验通过。已检查 189 个 manifest 键、官方 URL、正文路径及 SHA-256、234 条日志、全部 135 个来源 URL 的请求覆盖，以及条例第一条至第二十九条的原样文本。两个实现模块分别为 433、253 行，测试文件 359 行，均低于 500 行。
-
-原始 PDF 下载和视觉核验仍受网络阻断，不作成功声明。资源大厅的最终集成验证见 `offline-acceptance.md`；采集单项测试不替代整体应用验收。
+正文按实际结构生成真实条号、页码或自动阅读段落。自动段落仅用于导航；术语文本匹配不等于法规定义核验。最终集成检查见 [验收说明](offline-acceptance.md)。

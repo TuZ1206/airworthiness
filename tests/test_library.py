@@ -61,7 +61,15 @@ class LibraryTests(unittest.TestCase):
         self.assertEqual(doc['uploaded_provenance']['pdf_sha256'], 'f1a0a74794b485cbdb6baf818d027a4d11be6e7431968e472ed6ff583924477a')
         self.assertTrue(doc['uploaded_provenance']['pdf_url'].endswith('.pdf'))
         for term in self.catalog.chapter(self.db, 'ch01')['glossary']:
-            self.assertEqual(term['anchor_or_url'], f"/chapters/ch01?source={term['source_id']}")
+            base = f"/chapters/ch01?source={term['source_id']}"
+            if term['locator_status'] == 'source_only':
+                self.assertEqual(term['anchor_or_url'], base)
+            else:
+                self.assertEqual(term['anchor_or_url'], base + '#' + term['locator_anchor'])
+                source_doc = self.catalog.document(self.db, term['source_id'])
+                self.assertIn('id="' + term['locator_anchor'] + '"', source_doc['html'])
+                self.assertTrue(term['locator_evidence'])
+                self.assertFalse(term['definition_verified'])
             self.assertIn('original_anchor_or_url', term)
 
     def test_original_excerpt_is_never_implicitly_labelled_fulltext(self):
@@ -78,7 +86,11 @@ class LibraryTests(unittest.TestCase):
         self.assertEqual(len(report["chapters"]), 9)
         self.assertTrue(report["generated_at"])
         self.assertTrue(all(x["reason"] for x in report["gaps"]))
-        self.assertTrue(any(x['source_id'] == 'CH03-S001' and x['kind'] == 'date_variation' for x in report['issues']))
+        self.assertFalse(any(x['source_id'] == 'CH03-S001' and x['kind'] == 'date_variation' for x in report['issues']))
+        doc = self.catalog.document(self.db, 'CH03-S001')
+        self.assertEqual(doc['publish_date'], '2016-03-17')
+        self.assertEqual(doc['original_metadata']['publish_date'], '2011-11-07')
+        self.assertTrue(any(x['source_id'] == 'CH03-S001' and x['field'] == 'publish_date' for x in report['resolved_metadata']))
 
 
 class RenderingTests(unittest.TestCase):

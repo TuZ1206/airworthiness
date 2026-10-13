@@ -4,9 +4,11 @@ import hashlib
 import json
 import re
 from collections import defaultdict
+from copy import deepcopy
 from pathlib import Path
 from urllib.parse import urlsplit
 
+from .locators import resolve_terms
 from .reading import clean_extracted_text
 
 SOURCE_FIELDS = "source_id,title,document_code,document_status,publish_date,url,sha256,crawled_at,review_status".split(",")
@@ -145,6 +147,9 @@ def load_inputs(root):
                         note = entry.get("note") or "已获取官方正文；自动提取的版式、表格与完整性待人工校对。"
                         entry = dict(entry, applied=True)
                         body_provenance = {"source_id": sid, "method": entry.get("method"), "markdown_sha256": entry["sha256"], "original_sha256": entry.get("original_sha256", ""), "url": entry["url"], "crawled_at": entry.get("crawled_at"), "tool_snapshot_sha256": entry.get("tool_snapshot_sha256", "")}
+                        for field in ("originals", "archive_member", "archive_member_sha256", "request_url"):
+                            if field in entry:
+                                body_provenance[field] = deepcopy(entry[field])
             elif not entry.get("skip_reason") and (entry.get("error") or entry.get("note")):
                 note += " 本次获取：" + acquisition_reason(entry)
             if not row["publish_date"]:
@@ -173,5 +178,33 @@ def load_inputs(root):
             if len(values) > 1:
                 for row in group:
                     issues.append({"source_id": row["source_id"], "kind": kind, "message": f"同一文号跨章登记的{label}存在差异（{'；'.join(values)}），可能涉及修订、发布通知或记录错误，需核对官方来源。"})
+    # Metadata verification owns corrections and documentary evidence, not URLs.
+    # Its module can arrive independently; do not hide failures inside it.
+    resolved_issues = []
+    try:
+        from .verification import apply_metadata
+    except ModuleNotFoundError as exc:
+        if exc.name != f"{__package__}.verification":
+            raise
+    else:
+        resolved_issues, issues = apply_metadata(documents, issues, root)
+    resolved_by_source = defaultdict(list)
+    for issue in resolved_issues:
+        resolved_by_source[issue["source_id"]].append(issue)
+    for doc in documents:
+        # Keep the original issue message AND its resolution/evidence in SQLite.
+        doc["resolved_issues"] = resolved_by_source[doc["source_id"]]
     share_originals(documents)
+    terms_by_source = defaultdict(list)
+    for term in terms:
+        terms_by_source[term["source_id"]].append(term)
+    for doc in documents:
+        group = terms_by_source.get(doc["source_id"], [])
+        if group:
+            # Editorial excerpts and registration notes cannot be original-text
+            # evidence, even when they contain a term or an exact supplied quote.
+            body = doc["body"] if doc["content_kind"] in {"fulltext", "extracted"} else ""
+            located = resolve_terms(group, body, extracted=doc["content_kind"] == "extracted")
+            for original, resolved in zip(group, located):
+                original.update(resolved)
     return chapters, documents, terms, errors, issues

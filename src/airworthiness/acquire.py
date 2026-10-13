@@ -32,7 +32,7 @@ else:  # Also support python src/airworthiness/acquire.py.
 NOTICE = "机械采集结果，待核验；抓取成功不等于专业审核或批准。"
 BODY_SELECTORS = (".TRS_Editor", ".TRS_PreAppend", ".article-content", "#UCAP-CONTENT",
                   "#zoom", "#Zoom", ".article_content", "#article-content",
-                  ".Article_Content", ".viewTRSContent", ".TRS_UEDITOR")
+                  ".Article_Content", ".viewTRSContent", ".TRS_UEDITOR", '[data-role="n_content"]')
 RANK = {"failed": 0, "metadata": 1, "extracted": 2, "fulltext": 3}
 PDF_LOCK = threading.Lock()  # PyMuPDF document operations are not thread-safe.
 
@@ -46,6 +46,7 @@ class Extraction:
     note: str = ""
     title: str = ""
     attachments: list[str] = field(default_factory=list)
+    non_text_elements: int = 0
 
 
 def _markdown(node, base_url):
@@ -56,6 +57,8 @@ def _markdown(node, base_url):
     name = node.name.lower()
     if name == "br":
         return "\n"
+    if name == "img":
+        return " [原文包含图像/公式，见官方原文] "
     if name == "table":
         rows = []
         for tr in node.find_all("tr"):
@@ -124,6 +127,13 @@ def extract_html(data: bytes, url: str) -> Extraction:
     legal_lines = re.findall(r"(?m)^\s*(?:#+\s*)?(?:第[一二三四五六七八九十百零〇\d]+[条章节]|\d+\.\d+\s)", body)
     substantive = len(body) >= 350 and len(legal_lines) >= 2
     kind = "fulltext" if substantive and not is_standard else "metadata"
+    images = len(container.select('img')) if container else 0
+    amendment = (container is not None and not is_standard and len(body) >= 350
+                 and re.search(r'关于修改.*决定', title)
+                 and len(re.findall(r'(?m)^\s*[一二三四五六七八九十]+、将', body)) >= 2
+                 and '本决定自' in body)
+    if amendment or (images and kind == 'fulltext'):
+        kind = 'extracted'
     note = NOTICE
     if is_standard:
         note += " 国家标准平台状态页，仅为标准元数据，不是标准正文。"
@@ -131,7 +141,11 @@ def extract_html(data: bytes, url: str) -> Extraction:
         note += " 未识别足够的法规正文；仅保存官网页面元数据或通知内容。"
     else:
         note += " 保存所识别的HTML正文；附件、图像、表格合并单元格及分页完整性仍须核验。"
-    return Extraction(kind, body, "html:" + (selector or "metadata"), note=note, title=title, attachments=attachments)
+    if amendment:
+        note += " 本页为修改决定，不是修订后的合并全文；独立附件未合并。"
+    if images:
+        note += f" 原文包含图像/公式占位 {images} 项，未提取其内容。"
+    return Extraction(kind, body, "html:" + (selector or "metadata"), note=note, title=title, attachments=attachments, non_text_elements=images)
 
 
 def extract_pdf(data: bytes) -> Extraction:
@@ -242,10 +256,12 @@ def _acquire_group(url, rows, fetcher):
             f"- 原文 SHA-256：{download.original_sha256}\n\n"
             f"{extraction.markdown}\n").encode("utf-8")
     entry = dict(content_kind=extraction.content_kind, path=f"data/acquired/documents/{key}.md",
-                 url=download.url, landing_url=url, sha256=digest(body), crawled_at=download.crawled_at,
+                 url=download.url, request_url=download.redirects[0] if download.redirects else download.url,
+                 landing_url=url, sha256=digest(body), crawled_at=download.crawled_at,
                  method=extraction.method, page_count=extraction.page_count, note=extraction.note,
                  error="; ".join(errors), original_sha256=download.original_sha256,
-                 review_status="pending", attempts=attempts, text_chars=len(extraction.markdown))
+                 review_status="pending", attempts=attempts, text_chars=len(extraction.markdown),
+                 non_text_elements=extraction.non_text_elements)
     return entry, body
 
 
@@ -336,7 +352,10 @@ def run_acquisition(root: Path, *, fetcher=None, workers=4, progress=False):
 
 
 def import_web_snapshots(root: Path, snapshots):
-    """Import exact HTML text returned by the remote web reader, never PDF text.
+    """Deprecated compatibility API for exact-landing HTML snapshots, never PDF.
+
+    This legacy format lacks explicit identity bindings. New callers and the CLI
+    must use remote_import.import_remote_snapshot with its strict evidence schema.
 
     Raw tool responses remain in ignored cache. They are not original HTTP bytes:
     original_sha256 stays empty and all usable body text is marked extracted.
@@ -363,7 +382,9 @@ def import_web_snapshots(root: Path, snapshots):
             if not header or canonical_url(header[2]) != url or "Content type: text/html;" not in raw:
                 raise ValueError("Missing matching official HTML provenance")
             title = header[1]
-            for match in re.finditer(r"(?:^|\s)L(\d+): ?(.*?)(?=\sL\d+:|\Z)", raw, re.S):
+            # Only physical line starts delimit records; embedded labels are text
+            # and cannot supply a missing line or conflict with its real record.
+            for match in re.finditer(r"^L(\d+): ?(.*?)(?=^L\d+:|\Z)", raw, re.M | re.S):
                 number, value = int(match[1]), match[2].rstrip("\r\n")
                 if number in lines and lines[number] != value:
                     raise ValueError("Conflicting remote snapshot lines")
@@ -415,10 +436,23 @@ def main(argv=None):
     parser.add_argument("--per-host", type=int, default=2, choices=[1, 2])
     parser.add_argument("--refresh", action="store_true", help="Re-fetch; keep better verified existing text")
     parser.add_argument("--proxy", help="Explicit HTTP proxy URL without credentials (optional)")
-    parser.add_argument("--import-web-json", action="store_true", help="Import exact remote HTML snapshots from UTF-8 JSON on stdin; no network requests")
+    parser.add_argument("--import-web-json", action="store_true", help="Import an explicit array of identity-bound remote snapshots from UTF-8 JSON on stdin; no network requests")
     args = parser.parse_args(argv)
     if args.import_web_json:
-        manifest = import_web_snapshots(args.root, json.load(sys.stdin))
+        if not __package__:
+            sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+        from airworthiness.remote_import import import_remote_snapshot, validate_remote_snapshot
+        try:
+            snapshots = json.load(sys.stdin)
+            if not isinstance(snapshots, list) or not snapshots:
+                raise ValueError("Expected a nonempty explicit snapshot array")
+            # Reject an invalid later item before an earlier item can write files.
+            for snapshot in snapshots:
+                validate_remote_snapshot(snapshot, root=args.root)
+            for snapshot in snapshots:
+                manifest = import_remote_snapshot(args.root, snapshot)
+        except ValueError as exc:
+            parser.error(str(exc))
         print(json.dumps(Counter(e["content_kind"] for e in manifest.values()), ensure_ascii=False))
         return 0
     if args.proxy:

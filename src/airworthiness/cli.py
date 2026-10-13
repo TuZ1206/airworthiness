@@ -6,6 +6,7 @@ from pathlib import Path
 from . import catalog
 from .config import project_root
 from .ingest import load_inputs
+from .access_notes import enrich_access_notes
 
 
 def markdown_report(report):
@@ -24,6 +25,14 @@ def markdown_report(report):
         lines.append(f"- {issue['source_id']}：{issue['message']}")
     if not report["issues"]:
         lines.append("未发现自动校验可识别的元数据问题。")
+    lines += ["", "## 已处理提示（保留原记录）", "", "以下仅表示字段核对或差异解释完成，不是专业审核通过。", ""]
+    resolutions = dict(corrected="字段已纠正", explained="差异已解释", confirmed="已确认")
+    for issue in report.get("resolved_issues", []):
+        resolution = issue.get('resolution', '详见字段核对记录')
+        lines.append(f"- {issue['source_id']}：{issue['message']}；处理：{resolutions.get(resolution, resolution)}。")
+        for evidence in issue.get("evidence", []):
+            for url in evidence.get("evidence_url", []):
+                lines.append(f"  - [官方证据]({url})")
     lines += ["", "## 本轮边界", "", "- CH04-S007 的 HB 8605-2021 标题已按政府标准平台修正为《飞机复合材料结构适航符合性验证通用要求》，更新了该摘录的哈希。", "- 原上传 nodes.csv、relations.csv 保留；本轮不重建或审核图谱数据。旧节点中的同类题名问题仍需后续处理。", "- 不改变 review_status，不提供专业批准，不接入 Neo4j、Dify 或模型服务。", ""]
     return "\n".join(lines)
 
@@ -49,6 +58,7 @@ def main(argv=None):
         return 0
     catalog.ensure_catalog(root, database)
     report = catalog.quality(database)
+    enrich_access_notes(root, report['gaps'])
     output = args.output or root / "docs/data-quality-report.md"
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(markdown_report(report), encoding="utf-8", newline="\n")

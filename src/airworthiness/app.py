@@ -1,11 +1,13 @@
 """Offline resource hall. No credentials, Neo4j or model service required."""
 import os
 
-from flask import Flask, abort, jsonify, render_template, request
+from flask import Flask, abort, jsonify, render_template, request, send_file, url_for
 from werkzeug.exceptions import HTTPException
 
 from . import catalog
 from .config import project_root
+from .originals import cached_original, original_snapshot
+from .access_notes import enrich_access_notes
 
 
 def create_app(settings=None):
@@ -61,11 +63,39 @@ def create_app(settings=None):
         result = catalog.document(app.config["DATABASE"], source_id)
         if not result:
             abort(404, description="未找到该资料")
+        enrich_access_notes(app.config['DATA_ROOT'], [result])
+        if result.get('access_note'):
+            result['extraction_note'] = result.get('extraction_note', '') + ' 获取核对：' + result['access_note']
+        provenance = result.get('body_provenance') or {}
+        candidates = provenance.get('originals') or [provenance]
+        result['originals'] = [
+            dict(label=item.get('label') or '本地 PDF 原件',
+                 url=url_for('original', source_id=source_id, **({'index': index} if index else {})))
+            for index, item in enumerate(candidates[:16])
+            if cached_original(app.config['DATA_ROOT'], result, index) is not None
+        ]
+        result['original_available'] = bool(result['originals'])
+        result['original_url'] = result['originals'][0]['url'] if result['originals'] else ''
         return jsonify(result)
+
+    @app.get('/api/documents/<source_id>/original')
+    def original(source_id):
+        try:
+            index = int(request.args.get('index', '0'))
+        except ValueError:
+            abort(400, description='无效的附件索引')
+        document = catalog.document(app.config['DATABASE'], source_id)
+        snapshot = original_snapshot(app.config['DATA_ROOT'], document, index) if document else None
+        if snapshot is None:
+            abort(404, description='本机没有已校验的该资料 PDF 原件')
+        return send_file(snapshot, mimetype='application/pdf', as_attachment=False,
+                         download_name=source_id + '.pdf', conditional=True)
 
     @app.get("/api/quality")
     def quality():
-        return jsonify(catalog.quality(app.config["DATABASE"]))
+        result = catalog.quality(app.config['DATABASE'])
+        enrich_access_notes(app.config['DATA_ROOT'], result['gaps'])
+        return jsonify(result)
 
     @app.get("/api/health")
     def health():

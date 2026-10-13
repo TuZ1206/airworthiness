@@ -41,6 +41,26 @@ function renderReaderSidebar(container, chapter, selectedSource, chapters, toc) 
     el('nav', { 'aria-label': '本章文件' }, files));
 }
 
+function glossaryTarget(item, chapter) {
+  const base = chapterURL(sourceChapter(item.source_id, chapter.id), item.source_id);
+  if (!['text_match', 'verified_clause'].includes(item.locator_status)) return base;
+  let anchor = String(item.locator_anchor || '');
+  if (!anchor && item.anchor_or_url) {
+    try { anchor = decodeURIComponent(new URL(item.anchor_or_url, location.href).hash.slice(1)); }
+    catch { return base; }
+  }
+  if (!/^(?:reading-)?(?:clause|chapter|page|paragraph|section)-[0-9a-z-]+$/.test(anchor)) return base;
+  return `${base}#${anchor.startsWith('reading-') ? anchor : `reading-${anchor}`}`;
+}
+
+function locatorDescription(item) {
+  return {
+    verified_clause: '精确引文位置已核对；未核验术语释义，也不代表专业审核通过。',
+    text_match: '仅关键词匹配；未核验术语释义，不表示此处支持该定义。',
+    source_only: '仅定位来源；尚未找到可靠的正文匹配。'
+  }[item.locator_status] || '仅定位来源；尚未找到可靠的正文匹配。';
+}
+
 function renderGlossary(container, entries, chapter) {
   const terms = list(entries);
   const rows = el('div');
@@ -53,15 +73,18 @@ function renderGlossary(container, entries, chapter) {
     rows.replaceChildren(...filtered.map(item => el('section', { class: 'glossary-entry' },
       item.group ? el('div', { class: 'term-group' }, item.group) : null,
       el('h3', {}, item.term), el('p', {}, item.definition || '释义尚待补充。'),
-      item.source_id ? link(`来源 ${item.source_id} ↗`, chapterURL(sourceChapter(item.source_id, chapter.id), item.source_id), { class: 'term-source' }) :
+      item.source_id ? link(`来源 ${item.source_id} ↗`, glossaryTarget(item, chapter), { class: 'term-source' }) :
         el('span', { class: 'review-label' }, '来源尚待补充'),
+      el('p', { class: 'sidebar-empty' }, locatorDescription(item)),
+      ['text_match', 'verified_clause'].includes(item.locator_status) && item.locator_evidence ?
+        el('p', { class: 'locator-evidence' }, `原文片段：${item.locator_evidence}`) : null,
       el('span', { class: 'review-label' }, reviewLabel(item.review_status)))));
     if (!filtered.length) rows.append(el('p', { class: 'sidebar-empty' }, term ? '没有匹配的术语。' : '当前内容暂无关联术语。'));
   };
   input.addEventListener('input', render);
   render();
   container.replaceChildren(el('h2', { class: 'glossary-title' }, '术语释义', shownCount),
-    el('p', { class: 'glossary-intro' }, '随文参照 · 点击来源回到对应资料'), input, rows);
+    el('p', { class: 'glossary-intro' }, '随文参照 · 原文定位不等于释义核验'), input, rows);
 }
 
 function readerTools(content, q) {
@@ -98,6 +121,16 @@ function readerTools(content, q) {
   return toolbar;
 }
 
+function originalPDFs(doc) {
+  if (doc.original_available !== true || !/^CH\d{2}-S\d{3}$/.test(doc.source_id || '')) return [];
+  const expected = `/api/documents/${doc.source_id}/original`;
+  const items = list(doc.originals);
+  const candidates = items.length ? items : [{ label: '', url: doc.original_url }];
+  return candidates.filter(item => item && typeof item.url === 'string' && item.url.startsWith(expected) &&
+    /^(?:\?index=(?:0|[1-9]\d*))?$/.test(item.url.slice(expected.length)))
+    .map(item => ({ url: item.url, label: typeof item.label === 'string' ? item.label : '' }));
+}
+
 function documentNotice(doc) {
   const messages = {
     fulltext: '本页收录网页正文。法规效力与版本请核对官方来源。',
@@ -105,10 +138,46 @@ function documentNotice(doc) {
     excerpt: '本页为整理摘录，可能包含归纳或转述，不代表完整原文，不宜作为逐字引用。请核对官方来源。',
     metadata: '本条目仅收录来源登记及获取状态信息，尚无可用正文。下方信息不代表原文。'
   };
+  if (doc.content_kind === 'metadata' && originalPDFs(doc).length) {
+    messages.metadata = '本条目暂缺可检索文字，可查看本地 PDF 原件并对照图表、公式。下方登记信息不代表原文。';
+  }
   return el('aside', { class: 'content-notice', 'aria-label': '收录与审核说明' },
     el('strong', {}, `${kinds[doc.content_kind] || '收录类型未注明'} · ${reviewLabel(doc.review_status)}`),
     el('p', {}, messages[doc.content_kind] || '收录范围尚未确认，请核对官方来源。'),
+    doc.navigation_note ? el('p', {}, doc.navigation_note) : null,
     doc.extraction_note ? el('p', { class: 'extraction-note' }, doc.extraction_note) : null);
+}
+
+function metadataEvidenceLink(value, index) {
+  try {
+    const host = new URL(value).hostname.toLowerCase().replace(/\.$/, '');
+    if (host !== 'gov.cn' && !host.endsWith('.gov.cn')) return null;
+    return officialLink(value, `官方证据 ${index + 1} ↗`);
+  } catch { return null; }
+}
+
+function metadataDetails(doc) {
+  const entries = list(doc.metadata_verification).filter(item => item && typeof item === 'object' && !Array.isArray(item));
+  if (!entries.length) return null;
+  const fields = { title: '题名', document_code: '文件文号', publish_date: '发布日期' };
+  const actions = { corrected: '已纠正', already_matches: '原值已一致', confirmed: '已确认',
+    explained: '差异已解释', recorded: '仅记录', blocked: '未应用', unresolved: '未解决' };
+  const value = text => typeof text === 'string' && text.trim() ? text : '未记录';
+  return el('section', { 'aria-label': '元数据核对记录' }, el('h3', {}, '元数据核对记录'),
+    el('ul', {}, entries.map(entry => {
+      const old = value(entry.original_value ?? doc.original_metadata?.[entry.field]);
+      const verified = value(entry.verified_value);
+      const applied = ['corrected', 'already_matches', 'confirmed'].includes(entry.application);
+      const change = applied ? `${old} → ${verified}` : `${old}（原值保留；核对值：${verified}）`;
+      const isField = Object.hasOwn(fields, entry.field);
+      const label = isField ? fields[entry.field] : entry.field === 'url_alias' ? '同源地址核对' : '来源核对';
+      const notes = [...new Set([entry.evidence?.text, entry.note].filter(text => typeof text === 'string' && text.trim()))];
+      const detail = isField ? change : notes.join('；') || '未提供核对说明。';
+      const evidence = list(entry.evidence_url).map(metadataEvidenceLink).filter(Boolean);
+      return el('li', {}, el('p', {}, `${label}：${detail} · ${actions[entry.application] || '未应用'}`),
+        evidence.length ? evidence : el('span', { class: 'sidebar-empty' }, '未提供可用的官方证据链接。'));
+    })),
+    el('p', { class: 'sidebar-empty' }, `仅核对登记字段，不改变专业审核状态（${reviewLabel(doc.review_status)}）。`));
 }
 
 function provenanceDetails(doc) {
@@ -121,10 +190,15 @@ function provenanceDetails(doc) {
     ['原始附件／页面 SHA-256', source.pdf_sha256 || source.original_sha256 || '未取得原始字节哈希']
   ];
   const attachment = source.pdf_url || (source.source_id === doc.source_id ? uploaded.pdf_url : '');
+  const originals = originalPDFs(doc);
   return el('details', { class: 'provenance-details' },
     el('summary', {}, '查看采集与校验记录'),
     el('dl', { class: 'document-facts' }, fields.map(([name, value]) => [el('dt', {}, name), el('dd', {}, value)])),
+    originals.map(item => el('a', { href: item.url, target: '_blank', rel: 'noopener noreferrer', class: 'button' },
+      `查看本地 PDF 原件${item.label ? ` · ${item.label}` : ''} ↗`)),
+    originals.length ? el('p', {}, '请对照 PDF 原件中的图表、公式；提取正文可能存在缺失。') : null,
     attachment ? officialLink(attachment, '查看官方附件 ↗') : null,
+    metadataDetails(doc),
     el('p', { class: 'sidebar-empty' }, '哈希用于核对保存文件的一致性，不代表专业审核通过。'));
 }
 
@@ -181,7 +255,7 @@ async function renderReader(chapterId, signal, generation) {
   }
   // A copied source URL can refer to another chapter; use the canonical route.
   if (doc?.chapter_id && doc.chapter_id !== chapterId) {
-    navigate(chapterURL(doc.chapter_id, doc.source_id), { replace: true });
+    navigate(chapterURL(doc.chapter_id, doc.source_id) + location.hash, { replace: true });
     return;
   }
   const isDoc = Boolean(doc);
@@ -245,7 +319,10 @@ function scheduleSave() {
 
 function hashTarget() {
   if (!location.hash) return null;
-  try { return document.getElementById(decodeURIComponent(location.hash.slice(1))); }
+  try {
+    const id = decodeURIComponent(location.hash.slice(1));
+    return document.getElementById(id) || document.getElementById(`reading-${id}`);
+  }
   catch { return null; }
 }
 
