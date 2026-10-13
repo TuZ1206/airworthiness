@@ -19,6 +19,8 @@ gov.cn / *.gov.cn 官方页面
 
 每章可以独立整理，九章完成后再统一检查编号、重名节点和跨章关系。未经专业审核的数据不得导入正式 Neo4j 图谱或正式 Dify 知识库。
 
+当前已按统一接口整理第1、2、4、5、6、7、8、9章；第九章现行定位为“试验与统计方法”。全部章节数据仍为 `pending`，其中仅能取得官方状态页的标准不得支撑不可见的详细条款或量化结论。
+
 ## 二、建议目录
 
 以下是团队确认清理旧文件后采用的目标结构。当前仓库中的旧版单文件程序和压缩包暂时保留，不要继续在压缩包或千行脚本中增加新内容。
@@ -40,7 +42,7 @@ airworthiness/
 │  │  └─ image_file/         # 法规原文页
 │  └─ qa/
 │     └─ __init__.py         # 预留 Dify 问答服务
-├─ data/chapters/
+├─ data/
 │  ├─ ch01/ ... ch09/        # 九章数据（sources/nodes/relations/glossary 等）
 ├─ templates/
 │  ├─ chapter/               # 章节数据模板
@@ -97,7 +99,7 @@ allowed = host == "gov.cn" or host.endswith(".gov.cn")
 
 ## 五、每章必须提交的文件
 
-每章放在 `data/chapters/ch01` 至 `ch09` 中，目录和文件名必须一致：
+每章放在 `data/ch01` 至 `data/ch09` 中，目录和文件名必须一致：
 
 ```text
 ch06/

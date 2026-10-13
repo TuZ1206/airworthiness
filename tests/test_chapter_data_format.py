@@ -7,8 +7,8 @@ from urllib.parse import urlparse
 
 
 ROOT = Path(__file__).resolve().parents[1]
-CHAPTER_ROOT = ROOT / "data" / "chapters"
-CHAPTERS = ("ch01", "ch02", "ch04", "ch05", "ch06", "ch07", "ch08")
+CHAPTER_ROOT = ROOT / "data"
+CHAPTERS = ("ch01", "ch02", "ch04", "ch05", "ch06", "ch07", "ch08", "ch09")
 HEADERS = {
     "sources.csv": ["source_id", "title", "document_code", "document_status", "publish_date", "url", "sha256", "crawled_at", "review_status"],
     "nodes.csv": ["node_id", "chapter_id", "label", "name", "code", "summary", "display_type", "source_id", "source_locator", "priority", "review_status"],

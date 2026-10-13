@@ -83,8 +83,8 @@ CHAPTERS = [
      "description": "Coupon → Element → Subcomponent → Full-scale，试验计划与审查关注点"},
     {"id": 8, "title": "疲劳与损伤容限要求",
      "description": "冲击损伤评估，残余强度与增长，修理容限，持续适航要求"},
-    {"id": 9, "title": "结构设计审查与适航符合性分析",
-     "description": "连接与接头设计，分析方法与仿真验证，结构审查典型问题"},
+    {"id": 9, "title": "试验与统计方法",
+     "description": "试验设计，制造代表性，材料试验，统计设计值，数据质量与试验分析相关性"},
 ]
 
 ARTICLES = [
@@ -117,6 +117,14 @@ ARTICLES = [
      "content": "结构必须能够承受限制载荷而无有害永久变形", "authority": "CAAC"},
     {"code": "CCAR-25.305", "title": "强度和变形",
      "content": "结构必须能够承受极限载荷至少3秒钟而不破坏", "authority": "CAAC"},
+    {"code": "AC-25-AA-2023-03", "title": "运输类飞机审定",
+     "content": "第25.307、25.605和25.613条的可接受符合性方法", "authority": "CAAC"},
+    {"code": "CCAR-21-R5", "title": "民用航空产品和零部件合格审定规定",
+     "content": "检查试验、制造符合性声明和记录的审定接口", "authority": "CAAC"},
+    {"code": "AP-21-11R2", "title": "型号合格审定程序",
+     "content": "试验计划、制造符合性和试验报告程序接口", "authority": "CAAC"},
+    {"code": "AC-21-AA-2017-39", "title": "复合材料结构制造质量体系要求指南",
+     "content": "材料、试板、质量记录和制造代表性接口", "authority": "CAAC"},
 ]
 
 # ----------------------------
@@ -130,6 +138,14 @@ CONCEPTS = [
     {"name": "工艺鉴定", "level": "制造", "description": "证明制造工艺能够持续生产符合设计要求产品"},
     {"name": "损伤容限", "level": "设计", "description": "结构在存在损伤时仍能保持其剩余强度和刚度的能力"},
     {"name": "持续适航", "level": "运维", "description": "在飞机整个寿命周期内保持适航标准"},
+    {"name": "A基准设计值", "level": "统计", "description": "按CCAR-25第25.613条规定的存活概率、置信度和适用条件确定的材料设计值"},
+    {"name": "B基准设计值", "level": "统计", "description": "按CCAR-25第25.613条规定的存活概率、置信度和结构后果适用的材料设计值"},
+    {"name": "试验大纲", "level": "验证", "description": "规定试验目标、构型、条件、判据和数据交付的受控方案"},
+    {"name": "制造符合性确认", "level": "验证", "description": "确认试验件材料、零件、工艺、构造和装配符合设计资料"},
+    {"name": "制造代表性", "level": "验证", "description": "试验件状态可追溯到适用材料、工艺、设备、人员和构型"},
+    {"name": "统计容忍区间", "level": "统计", "description": "在适用统计模型下确定覆盖总体规定比例的区间"},
+    {"name": "数据质量", "level": "统计", "description": "保证试验数据完整、可追溯、可复算并保留偏离处理"},
+    {"name": "试验—分析相关性", "level": "验证", "description": "使用适用试验数据校核分析模型和适用边界"},
 
     # 新增：安全工程（Safety Engineering）
     {"name": "安全性分析", "level": "安全工程", "description": "通过系统化识别危害、评估风险并提出安全需求/措施，形成可审查的安全证据链"},
@@ -333,6 +349,11 @@ class AviationKnowledgeGraph:
             MERGE (c)-[:REFERENCES]->(a)
             """,
             {"pairs": [
+                {"chapter": 9, "article": "CCAR-25-R4"},
+                {"chapter": 9, "article": "AC-25-AA-2023-03"},
+                {"chapter": 9, "article": "CCAR-21-R5"},
+                {"chapter": 9, "article": "AP-21-11R2"},
+                {"chapter": 9, "article": "AC-21-AA-2017-39"},
             ]},
         )
 
@@ -433,7 +454,14 @@ class AviationKnowledgeGraph:
                 {"chapter": 5, "concept": "构型与变更管理"},
                 {"chapter": 6, "concept": "质量管理"},
                 {"chapter": 6, "concept": "可追溯性"},
-                {"chapter": 9, "concept": "符合性说明"},
+                {"chapter": 9, "concept": "A基准设计值"},
+                {"chapter": 9, "concept": "B基准设计值"},
+                {"chapter": 9, "concept": "试验大纲"},
+                {"chapter": 9, "concept": "制造符合性确认"},
+                {"chapter": 9, "concept": "制造代表性"},
+                {"chapter": 9, "concept": "统计容忍区间"},
+                {"chapter": 9, "concept": "数据质量"},
+                {"chapter": 9, "concept": "试验—分析相关性"},
             ]},
         )
 
