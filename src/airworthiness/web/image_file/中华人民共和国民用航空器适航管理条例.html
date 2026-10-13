@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <title>
+      中华人民共和国民用航空器适航管理条例
+    </title>
+    <style>
+    :root {
+      --ink:#1a1a1a;
+      --muted:#6b7280;
+      --line:#e5e7eb;
+      --brand:#9b1c1c;
+      --brand2:#b42318;
+      --bg:#fafafa;
+      --sb-w:305px;
+    }
+    * {
+      box-sizing:border-box;
+    }
+    html,body {
+      margin:0;
+      padding:0;
+    }
+    body {
+      font-family:"Microsoft YaHei","PingFang SC","WenQuanYi Micro Hei",sans-serif;
+      color:var(--ink);
+      background:var(--bg);
+      line-height:1.85;
+      font-size:15.5px;
+    }
+    a {
+      color:var(--brand2);
+      text-decoration:none;
+    }
+    a:hover {
+      text-decoration:underline;
+    }
+    .doc-title {
+      text-align:center;
+      padding:34px 24px 18px;
+      border-bottom:3px solid var(--brand);
+      margin-bottom:8px;
+      background:#fff;
+      position:sticky;
+      top:0;
+      z-index:5;
+    }
+    .doc-title h1 {
+      font-size:26px;
+      margin:0 0 8px;
+      color:var(--brand);
+      letter-spacing:1px;
+    }
+    .doc-sub {
+      font-size:12.5px;
+      color:var(--muted);
+      margin:0;
+    }
+    #sidebar {
+      position:fixed;
+      top:0;
+      left:0;
+      bottom:0;
+      width:var(--sb-w);
+      background:#fff;
+      border-right:1px solid var(--line);
+      overflow-y:auto;
+      transition:transform .25s ease;
+      z-index:50;
+      box-shadow:2px 0 8px rgba(0,0,0,.04);
+    }
+    #sidebar.collapsed {
+      transform:translateX(calc(-1*var(--sb-w)));
+    }
+    .sb-head {
+      position:sticky;
+      top:0;
+      background:var(--brand);
+      color:#fff;
+      padding:12px 14px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      font-weight:700;
+      font-size:16px;
+      z-index:2;
+    }
+    .sb-head button {
+      background:rgba(255,255,255,.18);
+      color:#fff;
+      border:0;
+      border-radius:6px;
+      width:28px;
+      height:28px;
+      cursor:pointer;
+      font-size:14px;
+      line-height:1;
+    }
+    .sb-head button:hover {
+      background:rgba(255,255,255,.32);
+    }
+    .sb-body {
+      padding:8px 0 40px;
+    }
+    ul.toc {
+      list-style:none;
+      margin:0;
+      padding:0;
+    }
+    ul.toc-sub {
+      list-style:none;
+      margin:0;
+      padding:0 0 4px 18px;
+      border-left:1px dashed var(--line);
+      margin-left:18px;
+    }
+    .toc-ch {
+      padding:0;
+    }
+    .toc-ch-a {
+      display:flex;
+      gap:8px;
+      padding:7px 14px;
+      cursor:pointer;
+      color:var(--ink);
+      font-weight:600;
+      font-size:14px;
+      border-left:3px solid transparent;
+    }
+    .toc-ch-a:hover {
+      background:#fbecec;
+      color:var(--brand);
+      text-decoration:none;
+      border-left-color:var(--brand);
+    }
+    .t-no {
+      color:var(--brand);
+      white-space:nowrap;
+    }
+    .t-t {
+      color:inherit;
+    }
+    .toc-sec {
+      font-size:12.5px;
+      color:var(--muted);
+      padding:3px 4px 3px 8px;
+      display:flex;
+      gap:6px;
+      font-style:italic;
+    }
+    .toc-art a {
+      display:block;
+      padding:2px 4px 2px 8px;
+      font-size:12.5px;
+      color:#374151;
+      border-radius:4px;
+    }
+    .toc-art a:hover {
+      background:#f3f4f6;
+      color:var(--brand2);
+      text-decoration:none;
+    }
+    .toc-art a.active {
+      background:#fbecec;
+      color:var(--brand);
+      font-weight:600;
+    }
+    #content {
+      margin-left:var(--sb-w);
+      padding:0 40px 80px;
+      transition:margin-left .25s ease;
+      max-width:1000px;
+    }
+    body.sb-hidden #content {
+      margin-left:0;
+    }
+    .chapter {
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:10px;
+      margin:18px 0;
+      overflow:hidden;
+    }
+    .chapter>h2 {
+      background:linear-gradient(90deg,#9b1c1c,#b42318);
+      color:#fff;
+      margin:0;
+      padding:14px 22px;
+      font-size:18px;
+      display:flex;
+      gap:10px;
+      align-items:center;
+      position:sticky;
+      top:0px;
+      z-index:4;
+    }
+    .ch-no {
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      line-height:1;
+      background:rgba(255,255,255,.2);
+      padding:2px 10px;
+      border-radius:20px;
+      font-size:14px;
+    }
+    .section {
+      margin:0;
+    }
+    .section>h3 {
+      margin:0;
+      padding:12px 22px;
+      font-size:15px;
+      color:var(--brand);
+      background:#fdf3f3;
+      border-bottom:1px solid #f5dcdc;
+      display:flex;
+      gap:8px;
+      align-items:center;
+      position:sticky;
+      top:110px;
+      z-index:3;
+    }
+    .sec-no {
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      line-height:1;
+      font-size:12.5px;
+      color:#b42318;
+      background:#fbecec;
+      padding:2px 8px;
+      border-radius:12px;
+    }
+    .article {
+      padding:14px 26px;
+      border-bottom:1px solid #f1f1f1;
+      scroll-margin-top:120px;
+      transition:background .15s;
+    }
+    .article:last-child {
+      border-bottom:0;
+    }
+    .article:hover {
+      background:#fcf6f6;
+    }
+    .art-head {
+      margin-bottom:4px;
+    }
+    .art-no {
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      line-height:1;
+      font-weight:800;
+      color:var(--brand);
+      font-size:15px;
+      background:#fbecec;
+      padding:2px 12px;
+      border-radius:14px;
+    }
+    .article p {
+      margin:6px 0;
+      text-align:justify;
+      text-indent:2em;
+    }
+    .article ol.items {
+      margin:6px 0 6px 4px;
+      padding-left:24px;
+    }
+    .article ol.items li {
+      margin:3px 0;
+      text-align:justify;
+    }
+    ul.toc-sub {
+      display:none;
+    }
+    .toc-ch.open>ul.toc-sub {
+      display:block;
+    }
+    .toc-ch>a.toc-ch-a::before {
+      content:"▸ ";
+      color:var(--brand);
+      font-size:11px;
+    }
+    .toc-ch.open>a.toc-ch-a::before {
+      content:"▾ ";
+    }
+    #sbOpen {
+      position:fixed;
+      left:12px;
+      top:12px;
+      z-index:60;
+      display:none;
+      background:var(--brand);
+      color:#fff;
+      border:0;
+      border-radius:8px;
+      padding:8px 12px;
+      cursor:pointer;
+      font-size:14px;
+      box-shadow:0 2px 8px rgba(0,0,0,.2);
+    }
+    body.sb-hidden #sbOpen {
+      display:block;
+    }
+    #toTop {
+      position:fixed;
+      right:20px;
+      bottom:20px;
+      background:var(--brand);
+      color:#fff;
+      border:0;
+      border-radius:50%;
+      width:42px;
+      height:42px;
+      cursor:pointer;
+      font-size:20px;
+      display:none;
+      box-shadow:0 2px 10px rgba(0,0,0,.25);
+    }
+    #toTop.show {
+      display:block;
+    }
+    @media (max-width:900px){#sidebar {
+      width:260px;
+    }
+    #content {
+      padding:0 18px 60px;
+    }
+    }
+    </style>
+  </head>
+  <body>
+
+    <button id="sbOpen" type="button" title="展开目录">
+      ☰ 目录
+    </button>
+
+    <nav id="sidebar" class="sidebar">
+      <div class="sb-head">
+        <span>
+          目录
+        </span>
+        <button id="sbToggle" type="button" title="收起目录">
+          ◀
+        </button>
+      </div>
+      <div class="sb-body">
+        <ul class="toc">
+          <li class="toc-ch">
+            <a class="toc-ch-a" href="#ch1" data-target="ch1">
+              <span class="t-no">
+                条例
+              </span>
+              <span class="t-t">
+                中华人民共和国民用航空器适航管理条例
+              </span>
+            </a>
+            <ul class="toc-sub">
+              <li class="toc-art">
+                <a href="#a1" data-target="a1">
+                  第1条
+                </a>
+              </li>
+              <li class="toc-art">
+                <a href="#a2" data-target="a2">
+                  第2条
+                </a>
+              </li>
+              <li class="toc-art">
+                <a href="#a3" data-target="a3">
+                  第3条
+                </a>
+              </li>
+              <li class="toc-art">
+                <a href="#a4" data-target="a4">
+                  第4条
+                </a>
+              </li>
+              <li class="toc-art">
+                <a href="#a5" data-target="a5">
+                  第5条
+                </a>
+              </li>
+              <li class="toc-art">
+                <a href="#a6" data-target="a6">
+                  第6条
+                </a>
+              </li>
+              <li class="toc-art">
+                <a href="#a7" data-target="a7">
+                  第7条
+                </a>
+              </li>
+              <li class="toc-art">
+                <a href="#a8" data-target="a8">
+                  第8条
+                </a>
+              </li>
+              <li class="toc-art">
+                <a href="#a9" data-target="a9">
+                  第9条
+                </a>
+              </li>
+              <li class="toc-art">
+                <a href="#a10" data-target="a10">
+                  第10条
+                </a>
+              </li>
+              <li class="toc-art">
+                <a href="#a11" data-target="a11">
+                  第11条
+                </a>
+              </li>
+              <li class="toc-art">
+                <a href="#a12" data-target="a12">
+                  第12条
+                </a>
+              </li>
+              <li class="toc-art">
+                <a href="#a13" data-target="a13">
+                  第13条
+                </a>
+              </li>
+              <li class="toc-art">
+                <a href="#a14" data-target="a14">
+                  第14条
+                </a>
+              </li>
+              <li class="toc-art">
+                <a href="#a15" data-target="a15">
+                  第15条
+                </a>
+              </li>
+              <li class="toc-art">
+                <a href="#a16" data-target="a16">
+                  第16条
+                </a>
+              </li>
+              <li class="toc-art">
+                <a href="#a17" data-target="a17">
+                  第17条
+                </a>
+              </li>
+              <li class="toc-art">
+                <a href="#a18" data-target="a18">
+                  第18条
+                </a>
+              </li>
+              <li class="toc-art">
+                <a href="#a19" data-target="a19">
+                  第19条
+                </a>
+              </li>
+              <li class="toc-art">
+                <a href="#a20" data-target="a20">
+                  第20条
+                </a>
+              </li>
+              <li class="toc-art">
+                <a href="#a21" data-target="a21">
+                  第21条
+                </a>
+              </li>
+              <li class="toc-art">
+                <a href="#a22" data-target="a22">
+                  第22条
+                </a>
+              </li>
+              <li class="toc-art">
+                <a href="#a23" data-target="a23">
+                  第23条
+                </a>
+              </li>
+              <li class="toc-art">
+                <a href="#a24" data-target="a24">
+                  第24条
+                </a>
+              </li>
+              <li class="toc-art">
+                <a href="#a25" data-target="a25">
+                  第25条
+                </a>
+              </li>
+              <li class="toc-art">
+                <a href="#a26" data-target="a26">
+                  第26条
+                </a>
+              </li>
+              <li class="toc-art">
+                <a href="#a27" data-target="a27">
+                  第27条
+                </a>
+              </li>
+              <li class="toc-art">
+                <a href="#a28" data-target="a28">
+                  第28条
+                </a>
+              </li>
+              <li class="toc-art">
+                <a href="#a29" data-target="a29">
+                  第29条
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <main id="content" class="content">
+      <header class="doc-title">
+        <h1>
+          中华人民共和国民用航空器适航管理条例
+        </h1>
+        <p class="doc-sub">
+          （1987年5月4日国务院发布，自1987年6月1日起施行）
+        </p>
+      </header>
+      <section class="chapter" id="ch1" data-chapter="条例">
+        <h2>
+          <span class="ch-no">
+            条例
+          </span>
+          中华人民共和国民用航空器适航管理条例
+        </h2>
+        <article class="article" id="a1" data-article="第1条">
+          <div class="art-head">
+            <span class="art-no">
+              第1条
+            </span>
+          </div>
+          <p>
+            为保障民用航空安全，维护公众利益，促进民用航空事业的发展，特制定本条例。
+          </p>
+        </article>
+        <article class="article" id="a2" data-article="第2条">
+          <div class="art-head">
+            <span class="art-no">
+              第2条
+            </span>
+          </div>
+          <p>
+            在中华人民共和国境内从事民用航空器（含航空发动机和螺旋桨，下同）的设计、生产、使用和维修的单位或者个人，向中华人民共和国出口民用航空器的单位或者个人，以及在中华人民共和国境外维修在中华人民共和国注册登记的民用航空器的单位或者个人，均须遵守本条例。
+          </p>
+        </article>
+        <article class="article" id="a3" data-article="第3条">
+          <div class="art-head">
+            <span class="art-no">
+              第3条
+            </span>
+          </div>
+          <p>
+            民用航空器的适航管理，是根据国家的有关规定，对民用航空器的设计、生产、使用和维修，实施以确保飞行安全为目的的技术鉴定和监督。
+          </p>
+        </article>
+        <article class="article" id="a4" data-article="第4条">
+          <div class="art-head">
+            <span class="art-no">
+              第4条
+            </span>
+          </div>
+          <p>
+            民用航空器的适航管理由中国民用航空局（以下简称民航局）负责。
+          </p>
+        </article>
+        <article class="article" id="a5" data-article="第5条">
+          <div class="art-head">
+            <span class="art-no">
+              第5条
+            </span>
+          </div>
+          <p>
+            民用航空器的适航管理，必须执行规定的适航标准和程序。
+          </p>
+        </article>
+        <article class="article" id="a6" data-article="第6条">
+          <div class="art-head">
+            <span class="art-no">
+              第6条
+            </span>
+          </div>
+          <p>
+            任何单位或者个人设计民用航空器，应当持航空工业部对该设计项目的审核批准文件，向民航局申请型号合格证。民航局接受型号合格证申请后，应当按照规定进行型号合格审定；审定合格的，颁发型号合格证。
+          </p>
+        </article>
+        <article class="article" id="a7" data-article="第7条">
+          <div class="art-head">
+            <span class="art-no">
+              第7条
+            </span>
+          </div>
+          <p>
+            任何单位或者个人生产民用航空器，应当具有必要的生产能力，并应当持本条例第六条规定的型号合格证，经航空工业部同意后，向民航局申请生产许可证。民航局接受生产许可证申请后，应当按照规定进行生产许可审定；审定合格的，颁发生产许可证，并按照规定颁发适航证。
+          </p>
+          <p>
+            任何单位或者个人未按照前款规定取得生产许可证的，均不得生产民用航空器。但本条例第八条规定的除外。
+          </p>
+        </article>
+        <article class="article" id="a8" data-article="第8条">
+          <div class="art-head">
+            <span class="art-no">
+              第8条
+            </span>
+          </div>
+          <p>
+            任何单位或者个人未取得生产许可证，但因特殊需要，申请生产民用航空器的，须经民航局批准。
+          </p>
+          <p>
+            按照前款规定生产的民用航空器，须经民航局逐一审查合格后，颁发适航证。
+          </p>
+        </article>
+        <article class="article" id="a9" data-article="第9条">
+          <div class="art-head">
+            <span class="art-no">
+              第9条
+            </span>
+          </div>
+          <p>
+            民用航空器必须具有民航局颁发的适航证，方可飞行。
+          </p>
+          <p>
+            民航局颁发的适航证应当规定该民用航空器所适用的活动类别、证书的有效期限及安全所需的其他条件和限制。
+          </p>
+        </article>
+        <article class="article" id="a10" data-article="第10条">
+          <div class="art-head">
+            <span class="art-no">
+              第10条
+            </span>
+          </div>
+          <p>
+            持有民用航空器生产许可证的单位生产的民用航空器，经国务院有关主管部门批准需要出口时，由民航局签发出口适航证。
+          </p>
+        </article>
+        <article class="article" id="a11" data-article="第11条">
+          <div class="art-head">
+            <span class="art-no">
+              第11条
+            </span>
+          </div>
+          <p>
+            在中华人民共和国境内飞行的民用航空器必须具有国籍登记证。在中华人民共和国注册登记的民用航空器，具有中华人民共和国国籍，国籍登记证由民航局颁发。民用航空器取得国籍登记证后，必须按照规定在该民用航空器的外表标明国籍登记识别标志。
+          </p>
+        </article>
+        <article class="article" id="a12" data-article="第12条">
+          <div class="art-head">
+            <span class="art-no">
+              第12条
+            </span>
+          </div>
+          <p>
+            中华人民共和国的任何单位或者个人进口外国生产的任何型号的民用航空器，如系首次进口并用于民用航空活动时，出口民用航空器的单位或者个人必须向民航局申请型号审查。民航局接受申请后，应当按照规定对该型号民用航空器进行型号审查；审查合格的，颁发准予进口的型号认可证书。
+          </p>
+        </article>
+        <article class="article" id="a13" data-article="第13条">
+          <div class="art-head">
+            <span class="art-no">
+              第13条
+            </span>
+          </div>
+          <p>
+            中华人民共和国的任何单位或者个人租用的外国民用航空器，必须经民航局对其原登记国颁发的适航证审查认可或者另行颁发适航证后，方可飞行。
+          </p>
+        </article>
+        <article class="article" id="a14" data-article="第14条">
+          <div class="art-head">
+            <span class="art-no">
+              第14条
+            </span>
+          </div>
+          <p>
+            任何单位或者个人的民用航空器取得适航证以后，必须按照民航局的有关规定和适航指令，使用和维修民用航空器，保证其始终处于持续适航状态。
+          </p>
+        </article>
+        <article class="article" id="a15" data-article="第15条">
+          <div class="art-head">
+            <span class="art-no">
+              第15条
+            </span>
+          </div>
+          <p>
+            加装或者改装已取得适航证的民用航空器，必须经民航局批准，涉及的重要部件、附件必须经民航局审定。
+          </p>
+        </article>
+        <article class="article" id="a16" data-article="第16条">
+          <div class="art-head">
+            <span class="art-no">
+              第16条
+            </span>
+          </div>
+          <p>
+            中华人民共和国境内和境外任何维修单位或者个人，承担在中华人民共和国注册登记的民用航空器的维修业务的，必须向民航局申请维修许可证，经民航局对其维修设施、技术人员、质量管理系统审查合格，并颁发维修许可证后，方可从事批准范围内的维修业务活动。
+          </p>
+        </article>
+        <article class="article" id="a17" data-article="第17条">
+          <div class="art-head">
+            <span class="art-no">
+              第17条
+            </span>
+          </div>
+          <p>
+            负责维修并放行在中华人民共和国注册登记的民用航空器的维修技术人员，必须向民航局提出申请，经民航局或者其授权单位考核合格并取得维修人员执照或者相应的证明文件后，方可从事民用航空器的维修并放行工作。
+          </p>
+        </article>
+        <article class="article" id="a18" data-article="第18条">
+          <div class="art-head">
+            <span class="art-no">
+              第18条
+            </span>
+          </div>
+          <p>
+            民用航空器的适航审查应当收取费用。收费办法由民航局会同财政部制定。
+          </p>
+        </article>
+        <article class="article" id="a19" data-article="第19条">
+          <div class="art-head">
+            <span class="art-no">
+              第19条
+            </span>
+          </div>
+          <p>
+            民航局有权对生产、使用、维修民用航空器的单位或者个人以及取得适航证的民用航空器进行定期检查或者抽查；经检查与抽查不合格的，民航局除按照本条例的有关规定对其处罚外，还可吊销其有关证件。
+          </p>
+        </article>
+        <article class="article" id="a20" data-article="第20条">
+          <div class="art-head">
+            <span class="art-no">
+              第20条
+            </span>
+          </div>
+          <p>
+            使用民用航空器进行飞行活动的任何单位或者个人有下列情形之一的，民航局有权责令其停止飞行，并视情节轻重，处以罚款：
+          </p>
+          <ol class="items">
+            <li>
+              民用航空器未取得适航证的；
+            </li>
+            <li>
+              民用航空器适航证已经失效的；
+            </li>
+            <li>
+              使用民用航空器超越适航证规定范围的。
+            </li>
+          </ol>
+        </article>
+        <article class="article" id="a21" data-article="第21条">
+          <div class="art-head">
+            <span class="art-no">
+              第21条
+            </span>
+          </div>
+          <p>
+            维修民用航空器的单位或者个人，有下列情形之一的，民航局有权责令其停止维修业务或者吊销其维修许可证，并视情节轻重，处以罚款：
+          </p>
+          <ol class="items">
+            <li>
+              未取得维修许可证，擅自承接维修业务的；
+            </li>
+            <li>
+              超过维修许可证规定的业务范围，承接维修业务的；
+            </li>
+            <li>
+              由未取得维修人员执照的人员负责民用航空器的维修并放行的。
+            </li>
+          </ol>
+        </article>
+        <article class="article" id="a22" data-article="第22条">
+          <div class="art-head">
+            <span class="art-no">
+              第22条
+            </span>
+          </div>
+          <p>
+            任何单位或者个人违反本条例第七条规定，擅自生产民用航空器的，民航局有权责令其停止生产，并视情节轻重，处以罚款。
+          </p>
+        </article>
+        <article class="article" id="a23" data-article="第23条">
+          <div class="art-head">
+            <span class="art-no">
+              第23条
+            </span>
+          </div>
+          <p>
+            按照本条例受到处罚的单位的上级主管机关，应当根据民航局的建议对受罚单位的主要负责人或者直接责任人员给予行政处分；情节严重，构成犯罪的，由司法机关依法追究刑事责任。
+          </p>
+        </article>
+        <article class="article" id="a24" data-article="第24条">
+          <div class="art-head">
+            <span class="art-no">
+              第24条
+            </span>
+          </div>
+          <p>
+            民航局因适航管理工作的过失造成人身伤亡或者重大财产损失的，应当承担赔偿责任，并对直接责任人员给予行政处分；直接责任人员的行为构成犯罪的，由司法机关依法追究刑事责任。
+          </p>
+        </article>
+        <article class="article" id="a25" data-article="第25条">
+          <div class="art-head">
+            <span class="art-no">
+              第25条
+            </span>
+          </div>
+          <p>
+            民航局从事适航管理的工作人员，利用职务之便营私舞弊的，应当给予行政处分；情节严重，构成犯罪的，由司法机关依法追究刑事责任。
+          </p>
+        </article>
+        <article class="article" id="a26" data-article="第26条">
+          <div class="art-head">
+            <span class="art-no">
+              第26条
+            </span>
+          </div>
+          <p>
+            任何单位或者个人对民航局作出的罚款决定不服的，可以在接到罚款通知书之日起十五日内向民航局提请复议，也可以直接向人民法院起诉；期满不提请复议也不起诉又不执行的，民航局可以申请人民法院强制执行。
+          </p>
+        </article>
+        <article class="article" id="a27" data-article="第27条">
+          <div class="art-head">
+            <span class="art-no">
+              第27条
+            </span>
+          </div>
+          <p>
+            民航局应当在广泛征求航空工业部及各有关部门意见的基础上，制定本条例的实施细则及有关技术标准。
+          </p>
+        </article>
+        <article class="article" id="a28" data-article="第28条">
+          <div class="art-head">
+            <span class="art-no">
+              第28条
+            </span>
+          </div>
+          <p>
+            本条例由民航局负责解释。
+          </p>
+        </article>
+        <article class="article" id="a29" data-article="第29条">
+          <div class="art-head">
+            <span class="art-no">
+              第29条
+            </span>
+          </div>
+          <p>
+            本条例自一九八七年六月一日起施行。
+          </p>
+        </article>
+      </section>
+    </main>
+
+    <button id="toTop" type="button" title="返回顶部">
+      ↑
+    </button>
+    <script>
+    (function(){
+      var sb=document.getElementById('sidebar');
+      document.getElementById('sbToggle').addEventListener('click',function(){sb.classList.add('collapsed');document.body.classList.add('sb-hidden');});
+      document.getElementById('sbOpen').addEventListener('click',function(){sb.classList.remove('collapsed');document.body.classList.remove('sb-hidden');});
+      document.querySelectorAll('.toc-ch').forEach(function(li){li.classList.add('open');});
+      document.querySelectorAll('.toc-ch-a').forEach(function(a){a.addEventListener('click',function(e){var li=a.closest('.toc-ch');li.classList.toggle('open');});});
+      document.querySelectorAll('.toc-art a').forEach(function(a){a.addEventListener('click',function(){document.querySelectorAll('.toc-art a.active').forEach(function(x){x.classList.remove('active');});a.classList.add('active');});});
+      var totop=document.getElementById('toTop');
+      window.addEventListener('scroll',function(){totop.classList.toggle('show',window.scrollY>400);});
+      totop.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});
+      function openByHash(){var h=location.hash.replace('#','');if(!h)return;var el=document.getElementById(h);if(!el)return;var ch=el.closest('.chapter');if(ch){var a=document.querySelector('.toc-ch a[data-target="'+ch.id+'"]');if(a)a.closest('.toc-ch').classList.add('open');}}
+      window.addEventListener('hashchange',openByHash);openByHash();
+    })();
+    </script>
+  </body>
+</html>

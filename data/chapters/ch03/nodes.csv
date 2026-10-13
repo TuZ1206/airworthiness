@@ -1,0 +1,30 @@
+node_id,chapter_id,label,name,code,summary,display_type,source_id,source_locator,priority,review_status
+CH03-N001,3,Article,运输类飞机适航标准,CCAR-25-R4,材料适用性、制造方法和材料设计值的法规基础,law,CH03-S001,第25.603、25.605、25.613条,high,pending
+CH03-N002,3,Requirement,材料适用性与耐久性,25.603,关系安全的材料须由经验或试验证明适用性和耐久性,material,CH03-S001,第25.603(a)条,high,pending
+CH03-N003,3,Evidence,经验或试验证据,MATERIAL-EVIDENCE,材料适用性和耐久性结论应由适用经验或试验支持,concept,CH03-S001,第25.603(a)条,high,pending
+CH03-N004,3,Requirement,预期环境条件,EXPECTED-ENV,材料评价应考虑服役中预期的温度、湿度等环境影响,material,CH03-S001,第25.603(a)、25.613(c)条,high,pending
+CH03-N005,3,Requirement,批准的材料标准,APPROVED-STANDARD,材料应符合经批准的标准并在设计资料中受控,material,CH03-S001,第25.603(b)、25.613(a)条,high,pending
+CH03-N006,3,Requirement,制造方法与材料性能接口,25.605,制造方法必须能够持续生产符合设计要求的完好结构,process,CH03-S001,第25.605条,medium,pending
+CH03-N007,3,Requirement,材料强度性能,25.613(a),材料强度性能以足够的材料试验为依据,material,CH03-S001,第25.613(a)条,high,pending
+CH03-N008,3,Concept,材料变异性,MATERIAL-VARIABILITY,材料设计值应通过统计方法考虑材料性能变异,concept,CH03-S001,第25.613(a)、(b)条,high,pending
+CH03-N009,3,Concept,材料设计值,MATERIAL-DESIGN-VALUE,在试验统计基础上用于结构强度分析的材料性能值,concept,CH03-S001,第25.613(a)、(b)条,high,pending
+CH03-N010,3,Concept,A基准设计值,A-BASIS,单个元件破坏会导致结构完整性丧失时适用的条款设计值,concept,CH03-S001,第25.613(b)(1)条,high,pending
+CH03-N011,3,Concept,B基准设计值,B-BASIS,载荷可安全分配至其他承载元件时适用的条款设计值,concept,CH03-S001,第25.613(b)(2)条,high,pending
+CH03-N012,3,Decision,结构后果与基准选择,BASIS-SELECTION,基准选择取决于载荷传递和单个元件失效后的结构后果,process,CH03-S001,第25.613(b)(1)、(2)条,high,pending
+CH03-N013,3,Requirement,环境修正材料设计值,ENV-CORRECTION,至关重要部件或结构的设计值应考虑显著环境影响,material,CH03-S001,第25.613(c)条,high,pending
+CH03-N014,3,Concept,精选材料设计值,SELECTED-MATERIAL,逐项取样确认实际强度时可按条款采用较高设计值,concept,CH03-S001,第25.613(e)条,medium,pending
+CH03-N015,3,Article,运输类飞机审定,AC-25-AA-2023-03,材料和工艺验证及设计值的可接受符合性方法,norm,CH03-S002,AC 25.605、AC 25.613,high,pending
+CH03-N016,3,Method,材料设计值符合性方法,AC-25.613,基于适用统计方法形成材料强度性能和设计值证据,process,CH03-S002,AC 25.613,high,pending
+CH03-N017,3,Concept,批间与过程变异,BATCH-VARIABILITY,材料数据评价应识别材料批次和制造过程带来的性能差异,concept,CH03-S002,AC 25.613,high,pending
+CH03-N018,3,Article,民用航空产品和零部件合格审定规定,CCAR-21-R5,检查试验、制造符合性和设计更改的审定接口,law,CH03-S003,第21.33、21.45、21.53、21.93条,high,pending
+CH03-N019,3,Process,材料级试验件符合性,SPECIMEN-CONFORMITY,试验材料、制造过程、构造和状态应符合适用设计资料,process,CH03-S003,第21.33、21.53条,high,pending
+CH03-N020,3,Article,型号合格审定程序,AP-21-11R2,材料符合性计划和证据闭环的现行程序入口,norm,CH03-S004,官方发布页；附件子条款待复核,medium,pending
+CH03-N021,3,Article,复合材料结构制造质量体系要求指南,AC-21-AA-2017-39,材料规范、验收、表征和记录接口,norm,CH03-S005,第3章、第4.1至4.5节,high,pending
+CH03-N022,3,Concept,材料规范,MATERIAL-SPECIFICATION,规定材料组成、性能、试验和验收要求的受控文件,material,CH03-S005,第3章,high,pending
+CH03-N023,3,Process,原材料入厂复验,INCOMING-ACCEPTANCE,按材料规范对不同批次开展适用取样和性能确认,process,CH03-S005,第4.1.2节,high,pending
+CH03-N024,3,Requirement,供应商报告验证,SUPPLIER-REPORT,供应商报告不能单独替代申请人或持证人的入厂确认,process,CH03-S005,第4.1.2节,high,pending
+CH03-N025,3,Concept,增强纤维表征,FIBER-CHARACTERIZATION,以适用力学性能和表面处理控制表征增强纤维,material,CH03-S005,第4.3节,medium,pending
+CH03-N026,3,Concept,预浸料与胶粘剂表征,PREPREG-ADHESIVE,按适用材料规范确认化学、物理和力学性能,material,CH03-S005,第4.4、4.5节,medium,pending
+CH03-N027,3,Process,材料鉴定与验收边界,QUALIFICATION-ACCEPTANCE,批准材料规范及设计数据与生产批次验收承担不同证据职责,process,CH03-S005,第3章、第4.1.2节,high,pending
+CH03-N028,3,Concept,材料数据库与可追溯性,MATERIAL-DATABASE,保存材料批次、试验状态、结果和设计值形成可复核证据链,concept,CH03-S003,第21.33、21.45条,high,pending
+CH03-N029,3,Standard,复合材料符合性验证标准状态,HB 8605-2021,仅确认标准现行状态，不引用不可见技术条文,norm,CH03-S006,官方标准状态页；公开范围不含正文,low,pending

@@ -1,0 +1,27 @@
+node_id,chapter_id,label,name,code,summary,display_type,source_id,source_locator,priority,review_status
+CH01-N001,ch01,Definition,民用航空器适用范围,中华人民共和国民用航空法,现行法律界定民用航空器及排除的任务类型。,concept,CH01-S001,第十一条,high,pending
+CH01-N002,ch01,Definition,无人驾驶航空器适用范围,国务院、中央军委令第761号,无人驾驶航空器的定义、分类和分级适航许可边界。,concept,CH01-S003,第二条、第八条至第十四条,high,pending
+CH01-N003,ch01,Concept,中国民用航空适航法规层级,法规体系,法律、行政法规、民航规章、规范性文件和标准之间的层级关系。,concept,CH01-S001,第四条、第二十五条至第三十五条,high,pending
+CH01-N004,ch01,Law,民用航空法适航管理制度,中华人民共和国主席令第六十五号,设计、生产、维修、适航批准和持续适航的上位法框架。,law,CH01-S001,第二十五条至第三十五条,high,pending
+CH01-N005,ch01,Regulation,适航管理行政法规,适航管理条例,适航技术鉴定、监督和证件制度的行政法规基础。,law,CH01-S002,第一条至第十九条,high,pending
+CH01-N006,ch01,Regulation,国籍登记制度,CCAR-45-R3,民用航空器国籍登记及登记国职责。,law,CH01-S004,修改决定及重新公布文本,medium,pending
+CH01-N007,ch01,Regulation,合格审定管理总纲,CCAR-21-R5,民用航空产品和零部件设计、生产和适航批准总纲。,law,CH01-S005,A章、B章、F章、G章、I章、K章、L章,high,pending
+CH01-N008,ch01,Process,型号合格审定,AP-21-11R2,型号合格证项目的审定组织、符合性验证和证后管理过程。,process,CH01-S006,总则、审定计划、符合性验证及证后管理章节,high,pending
+CH01-N009,ch01,Process,生产批准,PC,生产机构许可、生产质量系统和产品符合性的批准环节。,process,CH01-S005,G章及相关持证人责任条款,high,pending
+CH01-N010,ch01,Process,适航批准,CoA,单机适航证、特许飞行证和出口适航批准接口。,process,CH01-S005,I章、K章、L章,high,pending
+CH01-N011,ch01,Regulation,正常类飞机技术标准,CCAR-23-R4,正常类飞机型号合格审定的技术要求。,law,CH01-S007,第23.2000条、第23.2005条及适用技术要求,medium,pending
+CH01-N012,ch01,Regulation,运输类飞机技术标准,CCAR-25-R4,运输类飞机型号合格审定的技术要求。,law,CH01-S008,A章至H章,high,pending
+CH01-N013,ch01,Regulation,正常类旋翼航空器技术标准,CCAR-27-R3,正常类旋翼航空器型号合格审定技术要求。,law,CH01-S009,规章发布页及附件,medium,pending
+CH01-N014,ch01,Regulation,航空发动机技术标准,CCAR-33-R2,航空发动机型号合格审定的技术要求。,law,CH01-S011,规章发布页及附件,medium,pending
+CH01-N015,ch01,Process,技术标准规定项目批准,CTSO / CTSOA,机载设备等项目最低性能标准及项目批准路径。,process,CH01-S012,第一章至第四章,medium,pending
+CH01-N016,ch01,Concept,持续适航,Continued Airworthiness,产品投入使用后通过责任、维修和安全改进保持适航状态。,concept,CH01-S013,A章至E章,high,pending
+CH01-N017,ch01,Process,适航指令,AD,针对不安全状态规定强制检查、改正措施或使用限制。,process,CH01-S014,第二条、第三条、第六条、第七条,high,pending
+CH01-N018,ch01,Process,维修单位合格审定,CCAR-145R4,维修许可证以及维修单位能力和质量安全管理要求。,process,CH01-S015,第二章至第五章,medium,pending
+CH01-N019,ch01,Process,适航委任体系,CCAR-183AA-R1,委任代表和委任单位代表的授权、责任和监督。,process,CH01-S016,第183.1条至第183.61条,medium,pending
+CH01-N020,ch01,Concept,适航规范性文件,AP / AC / MD,在上位规章框架下细化程序、可接受方法和管理要求。,norm,CH01-S017,第1节至第4节,high,pending
+CH01-N021,ch01,Process,专用条件和等效安全水平,SC / ELOS,在适航规章要求不足等情形下补充审定基础或作出安全水平结论。,process,CH01-S019,第1.1节至第2.3节及相应办理程序,medium,pending
+CH01-N022,ch01,Norm,航空行业标准,HB 8605-2021,政府标准平台可核验的复合材料适航符合性验证行业标准状态。,norm,CH01-S020,全国标准信息公共服务平台状态页,medium,pending
+CH01-N023,ch01,Norm,复合材料制造质量体系指南,AC-21-AA-2017-39,复合材料制造质量体系的可接受指导方法。,norm,CH01-S018,目的、适用范围及相关章节,high,pending
+CH01-N024,ch01,Concept,双边适航关系,Bilateral Airworthiness,中国与有关国家建立的适航合作和文件目录接口。,concept,CH01-S021,通知正文及附件目录,low,pending
+CH01-N025,ch01,Process,适航全生命周期,设计—生产—适航批准—持续适航,从设计批准到生产、单机放行和持续适航的证据与责任链。,process,CH01-S001,第二十五条至第三十五条,high,pending
+CH01-N026,ch01,Regulation,运输类旋翼航空器技术标准,CCAR-29-R3,运输类旋翼航空器型号合格审定技术要求。,law,CH01-S010,规章发布页及附件,medium,pending

@@ -1,0 +1,753 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>适航法规知识图谱可视化</title>
+  <script src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Noto Sans SC', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f8f9fa;
+        color: #333;
+        line-height: 1.6;
+        min-height: 100vh;
+        overflow: hidden;
+    }
+
+    #toolbar {
+        padding: 12px 25px;
+        background-color: #2c3e50;
+        color: white;
+        display: flex;
+        align-items: center;
+        height: 60px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        position: relative;
+        z-index: 1000;
+    }
+
+    #toolbar strong {
+        font-size: 1.3em;
+        font-weight: 500;
+        margin-right: 15px;
+    }
+
+    .badge {
+        padding: 5px 12px;
+        background-color: #3498db;
+        color: white;
+        border-radius: 3px;
+        font-size: 0.85em;
+        font-weight: 500;
+        margin-right: 15px;
+    }
+
+    #toolbar button {
+        padding: 7px 15px;
+        background-color: #3498db;
+        color: white;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+        font-size: 0.9em;
+        font-weight: 500;
+        transition: background-color 0.2s;
+        margin-right: 10px;
+    }
+
+    #toolbar button:hover {
+        background-color: #2980b9;
+    }
+
+    #toolbar a {
+        margin-left: auto;
+        padding: 7px 15px;
+        background-color: #7f8c8d;
+        color: white;
+        text-decoration: none;
+        border-radius: 3px;
+        font-size: 0.9em;
+        font-weight: 500;
+        transition: background-color 0.2s;
+    }
+
+    #toolbar a:hover {
+        background-color: #6c7a7d;
+    }
+
+    /* 添加网络容器左边距，避免被侧边栏遮挡 */
+    #network-container {
+        margin-left: 320px;
+        height: calc(100vh - 60px);
+        position: relative;
+    }
+
+    #network {
+        height: 100%;
+        background-color: #fff;
+        border-top: 1px solid #e0e0e0;
+    }
+
+    .sidebar {
+        position: fixed;
+        left: 20px;
+        top: 80px;
+        width: 280px;
+        max-height: calc(100vh - 100px);
+        overflow-y: auto;
+        background-color: #fff;
+        border: 1px solid #e0e0e0;
+        border-radius: 4px;
+        padding: 20px;
+        z-index: 999;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        transition: all 0.3s ease;
+    }
+
+    .sidebar:hover {
+        box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    }
+
+    .sidebar::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .sidebar::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 3px;
+    }
+
+    .sidebar::-webkit-scrollbar-thumb {
+        background: #bdc3c7;
+        border-radius: 3px;
+    }
+
+    .sidebar h3 {
+        margin: 0 0 15px;
+        color: #2c3e50;
+        font-size: 1.2em;
+        font-weight: 600;
+        padding-bottom: 8px;
+        border-bottom: 1px solid #ecf0f1;
+    }
+
+    .sidebar h4 {
+        margin: 20px 0 12px;
+        color: #34495e;
+        font-size: 1.05em;
+        font-weight: 600;
+    }
+
+    .section {
+        margin: 18px 0;
+        padding-top: 18px;
+        border-top: 1px solid #ecf0f1;
+    }
+
+    .row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 12px 0;
+    }
+
+    .filter-item {
+        display: block;
+        margin: 8px 0;
+        padding: 6px 10px;
+        border-radius: 3px;
+        transition: background-color 0.2s;
+        cursor: pointer;
+    }
+
+    .filter-item:hover {
+        background-color: #f5f7fa;
+    }
+
+    .filter-item input {
+        margin-right: 8px;
+    }
+
+    .sidebar button {
+        padding: 7px 14px;
+        background-color: #3498db;
+        color: white;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+        font-size: 0.85em;
+        font-weight: 500;
+        transition: background-color 0.2s;
+        margin: 4px;
+    }
+
+    .sidebar button:hover {
+        background-color: #2980b9;
+    }
+
+    .sidebar input[type="number"] {
+        padding: 6px 10px;
+        border: 1px solid #ddd;
+        border-radius: 3px;
+        font-size: 0.9em;
+        width: 70px;
+        text-align: center;
+    }
+
+    .sidebar label {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        padding: 6px 0;
+        transition: color 0.2s;
+        font-size: 0.95em;
+    }
+
+    .sidebar label:hover {
+        color: #3498db;
+    }
+
+    /* 节点颜色映射 */
+    .node-chapter { background-color: #3498db; border-color: #2980b9; }
+    .node-article { background-color: #2ecc71; border-color: #27ae60; }
+    .node-concept { background-color: #e67e22; border-color: #d35400; }
+    .node-method { background-color: #9b59b6; border-color: #8e44ad; }
+    .node-block { background-color: #e74c3c; border-color: #c0392b; }
+    .node-other { background-color: #95a5a6; border-color: #7f8c8d; }
+
+    /* 响应式调整 */
+    @media (max-width: 1200px) {
+        .sidebar {
+            width: 240px;
+            padding: 15px;
+        }
+
+        #network-container {
+            margin-left: 280px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .sidebar {
+            width: 220px;
+            left: 10px;
+            top: 70px;
+            padding: 12px;
+        }
+
+        #network-container {
+            margin-left: 0;
+            padding-left: 240px;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .sidebar {
+            position: relative;
+            width: calc(100% - 40px);
+            top: 0;
+            left: 0;
+            margin: 10px auto;
+            max-height: 200px;
+        }
+
+        #network-container {
+            margin-left: 0;
+            padding-left: 0;
+            height: calc(100vh - 260px);
+        }
+
+        #toolbar {
+            flex-wrap: wrap;
+            height: auto;
+            padding: 10px;
+        }
+
+        #toolbar strong {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+    }
+  </style>
+</head>
+<body>
+  <!-- 工具栏 -->
+  <div id="toolbar">
+    <strong>适航法规知识图谱</strong>
+    <span class="badge" id="stat">加载中...</span>
+    <button onclick="loadGraph()">刷新图谱</button>
+    <a href="/">返回主页</a>
+  </div>
+
+  <!-- 侧边栏 -->
+  <div id="sidebar" class="sidebar">
+    <h3>显示控制</h3>
+    <div class="section">
+      <label><input type="checkbox" id="toggleFocus" checked> 启用节点聚焦</label>
+      <div class="row">
+        <span>聚焦深度</span>
+        <div class="row">
+          <span>物理引擎</span>
+          <button id="btnStabilize">重新稳定布局</button>
+        </div>
+        <label><input type="checkbox" id="togglePhysics" checked> 启用动态布局</label>
+        <input type="number" id="focusDepth" min="1" max="5" value="2">
+      </div>
+      <button id="btnReset">重置视图</button>
+    </div>
+
+    <h4>节点标签</h4>
+    <div class="row">
+      <button type="button" id="lblAll">全选</button>
+      <button type="button" id="lblNone">全不选</button>
+    </div>
+    <div id="labelFilters"></div>
+
+    <h4>关系类型</h4>
+    <div class="row">
+      <button type="button" id="relAll">全选</button>
+      <button type="button" id="relNone">全不选</button>
+    </div>
+    <div id="relFilters"></div>
+  </div>
+
+  <!-- 网络容器 - 添加容器包裹以解决遮挡问题 -->
+  <div id="network-container">
+    <div id="network"></div>
+  </div>
+
+<script>
+  let network;
+  let nodes = new vis.DataSet();
+  let edges = new vis.DataSet();
+
+  // 当前状态
+  const state = {
+    focusEnabled: true,
+    focusNodeId: null,
+    focusDepth: 2,
+    enabledLabels: new Set(),
+    enabledRelTypes: new Set(),
+    allLabels: [],
+    allRelTypes: []
+  };
+
+  // 节点颜色映射
+  const nodeColors = {
+    chapter: { background: '#3498db', border: '#2980b9' },
+    article: { background: '#2ecc71', border: '#27ae60' },
+    concept: { background: '#e67e22', border: '#d35400' },
+    method: { background: '#9b59b6', border: '#8e44ad' },
+    block: { background: '#e74c3c', border: '#c0392b' },
+    other: { background: '#95a5a6', border: '#7f8c8d' }
+  };
+
+  function getNodeLabels(n){
+    return Array.isArray(n.labels) && n.labels.length ? n.labels : [n.group || 'other'];
+  }
+
+  function buildFilters(){
+    const labelSet = new Set();
+    nodes.forEach(n => getNodeLabels(n).forEach(l => labelSet.add(l)));
+
+    const relSet = new Set();
+    edges.forEach(e => relSet.add(e.label || 'REL'));
+
+    state.allLabels = Array.from(labelSet).sort();
+    state.allRelTypes = Array.from(relSet).sort();
+
+    state.enabledLabels = new Set(state.allLabels);
+    state.enabledRelTypes = new Set(state.allRelTypes);
+
+    // 渲染UI
+    const lf = document.getElementById('labelFilters');
+    lf.innerHTML = state.allLabels.map(l => `
+      <label class="filter-item">
+        <input type="checkbox" data-label="${l}" checked>
+        <span>${l}</span>
+      </label>
+    `).join("");
+
+    const rf = document.getElementById('relFilters');
+    rf.innerHTML = state.allRelTypes.map(t => `
+      <label class="filter-item">
+        <input type="checkbox" data-rel="${t}" checked>
+        <span>${t}</span>
+      </label>
+    `).join("");
+
+    lf.addEventListener('change', (ev) => {
+      const cb = ev.target;
+      if (!cb || !cb.dataset.label) return;
+      state.enabledLabels[cb.checked ? 'add' : 'delete'](cb.dataset.label);
+      applyVisibility();
+    });
+
+    rf.addEventListener('change', (ev) => {
+      const cb = ev.target;
+      if (!cb || !cb.dataset.rel) return;
+      state.enabledRelTypes[cb.checked ? 'add' : 'delete'](cb.dataset.rel);
+      applyVisibility();
+    });
+  }
+
+  function setAllCheckbox(containerId, selector, checked, enabledSet) {
+    const box = document.getElementById(containerId);
+    box.querySelectorAll(selector).forEach(cb => {
+      cb.checked = checked;
+      const key = cb.dataset.label || cb.dataset.rel;
+      if (!key) return;
+      enabledSet[checked ? 'add' : 'delete'](key);
+    });
+    applyVisibility();
+  }
+
+  document.getElementById('lblAll').onclick  = () => setAllCheckbox('labelFilters', 'input[type=checkbox][data-label]', true,  state.enabledLabels);
+  document.getElementById('lblNone').onclick = () => setAllCheckbox('labelFilters', 'input[type=checkbox][data-label]', false, state.enabledLabels);
+
+  document.getElementById('relAll').onclick  = () => setAllCheckbox('relFilters', 'input[type=checkbox][data-rel]', true,  state.enabledRelTypes);
+  document.getElementById('relNone').onclick = () => setAllCheckbox('relFilters', 'input[type=checkbox][data-rel]', false, state.enabledRelTypes);
+
+  function computeFocusKeepNodes(){
+    if (!state.focusEnabled || state.focusNodeId == null) return null;
+
+    const keep = new Set([state.focusNodeId]);
+    let frontier = new Set([state.focusNodeId]);
+
+    for (let d = 0; d < state.focusDepth; d++) {
+      const next = new Set();
+      frontier.forEach(id => {
+        network.getConnectedNodes(id).forEach(nid => {
+          if (!keep.has(nid)) next.add(nid);
+          keep.add(nid);
+        });
+      });
+      frontier = next;
+      if (frontier.size === 0) break;
+    }
+    return keep;
+  }
+
+  function applyVisibility(){
+    const focusKeep = computeFocusKeepNodes();
+
+    const nodeAllowedByLabel = new Map();
+    nodes.forEach(n => {
+      const labels = getNodeLabels(n);
+      const ok = labels.some(l => state.enabledLabels.has(l));
+      nodeAllowedByLabel.set(n.id, ok);
+    });
+
+    const baseNodeVisible = (id) => nodeAllowedByLabel.get(id) && (!focusKeep || focusKeep.has(id));
+
+    const edgeAllowedByType = (e) => state.enabledRelTypes.has(e.label || 'REL');
+
+    const visibleEdges = [];
+    const nodesOnVisibleEdges = new Set();
+    edges.forEach(e => {
+      const ok = baseNodeVisible(e.from) && baseNodeVisible(e.to) && edgeAllowedByType(e);
+      if (ok) {
+        visibleEdges.push(e);
+        nodesOnVisibleEdges.add(e.from);
+        nodesOnVisibleEdges.add(e.to);
+      }
+    });
+
+    const relFiltered = state.enabledRelTypes.size !== state.allRelTypes.length;
+
+    const finalNodeVisible = (id) => baseNodeVisible(id) && (!relFiltered || nodesOnVisibleEdges.has(id) || id === state.focusNodeId);
+
+    nodes.update(nodes.get().map(n => ({
+      ...n,
+      hidden: !finalNodeVisible(n.id)
+    })));
+
+    edges.update(visibleEdges.map(e => ({
+      ...e,
+      hidden: false
+    })));
+  }
+
+  function resetView(){
+    state.focusNodeId = null;
+    applyVisibility();
+    network.fit({ animation: { duration: 1000, easingFunction: 'easeInOutQuad' } });
+    network.stabilize(100);
+  }
+
+  async function loadGraph(){
+    try {
+      const res = await fetch('/graph');
+      if (!res.ok) {
+        throw new Error(`HTTP 错误: ${res.status} ${res.statusText}`);
+      }
+      const graph = await res.json();
+
+      // ==== 增强数据校验 ====
+      if (!graph.nodes || !Array.isArray(graph.nodes)) {
+        throw new Error('返回数据中节点列表格式无效或缺失。');
+      }
+      if (!graph.edges || !Array.isArray(graph.edges)) {
+        throw new Error('返回数据中边列表格式无效或缺失。');
+      }
+      // ======================
+
+      const nodeIdMap = new Map();
+      const formattedNodes = (graph.nodes || []).map((node, index) => {
+        // 确保有一个稳定的ID用于网络渲染
+        const stableId = node.id ? String(node.id) : `node-${index}`;
+        nodeIdMap.set(node.id, stableId); // 用原始ID做映射键
+
+        const group = node.group || 'other';
+        const colors = nodeColors[group] || nodeColors.other;
+
+        return {
+          id: stableId,
+          label: node.label || '未知节点',
+          title: node.title || node.description || '',
+          group: group,
+          originalId: node.id, // 保留原始ID用于调试
+          shape: 'dot',
+          size: 25,
+          font: { size: 14, face: 'Noto Sans SC', color: '#2c3e50' },
+          color: {
+            background: colors.background,
+            border: colors.border,
+            highlight: { background: colors.background, border: '#2c3e50' }
+          },
+          borderWidth: 1,
+          shadow: { enabled: false }
+        };
+      });
+
+      const formattedEdges = [];
+      (graph.edges || []).forEach((edge, index) => {
+        // 更安全地查找映射ID，确保边只连接到存在的节点
+        const fromId = nodeIdMap.get(edge.from);
+        const toId = nodeIdMap.get(edge.to);
+
+        // 如果找不到映射，尝试使用原始ID（兼容性回退）
+        const finalFromId = fromId || edge.from;
+        const finalToId = toId || edge.to;
+
+        // 可选：检查边连接的两个节点是否都存在，如果不存在可以跳过此边或记录警告
+        // 这里选择创建边，让网络库处理（不存在的节点会导致边不显示）
+        formattedEdges.push({
+          id: `edge-${index}`,
+          from: finalFromId,
+          to: finalToId,
+          label: edge.label || '',
+          arrows: 'to',
+          color: { color: '#95a5a6', highlight: '#3498db', opacity: 0.7 },
+          width: 1,
+          font: { size: 10, strokeWidth: 2, color: '#7f8c8d' },
+          smooth: { enabled: true, type: 'continuous', roundness: 0.2 },
+          shadow: { enabled: false }
+        });
+      });
+
+      // 更新状态显示
+      document.getElementById('stat').textContent = `节点: ${formattedNodes.length} 边: ${formattedEdges.length}`;
+
+      // 如果格式化后没有节点，给出提示但不抛出错误
+      if (formattedNodes.length === 0) {
+        console.warn('警告：图谱数据中没有有效的节点。');
+      }
+
+      // ... 后续的 nodes DataSet 和 edges DataSet 初始化、网络创建等代码保持不变 ...
+      nodes = new vis.DataSet(formattedNodes);
+      edges = new vis.DataSet(formattedEdges);
+
+      document.getElementById('stat').textContent = `节点: ${nodes.length} 边: ${edges.length}`;
+
+      const container = document.getElementById('network');
+
+      const options = {
+        nodes: {
+          shape: 'dot',
+          size: 20,
+          font: {
+            size: 12,
+            face: 'Noto Sans SC',
+            color: '#2c3e50',
+            strokeColor: 'rgba(255,255,255,0.7)',
+            strokeWidth: 2
+          },
+          borderWidth: 2,
+          shadow: false,
+          scaling:{
+            min: 10,
+            max: 30,
+            label: {
+              min: 8,
+              max: 20,
+              enabled: true,
+              maxVisible: 20,
+              drawThreshold: 5
+            }
+          }
+        },
+        edges: {
+          arrows: {
+            to: {
+              enabled: true,
+              scaleFactor: 0.8
+            }
+          },
+          color: {
+            color: 'rgba(149,165,166,0.6)',
+            highlight: '#3498db',
+            opacity: 0.7
+          },
+          width: 1.5,
+          font: {
+            size: 9,
+            strokeWidth: 2,
+            color: '#7f8c8d'
+          },
+          smooth: {
+            enabled: true,
+            type: 'continuous',
+            roundness: 0.3
+          },
+          shadow: false,
+          selectionWidth: 3
+        },
+        physics: {
+          enabled: true,
+          stabilization: {
+            iterations: 200, // 增加迭代次数使初始布局更稳定
+            updateInterval: 25,
+            onlyDynamicEdges: false,
+            fit: true
+          },
+          solver: 'forceAtlas2Based', // 此算法更适合大型网络
+          forceAtlas2Based: {
+            gravitationalConstant: -100, // 增加负值，增强节点间的斥力，使其分散
+            centralGravity: 0.005,      // 降低中心引力，防止过度收缩
+            springLength: 150,          // 增加理想弹簧长度，拉大节点间距
+            springConstant: 0.04,       // 降低弹簧刚度，使边更柔和
+            damping: 0.4,
+            avoidOverlap: 1.0           // 确保节点不重叠
+          },
+          maxVelocity: 50,
+          minVelocity: 0.1,
+          timestep: 0.5
+        },
+        interaction: {
+          hover: true,
+          tooltipDelay: 200,
+          navigationButtons: true,
+          keyboard: true
+        },
+        layout: {
+          improvedLayout: true,
+          hierarchical: {
+            enabled: false,
+            direction: 'UD',
+            sortMethod: 'directed'
+          }
+        }
+      };
+
+      if (network) {
+        network.destroy();
+      }
+
+      network = new vis.Network(container, { nodes, edges }, options);
+
+      document.getElementById('toggleFocus').addEventListener('change', (e) => {
+        state.focusEnabled = e.target.checked;
+        applyVisibility();
+      });
+
+      document.getElementById('focusDepth').addEventListener('change', (e) => {
+        state.focusDepth = Math.max(1, Math.min(5, parseInt(e.target.value || '2', 10)));
+        applyVisibility();
+      });
+
+      document.getElementById('btnReset').addEventListener('click', resetView);
+
+      network.on("click", (params) => {
+        if (params.nodes && params.nodes.length > 0) {
+          if (state.focusEnabled) {
+            state.focusNodeId = params.nodes[0];
+            applyVisibility();
+            network.focus(state.focusNodeId, {
+              scale: 1.2,
+              animation: {
+                duration: 1000,
+                easingFunction: 'easeInOutQuad'
+              }
+            });
+          }
+        } else {
+          state.focusNodeId = null;
+          applyVisibility();
+        }
+      });
+
+      network.on("doubleClick", (params) => {
+        if (params.nodes && params.nodes.length > 0) {
+          const nodeId = params.nodes[0];
+          const node = nodes.get(nodeId);
+          if (node) {
+            alert(`节点详情:\n\n标签: ${node.label}\n类型: ${node.group}\nID: ${nodeId}`);
+          }
+        }
+      });
+
+      buildFilters();
+      applyVisibility();
+
+      network.on("stabilizationIterationsDone", () => {
+        network.fit({ animation: { duration: 1500, easingFunction: 'easeInOutQuad' } });
+      });
+
+
+      document.getElementById('btnStabilize').addEventListener('click', function() {
+        network.stabilize(100);
+      });
+      document.getElementById('togglePhysics').addEventListener('change', function(e) {
+        network.setOptions({ physics: e.target.checked });
+      });
+
+      // 为网络添加“双击背景重置视图”的交互
+      network.on("doubleClick", function(params) {
+        if (params.nodes.length === 0) { // 双击空白处
+          resetView();
+        }
+      });
+
+    }catch (err) {
+    console.error('加载图谱失败，详细错误:', err);
+    alert(`加载图谱失败: ${err.message}\n\n请检查：\n1. 浏览器控制台（F12）是否有更多错误信息。\n2. 确保 Neo4j 服务正在运行。\n3. 检查 /graph 接口返回的数据格式。`)
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    loadGraph();
+
+    document.getElementById('toggleFocus').addEventListener('change', (e) => {
+      state.focusEnabled = e.target.checked;
+      applyVisibility();
+    });
+
+    document.getElementById('focusDepth').addEventListener('change', (e) => {
+      state.focusDepth = Math.max(1, Math.min(5, parseInt(e.target.value || '2', 10)));
+      applyVisibility();
+    });
+
+    document.getElementById('btnReset').addEventListener('click', resetView);
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>民用航空器 | 适航法规知识图谱</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ============================================================
+           Design Tokens
+           ============================================================ */
+        :root {
+            --c-bg: #f5f7fb;
+            --c-bg-grad-1: #eef2ff;
+            --c-bg-grad-2: #f0f9ff;
+            --c-surface: rgba(255, 255, 255, 0.72);
+            --c-surface-solid: #ffffff;
+            --c-border: rgba(99, 102, 241, 0.10);
+            --c-border-strong: rgba(99, 102, 241, 0.20);
+
+            --c-text-1: #0f172a;
+            --c-text-2: #475569;
+            --c-text-3: #94a3b8;
+
+            --c-primary: #4f46e5;
+            --c-primary-light: #818cf8;
+            --c-primary-fade: rgba(79, 70, 229, 0.08);
+            --c-cyan: #06b6d4;
+            --c-cyan-fade: rgba(6, 182, 212, 0.08);
+            --c-green: #10b981;
+            --c-green-fade: rgba(16, 185, 129, 0.08);
+            --c-amber: #f59e0b;
+            --c-amber-fade: rgba(245, 158, 11, 0.08);
+            --c-purple: #8b5cf6;
+            --c-purple-fade: rgba(139, 92, 246, 0.08);
+
+            --font-sans: 'Inter', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            --font-serif-display: 'Noto Sans SC', 'Inter', sans-serif;
+
+            --r-sm: 6px;
+            --r-md: 10px;
+            --r-lg: 14px;
+            --r-xl: 20px;
+
+            --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.04), 0 1px 2px rgba(15, 23, 42, 0.06);
+            --shadow-md: 0 4px 12px rgba(15, 23, 42, 0.05), 0 2px 4px rgba(15, 23, 42, 0.04);
+            --shadow-lg: 0 10px 30px rgba(15, 23, 42, 0.06), 0 4px 8px rgba(15, 23, 42, 0.04);
+            --shadow-glow-cyan: 0 0 24px rgba(6, 182, 212, 0.12);
+            --shadow-glow-indigo: 0 0 24px rgba(79, 70, 229, 0.10);
+
+            --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+            --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+        }
+
+        /* ============================================================
+           Reset & Base
+           ============================================================ */
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            font-size: 15px;
+            line-height: 1.75;
+            color: var(--c-text-2);
+            background: var(--c-bg);
+            min-height: 100vh;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background:
+                linear-gradient(var(--c-bg-grad-1), var(--c-bg-grad-2)),
+                radial-gradient(at 20% 0%, rgba(99, 102, 241, 0.04) 0%, transparent 50%),
+                radial-gradient(at 80% 100%, rgba(6, 182, 212, 0.04) 0%, transparent 50%);
+            z-index: -2;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(99, 102, 241, 0.035) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(99, 102, 241, 0.035) 1px, transparent 1px);
+            background-size: 28px 28px;
+            z-index: -1;
+            mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 30%, transparent 100%);
+            -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 30%, transparent 100%);
+        }
+
+        ::selection {
+            background: var(--c-primary);
+            color: #fff;
+        }
+
+        /* ============================================================
+           Layout
+           ============================================================ */
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 24px 80px;
+        }
+
+        /* ============================================================
+           Top Navigation
+           ============================================================ */
+        .top-nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            background: rgba(245, 247, 251, 0.75);
+            border-bottom: 1px solid var(--c-border);
+            transition: all 0.3s var(--ease-out);
+        }
+
+        .top-nav-inner {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 14px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .top-nav .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            font-size: 0.9em;
+            color: var(--c-text-1);
+            text-decoration: none;
+        }
+
+        .top-nav .brand i {
+            color: var(--c-primary);
+            font-size: 1.2em;
+        }
+
+        .top-nav .nav-links {
+            display: flex;
+            gap: 6px;
+        }
+
+        .top-nav .nav-links a {
+            padding: 6px 14px;
+            border-radius: var(--r-sm);
+            font-size: 0.85em;
+            color: var(--c-text-2);
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .top-nav .nav-links a:hover {
+            background: var(--c-primary-fade);
+            color: var(--c-primary);
+        }
+
+        /* ============================================================
+           Breadcrumb
+           ============================================================ */
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 24px 0 8px;
+            font-size: 0.82em;
+            color: var(--c-text-3);
+        }
+
+        .breadcrumb a {
+            color: var(--c-primary-light);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--c-primary);
+        }
+
+        .breadcrumb .sep {
+            opacity: 0.5;
+            font-size: 0.7em;
+        }
+
+        .breadcrumb .current {
+            color: var(--c-text-2);
+            font-weight: 500;
+        }
+
+        /* ============================================================
+           Hero Section
+           ============================================================ */
+        .hero {
+            position: relative;
+            padding: 48px 0 40px;
+            text-align: left;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: 0.78em;
+            font-weight: 500;
+            background: var(--c-green-fade);
+            color: var(--c-green);
+            border: 1px solid rgba(16, 185, 129, 0.18);
+            margin-bottom: 18px;
+        }
+
+        .hero-badge i {
+            font-size: 0.85em;
+        }
+
+        .hero h1 {
+            font-size: 2.6em;
+            font-weight: 700;
+            color: var(--c-text-1);
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            margin-bottom: 8px;
+        }
+
+        .hero .subtitle {
+            font-size: 1.15em;
+            color: var(--c-text-3);
+            font-style: italic;
+            font-weight: 300;
+        }
+
+        .hero::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            border-radius: 2px;
+            background: linear-gradient(90deg, var(--c-green), var(--c-cyan));
+            margin-top: 28px;
+        }
+
+        /* ============================================================
+           Meta Row
+           ============================================================ */
+        .meta-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 40px;
+        }
+
+        .meta-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 5px 12px;
+            border-radius: var(--r-sm);
+            font-size: 0.8em;
+            background: var(--c-surface);
+            color: var(--c-text-2);
+            border: 1px solid var(--c-border);
+            backdrop-filter: blur(6px);
+        }
+
+        .meta-chip i {
+            font-size: 0.85em;
+            color: var(--c-primary-light);
+        }
+
+        /* ============================================================
+           Section Card
+           ============================================================ */
+        .section-card {
+            background: var(--c-surface-solid);
+            border: 1px solid var(--c-border);
+            border-radius: var(--r-lg);
+            padding: 32px;
+            margin-bottom: 24px;
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow 0.3s var(--ease-out), border-color 0.3s var(--ease-out);
+        }
+
+        .section-card:hover {
+            box-shadow: var(--shadow-md);
+            border-color: var(--c-border-strong);
+        }
+
+        .section-card h2 {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: var(--c-text-1);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-card h2 .icon-wrap {
+            width: 32px;
+            height: 32px;
+            border-radius: var(--r-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85em;
+            color: #fff;
+            flex-shrink: 0;
+        }
+
+        .icon-wrap.indigo {
+            background: linear-gradient(135deg, #6366f1, #4f46e5);
+        }
+        .icon-wrap.cyan {
+            background: linear-gradient(135deg, #22d3ee, #06b6d4);
+        }
+        .icon-wrap.green {
+            background: linear-gradient(135deg, #34d399, #10b981);
+        }
+        .icon-wrap.amber {
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+        }
+        .icon-wrap.purple {
+            background: linear-gradient(135deg, #a78bfa, #8b5cf6);
+        }
+
+        /* ============================================================
+           Definition Blocks
+           ============================================================ */
+        .definition-block {
+            position: relative;
+            padding: 22px 24px;
+            margin-bottom: 16px;
+            border-radius: var(--r-md);
+            background: #fafbfe;
+            border: 1px solid var(--c-border);
+            transition: all 0.3s var(--ease-out);
+            overflow: hidden;
+        }
+
+        .definition-block:last-child {
+            margin-bottom: 0;
+        }
+
+        .definition-block::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            border-radius: 3px 0 0 3px;
+            transition: width 0.3s var(--ease-out);
+        }
+
+        .definition-block:hover {
+            background: #fff;
+            box-shadow: var(--shadow-sm);
+            transform: translateX(2px);
+        }
+
+        .definition-block:hover::before {
+            width: 4px;
+        }
+
+        .definition-block.icao::before {
+            background: linear-gradient(180deg, #6366f1, #818cf8);
+        }
+        .definition-block.ccar::before {
+            background: linear-gradient(180deg, #10b981, #34d399);
+        }
+        .definition-block.faa::before {
+            background: linear-gradient(180deg, #f59e0b, #fbbf24);
+        }
+
+        .def-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .def-source-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75em;
+            color: #fff;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .def-source-icon.icao {
+            background: linear-gradient(135deg, #6366f1, #4f46e5);
+        }
+        .def-source-icon.ccar {
+            background: linear-gradient(135deg, #10b981, #059669);
+        }
+        .def-source-icon.faa {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+        }
+
+        .def-title {
+            font-size: 0.95em;
+            font-weight: 600;
+            color: var(--c-text-1);
+        }
+
+        .def-ref {
+            font-size: 0.75em;
+            color: var(--c-text-3);
+            margin-left: auto;
+            white-space: nowrap;
+        }
+
+        .def-body {
+            font-size: 0.92em;
+            line-height: 1.85;
+            color: var(--c-text-2);
+            text-align: justify;
+        }
+
+        .def-body p+p {
+            margin-top: 10px;
+        }
+
+        .def-body .en {
+            font-family: 'Inter', sans-serif;
+            color: var(--c-text-3);
+            font-size: 0.92em;
+            margin-bottom: 6px;
+        }
+
+        .highlight {
+            background: linear-gradient(180deg, transparent 60%, rgba(79, 70, 229, 0.12) 60%);
+            padding: 0 2px;
+            font-weight: 500;
+            color: var(--c-text-1);
+        }
+
+        .highlight-green {
+            background: linear-gradient(180deg, transparent 60%, rgba(16, 185, 129, 0.12) 60%);
+            padding: 0 2px;
+            font-weight: 500;
+            color: var(--c-text-1);
+        }
+
+        .highlight-amber {
+            background: linear-gradient(180deg, transparent 60%, rgba(245, 158, 11, 0.12) 60%);
+            padding: 0 2px;
+            font-weight: 500;
+            color: var(--c-text-1);
+        }
+
+        /* ============================================================
+           Analysis Grid
+           ============================================================ */
+        .analysis-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 16px;
+        }
+
+        .analysis-card {
+            padding: 22px;
+            border-radius: var(--r-md);
+            background: #fafbfe;
+            border: 1px solid var(--c-border);
+            transition: all 0.3s var(--ease-out);
+        }
+
+        .analysis-card:hover {
+            background: #fff;
+            box-shadow: var(--shadow-sm);
+            transform: translateY(-2px);
+        }
+
+        .analysis-card h4 {
+            font-size: 0.95em;
+            font-weight: 600;
+            color: var(--c-text-1);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .analysis-card h4 .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .dot.indigo {
+            background: #6366f1;
+        }
+        .dot.green {
+            background: #10b981;
+        }
+        .dot.amber {
+            background: #f59e0b;
+        }
+
+        .analysis-card p {
+            font-size: 0.86em;
+            line-height: 1.7;
+            color: var(--c-text-2);
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.72em;
+            font-weight: 500;
+            margin-top: 12px;
+        }
+
+        .tag-indigo {
+            background: var(--c-primary-fade);
+            color: var(--c-primary);
+        }
+        .tag-green {
+            background: var(--c-green-fade);
+            color: #059669;
+        }
+        .tag-amber {
+            background: var(--c-amber-fade);
+            color: #b45309;
+        }
+
+        /* ============================================================
+           Note & Quote Boxes
+           ============================================================ */
+        .note-box {
+            display: flex;
+            gap: 14px;
+            padding: 18px 22px;
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.05), rgba(245, 158, 11, 0.02));
+            border: 1px solid rgba(245, 158, 11, 0.15);
+            border-radius: var(--r-md);
+            margin-top: 24px;
+        }
+
+        .note-box .note-icon {
+            color: var(--c-amber);
+            font-size: 1.15em;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .note-box .note-content {
+            font-size: 0.88em;
+            line-height: 1.7;
+            color: var(--c-text-2);
+        }
+
+        .note-box .note-content strong {
+            color: var(--c-text-1);
+        }
+
+        .quote-box {
+            padding: 16px 22px;
+            background: var(--c-primary-fade);
+            border-left: 3px solid var(--c-primary);
+            border-radius: 0 var(--r-md) var(--r-md) 0;
+            margin-top: 20px;
+            font-size: 0.88em;
+            line-height: 1.7;
+            color: var(--c-text-2);
+        }
+
+        .quote-box .quote-label {
+            font-size: 0.75em;
+            font-weight: 600;
+            color: var(--c-primary);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 4px;
+        }
+
+        /* ============================================================
+           Comparison Table
+           ============================================================ */
+        .compare-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.88em;
+            margin-top: 8px;
+        }
+
+        .compare-table thead th {
+            background: #f8fafc;
+            color: var(--c-text-1);
+            font-weight: 600;
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 2px solid var(--c-border);
+            font-size: 0.82em;
+            letter-spacing: 0.02em;
+        }
+
+        .compare-table tbody td {
+            padding: 14px 16px;
+            border-bottom: 1px solid rgba(99, 102, 241, 0.06);
+            color: var(--c-text-2);
+            vertical-align: top;
+        }
+
+        .compare-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .compare-table tbody tr:hover td {
+            background: #fafbfe;
+        }
+
+        .compare-table td strong {
+            color: var(--c-text-1);
+            font-weight: 600;
+        }
+
+        /* ============================================================
+           Action Bar
+           ============================================================ */
+        .action-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 36px;
+            padding-top: 24px;
+            border-top: 1px solid var(--c-border);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: var(--r-sm);
+            font-size: 0.88em;
+            font-weight: 500;
+            cursor: pointer;
+            text-decoration: none;
+            font-family: var(--font-sans);
+            transition: all 0.25s var(--ease-out);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #4f46e5, #6366f1);
+            color: #fff;
+            box-shadow: 0 2px 8px rgba(79, 70, 229, 0.25);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 4px 16px rgba(79, 70, 229, 0.35);
+            transform: translateY(-1px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--c-text-2);
+            border: 1px solid var(--c-border);
+        }
+
+        .btn-outline:hover {
+            background: #f8fafc;
+            color: var(--c-text-1);
+            border-color: var(--c-border-strong);
+        }
+
+        /* ============================================================
+           Scrollbar
+           ============================================================ */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(99, 102, 241, 0.2);
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(99, 102, 241, 0.35);
+        }
+
+        /* ============================================================
+           Reveal Animation
+           ============================================================ */
+        .reveal {
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ============================================================
+           Responsive
+           ============================================================ */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2em;
+            }
+            .section-card {
+                padding: 24px 20px;
+            }
+            .def-ref {
+                display: none;
+            }
+            .top-nav .nav-links {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 16px 60px;
+            }
+            .hero {
+                padding: 32px 0 28px;
+            }
+            .hero h1 {
+                font-size: 1.7em;
+            }
+            .analysis-grid {
+                grid-template-columns: 1fr;
+            }
+            .action-bar .btn {
+                flex: 1;
+                justify-content: center;
+            }
+        }
+
+        /* ============================================================
+           Print Styles
+           ============================================================ */
+        @media print {
+            body::before,
+            body::after {
+                display: none;
+            }
+            .top-nav,
+            .action-bar {
+                display: none;
+            }
+            .section-card {
+                box-shadow: none;
+                border: 1px solid #ddd;
+                break-inside: avoid;
+            }
+            .hero h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== Top Navigation ===== -->
+    <nav class="top-nav">
+        <div class="top-nav-inner">
+            <a href="/" class="brand">
+                <i class="fas fa-atom"></i>
+                适航法规知识图谱
+            </a>
+            <div class="nav-links">
+                <a href="/"><i class="fas fa-home"></i> 首页</a>
+                <a href="/concepts"><i class="fas fa-book"></i> 词条</a>
+                <a href="/visualize"><i class="fas fa-project-diagram"></i> 图谱</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <!-- ===== Breadcrumb ===== -->
+        <div class="breadcrumb">
+            <a href="/"><i class="fas fa-home"></i> 首页</a>
+            <span class="sep">/</span>
+            <a href="/concepts">概念词条</a>
+            <span class="sep">/</span>
+            <span class="current">民用航空器</span>
+        </div>
+
+        <!-- ===== Hero ===== -->
+        <header class="hero reveal">
+            <div class="hero-badge">
+                <i class="fas fa-tag"></i> 前置定义 · 排除法定义
+            </div>
+            <h1>民用航空器</h1>
+            <div class="subtitle">Civil Aircraft</div>
+        </header>
+
+        <!-- ===== Meta Row ===== -->
+        <div class="meta-row reveal">
+            <span class="meta-chip"><i class="fas fa-folder-open"></i> 类别：前置定义</span>
+            <span class="meta-chip"><i class="fas fa-link"></i> ICAO 公约第 3 条</span>
+            <span class="meta-chip"><i class="fas fa-link"></i> 《中华人民共和国民用航空法》第 5 条</span>
+            <span class="meta-chip"><i class="fas fa-link"></i> 14 CFR §1.1</span>
+        </div>
+
+        <!-- ===== 多源定义 ===== -->
+        <section class="section-card reveal">
+            <h2><span class="icon-wrap indigo"><i class="fas fa-scroll"></i></span> 多源定义</h2>
+            <p style="font-size:0.88em; color:var(--c-text-3); margin-bottom:20px;">
+                民用航空器在各适航体系中很少被正面定义，普遍采用 <strong>排除法</strong>：先明确「非民用」（国家航空器 / 公共航空器），其余即为民用航空器。
+            </p>
+
+            <!-- ICAO -->
+            <div class="definition-block icao">
+                <div class="def-header">
+                    <div class="def-source-icon icao">I</div>
+                    <span class="def-title">国际民航组织（ICAO）</span>
+                    <span class="def-ref">《国际民用航空公约》第 3 条</span>
+                </div>
+                <div class="def-body">
+                    <p>本公约仅适用于民用航空器，不适用于国家航空器。</p>
+                    <p><span class="highlight">用于军事、海关和警察部门的航空器，应认为是国家航空器。</span></p>
+                    <p style="margin-top:8px; font-size:0.93em; color:var(--c-text-3);">
+                        <i class="fas fa-info-circle"></i> 公约通过明确「国家航空器」的三类典型用途，反向划定民用航空器的边界。
+                    </p>
+                </div>
+            </div>
+
+            <!-- CCAR -->
+            <div class="definition-block ccar">
+                <div class="def-header">
+                    <div class="def-source-icon ccar">C</div>
+                    <span class="def-title">中国民航局（CAAC）</span>
+                    <span class="def-ref">《中华人民共和国民用航空法》第 5 条</span>
+                </div>
+                <div class="def-body">
+                    <p>本法所称民用航空器，是指<span class="highlight-green">除用于执行军事、海关、警察飞行任务外的航空器</span>。</p>
+                    <p style="margin-top:8px; font-size:0.93em; color:var(--c-text-3);">
+                        <i class="fas fa-info-circle"></i> 直接承袭芝加哥公约第三条的排除逻辑，同时体现国籍登记与适航监管的管理工具性。
+                    </p>
+                </div>
+            </div>
+
+            <!-- FAA -->
+            <div class="definition-block faa">
+                <div class="def-header">
+                    <div class="def-source-icon faa">F</div>
+                    <span class="def-title">美国联邦航空管理局（FAA）</span>
+                    <span class="def-ref">14 CFR §1.1</span>
+                </div>
+                <div class="def-body">
+                    <p class="en">"Civil aircraft means aircraft other than public aircraft."</p>
+                    <p>民用航空器意指<span class="highlight-amber">公共航空器以外的航空器</span>。</p>
+                    <p style="margin-top:10px;">FAA 对「公共航空器」的界定极为精细，需同时满足：</p>
+                    <ul style="margin-top:6px; padding-left:20px; list-style:disc; font-size:0.96em;">
+                        <li><strong>非商业目的</strong>（不以取酬载客或运货为主要目的）；</li>
+                        <li><strong>仅限政府职能</strong>（国防、执法、消防、搜救、科研等）；</li>
+                        <li><strong>除机组成员或合格非机组成员外不搭载他人</strong>。</li>
+                    </ul>
+                    <p style="margin-top:8px; font-size:0.91em; color:var(--c-text-3);">
+                        一旦政府航空器从事载客取酬或面向公众的商业运营，即丧失公共航空器身份，回归民用航空器规则。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== 定义对比分析 ===== -->
+        <section class="section-card reveal">
+            <h2><span class="icon-wrap cyan"><i class="fas fa-search-plus"></i></span> 定义对比分析</h2>
+            <p style="font-size:0.88em; color:var(--c-text-3); margin-bottom:20px;">
+                三大体系均采用排除法，但在排除对象、立法目的和管理粒度上各有侧重。
+            </p>
+
+            <div class="analysis-grid">
+                <div class="analysis-card">
+                    <h4><span class="dot indigo"></span> ICAO — 跨国界互认</h4>
+                    <p>以<span style="color:var(--c-primary); font-weight:500;">国际协调</span>为核心，通过排除军事、海关、警察三类国家航空器，为民用航空器的跨国运行确立统一基准。定义简洁，重在解决缔约国之间的互认问题。</p>
+                    <span class="tag tag-indigo"><i class="fas fa-globe"></i> 国际公法视角</span>
+                </div>
+
+                <div class="analysis-card">
+                    <h4><span class="dot green"></span> 中国 CAAC — 管理工具性</h4>
+                    <p>直接承袭《民航法》第五条，与芝加哥公约对齐。<span style="color:#059669; font-weight:500;">强调国籍登记与适航监管的抓手</span>，通过「执行军事、海关、警察飞行任务」这一行为标准来界定，便于行政管理和执法。</p>
+                    <span class="tag tag-green"><i class="fas fa-landmark"></i> 行政管理导向</span>
+                </div>
+
+                <div class="analysis-card">
+                    <h4><span class="dot amber"></span> 美国 FAA — 公私分界</h4>
+                    <p>通过「公共航空器」的复杂定义反向界定，<span style="color:#b45309; font-weight:500;">侧重公私部门的法律适用分界</span>。概念外延更宽：公共航空器不仅包括军方，还覆盖联邦、州、地方政府为政府目的使用的航空器，且允许动态转换。</p>
+                    <span class="tag tag-amber"><i class="fas fa-balance-scale"></i> 功能目的导向</span>
+                </div>
+            </div>
+
+            <!-- 特别说明 -->
+            <div class="note-box">
+                <i class="fas fa-exclamation-triangle note-icon"></i>
+                <div class="note-content">
+                    <strong>关于「公共航空器」的补充：</strong>美国 14 CFR §1.1 对公共航空器的定义包含三层：① 政府所有或专有的航空器；② 军用或为军队服务的航空器；③ 国民警卫队受国防部直接指挥时的航空器。当政府航空器从事商业运输时，自动降级为民用航空器，适用 FAA 全面适航要求。
+                </div>
+            </div>
+
+            <div class="quote-box">
+                <div class="quote-label"><i class="fas fa-quote-left"></i> 核心共识</div>
+                <p>无论哪种体系，<span style="color:var(--c-text-1); font-weight:500;">民用航空器的本质都是「非国家/非公共」的航空器</span>。区别在于：ICAO 解决跨国界互认，美国侧重公私部门的法律适用分界，中国强调国籍登记与适航监管的抓手。</p>
+            </div>
+        </section>
+
+        <!-- ===== 术语对照表 ===== -->
+        <section class="section-card reveal">
+            <h2><span class="icon-wrap purple"><i class="fas fa-table"></i></span> 术语对照表</h2>
+            <table class="compare-table">
+                <thead>
+                    <tr>
+                        <th>中文术语</th>
+                        <th>英文术语</th>
+                        <th>定义来源</th>
+                        <th>关键特征</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>民用航空器</strong></td>
+                        <td>Civil Aircraft</td>
+                        <td>ICAO / CCAR / 14 CFR</td>
+                        <td>非国家/非公共的航空器</td>
+                    </tr>
+                    <tr>
+                        <td><strong>国家航空器</strong></td>
+                        <td>State Aircraft</td>
+                        <td>ICAO 公约第 3 条</td>
+                        <td>用于军事、海关、警察部门</td>
+                    </tr>
+                    <tr>
+                        <td><strong>公共航空器</strong></td>
+                        <td>Public Aircraft</td>
+                        <td>14 CFR §1.1</td>
+                        <td>政府所有/军用/国民警卫队，非商业用途</td>
+                    </tr>
+                    <tr>
+                        <td><strong>商业用途</strong></td>
+                        <td>Commercial Purpose</td>
+                        <td>14 CFR §1.1</td>
+                        <td>载客取酬或货物运输营利</td>
+                    </tr>
+                    <tr>
+                        <td><strong>政府职能</strong></td>
+                        <td>Governmental Function</td>
+                        <td>14 CFR §1.1</td>
+                        <td>国防、执法、消防、科研等</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- ===== 操作栏 ===== -->
+        <div class="action-bar reveal">
+            <a href="/" class="btn btn-primary">
+                <i class="fas fa-arrow-left"></i> 返回知识图谱首页
+            </a>
+            <a href="/visualize" class="btn btn-outline">
+                <i class="fas fa-project-diagram"></i> 查看知识图谱可视化
+            </a>
+            <button class="btn btn-outline" onclick="window.print()">
+                <i class="fas fa-print"></i> 打印词条
+            </button>
+            <button class="btn btn-outline" onclick="copyCitation()">
+                <i class="fas fa-quote-right"></i> 复制引用格式
+            </button>
+        </div>
+
+    </div><!-- /container -->
+
+    <script>
+        // ===== Reveal on scroll / load =====
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Trigger hero immediately
+        requestAnimationFrame(() => {
+            document.querySelectorAll('.hero, .meta-row').forEach(el => {
+                el.classList.add('visible');
+            });
+        });
+
+        // ===== Copy Citation =====
+        function copyCitation() {
+            const citation =
+                `民用航空器. (n.d.). 适航法规知识图谱系统. Retrieved from /concept/民用航空器`;
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(citation).then(() => {
+                    showCopied();
+                }).catch(() => fallbackCopy(citation));
+            } else {
+                fallbackCopy(citation);
+            }
+        }
+
+        function fallbackCopy(text) {
+            const ta = document.createElement('textarea');
+            ta.value = text;
+            ta.style.position = 'fixed';
+            ta.style.opacity = '0';
+            document.body.appendChild(ta);
+            ta.select();
+            try { document.execCommand('copy');
+                showCopied(); } catch (e) { alert('复制失败，请手动复制'); }
+            document.body.removeChild(ta);
+        }
+
+        function showCopied() {
+            const btn = event.target.closest('.btn');
+            if (!btn) return;
+            const original = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-check"></i> 已复制';
+            btn.style.color = '#10b981';
+            btn.style.borderColor = '#10b981';
+            setTimeout(() => {
+                btn.innerHTML = original;
+                btn.style.color = '';
+                btn.style.borderColor = '';
+            }, 2000);
+        }
+    </script>
+
+</body>
+</html>

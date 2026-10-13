@@ -1,0 +1,15 @@
+term_id,term,aliases,definition,group,has_page,anchor_or_url,related_node_id,source_id,review_status
+CH08-T001,损伤容限,DT,结构在规定损伤状态下通过损伤扩展和剩余强度评定维持安全的审定方法,核心概念,true,#damage-growth-residual-strength,CH08-N013,CH08-S001,pending
+CH08-T002,勉强可见冲击损伤,BVID,原稿术语；正式定义待HB受控正文核验,待核验,true,#pending-concepts,CH08-N032,CH08-S002,pending
+CH08-T003,可见冲击损伤,VID,原稿术语；正式定义待HB受控正文核验,待核验,true,#pending-concepts,CH08-N032,CH08-S002,pending
+CH08-T004,离散源损伤,DSD,由规定离散事件造成且需评定剩余结构能力的损伤,核心概念,true,#impact-discrete-source,CH08-N015,CH08-S001,pending
+CH08-T005,广布疲劳损伤,WFD,多个疲劳损伤相互作用并影响结构完整性的状态,持续适航,true,#damage-growth-residual-strength,CH08-N021,CH08-S006,pending
+CH08-T006,有效寿命限制,LOV,持续结构完整性评估中的寿命边界概念,持续适航,true,#continued-airworthiness,CH08-N022,CH08-S006,pending
+CH08-T007,适航限制项目,ALS,持续适航文件中的强制性限制项目接口,持续适航,true,#continued-airworthiness,CH08-N026,CH08-S001,pending
+CH08-T008,持续适航文件,ICA,为保持产品适航状态提供的运行与维修资料,持续适航,true,#continued-airworthiness,CH08-N027,CH08-S003,pending
+CH08-T009,修理设计限值,RDL,原稿术语；正式定义待HB受控正文核验,待核验,true,#pending-concepts,CH08-N033,CH08-S002,pending
+CH08-T010,允许损伤限值,ADL,原稿术语；正式定义待HB受控正文核验,待核验,true,#pending-concepts,CH08-N033,CH08-S002,pending
+CH08-T011,补充结构检查大纲,SSID,基于结构评估形成的补充检查资料和实施安排,持续适航,true,#continued-airworthiness,CH08-N023,CH08-S006,pending
+CH08-T012,无扩展,No-growth,原稿术语；正式定义和适用边界待受控正文核验,待核验,true,#pending-concepts,CH08-N032,CH08-S002,pending
+CH08-T013,缓慢扩展,Slow-growth,原稿术语；正式定义和适用边界待受控正文核验,待核验,true,#pending-concepts,CH08-N032,CH08-S002,pending
+CH08-T014,止裂,Arrest,原稿术语；正式定义和适用边界待受控正文核验,待核验,true,#pending-concepts,CH08-N032,CH08-S002,pending

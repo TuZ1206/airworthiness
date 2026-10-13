@@ -2,4 +2,5 @@ neo4j==5.20.0
 flask==3.0.0
 flask-cors==4.0.0
 python-dotenv==1.0.0
-vis-network==9.1.9
+openai==1.40.0
+beautifulsoup4==4.12.3

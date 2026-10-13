@@ -1,0 +1,17 @@
+term_id,term,aliases,definition,group,has_page,anchor_or_url,related_node_id,source_id,review_status
+CH05-T001,材料等同,Material Equivalency,证明材料变化后产品仍符合适用要求的证据集合而非独立批准结论,变化与证据,true,#material-process-basis,CH05-N031,CH05-S001,pending
+CH05-T002,工艺等同,Process Equivalency,证明工艺变化后制造方法和产品仍符合批准要求的证据集合,变化与证据,true,#material-process-basis,CH05-N030,CH05-S001,pending
+CH05-T003,大改,Major Change,除小改以外的型号设计更改,更改分类,true,#change-classification,CH05-N019,CH05-S003,pending
+CH05-T004,小改,Minor Change,对规定适航特性没有显著影响的型号设计更改,更改分类,true,#change-classification,CH05-N018,CH05-S003,pending
+CH05-T005,重大更改,Significant Change,按第21.101条及确定方法评估审定基础修订水平的更改,审定基础,true,#affected-certification-basis,CH05-N026,CH05-S005,pending
+CH05-T006,受影响区域,Affected Area,受设计更改直接或间接影响的区域系统部件或设备,审定基础,true,#affected-certification-basis,CH05-N025,CH05-S004,pending
+CH05-T007,累积影响,Cumulative Effect,本次更改与先前相关设计更改共同产生的影响,审定基础,true,#affected-certification-basis,CH05-N027,CH05-S005,pending
+CH05-T008,审定基础,Certification Basis,项目必须表明符合的适航要求专用条件豁免和ELOS集合,审定基础,true,#affected-certification-basis,CH05-N021,CH05-S003,pending
+CH05-T009,较早修订版,Earlier Amendment,在第21.101条规定条件下经局方确认采用的较早适航要求,审定基础,true,#affected-certification-basis,CH05-N028,CH05-S003,pending
+CH05-T010,专用条件,Special Condition,现行标准不足时为项目制定并纳入审定基础的要求,特殊审定,true,#equivalency-revalidation,CH05-N038,CH05-S008,pending
+CH05-T011,豁免,Exemption,按程序批准暂时或永久不符合特定适航或环保要求,特殊审定,true,#equivalency-revalidation,CH05-N039,CH05-S008,pending
+CH05-T012,等效安全水平结论,ELOS,局方确认补偿措施达到规章确定安全水平的正式结论,特殊审定,true,#equivalency-revalidation,CH05-N040,CH05-S008,pending
+CH05-T013,补充型号合格证,STC,对型号设计大改采用的设计批准证件之一,批准路径,true,#change-classification,CH05-N022,CH05-S003,pending
+CH05-T014,改装设计批准书,MDA,按适用申请人资格和更改类别采用的设计批准文件,批准路径,true,#change-classification,CH05-N022,CH05-S003,pending
+CH05-T015,符合性检查清单,Compliance Checklist,记录适用条款方法文件责任和符合性结论的项目证据,证据闭环,true,#compliance-evidence,CH05-N035,CH05-S006,pending
+CH05-T016,构型基线,Configuration Baseline,由经批准图样规范清单和持续适航资料定义的当前设计状态,证后管理,true,#post-certification-change,CH05-N037,CH05-S006,pending

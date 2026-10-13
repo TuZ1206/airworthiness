@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "airworthiness"
+version = "0.1.0"
+description = "民用航空适航知识图谱与智能问答"
+requires-python = ">=3.11"
+dependencies = [
+    "neo4j==5.20.0",
+    "flask==3.0.0",
+    "flask-cors==4.0.0",
+    "python-dotenv==1.0.0",
+    "openai==1.40.0",
+    "beautifulsoup4==4.12.3",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]

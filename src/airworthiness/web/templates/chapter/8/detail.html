@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第8章: 疲劳与损伤容限要求 - 适航法规知识图谱</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', 'Microsoft YaHei', sans-serif;
+            line-height: 1.7;
+            color: #334155;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* 头部导航 */
+        .header {
+            background: linear-gradient(135deg, rgba(219, 234, 254, 0.9) 0%, rgba(237, 233, 254, 0.9) 100%);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(165, 180, 252, 0.1);
+        }
+
+        .nav-breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            font-size: 0.9em;
+            color: #64748b;
+        }
+
+        .nav-breadcrumb a {
+            color: #4f46e5;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-breadcrumb a:hover {
+            color: #7c3aed;
+        }
+
+        .chapter-header {
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .chapter-number {
+            font-size: 1.2em;
+            color: #4f46e5;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .chapter-title {
+            font-size: 2.2em;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+
+        .chapter-description {
+            font-size: 1.1em;
+            color: #64748b;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* 内容区域 */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .main-content {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .info-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .section-title {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #a5b4fc;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* 知识内容样式 */
+        .knowledge-content {
+            line-height: 1.8;
+            color: #475569;
+        }
+
+        .knowledge-content h3 {
+            color: #334155;
+            margin: 25px 0 15px;
+            font-size: 1.4em;
+        }
+
+        .knowledge-content p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        .knowledge-content ul, .knowledge-content ol {
+            margin: 15px 0;
+            padding-left: 25px;
+        }
+
+        .knowledge-content li {
+            margin-bottom: 8px;
+        }
+
+        /* 关联项目样式 */
+        .related-items {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .related-item {
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+        }
+
+        .related-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .item-article {
+            border-left-color: #10b981;
+            background: rgba(16, 185, 129, 0.05);
+        }
+
+        .item-concept {
+            border-left-color: #f59e0b;
+            background: rgba(245, 158, 11, 0.05);
+        }
+
+        .item-method {
+            border-left-color: #8b5cf6;
+            background: rgba(139, 92, 246, 0.05);
+        }
+
+        .item-block {
+            border-left-color: #ef4444;
+            background: rgba(239, 68, 68, 0.05);
+        }
+
+        .item-title {
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 5px;
+        }
+
+        .item-desc {
+            font-size: 0.9em;
+            color: #64748b;
+        }
+
+        /* 导航按钮 */
+        .chapter-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .nav-btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-btn-prev {
+            background: linear-gradient(135deg, #a5b4fc, #818cf8);
+            color: white;
+        }
+
+        .nav-btn-next {
+            background: linear-gradient(135deg, #c4b5fd, #a78bfa);
+            color: white;
+            margin-left: auto;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(165, 180, 252, 0.3);
+        }
+
+        /* 可视化区域 */
+        .visualization-section {
+            margin-top: 40px;
+        }
+
+        #chapter-graph {
+            height: 400px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 968px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .chapter-title {
+                font-size: 1.8em;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+
+            .chapter-navigation {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-btn {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 头部导航 -->
+        <div class="header">
+            <div class="nav-breadcrumb">
+                <a href="/"><i class="fas fa-home"></i> 首页</a>
+                <i class="fas fa-chevron-right"></i>
+                <a href="/">知识体系</a>
+                <i class="fas fa-chevron-right"></i>
+                <span>第8章</span>
+            </div>
+
+            <div class="chapter-header">
+                <div class="chapter-number">第 8 章</div>
+                <h1 class="chapter-title">疲劳与损伤容限要求</h1>
+                <p class="chapter-description">本章系统阐述了复合材料结构在疲劳、损伤容限方面的适航要求，包括损伤分类与验证、修理设计原则、修理方法验证、裂纹增长分析以及概率损伤容限评定程序，确保结构在服役期间的安全性。</p>
+            </div>
+        </div>
+
+        <!-- 主要内容区域 -->
+        <div class="content-grid">
+            <!-- 左侧主要内容 -->
+            <div class="main-content">
+                <h2 class="section-title">
+                    <i class="fas fa-book-open"></i> 知识内容
+                </h2>
+
+                <div class="knowledge-content">
+                    <h3>8.1 损伤分类与结构验证要求</h3>
+                    <p>根据损伤的可检性和来源，复合材料结构的损伤被分为五类，每类对应不同的验证要求：</p>
+                    <ol>
+                        <li><strong>损伤1</strong>：在预定的或指导的检查中可能未发现的允许的损伤或允许的制造缺陷。
+                            <ul>
+                                <li><strong>结构验证</strong>：要证实在全寿命期内能可靠地保持极限载荷的能力。</li>
+                            </ul>
+                        </li>
+                        <li><strong>损伤2</strong>：在规定的检查间隔内，预定或指导的检查可以可靠地发现的损伤。
+                            <ul>
+                                <li><strong>结构验证</strong>：要证实采用可靠的检查方法，在检查间隔内保持限制载荷的能力。</li>
+                            </ul>
+                        </li>
+                        <li><strong>损伤3</strong>：在损伤发生后的数次飞行内，可以被不具备复合材料检查专业技能的机组或维护人员可靠地检查到的损伤。
+                            <ul>
+                                <li><strong>结构验证</strong>：需要包括当保持或接近限制载荷承载能力时的、可靠的、快速的检测方法。</li>
+                            </ul>
+                        </li>
+                        <li><strong>损伤4</strong>：导致飞机行动受限制的已知事件造成的离散源损伤。
+                            <ul>
+                                <li><strong>结构验证</strong>：需要包括条款规定的载荷下的剩余强度能力。</li>
+                            </ul>
+                        </li>
+                        <li><strong>损伤5</strong>：由非正常的地面或飞行事件导致的、未包含在设计准则或结构验证程序中的严重损伤。
+                            <ul>
+                                <li><strong>结构验证</strong>：需要通过工程的判断来确定合适的、有条件的检查方法的界面，这些检查是基于异常事件的有效信息。</li>
+                            </ul>
+                        </li>
+                    </ol>
+
+                    <h3>8.2 修理时的结构设计原则</h3>
+                    <p>为便于后续修理，在初始设计阶段应考虑以下原则：</p>
+                    <ol>
+                        <li><strong>修理通道</strong>：易损部件应留有修理通道，即提供足够的检查空间和使用钻孔、铆接工具的空间。</li>
+                        <li><strong>连接方式</strong>：易损部位复合材料结构的连接尽可能采用螺接，以便受到损伤时易于拆卸修理或更换。</li>
+                        <li><strong>修理余量</strong>：对易损部位应考虑修理余量，以保证修理时扩孔、加开连接螺栓孔后仍有足够强度。</li>
+                        <li><strong>接头安装</strong>：复合材料结构上安装金属接头等其他零件时应尽可能采用螺接，而不采用胶接，以便拆卸，易于复合材料结构的修理。</li>
+                        <li><strong>构型选择</strong>：组合结构构件的修理一般比整体结构构件的修理容易很多，因此在满足结构设计原则的前提下，复合材料构件应尽可能采用组合结构形式。</li>
+                    </ol>
+
+                    <h3>8.3 修理方法的分析与验证</h3>
+                    <p>对修理方案需从以下多个维度进行分析与验证：</p>
+                    <ol>
+                        <li><strong>静强度和稳定性</strong>：强度恢复；稳定性要求。</li>
+                        <li><strong>耐久性</strong>：
+                            <ul>
+                                <li>结构疲劳载荷对螺接和胶接结构的影响，加强对损伤扩展和修理区域的监测以满足适航要求。</li>
+                                <li>在修理中使用不同材料时，构件的接触腐蚀应加以考虑和注意，并采取有效措施防止。</li>
+                                <li>在修理设计中应考虑在使用环境中，因修理材料吸湿和湿/热环境的影响将降低设计许用值。</li>
+                            </ul>
+                        </li>
+                        <li><strong>刚度要求</strong>：变形限制；气动弹性稳定性；载荷传递路径。</li>
+                        <li><strong>气动外形</strong>：飞机的机翼前缘和翼面结构等要求有光滑的气动外形，因此这些区域修理时所用的外补片必须非常薄。</li>
+                        <li><strong>重量和平衡</strong>：修理时应注意将局部重量变化控制在一定范围内。</li>
+                        <li><strong>工作温度</strong>：必须选择在工作温度范围内有足够强度的修理材料，湿热条件是修理材料选择的关键条件。</li>
+                        <li><strong>环境影响</strong>：
+                            <ul>
+                                <li><strong>燃油密封系统</strong>：飞机上燃料装在机翼整体油箱内，因此任何对机翼蒙皮的修理都会和燃油密封系统接触。</li>
+                                <li><strong>防雷击系统</strong>：如果原结构有防雷击要求，那么修理以后必须达到同样的导电率。</li>
+                                <li><strong>飞机操纵系统</strong>：对于任何一个飞行过程中需运动的制件，修理后必须保证其操纵性不受影响。</li>
+                            </ul>
+                        </li>
+                        <li><strong>成本和周期</strong>。</li>
+                    </ol>
+
+                    <h3>8.4 修理方法的强度分析与验证</h3>
+                    <ol>
+                        <li>用与结构件的设计应变水平所对应的载荷进行复合材料结构修理的强度分析与验证。</li>
+                        <li>仍要保证其疲劳损伤容限特性能恢复到原来的状态。</li>
+                        <li>注意补片造成的偏心问题。</li>
+                    </ol>
+
+                    <h3>8.5 主要试验</h3>
+                    <p>为验证修理效果和结构完整性，需要进行的主要试验包括：</p>
+                    <ul>
+                        <li>静力试验</li>
+                        <li>疲劳和损伤容限试验</li>
+                    </ul>
+
+                    <h3>8.6 裂纹的增长分析与检查大纲</h3>
+                    <p>裂纹增长行为分为三类，并对应不同的检查策略：</p>
+                    <ol>
+                        <li><strong>不增长</strong>：取决于止裂损伤尺寸的检查间隔。</li>
+                        <li><strong>止裂增长</strong>：取决于止裂损伤尺寸的检查间隔。</li>
+                        <li><strong>缓慢增长</strong>：与金属断裂力学类似。</li>
+                    </ol>
+                    <p><strong>方法</strong>：制订包括检查频率、范围和方法在内的检查大纲，并包含在维护计划之中。</p>
+
+                    <h3>8.7 概率损伤容限评定程序</h3>
+                    <p>为确保结构安全性满足概率目标，需执行以下评定程序：</p>
+                    <ol>
+                        <li>由试验支持的分析得到整个剩余静强度—冲击能量曲线。</li>
+                        <li>按能量—概率曲线确定意外冲击威胁。</li>
+                        <li>在每个定期检测间隔内，计算结构上出现这种意外损伤的概率。</li>
+                        <li>确定载荷（或应力，或应变）出现次数—概率曲线。</li>
+                        <li>校核在超出概率目标以前，定期检测程序是否能高概率地检出损伤。</li>
+                    </ol>
+                </div>
+
+                <!-- 章节导航 -->
+                <div class="chapter-navigation">
+                    <a href="/chapter/7/detail" class="nav-btn nav-btn-prev">
+                        <i class="fas fa-arrow-left"></i>
+                        上一章: 第七章 积木式验证方法
+                    </a>
+                    <!-- 下一章链接暂缺，可根据需要添加 -->
+                </div>
+            </div>
+
+            <!-- 右侧边栏 -->
+            <div class="sidebar">
+                <!-- 相关法规 -->
+                <div class="info-card">
+                    <h3 class="section-title">
+                        <i class="fas fa-gavel"></i> 相关法规
+                    </h3>
+                    <div class="related-items">
+                        <div class="related-item item-article">
+                            <div class="item-title">CCAR-25.571 / FAR 25.571</div>
+                            <div class="item-desc">损伤容限和疲劳评定要求，本章分类验证要求的基础法规。</div>
+                        </div>
+                        <div class="related-item item-article">
+                            <div class="item-title">AC 20-107B 第8节</div>
+                            <div class="item-desc">复合材料飞机结构的损伤容限和疲劳评定，详细阐述了损伤分类与验证要求。</div>
+                        </div>
+                        <div class="related-item item-article">
+                            <div class="item-title">HB8605-2021 相关章节</div>
+                            <div class="item-desc">《飞机复合材料结构适航符合性验证通用要求》中关于损伤容限验证和修理验证的部分。</div>
+                        </div>
+                        <div class="related-item item-article">
+                            <div class="item-title">CCAR-25.305 / FAR 25.305</div>
+                            <div class="item-desc">强度和变形要求，是静强度验证（包括修理后）的依据。</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 核心概念 -->
+                <div class="info-card">
+                    <h3 class="section-title">
+                        <i class="fas fa-lightbulb"></i> 核心概念
+                    </h3>
+                    <div class="related-items">
+                        <div class="related-item item-concept">
+                            <div class="item-title">损伤分类 (1-5类)</div>
+                            <div class="item-desc">根据损伤的可检性、来源和威胁等级，将复合材料损伤分为五类，每类对应不同的剩余强度要求（极限载荷/限制载荷）和检查验证方法。</div>
+                        </div>
+                        <div class="related-item item-concept">
+                            <div class="item-title">修理设计原则</div>
+                            <div class="item-desc">在结构初始设计阶段为便于未来修理而考虑的通用性原则，如预留通道、优选螺接、考虑余量和采用组合构型。</div>
+                        </div>
+                        <div class="related-item item-concept">
+                            <div class="item-title">修理多维验证</div>
+                            <div class="item-desc">对修理方案不仅需验证静强度，还需综合验证其耐久性、刚度、气动外形、环境影响等多维度特性以满足适航要求。</div>
+                        </div>
+                        <div class="related-item item-concept">
+                            <div class="item-title">裂纹增长行为</div>
+                            <div class="item-desc">分为不增长、止裂增长和缓慢增长三种模式，直接影响检查间隔的确定和检查大纲的制定。</div>
+                        </div>
+                        <div class="related-item item-concept">
+                            <div class="item-title">概率损伤容限评定</div>
+                            <div class="item-desc">一种基于概率统计的方法，用于量化评估在结构的整个服役期内，意外损伤与载荷共同作用导致灾难性破坏的风险是否低于可接受目标。</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 合规方法 -->
+                <div class="info-card">
+                    <h3 class="section-title">
+                        <i class="fas fa-check-circle"></i> 合规方法
+                    </h3>
+                    <div class="related-items">
+                        <div class="related-item item-method">
+                            <div class="item-title">损伤威胁评估与分类验证</div>
+                            <div class="item-desc">系统识别结构可能遭遇的所有损伤威胁，并依据法规（如AC 20-107B）将其归入五类损伤，针对每类制定并执行相应的剩余强度验证试验和分析。</div>
+                        </div>
+                        <div class="related-item item-method">
+                            <div class="item-title">修理方案的多维度符合性验证</div>
+                            <div class="item-desc">针对具体的修理设计，不仅进行静强度和疲劳试验，还需评估其对刚度、气动、防雷击、燃油密封等系统的影响，确保全面符合适航要求。</div>
+                        </div>
+                        <div class="related-item item-method">
+                            <div class="item-title">制定基于裂纹增长的检查大纲</div>
+                            <div class="item-desc">根据裂纹增长特性（不增长/止裂/缓慢增长），确定合理的检查间隔、方法和范围，并将其制度化纳入飞机的持续适航维修计划。</div>
+                        </div>
+                        <div class="related-item item-method">
+                            <div class="item-title">实施概率损伤容限评定</div>
+                            <div class="item-desc">通过建立“冲击能量-剩余强度”和“载荷-概率”曲线，计算损伤概率，并验证在用的检查程序能否在风险超出目标前以高概率检出损伤，以满足定量的安全目标。</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 可视化图谱 -->
+        <div class="visualization-section">
+            <h2 class="section-title">
+                <i class="fas fa-project-diagram"></i> 知识关联图谱
+            </h2>
+            <div id="chapter-graph"></div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+    <script>
+        // 加载章节子图可视化
+        async function loadChapterGraph() {
+            try {
+                const response = await fetch(`/api/chapter/8/graph`);
+                const data = await response.json();
+
+                if (data.chapter) {
+                    renderChapterGraph(data);
+                }
+            } catch (error) {
+                console.error('加载章节图谱失败:', error);
+            }
+        }
+
+        function renderChapterGraph(graphData) {
+            const container = document.getElementById('chapter-graph');
+            const nodes = [];
+            const edges = [];
+
+            // 添加中心节点（当前章节）
+            nodes.push({
+                id: 'chapter',
+                label: `第8章\n疲劳与损伤容限要求`,
+                title: '本章系统阐述了复合材料结构在疲劳、损伤容限方面的适航要求，包括损伤分类与验证、修理设计原则、修理方法验证、裂纹增长分析以及概率损伤容限评定程序，确保结构在服役期间的安全性。',
+                color: {
+                    background: '#3498db',
+                    border: '#2980b9'
+                },
+                font: { size: 16 },
+                shape: 'dot',
+                size: 35
+            });
+
+            // 添加相关节点
+            if (graphData.related_nodes) {
+                graphData.related_nodes.forEach((node, index) => {
+                    const nodeId = `node-${index}`;
+                    let color = '#95a5a6';
+                    let label = node.title || node.name || node.code;
+
+                    if (node.labels && node.labels.includes('Article')) {
+                        color = '#2ecc71';
+                    } else if (node.labels && node.labels.includes('Concept')) {
+                        color = '#e67e22';
+                    } else if (node.labels && node.labels.includes('ComplianceMethod')) {
+                        color = '#9b59b6';
+                    } else if (node.labels && node.labels.includes('BuildingBlock')) {
+                        color = '#e74c3c';
+                    }
+
+                    nodes.push({
+                        id: nodeId,
+                        label: label.substring(0, 20) + (label.length > 20 ? '...' : ''),
+                        title: node.description || node.content || '',
+                        color: { background: color },
+                        font: { size: 12 },
+                        shape: 'dot',
+                        size: 25
+                    });
+
+                    // 添加边
+                    edges.push({
+                        from: 'chapter',
+                        to: nodeId,
+                        arrows: 'to',
+                        color: '#95a5a6'
+                    });
+                });
+            }
+
+            const data = { nodes: nodes, edges: edges };
+            const options = {
+                layout: {
+                    improvedLayout: true
+                },
+                physics: {
+                    enabled: true,
+                    stabilization: { iterations: 100 }
+                },
+                interaction: {
+                    hover: true
+                }
+            };
+
+            new vis.Network(container, data, options);
+        }
+
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            loadChapterGraph();
+        });
+    </script>
+</body>
+</html>

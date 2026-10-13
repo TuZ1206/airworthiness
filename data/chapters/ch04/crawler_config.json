@@ -1,0 +1,19 @@
+{
+  "chapter_id": "ch04",
+  "review_status": "pending",
+  "allowed_host_rule": "host == 'gov.cn' or host.endswith('.gov.cn')",
+  "seeds": [
+    "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/201606/t20160622_38638.html",
+    "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202401/t20240110_222622.html",
+    "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/GFXWJ/201801/t20180124_48751.html",
+    "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/202403/t20240313_223201.html",
+    "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202607/t20260701_231208.html",
+    "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202607/t20260701_231207.html",
+    "https://std.samr.gov.cn/hb/search/stdHBDetailedCNF?id=09C9A09DA897FC93E06397BE0A0A1DFC",
+    "https://std.samr.gov.cn/gb/search/gbDetailed?id=71F772D82E8BD3A7E05397BE0A0AB82A"
+  ],
+  "exclude_statuses": ["abolished", "unknown"],
+  "download_pdf": true,
+  "require_attachment_sha256": true,
+  "note": "仅抓取已核实有效的政府入口；专业审核和附件原始哈希完成前不得进入正式Neo4j或Dify。"
+}

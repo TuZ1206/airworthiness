@@ -1,0 +1,15 @@
+term_id,term,aliases,definition,group,has_page,anchor_or_url,related_node_id,source_id,review_status
+CH03-T001,材料强度性能,Material strength properties,以足够材料试验为依据并用于确定材料设计值的性能数据,法规基础,true,#material-evidence,CH03-N007,CH03-S001,pending
+CH03-T002,材料设计值,Material design value,在试验统计基础上确定并用于结构强度分析的材料性能值,设计值,true,#basis-values,CH03-N009,CH03-S001,pending
+CH03-T003,A基准,A-basis,按第25.613条规定用于单个元件失效会导致结构完整性丧失情形的设计值,设计值,true,#basis-values,CH03-N010,CH03-S001,pending
+CH03-T004,B基准,B-basis,按第25.613条规定用于载荷可安全重分配情形的设计值,设计值,true,#basis-values,CH03-N011,CH03-S001,pending
+CH03-T005,预期环境条件,Expected environmental conditions,航空器服役中合理预期且会影响材料适用性或设计值的环境,环境影响,true,#environment,CH03-N004,CH03-S001,pending
+CH03-T006,材料变异性,Material variability,由材料固有差异、批次和制造过程造成的性能分散,设计值,true,#basis-values,CH03-N008,CH03-S001,pending
+CH03-T007,批间变异,Batch-to-batch variability,不同原材料或制造批次之间可观察的材料性能差异,设计值,true,#basis-values,CH03-N017,CH03-S002,pending
+CH03-T008,材料规范,Material specification,规定材料组成、性能、试验和验收要求的受控文件,材料控制,true,#specification-boundary,CH03-N022,CH03-S005,pending
+CH03-T009,材料鉴定,Material qualification,建立材料适用范围、性能数据和批准规范基础的验证活动,材料控制,true,#specification-boundary,CH03-N027,CH03-S005,pending
+CH03-T010,入厂验收试验,Incoming acceptance test,按批准材料规范确认生产批次符合性的取样和试验活动,材料控制,true,#specification-boundary,CH03-N023,CH03-S005,pending
+CH03-T011,材料数据库,Material database,保存材料批次、试验状态、结果和设计值并支持复核的数据集合,证据管理,true,#database-traceability,CH03-N028,CH03-S003,pending
+CH03-T012,试样,Coupon,用于获得材料性能或验证材料状态的材料级试验件,材料证据,true,#material-evidence,CH03-N019,CH03-S003,pending
+CH03-T013,制造代表性,Manufacturing representativeness,试验件材料和制造状态对适用设计资料及生产状态的可追溯代表程度,证据管理,true,#database-traceability,CH03-N019,CH03-S003,pending
+CH03-T014,精选材料,Selected material,逐项取样确认实际强度达到设计使用值后按条款采用较高设计值的材料,设计值,true,#basis-values,CH03-N014,CH03-S001,pending

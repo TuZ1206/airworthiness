@@ -1,0 +1,31 @@
+node_id,chapter_id,label,name,code,summary,display_type,source_id,source_locator,priority,review_status
+CH09-N001,9,Article,运输类飞机适航标准,CCAR-25-R4,试验、分析、材料和制造方法的法规基础,law,CH09-S001,第25.307、25.603、25.605、25.613条,high,pending
+CH09-N002,9,Article,运输类飞机审定,AC-25-AA-2023-03,结构试验、制造方法和材料设计值的符合性方法,norm,CH09-S002,AC 25.307、AC 25.605、AC 25.613,high,pending
+CH09-N003,9,Article,合格审定规定,CCAR-21-R5,试验、制造符合性声明和记录接口,law,CH09-S003,第21.33、21.45、21.50、21.53条,high,pending
+CH09-N004,9,Article,型号合格审定程序,AP-21-11R2,试验计划与符合性闭环程序接口,norm,CH09-S004,官方发布页；附件子条款待复核,medium,pending
+CH09-N005,9,Article,复合材料制造质量体系指南,AC-21-AA-2017-39,材料、试板、记录和制造代表性接口,norm,CH09-S005,材料验收、检验试验、质量记录相关章节,medium,pending
+CH09-N006,9,Standard,复合材料符合性验证标准状态,HB 8605-2021,仅确认标准现行状态，不引用不可见条文,norm,CH09-S006,官方标准状态页,low,pending
+CH09-N007,9,Requirement,试验与分析证明,25.307,符合性可由试验、分析或二者结合证明,concept,CH09-S001,第25.307条,high,pending
+CH09-N008,9,Requirement,材料适用性与环境,25.603,材料适用性和耐久性由经验或试验支持并考虑环境,material,CH09-S001,第25.603条,high,pending
+CH09-N009,9,Requirement,新制造方法试验大纲,25.605,新制造方法以试验大纲证明其能够持续生产完好结构,process,CH09-S001,第25.605条,high,pending
+CH09-N010,9,Requirement,材料设计值统计基础,25.613,材料设计值以足够试验和统计考虑材料变异,concept,CH09-S001,第25.613条,high,pending
+CH09-N011,9,Concept,A基准设计值,A-BASIS,在条款规定的存活概率和置信度条件下使用的材料设计值,concept,CH09-S001,第25.613(b)条,high,pending
+CH09-N012,9,Concept,B基准设计值,B-BASIS,在条款规定的存活概率和置信度条件下按结构后果适用的材料设计值,concept,CH09-S001,第25.613(b)条,high,pending
+CH09-N013,9,Process,试验大纲,TEST-PLAN,明确试验目标、构型、条件、判据和数据交付的受控方案,process,CH09-S003,第21.33条；具体批准流程结合CH09-S004复核,high,pending
+CH09-N014,9,Process,制造符合性确认,MFG-CONFORMITY,确认试验件材料、零件、工艺、构造和装配符合设计资料,process,CH09-S003,第21.33、21.53条,high,pending
+CH09-N015,9,Concept,制造代表性,REPRESENTATIVENESS,试验件状态可追溯到适用材料、工艺、设备、人员和构型,concept,CH09-S005,材料、过程控制、检验试验和质量记录相关章节,high,pending
+CH09-N016,9,Process,试验报告与记录闭环,TEST-REPORT,保存试验状态、数据、偏离、处理和结论以支持复核,process,CH09-S003,第21.33、21.45条,high,pending
+CH09-N017,9,Standard,纤维增强塑料试验总则,GB/T 1446-2005,力学和物理性能测定的通用方法入口,norm,CH09-S007,官方状态页与公开范围,medium,pending
+CH09-N018,9,Standard,拉伸性能试验方法,GB/T 1447-2005,纤维增强塑料拉伸性能试验方法入口,norm,CH09-S008,官方标准状态页,medium,pending
+CH09-N019,9,Standard,压缩性能试验方法,GB/T 1448-2005,纤维增强塑料压缩性能试验方法入口,norm,CH09-S009,官方标准状态页,medium,pending
+CH09-N020,9,Standard,弯曲性能试验方法,GB/T 1449-2005,纤维增强塑料弯曲性能试验方法入口,norm,CH09-S010,官方标准状态页,medium,pending
+CH09-N021,9,Standard,疲劳数据统计分析,GB/T 35465.2-2017,S-N和ε-N疲劳数据统计分析的国内标准入口,norm,CH09-S011,官方标准状态页与标准名称公开范围,medium,pending
+CH09-N022,9,Standard,碳纤维复丝拉伸试验,GB/T 3362-2017,碳纤维复丝拉伸性能试验方法入口,norm,CH09-S012,官方标准状态页,medium,pending
+CH09-N023,9,Method,正态性检验,NORMALITY,采用正态分布模型前核查分布适用性,process,CH09-S014,官方状态页与标准名称公开范围,high,pending
+CH09-N024,9,Method,正态样本离群值处理,OUTLIER,仅对适用正态样本按受控方法判断和处理离群值,process,CH09-S013,官方状态页与标准名称公开范围,high,pending
+CH09-N025,9,Method,统计容忍区间,TOL-INTERVAL,在适用统计模型下确定覆盖总体规定比例的区间,process,CH09-S015,官方状态页与标准名称公开范围,high,pending
+CH09-N026,9,Concept,数据质量,DATA-QUALITY,保证数据完整、可追溯、可复算并保留偏离处理,concept,CH09-S003,第21.33、21.45条,high,pending
+CH09-N027,9,Concept,批间与过程变异,VARIABILITY,试验设计应识别材料批次与制造过程对性能数据的影响,concept,CH09-S002,AC 25.613,high,pending
+CH09-N028,9,Method,试验—分析相关性,CORRELATION,分析模型需由适用试验数据校核并记录适用边界,process,CH09-S001,第25.307条,high,pending
+CH09-N029,9,PendingMethod,蒙特卡洛与概率有限元候选方法,PROB-METHOD,可作为项目候选分析工具，但不得自动视为强制符合性方法,process,CH09-S002,AC 25.307；具体项目接受性待局方确认,low,pending
+CH09-N030,9,PendingConcept,量化统计规则待确认,PENDING-QUANT,样本量、批次数、阈值、公式和容限系数须逐项取得中国官方定位,concept,CH09-S006,官方状态页；受控正文不可见,low,pending
