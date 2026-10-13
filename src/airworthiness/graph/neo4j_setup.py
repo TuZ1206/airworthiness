@@ -125,6 +125,8 @@ ARTICLES = [
      "content": "试验计划、制造符合性和试验报告程序接口", "authority": "CAAC"},
     {"code": "AC-21-AA-2017-39", "title": "复合材料结构制造质量体系要求指南",
      "content": "材料、试板、质量记录和制造代表性接口", "authority": "CAAC"},
+    {"code": "HB 8605-2021", "title": "飞机复合材料结构适航符合性验证通用要求",
+     "content": "仅登记中国政府标准平台公开的标准名称和现行状态", "authority": "SAMR"},
 ]
 
 # ----------------------------
@@ -134,7 +136,6 @@ ARTICLES = [
 CONCEPTS = [
     # 原有
     {"name": "积木式验证", "level": "方法", "description": "从试样到全尺寸试验的渐进验证方法"},
-    {"name": "B基准值", "level": "统计", "description": "具有95%置信度和90%存活率的结构材料性能值"},
     {"name": "工艺鉴定", "level": "制造", "description": "证明制造工艺能够持续生产符合设计要求产品"},
     {"name": "损伤容限", "level": "设计", "description": "结构在存在损伤时仍能保持其剩余强度和刚度的能力"},
     {"name": "持续适航", "level": "运维", "description": "在飞机整个寿命周期内保持适航标准"},
@@ -146,6 +147,12 @@ CONCEPTS = [
     {"name": "统计容忍区间", "level": "统计", "description": "在适用统计模型下确定覆盖总体规定比例的区间"},
     {"name": "数据质量", "level": "统计", "description": "保证试验数据完整、可追溯、可复算并保留偏离处理"},
     {"name": "试验—分析相关性", "level": "验证", "description": "使用适用试验数据校核分析模型和适用边界"},
+    {"name": "材料强度性能", "level": "材料", "description": "以足够材料试验为依据并用于确定材料设计值的性能数据"},
+    {"name": "材料设计值", "level": "材料", "description": "在试验统计基础上形成并用于结构强度分析的材料性能值"},
+    {"name": "预期环境条件", "level": "材料", "description": "航空器服役中合理预期且会影响材料适用性或设计值的环境"},
+    {"name": "材料规范", "level": "材料", "description": "规定材料组成、性能、试验和验收要求的受控文件"},
+    {"name": "材料鉴定与验收", "level": "材料", "description": "区分材料适用性数据建立与生产批次符合性确认的证据职责"},
+    {"name": "材料数据库", "level": "材料", "description": "保存材料批次、试验状态、结果和设计值并支持复核的证据集合"},
 
     # 新增：安全工程（Safety Engineering）
     {"name": "安全性分析", "level": "安全工程", "description": "通过系统化识别危害、评估风险并提出安全需求/措施，形成可审查的安全证据链"},
@@ -349,6 +356,12 @@ class AviationKnowledgeGraph:
             MERGE (c)-[:REFERENCES]->(a)
             """,
             {"pairs": [
+                {"chapter": 3, "article": "CCAR-25-R4"},
+                {"chapter": 3, "article": "AC-25-AA-2023-03"},
+                {"chapter": 3, "article": "CCAR-21-R5"},
+                {"chapter": 3, "article": "AP-21-11R2"},
+                {"chapter": 3, "article": "AC-21-AA-2017-39"},
+                {"chapter": 3, "article": "HB 8605-2021"},
                 {"chapter": 9, "article": "CCAR-25-R4"},
                 {"chapter": 9, "article": "AC-25-AA-2023-03"},
                 {"chapter": 9, "article": "CCAR-21-R5"},
@@ -437,7 +450,14 @@ class AviationKnowledgeGraph:
             MERGE (c)-[:INCLUDES]->(con)
             """,
             {"pairs": [
-                {"chapter": 3, "concept": "B基准值"},
+                {"chapter": 3, "concept": "材料强度性能"},
+                {"chapter": 3, "concept": "材料设计值"},
+                {"chapter": 3, "concept": "A基准设计值"},
+                {"chapter": 3, "concept": "B基准设计值"},
+                {"chapter": 3, "concept": "预期环境条件"},
+                {"chapter": 3, "concept": "材料规范"},
+                {"chapter": 3, "concept": "材料鉴定与验收"},
+                {"chapter": 3, "concept": "材料数据库"},
                 {"chapter": 4, "concept": "工艺鉴定"},
                 {"chapter": 7, "concept": "积木式验证"},
                 {"chapter": 8, "concept": "损伤容限"},

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>第3章: 复合材料的材料性能及验证 - 适航法规知识图谱</title>
+    <title>第3章: 材料性能与材料级验证 - 适航法规知识图谱</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         * {
@@ -291,8 +291,8 @@
 
             <div class="chapter-header">
                 <div class="chapter-number">第 3 章</div>
-                <h1 class="chapter-title">复合材料的材料性能及验证</h1>
-                <p class="chapter-description">本章详细阐述了复合材料在民用飞机适航审定中，关于材料性能表征、统计评估方法、验证标准及材料规范的量化要求与技术指标。</p>
+                <h1 class="chapter-title">材料性能与材料级验证</h1>
+                <p class="chapter-description">依据中国现行官方文件，说明材料适用性、环境影响、材料变异性、A/B基准设计值、材料规范和材料级证据的适航边界。全部新增内容保持 pending，待专业审核。</p>
             </div>
         </div>
 
@@ -305,68 +305,54 @@
                 </h2>
 
                 <div class="knowledge-content">
-                    <h3>3.1 材料的适航标准</h3>
-                    <p><strong>核心法规依据</strong></p>
-                    <ol>
-                        <li><strong>CCAR-25-R4 25.303</strong>：规定材料设计许用值需基于统计方法确定，需提供材料性能的试验数据与置信区间。</li>
-                        <li><strong>CAAC AC 20-107B 5.1</strong>：复合材料需通过材料资质鉴定（MQR），包含原材料、预浸料、成型材料的全性能验证。</li>
-                        <li><strong>SAE AMS 3700</strong>：预浸料的存储、运输、使用规范的行业基准，被CAAC认可为等效技术标准。</li>
-                    </ol>
-                    <p><strong>量化指标</strong></p>
-                    <ol>
-                        <li><strong>资质鉴定试验样本量</strong>：A基准值试验样本数≥30个，B基准值试验样本数≥20个（AC 20-107B 5.2.1）。</li>
-                        <li><strong>材料性能稳定性</strong>：同批次预浸料的拉伸强度变异系数≤8%，压缩强度变异系数≤10%（HB 8605-2021 4.1.3）。</li>
-                        <li><strong>环境适应性验证</strong>：需覆盖-55℃~+70℃温度范围，以及85%RH湿热环境，至少开展1000小时老化试验（AC 20-107B 5.2.3）。</li>
-                    </ol>
+                    <h3 id="regulatory-basis">3.1 材料性能验证的法规基础</h3>
+                    <p>第25.603条要求关系安全的材料以经验或试验证明适用性和耐久性，符合经批准的标准，并考虑服役中预期的环境条件。第25.605条建立制造方法与材料性能一致性的接口；材料和工艺只有在受控条件下才能形成可用于结构验证的数据。</p>
+                    <p><strong>来源：CH03-S001｜第25.603、25.605条</strong></p>
+                    <p>第25.613条是材料强度性能和材料设计值的直接法规锚点。材料强度性能应以足够的材料试验为依据，并在试验统计基础上制定设计值。</p>
+                    <p><strong>来源：CH03-S001｜第25.613(a)条</strong></p>
 
-                    <h3>3.2 材料性能的表征</h3>
-                    <p><strong>测试方法与量化要求（依据 ASTM 标准）</strong></p>
-                    <ol>
-                        <li><strong>拉伸性能</strong>：按 ASTM D3039 测试，碳纤维/环氧树脂复合材料拉伸强度≥1500MPa，弹性模量≥130GPa（典型值）。</li>
-                        <li><strong>压缩性能</strong>：按 ASTM D6641 测试，压缩强度≥1000MPa，弹性模量≥120GPa（典型值）；试样长细比控制在10~15（AC 20-107B 5.3.2）。</li>
-                        <li><strong>层间剪切性能</strong>：按 ASTM D2344 测试，层间剪切强度≥70MPa，湿热老化后保留≥75%初始强度（HB 8605-2021 4.3.2）。</li>
-                        <li><strong>冲击后压缩性能（CAI）</strong>：按 ASTM D7136 测试，BVID级冲击后CAI强度≥250MPa（主承力结构要求，AC 20-107B 8.3.3）。</li>
-                    </ol>
-                    <p><strong>性能表征环境条件</strong></p>
-                    <ol>
-                        <li><strong>标准测试环境</strong>：23℃±2℃，50%RH±5%RH（ASTM D618）。</li>
-                        <li><strong>湿热老化条件</strong>：70℃+85%RH，老化时间1000h/3000h（分别对应短期/长期环境效应，AC 20-107B 5.2.3）。</li>
-                    </ol>
+                    <h3 id="material-evidence">3.2 材料特性与材料级证据</h3>
+                    <p>材料级证据应明确材料体系、批次、试样状态、适用规范、试验条件和结果。试验材料、制造过程、构造和装配状态应与适用设计资料相符，才能进入型号合格审定证据链。</p>
+                    <p><strong>来源：CH03-S003｜第21.33、21.53条</strong></p>
+                    <p>增强纤维可通过适用的力学性能及表面处理控制进行表征；预浸料和胶粘剂应按适用材料规范确认化学、物理和力学性能。具体项目和接受限值由批准规范确定，不在本章设置统一数值。</p>
+                    <p><strong>来源：CH03-S005｜第4.3至4.5节</strong></p>
 
-                    <h3>3.3 基于统计算法的材料性能</h3>
-                    <p><strong>统计方法要求</strong></p>
-                    <ol>
-                        <li><strong>基准值计算</strong>：采用两参数威布尔分布或正态分布，A基准值公式：A = x̄ - k_A * s；B基准值公式：B = x̄ - k_B * s。其中k_A、k_B为置信系数，样本量30时k_A=2.457、k_B=1.645（CCAR-25.303）。</li>
-                        <li><strong>数据剔除</strong>：采用Grubbs检验（显著性水平0.05），异常数据剔除后需补充试验至规定样本量（HB 8605-2021 4.4.2）。</li>
-                    </ol>
-                    <p><strong>量化统计指标</strong></p>
-                    <ol>
-                        <li><strong>数据置信度</strong>：材料性能统计结果需达到95%置信水平，存活率按设计要求选取（99%/95%）。</li>
-                        <li><strong>变异系数上限</strong>：主承力结构材料性能变异系数≤10%，超出时需重新开展材料批次验证（AC 20-107B 5.2.2）。</li>
-                    </ol>
+                    <h3 id="environment">3.3 环境影响与试验状态代表性</h3>
+                    <p>材料适用性和耐久性评价应覆盖服役中预期的环境。对于环境影响显著的至关重要部件或结构，温度、湿度等影响应反映在材料设计值中。</p>
+                    <p><strong>来源：CH03-S001｜第25.603(a)、25.613(c)条</strong></p>
+                    <p>环境条件、材料批次和制造状态必须与试验结果一起记录。具体温湿度、条件化时间和性能保持率属于项目试验方法及接受准则，由批准规范和审定计划确定。</p>
+                    <p><strong>来源：CH03-S002｜AC 25.613；CH03-S003｜第21.33条</strong></p>
 
-                    <h3>3.4 复合材料的材料规范</h3>
-                    <p><strong>规范编制要求</strong></p>
-                    <ol>
-                        <li><strong>原材料规范</strong>：需明确纤维（如T700/IM7）、树脂（如EP21/RTM6）的牌号、供应商、技术指标，以及入厂检验项目（如纤维直径偏差≤±0.5μm）。</li>
-                        <li><strong>预浸料规范</strong>：规定树脂含量（35%±3%）、挥发分含量（≤0.5%）、凝胶时间（90~120s/120℃）等关键指标（HB 8605-2021 4.2.1）。</li>
-                        <li><strong>成型材料规范</strong>：蜂窝芯材密度偏差≤±5kg/m³，泡沫芯材压缩强度≥10MPa（AC 20-107B 6.1.3）。</li>
-                    </ol>
-                    <p><strong>规范更新与管控</strong></p>
-                    <ol>
-                        <li><strong>规范修订</strong>：材料供应商变更、配方调整时，需重新修订规范并通过等效性验证，验证试验至少包含10个试样的关键性能测试。</li>
-                        <li><strong>批次追溯</strong>：原材料需实现批次号-生产批次-检验报告全链路追溯，追溯记录保存至飞机退役后5年（CCAR-25.1529）。</li>
-                    </ol>
+                    <h3 id="basis-values">3.4 材料变异性和A/B基准设计值</h3>
+                    <p>材料设计值应通过统计方法考虑材料变异，并将材料偏差导致结构破坏的概率降至最低。基准选择取决于结构载荷传递和单个元件失效后的后果，而不是由材料类别单独决定。</p>
+                    <ul>
+                        <li><strong>A基准适用条件：</strong>单个元件破坏会导致部件失去结构完整性时，采用99%概率、95%置信度的设计值。</li>
+                        <li><strong>B基准适用条件：</strong>单个元件破坏后载荷能够安全分配至其他承载元件时，采用90%概率、95%置信度的设计值。</li>
+                    </ul>
+                    <p><strong>来源：CH03-S001｜第25.613(b)(1)、(2)条</strong></p>
+                    <p>分布选择、样本量、容限系数和离群值处理归第九章方法边界，本章不预设统一算法。</p>
+
+                    <h3 id="specification-boundary">3.5 材料规范、鉴定与验收边界</h3>
+                    <p>材料规范应规定材料组成、性能、适用试验及验收要求。材料鉴定用于建立材料适用范围、性能数据和批准规范基础；生产批次验收用于确认实际到货材料符合相应规范，两类证据不能相互替代。</p>
+                    <p><strong>来源：CH03-S005｜第3章、第4.1.2节</strong></p>
+                    <p>供应商试验报告本身不足以证明原材料符合材料规范，应从不同批次取样开展适用确认。建立对特定来源产品质量的信任后可以减少复验，但不能取消入厂复验。</p>
+                    <p><strong>来源：CH03-S005｜第4.1.2节</strong></p>
+
+                    <h3 id="database-traceability">3.6 材料数据库、可追溯性及跨章接口</h3>
+                    <p>材料数据库应保存材料批次、试样状态、试验条件、结果、偏离处理和设计值来源，使材料结论能够回溯至设计资料和制造符合性记录。</p>
+                    <p><strong>来源：CH03-S003｜第21.33、21.45条</strong></p>
+                    <p>试验方法和统计计算归第九章，制造工艺控制归第四章，材料或供应商变更归第五、六章，材料级证据向高层级结构验证的传递归第七章。</p>
+                    <p><strong>审核状态：pending｜跨章边界见CH03 review.md</strong></p>
                 </div>
 
                 <!-- 章节导航 -->
                 <div class="chapter-navigation">
                     <a href="/chapter/2/detail" class="nav-btn nav-btn-prev">
                         <i class="fas fa-arrow-left"></i>
-                        上一章: 第二章 复合材料概述
+                        上一章: 第二章 复合材料结构适航验证总体框架
                     </a>
                     <a href="/chapter/4/detail" class="nav-btn nav-btn-next">
-                        下一章: 第四章 复合材料的工艺及验证
+                        下一章: 第四章 制造工艺与工艺验证
                         <i class="fas fa-arrow-right"></i>
                     </a>
                 </div>
@@ -381,20 +367,24 @@
                     </h3>
                     <div class="related-items">
                         <div class="related-item item-article">
-                            <div class="item-title">CCAR-25-R4 25.303</div>
-                            <div class="item-desc">材料性能统计评估与设计许用值确定</div>
+                            <div class="item-title">CCAR-25-R4 25.603/25.605/25.613</div>
+                            <div class="item-desc">材料适用性、制造方法和材料设计值的法规基础</div>
                         </div>
                         <div class="related-item item-article">
-                            <div class="item-title">CAAC AC 20-107B</div>
-                            <div class="item-desc">复合材料飞机结构，包含材料、工艺、验证与审定</div>
+                            <div class="item-title">AC-25-AA-2023-03</div>
+                            <div class="item-desc">材料设计值和工艺验证的可接受符合性方法</div>
+                        </div>
+                        <div class="related-item item-article">
+                            <div class="item-title">CCAR-21-R5 / AP-21-11R2</div>
+                            <div class="item-desc">检查试验、制造符合性和审定程序接口</div>
+                        </div>
+                        <div class="related-item item-article">
+                            <div class="item-title">AC-21-AA-2017-39</div>
+                            <div class="item-desc">材料规范、入厂验收、表征和记录接口</div>
                         </div>
                         <div class="related-item item-article">
                             <div class="item-title">HB 8605-2021</div>
-                            <div class="item-desc">民用飞机复合材料结构工艺质量控制</div>
-                        </div>
-                        <div class="related-item item-article">
-                            <div class="item-title">SAE AMS 3700</div>
-                            <div class="item-desc">预浸料材料规范行业标准</div>
+                            <div class="item-desc">仅登记官方标准状态，技术条文待受控正文核验</div>
                         </div>
                     </div>
                 </div>
@@ -406,24 +396,24 @@
                     </h3>
                     <div class="related-items">
                         <div class="related-item item-concept">
-                            <div class="item-title">材料适航标准</div>
-                            <div class="item-desc">适用于复合材料性能表征与验证的法规和行业标准</div>
+                            <div class="item-title">材料强度性能</div>
+                            <div class="item-desc">以足够材料试验为依据并用于确定材料设计值的性能数据</div>
                         </div>
                         <div class="related-item item-concept">
-                            <div class="item-title">材料性能表征</div>
-                            <div class="item-desc">通过标准化测试方法量化材料力学性能与环境适应性</div>
+                            <div class="item-title">材料设计值</div>
+                            <div class="item-desc">在试验统计基础上形成并用于结构强度分析的材料性能值</div>
                         </div>
                         <div class="related-item item-concept">
-                            <div class="item-title">统计基准值</div>
-                            <div class="item-desc">基于统计分布（如威布尔分布）计算的、具有特定置信水平和存活率的设计许用值（A/B基准值）</div>
+                            <div class="item-title">A/B基准设计值</div>
+                            <div class="item-desc">根据载荷传递和单个元件失效后的结构后果选择</div>
                         </div>
                         <div class="related-item item-concept">
                             <div class="item-title">材料规范</div>
-                            <div class="item-desc">规定原材料、预浸料、成型材料技术指标、验收标准与管控要求的文件</div>
+                            <div class="item-desc">规定材料组成、性能、试验和验收要求的受控文件</div>
                         </div>
                         <div class="related-item item-concept">
-                            <div class="item-title">材料资质鉴定 (MQR)</div>
-                            <div class="item-desc">对复合材料体系从原材料到成型材料进行全性能验证的过程</div>
+                            <div class="item-title">材料鉴定与验收</div>
+                            <div class="item-desc">分别承担适用性数据建立和生产批次符合性确认职责</div>
                         </div>
                     </div>
                 </div>
@@ -435,20 +425,20 @@
                     </h3>
                     <div class="related-items">
                         <div class="related-item item-method">
-                            <div class="item-title">材料资质鉴定试验</div>
-                            <div class="item-desc">通过规定样本量的系统试验，建立材料性能数据库并通过MQR。</div>
+                            <div class="item-title">材料适用性验证</div>
+                            <div class="item-desc">以经验或适用试验证明材料在预期环境中的适用性和耐久性。</div>
                         </div>
                         <div class="related-item item-method">
-                            <div class="item-title">统计基准值计算</div>
-                            <div class="item-desc">运用威布尔或正态分布模型，计算满足95%置信水平和99%/95%存活率的设计许用值。</div>
+                            <div class="item-title">基准选择</div>
+                            <div class="item-desc">依据结构失效后果选择第25.613条规定的A或B基准适用路径。</div>
                         </div>
                         <div class="related-item item-method">
-                            <div class="item-title">环境适应性验证</div>
-                            <div class="item-desc">在湿热、高低温等环境谱下进行规定时长的老化试验，评估性能保持率。</div>
+                            <div class="item-title">环境影响评价</div>
+                            <div class="item-desc">将预期温度、湿度等显著环境影响反映在材料设计值中。</div>
                         </div>
                         <div class="related-item item-method">
-                            <div class="item-title">材料规范与追溯</div>
-                            <div class="item-desc">编制详细规范控制材料质量，并建立全生命周期批次追溯体系。</div>
+                            <div class="item-title">材料数据库与追溯</div>
+                            <div class="item-desc">记录批次、试样状态、试验条件、结果、偏离和设计值来源。</div>
                         </div>
                     </div>
                 </div>
@@ -488,8 +478,8 @@
             // 添加中心节点（当前章节）
             nodes.push({
                 id: 'chapter',
-                label: `第3章\n复合材料的材料性能及验证`,
-                title: '本章详细阐述了复合材料在民用飞机适航审定中，关于材料性能表征、统计评估方法、验证标准及材料规范的量化要求与技术指标。',
+                label: `第3章\n材料性能与材料级验证`,
+                title: '材料适用性、环境影响、材料变异性、A/B基准设计值、材料规范和材料级证据的适航边界。',
                 color: {
                     background: '#3498db',
                     border: '#2980b9'

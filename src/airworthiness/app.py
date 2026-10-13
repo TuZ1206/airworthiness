@@ -80,7 +80,7 @@ fixed_chapter_data = {
         "title": "复合材料结构适航验证总体框架",
         "description": "本章系统阐述复合材料结构适航验证的核心框架，涵盖符合性方法(MoC)、积木式验证方法、验证证据链构建以及完整的取证与审查流程，为复合材料飞机结构满足适航规章要求提供系统的工程路径。",
         "prev_chapter": {"id": 1, "title": "复合材料适航法规体系概述"},
-        "next_chapter": {"id": 3, "title": "复合材料制造与工艺符合性"},
+        "next_chapter": {"id": 3, "title": "材料性能与材料级验证"},
         "articles": [
             {"code": "AP-21-AA-2023-11R1", "title": "型号合格审定程序", "content": "..."},
             {"code": "HB 8605-2021", "title": "飞机复合材料结构适航符合性验证通用要求", "content": "..."},
@@ -98,36 +98,36 @@ fixed_chapter_data = {
              "description": "由试验、分析和检查构成的，用于向审查方证明设计符合性的完整逻辑链条。", "level": None}
         ]
     },
-    3: {  # 第3章：复合材料的材料性能及验证
+    3: {  # 第3章：材料性能与材料级验证
         "id": 3,
-        "title": "复合材料的材料性能及验证",
-        "description": "本章详细阐述了复合材料在民用飞机适航审定中，关于材料性能表征、统计评估方法、验证标准及材料规范的量化要求与技术指标。",
-        "prev_chapter": {"id": 2, "title": "复合材料结构适航验证总体框架"},  # 与第2章关联
-        "next_chapter": {"id": 4, "title": "第四章 复合材料的工艺及验证"},  # 与第4章关联
-        "articles": [  # 相关法规
-            {"code": "CCAR-25-R4 25.303", "title": "材料性能统计评估与设计许用值确定", "content": "..."},
-            {"code": "CAAC AC 20-107B", "title": "复合材料飞机结构，包含材料、工艺、验证与审定", "content": "..."},
-            {"code": "HB 8605-2021", "title": "民用飞机复合材料结构工艺质量控制", "content": "..."},
-            {"code": "SAE AMS 3700", "title": "预浸料材料规范行业标准", "content": "..."}
+        "title": "材料性能与材料级验证",
+        "description": "本章依据中国现行官方文件说明材料适用性、环境影响、材料变异性、A/B基准设计值、材料规范和材料级证据的适航边界。",
+        "prev_chapter": {"id": 2, "title": "复合材料结构适航验证总体框架"},
+        "next_chapter": {"id": 4, "title": "制造工艺与工艺验证"},
+        "articles": [
+            {"code": "CCAR-25-R4 25.603/25.605/25.613", "title": "材料适用性、制造方法和材料设计值的法规基础", "content": "pending"},
+            {"code": "AC-25-AA-2023-03", "title": "材料和工艺验证及设计值的可接受符合性方法", "content": "pending"},
+            {"code": "CCAR-21-R5", "title": "检查试验、制造符合性和记录接口", "content": "pending"},
+            {"code": "AP-21-11R2", "title": "现行型号合格审定程序接口", "content": "pending"},
+            {"code": "AC-21-AA-2017-39", "title": "材料规范、入厂验收、表征和记录接口", "content": "pending"},
+            {"code": "HB 8605-2021", "title": "仅登记官方标准状态，具体条文待受控正文核验", "content": "pending"}
         ],
-        "concepts": [  # 核心概念
-            {"name": "材料适航标准", "description": "适用于复合材料性能表征与验证的法规和行业标准", "level": None},
-            {"name": "材料性能表征", "description": "通过标准化测试方法量化材料力学性能与环境适应性",
-             "level": None},
-            {"name": "统计基准值",
-             "description": "基于统计分布（如威布尔分布）计算的、具有特定置信水平和存活率的设计许用值（A/B基准值）",
-             "level": None},
-            {"name": "材料规范", "description": "规定原材料、预浸料、成型材料技术指标、验收标准与管控要求的文件",
-             "level": None},
-            {"name": "材料资质鉴定 (MQR)", "description": "对复合材料体系从原材料到成型材料进行全性能验证的过程",
-             "level": None}
+        "concepts": [
+            {"name": "材料强度性能", "description": "以足够材料试验为依据并用于确定材料设计值的性能数据。", "level": None},
+            {"name": "材料设计值", "description": "在试验统计基础上形成并用于结构强度分析的材料性能值。", "level": None},
+            {"name": "A基准设计值", "description": "按CCAR-25第25.613条规定的结构失效后果、概率和置信度条件适用。", "level": None},
+            {"name": "B基准设计值", "description": "按CCAR-25第25.613条规定的载荷重分配条件、概率和置信度适用。", "level": None},
+            {"name": "预期环境条件", "description": "航空器服役中合理预期且会影响材料适用性或设计值的环境。", "level": None},
+            {"name": "材料规范", "description": "规定材料组成、性能、试验和验收要求的受控文件。", "level": None},
+            {"name": "材料鉴定与验收", "description": "区分材料适用性数据的建立与生产批次符合性的确认。", "level": None},
+            {"name": "材料数据库", "description": "保存材料批次、试验状态、结果和设计值并支持复核的证据集合。", "level": None}
         ]
     },
     4: {  # 第4章：复合材料的工艺及验证
         "id": 4,
         "title": "复合材料的工艺及验证",
         "description": "本章系统阐述了复合材料构件制造工艺的适航标准、关键工艺参数控制、过程质量控制方法、工艺验证要求及相应文件化规范，确保生产过程的稳定性和构件的适航符合性。",
-        "prev_chapter": {"id": 3, "title": "第三章 复合材料的材料性能及验证"},  # 与第3章关联
+        "prev_chapter": {"id": 3, "title": "第三章 材料性能与材料级验证"},  # 与第3章关联
         "next_chapter": {"id": 5, "title": "第五章 等同验证与变更管理"},
         "articles": [  # 相关法规
             {"code": "CCAR-25-R4 25.831", "title": "工艺要求与工艺变更的适航审定要求", "content": "..."},

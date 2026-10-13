@@ -1,0 +1,8 @@
+source_id,title,document_code,document_status,publish_date,url,sha256,crawled_at,review_status
+CH03-S001,运输类飞机适航标准,CCAR-25-R4,effective,2011-11-07,https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/MHGZ/201606/t20160622_38638.html,0f2cdf00696afafef4e16787260093de107923120182678f49fd0498fd437401,2026-10-13T00:00:00+08:00,pending
+CH03-S002,运输类飞机审定,AC-25-AA-2023-03,effective,2023-12-27,https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202401/t20240110_222622.html,e2b171caeb4461c618ffe5f7c0a4ebc732e83a37bda34eb2f114a861748d29de,2026-10-13T00:00:00+08:00,pending
+CH03-S003,民用航空产品和零部件合格审定规定,CCAR-21-R5,effective,2024-02-18,https://www.caac.gov.cn/XXGK/XXGK/MHGZ/202403/t20240313_223201.html,a456e3f0996f5fc4e1fe448f75a324016ca35822ebb4f0fe5ba208adc318c656,2026-10-13T00:00:00+08:00,pending
+CH03-S004,型号合格审定程序,AP-21-11R2,effective,2026-06-25,https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202607/t20260701_231208.html,95dc171e8f487e930706186a2ad904400d7fb334c9c153da5adce37a18964439,2026-10-13T00:00:00+08:00,pending
+CH03-S005,复合材料结构制造质量体系要求指南,AC-21-AA-2017-39,effective,2017-03-17,https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/GFXWJ/201801/t20180124_48751.html,854c437e6e19438ed509f4cc92d4c9e7258cf70c105213deee873a773632ffda,2026-10-13T00:00:00+08:00,pending
+CH03-S006,飞机复合材料结构适航符合性验证通用要求,HB 8605-2021,effective,2021-04-19,https://std.samr.gov.cn/hb/search/stdHBDetailedCNF?id=09C9A09DA897FC93E06397BE0A0A1DFC,f63a4273ae8fcac64f74a7c609bc803b3fdd900df5fb09755ad7f3c8d4c30b4c,2026-10-13T00:00:00+08:00,pending
+CH03-S007,型号合格审定程序历史版本,AP-21-AA-2023-11R1,abolished,2023-12-06,https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202312/t20231223_222437.html,98a3434bfe0c81149deba845a493177c54836d121b3837367bcd89c331553344,2026-10-13T00:00:00+08:00,pending
