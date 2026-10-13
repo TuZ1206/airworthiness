@@ -1,0 +1,33 @@
+name: Official source acquisition
+on:
+  workflow_dispatch:
+  push:
+    branches: [feat/offline-resource-hall]
+    paths: [.github/workflows/source-acquisition.yml]
+permissions:
+  contents: read
+jobs:
+  collect-official-sources:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      PYTHONUTF8: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install -e .
+      - name: Fetch public official sources with bounded verified requests
+        run: python -m airworthiness.acquire --root . --workers 4 --per-host 2
+      - name: Preserve download evidence for local integration
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: official-source-evidence
+          retention-days: 3
+          include-hidden-files: true
+          path: |
+            data/acquired/
+            .cache/acquisition/*.bin
+            .cache/acquisition/*.json
