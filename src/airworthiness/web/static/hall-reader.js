@@ -1,5 +1,6 @@
 import { main, announcer, mobile, reducedMotion, kinds, statuses, state, el, list, count, chapterNumber, query, reviewLabel, sourceChapter, chapterURL, resourceURL, link, officialLink, badge, loading, errorBox, overview, record, renderRail, updateChapterSelect, route, navigate } from './hall-core.js';
 import { readingHTML, highlight } from './hall-content.js';
+import { createDocumentView } from './hall-document-view.js';
 
 function readerPanel(className, title, content) {
   return el('details', { class: className, open: !mobile.matches }, el('summary', { class: 'panel-summary' }, title), content);
@@ -35,8 +36,10 @@ function renderReaderSidebar(container, chapter, selectedSource, chapters, toc) 
   container.replaceChildren(
     el('p', { class: 'sidebar-label' }, '九章索引'), switcher,
     link('本章导读', chapterURL(chapter.id), { class: 'guide-link', 'aria-current': selectedSource ? null : 'page' }),
-    el('nav', { 'aria-label': '当前内容目录' }, el('p', { class: 'sidebar-label' }, selectedSource ? '当前文档目录' : '导读目录'),
-      toc.length ? tocList : el('p', { class: 'sidebar-empty' }, '当前内容没有可用的分节目录。')),
+    el('details', { class: 'toc-disclosure' },
+      el('summary', {}, selectedSource ? `文字目录 · ${toc.length} 处定位` : '导读目录'),
+      el('nav', { 'aria-label': '当前内容目录' },
+        toc.length ? tocList : el('p', { class: 'sidebar-empty' }, '当前内容没有可用的分节目录。'))),
     el('p', { class: 'sidebar-label' }, '本章文件 · ', fileCount), filter,
     el('nav', { 'aria-label': '本章文件' }, files));
 }
@@ -141,11 +144,16 @@ function documentNotice(doc) {
   if (doc.content_kind === 'metadata' && originalPDFs(doc).length) {
     messages.metadata = '本条目暂缺可检索文字，可查看本地 PDF 原件并对照图表、公式。下方登记信息不代表原文。';
   }
+  if (doc.content_kind === 'extracted' && originalPDFs(doc).length) {
+    messages.extracted = '已保存 PDF 原件，可按原件版式阅读。提取文字仅用于辅助检索，表格、公式及 OCR 文字仍需对照原件。';
+  }
   return el('aside', { class: 'content-notice', 'aria-label': '收录与审核说明' },
     el('strong', {}, `${kinds[doc.content_kind] || '收录类型未注明'} · ${reviewLabel(doc.review_status)}`),
     el('p', {}, messages[doc.content_kind] || '收录范围尚未确认，请核对官方来源。'),
-    doc.navigation_note ? el('p', {}, doc.navigation_note) : null,
-    doc.extraction_note ? el('p', { class: 'extraction-note' }, doc.extraction_note) : null);
+    doc.navigation_note || doc.extraction_note ? el('details', { class: 'notice-details' },
+      el('summary', {}, '提取限制与定位说明'),
+      doc.navigation_note ? el('p', {}, doc.navigation_note) : null,
+      doc.extraction_note ? el('p', { class: 'extraction-note' }, doc.extraction_note) : null) : null);
 }
 
 function metadataEvidenceLink(value, index) {
@@ -224,8 +232,10 @@ async function renderReader(chapterId, signal, generation) {
   const pane = el('section', { class: 'reading-pane', tabindex: '0', 'aria-label': '正文阅读区', 'aria-busy': 'true' }, loading('正在打开阅读内容…'));
   const leftPanel = readerPanel('reader-sidebar', '章节、文件与当前目录', sidebar);
   const rightPanel = readerPanel('glossary-sidebar', '随文术语释义', glossary);
-  main.replaceChildren(el('div', { class: 'reader-shell' }, leftPanel, pane, rightPanel));
-  const resize = () => { leftPanel.open = !mobile.matches; rightPanel.open = !mobile.matches; };
+  rightPanel.open = false;
+  leftPanel.append(rightPanel);
+  main.replaceChildren(el('div', { class: 'reader-shell' }, leftPanel, pane));
+  const resize = () => { leftPanel.open = !mobile.matches; rightPanel.open = false; };
   mobile.addEventListener('change', resize);
   state.disposers.push(() => mobile.removeEventListener('change', resize));
   const values = await Promise.allSettled([
@@ -271,14 +281,14 @@ async function renderReader(chapterId, signal, generation) {
       isDoc ? link(`第 ${chapterNumber(chapter.id)} 章`, chapterURL(chapter.id)) : el('span', {}, `第 ${chapterNumber(chapter.id)} 章`),
       el('span', { class: 'breadcrumb-divider', 'aria-hidden': 'true' }, '/'), el('span', {}, isDoc ? doc.source_id : '本章导读')),
     el('p', { class: 'eyebrow' }, isDoc ? `${doc.source_id} / ${kinds[doc.content_kind] || '收录资料'}` : `CHAPTER ${chapterNumber(chapter.id)} / READING GUIDE`), heading,
-    isDoc ? el('div', { class: 'tag-group' }, badge(doc.content_kind), el('span', { class: 'review-label' }, reviewLabel(doc.review_status))) :
+    isDoc ? el('p', { class: 'document-meta' }, doc.document_code || doc.source_id, ' · ', doc.publish_date || '发布日期待核对') :
       el('p', { class: 'reader-description' }, chapter.description),
-    isDoc ? documentFacts(doc) : null,
-    isDoc ? provenanceDetails(doc) : null,
+    isDoc ? el('details', { class: 'document-details' }, el('summary', {}, '文件信息、来源与校验记录'),
+      documentFacts(doc), provenanceDetails(doc)) : null,
     isDoc ? documentNotice(doc) : el('aside', { class: 'content-notice' }, el('strong', {}, '章节导读 · 待专业审核'), '导读用于组织阅读线索。查阅具体条文时，请选择已收录的来源文件。'),
-    readerTools(content.root, query()),
-    isDoc && ['excerpt', 'metadata'].includes(doc.content_kind) ? el('p', { class: 'sidebar-label' }, doc.content_kind === 'excerpt' ? '以下为整理摘录' : '来源登记与状态信息') : null,
-    content.root);
+    isDoc ? createDocumentView({ doc, originals: originalPDFs(doc), content: content.root,
+      tools: readerTools(content.root, query()), search: query(), hash: location.hash }) :
+      el('div', {}, readerTools(content.root, query()), content.root));
   const related = isDoc ? list(doc.related_sources) : [];
   if (related.length) inner.append(el('section', { class: 'related-sources', 'aria-label': '相关资料' }, el('h2', {}, '继续阅读 · 相关资料'),
     related.map(item => link([item.title || item.source_id, el('small', {}, `${item.source_id} · ${item.chapter_title || item.chapter_id || ''}`)], resourceURL(item)))));

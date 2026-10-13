@@ -1,5 +1,16 @@
 import { el, list, safeURL } from './hall-core.js';
 
+// Presentation only: keep legal text and backend IDs; never infer new clauses.
+function readingPresentation(tag, id, text, extracted) {
+  if (/^h[1-6]$/.test(tag) && /^reading-page-\d/.test(id)) return { className: 'source-page-label' };
+  if (/^h[1-6]$/.test(tag) && /^reading-toc-/.test(id)) return { className: 'source-directory-heading' };
+  if (extracted) return { className: 'extracted-block' };
+  if (tag === 'p' && text.includes('\n')) {
+    return { className: 'source-lines', lines: text.split('\n').map(line => line.trim()) };
+  }
+  return { className: '' };
+}
+
 // Search terms become text nodes inside mark elements, never HTML strings.
 function highlight(root, text) {
   const terms = [...new Set(String(text || '').trim().split(/\s+/u).filter(Boolean))].slice(0, 12).sort((a, b) => b.length - a.length);
@@ -64,10 +75,11 @@ function readingHTML(html, suppliedToc, baseURL) {
     if (discard.has(tag)) return;
     if (!allowed.has(tag)) { for (const child of source.childNodes) copy(child, parent); return; }
     const target = el(tag);
-    // The backend escapes raw extracted text; retain its whitespace convention.
-    if (['p', 'pre', 'div'].includes(tag) && source.classList.contains('extracted-block')) target.className = 'extracted-block';
     const rawId = source.getAttribute('id');
     if (rawId || /^h[1-6]$/.test(tag)) target.id = uniqueID(rawId);
+    const presentation = readingPresentation(tag, target.id || '', source.textContent,
+      ['p', 'pre', 'div'].includes(tag) && source.classList.contains('extracted-block'));
+    if (presentation.className) target.className = presentation.className;
     for (const attr of ['title', 'lang', 'dir']) if (source.hasAttribute(attr)) target.setAttribute(attr, source.getAttribute(attr));
     if (tag === 'td' || tag === 'th') {
       for (const attr of ['colspan', 'rowspan']) {
@@ -90,6 +102,11 @@ function readingHTML(html, suppliedToc, baseURL) {
       }
     }
     for (const child of source.childNodes) copy(child, target);
+    // Plain web-source lines (directory entries / enumerated items) need block
+    // layout. Never flatten inline markup, code, formulas or extracted tables.
+    if (presentation.lines && !source.children.length) {
+      target.replaceChildren(...presentation.lines.map(line => el('span', { class: 'source-line' }, line)));
+    }
     if (/^h[1-6]$/.test(tag)) headingItems.push({ id: target.id, text: target.textContent.trim(), level: Number(tag.slice(1)) });
     if (tag === 'table') parent.append(el('div', { class: 'table-scroll', tabindex: '0', role: 'region', 'aria-label': '文档表格，可横向滚动' }, target));
     else parent.append(target);
@@ -107,4 +124,4 @@ function readingHTML(html, suppliedToc, baseURL) {
 }
 
 
-export { highlight, readingHTML };
+export { highlight, readingHTML, readingPresentation };

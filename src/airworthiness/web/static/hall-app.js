@@ -69,6 +69,7 @@ document.addEventListener('click', event => {
     const target = document.getElementById(anchor.dataset.tocTarget);
     if (!target) return;
     event.preventDefault();
+    main.querySelector('.document-view')?.showText?.();
     if (mobile.matches) main.querySelectorAll('.reader-sidebar, .glossary-sidebar').forEach(panel => { panel.open = false; });
     history.replaceState(null, '', `${location.pathname}${location.search}#${encodeURIComponent(target.id)}`);
     target.scrollIntoView({ block: 'start', behavior: reducedMotion.matches ? 'auto' : 'smooth' });

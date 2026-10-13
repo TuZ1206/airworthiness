@@ -8,6 +8,7 @@ from . import catalog
 from .config import project_root
 from .originals import cached_original, original_snapshot
 from .access_notes import enrich_access_notes
+from .http_response import compress_text_response
 
 
 def create_app(settings=None):
@@ -111,10 +112,14 @@ def create_app(settings=None):
     def headers(response):
         response.headers["X-Content-Type-Options"] = "nosniff"
         response.headers["Referrer-Policy"] = "no-referrer"
-        response.headers["Content-Security-Policy"] = "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'; object-src 'none'"
+        frame_ancestors = "'none'"
+        if (request.endpoint == "original" and 200 <= response.status_code < 300
+                and response.mimetype == "application/pdf"):
+            frame_ancestors = "'self'"
+        response.headers["Content-Security-Policy"] = f"default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; frame-ancestors {frame_ancestors}; base-uri 'none'; object-src 'none'"
         if request.path.startswith("/api/"):
             response.headers["Cache-Control"] = "no-store"
-        return response
+        return compress_text_response(response)
 
     return app
 

@@ -15,7 +15,7 @@ class OriginalTests(unittest.TestCase):
         self.module = importlib.import_module('airworthiness.originals')
         self.temp = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)
-        self.root = Path(self.temp.name)
+        self.root = Path(self.temp.name).resolve()
         self.url = 'https://www.caac.gov.cn/file.pdf'
         self.raw = b'%PDF-1.7\nverified official bytes for route fixture'
         self.sha = hashlib.sha256(self.raw).hexdigest()
