@@ -93,6 +93,8 @@ def extract_html(data: bytes, url: str) -> Extraction:
     for unwanted in soup.select("script, style, noscript, nav, aside, header, footer, form, iframe, .share, .print, .bdsharebuttonbox"):
         unwanted.decompose()
     for hidden in soup.select('[hidden], [aria-hidden="true"], [style]'):
+        if hidden.attrs is None:  # A hidden ancestor already decomposed this node.
+            continue
         if hidden.has_attr("hidden") or hidden.get("aria-hidden") == "true" or re.search(r"display\s*:\s*none", hidden.get("style", ""), re.I):
             hidden.decompose()
     visible = soup.get_text(" ", strip=True)
