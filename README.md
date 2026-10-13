@@ -1,6 +1,41 @@
-# 民用航空适航知识图谱与智能问答
+# 民用航空适航法规资源大厅
 
-本仓库用于复现一个面向国内民用航空适航资料的演示系统。当前只完成两个板块：
+## 当前可运行版本：九章离线资源大厅
+
+本轮重建提供九章资料浏览、多文档本地阅读、中文全文检索、来源追溯和资料质量报告。**暂不启用 Neo4j、图谱、Dify 或 AI 问答**；后续两模块的专业审核与数据规则继续保留。旧版硬编码页面和程序已在本分支移除，可通过 Git 历史恢复，原章节节点、关系表保留。
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -e .
+.\.venv\Scripts\python.exe -m airworthiness.app
+```
+
+打开 <http://127.0.0.1:5000>。也可运行 `powershell -ExecutionPolicy Bypass -File .\start.ps1`。无需配置密钥或 `.env`；首次安装依赖需要联网，之后已保存内容可离线浏览。
+
+- 一份文件独立保存；同一章节内切换文件无需跳官网。官方链接用于额外核验。
+- 来源记录数包含跨章重复引用，不等于独立法规数。
+- **网页正文**：从已识别的官方正文区域提取；**提取正文**：附件机械提取，表格、公式和完整性待校对；**摘录／状态信息**：未获得全文，不冒充原文。
+- 上传资料位于 `data/chapters/`，补抓正文和获取记录位于 `data/acquired/`，SQLite 检索索引位于被忽略的 `.cache/`。资料变化后重启应用自动重建索引。
+- 来源审核状态不会因自动采集成功而改变；页面仍显示待专业审核。
+
+### 验证与报告
+
+```powershell
+.\.venv\Scripts\python.exe -m unittest discover -s tests -v
+.\.venv\Scripts\python.exe -m airworthiness.cli validate
+.\.venv\Scripts\python.exe -m airworthiness.cli build
+.\.venv\Scripts\python.exe -m airworthiness.cli report
+```
+
+页面 `/quality` 显示同一份质量统计；生成报告位于 `docs/data-quality-report.md`。详细操作见 [验收说明](docs/offline-acceptance.md)。重新获取官方资料使用 `python -m airworthiness.acquire --root .`，其输出不会覆盖上传原稿，下载失败会明确记录。原始二进制附件留在本地缓存，不提交 Git。
+
+当前实现分工：`ingest.py` 读取和校验资料，`catalog.py` 构建和查询 SQLite，`reading.py` 安全渲染正文，`app.py` 提供本机 API，`acquire.py` 获取官方资料，`cli.py` 提供构建和报告命令。
+
+---
+
+## 后续系统目标与资料规则
+
+本仓库的后续目标是面向国内民用航空适航资料完成两个板块：
 
 1. **知识图谱**：把九章资料整理为可审查的节点和关系，审核后导入 Neo4j。
 2. **AI 问答**：把审核通过的原文资料交给 Dify 建立知识库，由 DeepSeek 生成带来源的回答。
@@ -21,7 +56,7 @@ gov.cn / *.gov.cn 官方页面
 
 ## 二、建议目录
 
-以下是团队确认清理旧文件后采用的目标结构。当前仓库中的旧版单文件程序和压缩包暂时保留，不要继续在压缩包或千行脚本中增加新内容。
+以下为包含后续图谱与问答模块的目标结构；当前离线实现见本文开头，不要恢复旧版硬编码程序或在压缩包中开发。
 
 ```text
 airworthiness/
@@ -54,9 +89,9 @@ airworthiness/
 └─ README.md
 ```
 
-## 三、从零构建环境
+## 三、后续图谱与问答服务环境
 
-推荐 Windows、Python 3.11、Neo4j 5.x。Dify 可以使用云服务或本地部署，本项目通过 HTTP API 调用，不在仓库中重复实现 RAG。
+离线资源大厅只需要 Python 3.11 或以上（SQLite 需支持 FTS5 trigram，官方 Python 发行版通常已包含）。后续图谱采用 Neo4j 5.x；Dify 可以使用云服务或本地部署，通过 HTTP API 调用，不在仓库中重复实现 RAG。
 
 ```powershell
 git clone https://github.com/TuZ1206/airworthiness.git
@@ -65,10 +100,9 @@ py -3.11 -m venv .venv
 .\.venv\Scripts\Activate.ps1
 python -m pip install --upgrade pip
 pip install -e .
-Copy-Item .env.example .env
 ```
 
-然后在本机 `.env` 中填写 Neo4j、Dify 和 DeepSeek 配置。`.env` 只保存在个人电脑，不得上传。
+当前离线版本无需 `.env`。后续恢复服务接入时再添加 Neo4j、Dify 配置；真实密钥只保存在本机，不能上传。
 
 `pip install -e .` 会按 `pyproject.toml` 安装依赖，并以可编辑方式注册 `airworthiness` 包（源码在 `src/` 下）。启动命令固定为：
 
@@ -232,11 +266,11 @@ docs/repository-guidelines
 
 ## 十、旧文件处理结果
 
-历史遗留文件已完成清理：
+旧版本曾完成文件归类，本轮进一步移除了旧应用实现：
 
-- 根目录 `app.py`、`neo4j_setup.py`、`data_generator.py` 已归入 `src/airworthiness/`。
-- 原 `测试.py`（实际是另一版 neo4j 实现）经对比确认是旧版且数据不全，已删除；当前保留 `src/airworthiness/graph/neo4j_setup.py` 作为唯一实现。
-- `Web开发.zip` 已解压并分类到 `src/airworthiness/web/`，压缩包已删除。
+- `src/airworthiness/app.py` 已替换为离线资源大厅，不包含硬编码法规、模型调用或 Neo4j 启动依赖。
+- 旧图谱脚本、旧问答页面、旧章节详情和静态法规页面已移除；需要时从 Git 历史查看，不作为当前运行内容。
+- 九章 `nodes.csv` 和 `relations.csv` 保留，后续再验证并实现数据驱动的图谱模块。
 - 含密钥的 `.env` 已从仓库删除；该文件曾进入 Git 历史，相关密钥应尽快轮换。
 
 后续不要再提交 ZIP、缓存（`__pycache__`、`.pytest_cache`）或 `.env`。

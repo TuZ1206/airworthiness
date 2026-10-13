@@ -29,3 +29,9 @@ Thumbs.db
 *.dump
 downloads/
 exports/
+.cache/
+output/
+*.egg-info/
+build/
+dist/
+.playwright-cli/
