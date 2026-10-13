@@ -42,8 +42,7 @@ airworthiness/
 │  │  └─ image_file/         # 法规原文页
 │  └─ qa/
 │     └─ __init__.py         # 预留 Dify 问答服务
-├─ data/
-│  ├─ ch01/ ... ch09/        # 九章数据（sources/nodes/relations/glossary 等）
+├─ ch01/ ... ch09/            # 九章数据（sources/nodes/relations/glossary 等）
 ├─ templates/
 │  ├─ chapter/               # 章节数据模板
 │  └─ crawler/               # 爬虫配置模板
@@ -99,7 +98,7 @@ allowed = host == "gov.cn" or host.endswith(".gov.cn")
 
 ## 五、每章必须提交的文件
 
-每章放在 `data/ch01` 至 `data/ch09` 中，目录和文件名必须一致：
+每章直接放在仓库根目录的 `ch01` 至 `ch09` 中，目录和文件名必须一致：
 
 ```text
 ch06/

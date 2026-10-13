@@ -7,7 +7,7 @@ from urllib.parse import urlparse
 
 
 ROOT = Path(__file__).resolve().parents[1]
-CHAPTER = ROOT / "data" / "ch09"
+CHAPTER = ROOT / "ch09"
 APP = ROOT / "src" / "airworthiness" / "app.py"
 PAGE = ROOT / "src" / "airworthiness" / "web" / "templates" / "chapter" / "9" / "detail.html"
 GRAPH = ROOT / "src" / "airworthiness" / "graph" / "neo4j_setup.py"
