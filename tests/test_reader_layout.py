@@ -72,6 +72,25 @@ for(const path of ['//evil.test/pdf','https://evil.test/pdf','javascript:alert(1
 assert.equal(context.isOriginalPath('../secret',good),false);
 """)
 
+    def test_pages_pdf_paths_are_separate_and_official_links_are_not_iframes(self):
+        self.run_js('hall-document-view.js', r"""
+assert.equal(typeof context.isStaticOriginalPath,'function');
+const base='/airworthiness', good=base+'/originals/CH02-S006/0.pdf';
+assert.equal(context.isStaticOriginalPath('CH02-S006',good,base),true);
+for(const path of [good+'?redirect=evil',good+'/../x','https://evil.test/x.pdf',
+ '//evil.test/x.pdf','/originals/CH02-S006/0.pdf',base+'/originals/CH02-S007/0.pdf']) {
+ assert.equal(context.isStaticOriginalPath('CH02-S006',path,base),false,path);
+}
+const doc={source_id:'CH02-S006',content_kind:'extracted',deployment_mode:'static',
+ body_provenance:{url:'https://www.caac.gov.cn/document.pdf',originals:[
+ {url:'https://www.caac.gov.cn/document.pdf',label:'主文'},
+ {url:'javascript:alert(1)'},{url:'https://evil.test/test.pdf'}]}};
+assert.equal(context.officialPDFs(doc).length,1);
+assert.equal(context.initialDocumentMode(doc,[{url:good}],{base}), 'original');
+assert.equal(context.initialDocumentMode({...doc,deployment_mode:'offline'},[{url:good}],{base}), 'text');
+assert.equal(context.initialDocumentMode(doc,[{url:'https://www.caac.gov.cn/document.pdf'}],{base}), 'text');
+""")
+
 
 if __name__ == '__main__':
     unittest.main()

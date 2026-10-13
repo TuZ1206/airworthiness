@@ -1,5 +1,5 @@
 /* Same-origin ES modules; no build step or inline scripts required. */
-import { main, state, mobile, reducedMotion, safeURL, renderRail, empty, link, errorBox } from './hall-core.js';
+import { main, state, mobile, reducedMotion, safeURL, renderRail, empty, link, errorBox, sitePath, routePath, staticMode } from './hall-core.js';
 import { renderHome } from './hall-home.js';
 import { renderReader, saveReadingPosition, scheduleSave, hashTarget } from './hall-reader.js';
 import { renderQuality } from './hall-quality.js';
@@ -21,12 +21,13 @@ async function route({ focus = false } = {}) {
   state.controller = new AbortController();
   const signal = state.controller.signal;
   const generation = ++state.generation;
-  const chapterMatch = /^\/chapters\/(ch\d{2})\/?$/i.exec(location.pathname);
-  const isHome = location.pathname === '/';
-  const isQuality = /^\/quality\/?$/.test(location.pathname);
+  const pathname = routePath(location.pathname);
+  const chapterMatch = /^\/chapters\/(ch\d{2})\/?$/i.exec(pathname || '');
+  const isHome = pathname === '/';
+  const isQuality = /^\/quality\/?$/.test(pathname || '');
   const view = chapterMatch ? 'reader' : isQuality ? 'quality' : 'home';
   document.body.dataset.view = view;
-  document.title = isQuality ? '收录质量 · 适航离线资源馆' : '适航离线资源馆';
+  document.title = (isQuality ? '收录质量 · ' : '') + (staticMode ? '适航资源馆 · 在线验收版' : '适航离线资源馆');
   main.setAttribute('aria-busy', 'true');
   for (const anchor of document.querySelectorAll('[data-nav]')) {
     const active = isQuality ? 'quality' : chapterMatch || location.hash === '#chapters' ? 'chapters' : 'resources';
@@ -53,8 +54,8 @@ async function route({ focus = false } = {}) {
 }
 
 function navigate(path, { replace = false } = {}) {
-  const url = safeURL(path);
-  if (!url || url.origin !== location.origin) return;
+  const url = safeURL(sitePath(path));
+  if (!url || url.origin !== location.origin || routePath(url.pathname) === null) return;
   saveReadingPosition();
   if (replace) history.replaceState(null, '', url.href);
   else if (url.href !== location.href) history.pushState(null, '', url.href);

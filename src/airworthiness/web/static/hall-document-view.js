@@ -1,5 +1,5 @@
 /* Original layout is the default for PDFs; extracted text is a reading aid. */
-import { el, officialLink } from './hall-core.js';
+import { el, officialLink, basePath } from './hall-core.js';
 
 function isOriginalPath(sourceId, path) {
   if (!/^CH\d{2}-S\d{3}$/.test(sourceId || '') || typeof path !== 'string') return false;
@@ -7,14 +7,44 @@ function isOriginalPath(sourceId, path) {
   return path.startsWith(base) && /^(?:\?index=(?:0|[1-9]\d*))?$/.test(path.slice(base.length));
 }
 
-function initialDocumentMode(doc, originals, { search = '', hash = '' } = {}) {
+function isStaticOriginalPath(sourceId, path, base = '') {
+  if (!/^CH\d{2}-S\d{3}$/.test(sourceId || '') || typeof path !== 'string' ||
+      !/^(?:\/[A-Za-z0-9_-]+)*$/.test(base)) return false;
+  const prefix = `${base}/originals/${sourceId}/`;
+  return path.startsWith(prefix) && /^(?:0|[1-9]\d*)\.pdf$/.test(path.slice(prefix.length));
+}
+
+function officialPDFs(doc) {
+  const source = doc.body_provenance || {};
+  const candidates = [...(Array.isArray(source.originals) ? source.originals : []), source];
+  if (!source.source_id || source.source_id === doc.source_id) candidates.push(doc.uploaded_provenance || {});
+  const seen = new Set();
+  return candidates.flatMap(item => {
+    const value = item.pdf_url || item.url;
+    try {
+      const url = new URL(value);
+      if (!['http:', 'https:'].includes(url.protocol) || url.username || url.password ||
+          !/(?:^|\.)gov\.cn$/.test(url.hostname) || !/\.pdf$/i.test(url.pathname) || seen.has(url.href)) return [];
+      seen.add(url.href);
+      return [{ url: url.href, label: typeof item.label === 'string' ? item.label : '' }];
+    } catch { return []; }
+  }).slice(0, 16);
+}
+
+function allowedOriginal(doc, path, base) {
+  return doc.deployment_mode === 'static' ? isStaticOriginalPath(doc.source_id, path, base) : isOriginalPath(doc.source_id, path);
+}
+
+function initialDocumentMode(doc, originals, { search = '', hash = '', base = '' } = {}) {
   if (search || hash) return 'text';
   return ['extracted', 'metadata'].includes(doc.content_kind) &&
-    originals.some(item => isOriginalPath(doc.source_id, item?.url)) ? 'original' : 'text';
+    originals.some(item => allowedOriginal(doc, item?.url, base)) ? 'original' : 'text';
 }
 
 function createDocumentView({ doc, originals, content, tools, search = '', hash = '', onModeChange = () => {} }) {
-  const files = originals.filter(item => isOriginalPath(doc.source_id, item?.url));
+  const online = doc.deployment_mode === 'static';
+  const candidates = online ? Array.isArray(doc.static_originals) ? doc.static_originals : [] : originals;
+  const files = candidates.filter(item => allowedOriginal(doc, item?.url, basePath));
   const shell = el('section', { class: 'document-view', 'aria-label': '文档内容' });
   const textPane = el('div', { class: 'document-text', id: 'document-text' });
   const extracted = doc.content_kind === 'extracted';
@@ -29,17 +59,25 @@ function createDocumentView({ doc, originals, content, tools, search = '', hash 
       el('p', {}, '提取文字仅辅助检索，不还原表格、公式或扫描版式；引用时请对照原件。'), lines));
   }
   if (!files.length && ['extracted', 'metadata'].includes(doc.content_kind)) {
-    textPane.append(el('p', { class: 'original-missing' }, '当前电脑未保存可用 PDF 原件。若文字排版仍不清晰，请打开官方来源查看。'));
+    textPane.append(el('p', { class: 'original-missing' }, online
+      ? '此在线快照未托管本文件的 PDF。文字仅辅助检索；表格、公式及完整版式请打开官方原件查看。'
+      : '当前电脑未保存可用 PDF 原件。若文字排版仍不清晰，请打开官方来源查看。'));
   }
   textPane.append(tools, content);
   const originalPane = el('div', { class: 'document-original', id: 'document-original' });
   const actions = el('div', { class: 'document-actions' });
   const source = officialLink(doc.url, '官方来源 ↗');
   if (source) actions.append(source);
+  if (!files.length) {
+    for (const file of officialPDFs(doc)) {
+      const anchor = officialLink(file.url, file.label ? `官方 PDF · ${file.label} ↗` : '官方 PDF 原件 ↗');
+      if (anchor) actions.prepend(anchor);
+    }
+  }
 
   let frame = null;
   let selected = files[0];
-  let mode = initialDocumentMode(doc, files, { search, hash });
+  let mode = initialDocumentMode(doc, files, { search, hash, base: basePath });
   const originalButton = el('button', { type: 'button', class: 'view-button', 'aria-controls': 'document-original' }, 'PDF 原件');
   const textButton = el('button', { type: 'button', class: 'view-button', 'aria-controls': 'document-text' }, extracted ? '文字检索' : '正文阅读');
   const modes = el('div', { class: 'document-modes', role: 'group', 'aria-label': '阅读方式' });
@@ -93,3 +131,4 @@ function createDocumentView({ doc, originals, content, tools, search = '', hash 
 }
 
 export { createDocumentView, initialDocumentMode, isOriginalPath };
+export { isStaticOriginalPath, officialPDFs };

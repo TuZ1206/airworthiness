@@ -1,6 +1,7 @@
 import { main, announcer, mobile, reducedMotion, kinds, statuses, state, el, list, count, chapterNumber, query, reviewLabel, sourceChapter, chapterURL, resourceURL, link, officialLink, badge, loading, errorBox, overview, record, renderRail, updateChapterSelect, route, navigate } from './hall-core.js';
 import { readingHTML, highlight } from './hall-content.js';
 import { createDocumentView } from './hall-document-view.js';
+import { staticMode } from './hall-core.js';
 
 function readerPanel(className, title, content) {
   return el('details', { class: className, open: !mobile.matches }, el('summary', { class: 'panel-summary' }, title), content);
@@ -299,7 +300,7 @@ async function renderReader(chapterId, signal, generation) {
   pane.setAttribute('aria-busy', 'false');
   renderReaderSidebar(sidebar, chapter, sourceId, chapters, content.toc);
   renderGlossary(glossary, isDoc ? doc.glossary : chapter.glossary, chapter);
-  document.title = `${title} · 适航离线资源馆`;
+  document.title = `${title} · ${staticMode ? '适航法规资源馆' : '适航离线资源馆'}`;
   announcer.textContent = `已打开${isDoc ? '资料' : '章节导读'}：${title}`;
   state.pane = pane;
   state.scrollKey = `airworthiness:reading:${chapter.id}:${sourceId || 'guide'}`;

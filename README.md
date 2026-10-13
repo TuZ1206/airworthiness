@@ -1,5 +1,23 @@
 # 民用航空适航法规资源大厅
 
+## GitHub Pages 在线验收版
+
+发布地址由仓库 Settings → Pages 提供；目标地址为 <https://tuz1206.github.io/airworthiness/>。只有 `Publish resource hall to GitHub Pages` 工作流成功并完成访问验证后才视为上线，不能把分支推送成功当成部署完成。
+
+- 在线版复用九章正文、目录、术语和质量报告，不需要访问者安装 Python，也不依赖分享电脑开机。它是构建时的只读快照，不代表法规现行有效或专业审核通过。
+- 浏览器执行标题、文号和正文的字面关键词检索，支持章节/效力/收录类型筛选与分页。结果按来源编号排列，与本机 SQLite 的相关性排序不同；首次有关键词搜索会下载压缩的章节索引，旧浏览器可回退普通 JSON。
+- 自动发布不上传本机 `.cache`、数据库、密钥或原始二进制附件。未托管的 PDF 显示“官方 PDF 原件”/“官方来源”入口；图表、公式与扫描版式应打开原件查看，不能把提取文字当作完整原件。
+- Pages 的 Source 使用 **GitHub Actions**，`github-pages` 环境允许发布分支 **feat/offline-resource-hall**。推送该分支会测试、导出并发布；不自动合并草稿 PR，不修改 `main`。如以后更换发布分支，需要同时更新工作流触发分支与环境允许列表。
+
+本机复现静态站（输出目录必须为空或不存在）：
+
+```powershell
+.\.venv\Scripts\python.exe -m airworthiness.static_export --root . --output output/pages/airworthiness --base-path /airworthiness
+.\.venv\Scripts\python.exe -m http.server 8000 --bind 127.0.0.1 --directory output/pages
+```
+
+打开 <http://127.0.0.1:8000/airworthiness/>。可选 `--include-originals` 仅导出本机已校验且不超过大小限制的 PDF；它不会下载缺失原件，自动发布默认不启用。静态站导出是生成副本，不修改原始正文、哈希或审核状态。
+
 ## 当前可运行版本：九章离线资源大厅
 
 本轮重建提供九章资料浏览、多文档本地阅读、中文全文检索、来源追溯和资料质量报告。**暂不启用 Neo4j、图谱、Dify 或 AI 问答**；后续两模块的专业审核与数据规则继续保留。旧版硬编码页面和程序已在本分支移除，可通过 Git 历史恢复，原章节节点、关系表保留。

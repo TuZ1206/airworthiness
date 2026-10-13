@@ -1,4 +1,9 @@
 /* Shared API client, safe DOM primitives and navigation callbacks. */
+import { prefixPath, unprefixPath, staticRequest } from './hall-static.js';
+const staticMode = document.querySelector('meta[name="airworthiness-mode"]')?.content === 'static';
+const basePath = staticMode ? document.querySelector('meta[name="airworthiness-base"]')?.content || '' : '';
+const sitePath = path => prefixPath(path, basePath, staticMode);
+const routePath = path => unprefixPath(path, basePath);
 const main = document.getElementById('main');
 const rail = document.getElementById('chapter-rail');
 const announcer = document.getElementById('announcer');
@@ -56,7 +61,7 @@ function sourceChapter(sourceId, fallback = '') {
 }
 
 function chapterURL(id, sourceId = '', q = query()) {
-  const url = new URL(`/chapters/${encodeURIComponent(id)}`, location.origin);
+  const url = new URL(sitePath(`/chapters/${encodeURIComponent(id)}`), location.origin);
   if (sourceId) url.searchParams.set('source', sourceId);
   if (q) url.searchParams.set('q', q);
   return url.pathname + url.search;
@@ -67,7 +72,7 @@ function resourceURL(resource, q = query()) {
 }
 
 function link(text, href, attrs = {}) {
-  return el('a', { href, 'data-route': '', ...attrs }, text);
+  return el('a', { href: sitePath(href), 'data-route': '', ...attrs }, text);
 }
 
 function safeURL(value, base = location.href) {
@@ -94,7 +99,7 @@ function sectionHeading(title, detail) {
   return el('div', { class: 'section-heading' }, el('h2', {}, title), detail ? el('small', {}, detail) : null);
 }
 
-function loading(text = '正在读取本地资料…', inline = false) {
+function loading(text = '正在读取资料…', inline = false) {
   return el('div', { class: `state-box${inline ? ' inline-state' : ''}`, role: 'status' },
     el('span', { class: 'loading-indicator', 'aria-hidden': 'true' }), el('p', {}, text));
 }
@@ -108,6 +113,7 @@ function errorBox(error, retry, inline = false) {
     el('h3', {}, error.status === 400 ? '检索条件有误' : error.status === 404 ? '未找到这份资料' : '暂时无法读取资料'),
     el('p', {}, error.status === 404 ? '此地址对应的资料尚未收录，或标识已变更。可以返回资源总览继续查找。' :
       error.status === 400 ? error.userMessage || '请清除筛选条件后重新检索。' :
+      staticMode ? '在线资料下载失败或超时，请检查网络后重试。首次全文搜索需要下载检索索引。' :
       error.name === 'TimeoutError' ? '本地服务响应超时，请稍后重试。' : '请确认本地服务正在运行，然后重试。'),
     error.status === 400 ? link('清除筛选', '/#resources', { class: 'button' }) : el('button', { class: 'button', type: 'button', onclick: retry }, '重新加载'));
 }
@@ -118,8 +124,9 @@ async function api(path, signal) {
   const abort = () => controller.abort();
   if (signal.aborted) controller.abort();
   else signal.addEventListener('abort', abort, { once: true });
-  const timeout = window.setTimeout(() => { timedOut = true; controller.abort(); }, 20000);
+  const timeout = window.setTimeout(() => { timedOut = true; controller.abort(); }, staticMode ? 90000 : 20000);
   try {
+    if (staticMode) return await staticRequest(path, basePath, controller.signal);
     const response = await fetch(path, { signal: controller.signal, headers: { Accept: 'application/json' } });
     if (!response.ok) {
       const error = new Error(`HTTP ${response.status}`);
@@ -189,3 +196,4 @@ function updateChapterSelect(select, chapters, selected, all = true) {
 export const route = (...args) => state.route(...args);
 export const navigate = (...args) => state.navigate(...args);
 export { main, rail, announcer, mobile, reducedMotion, kinds, statuses, state, el, list, number, count, chapterNumber, query, reviewLabel, sourceChapter, chapterURL, resourceURL, link, safeURL, officialLink, badge, sectionHeading, loading, empty, errorBox, api, overview, record, renderRail, selectField, updateChapterSelect };
+export { staticMode, basePath, sitePath, routePath };

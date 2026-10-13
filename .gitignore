@@ -31,6 +31,7 @@ downloads/
 exports/
 .cache/
 output/
+_site/
 *.egg-info/
 build/
 dist/

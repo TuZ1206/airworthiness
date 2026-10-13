@@ -1,5 +1,6 @@
 import { main, announcer, kinds, statuses, state, el, number, count, chapterNumber, query, reviewLabel, chapterURL, resourceURL, link, officialLink, badge, sectionHeading, loading, empty, errorBox, api, overview, renderRail, selectField, updateChapterSelect, route, navigate } from './hall-core.js';
 import { highlight } from './hall-content.js';
+import { staticMode } from './hall-core.js';
 
 function collectionSummary(totals) {
   return el('div', { class: 'collection-summary' },
@@ -97,9 +98,10 @@ async function renderHome(signal, generation) {
   main.replaceChildren(
     el('section', { class: 'page-width home-hero', 'aria-labelledby': 'home-title' },
       el('div', {}, el('p', { class: 'eyebrow' }, 'AIRWORTHINESS / RESOURCE HALL'),
-        el('h1', { id: 'home-title' }, '适航离线资源馆'),
+        el('h1', { id: 'home-title' }, staticMode ? '适航法规资源馆' : '适航离线资源馆'),
         el('p', { class: 'hero-description' }, '从法规到验证，沿九章阅读。', el('br'), '查阅资料、对照术语，让每一次引用都有出处。'),
-        el('p', { class: 'hero-footnote' }, el('span', {}, '复合材料适航'), '本地收录 · 按章索引 · 来源可溯')), summary),
+        el('p', { class: 'hero-footnote' }, el('span', {}, '复合材料适航'), staticMode ? '在线验收 · 按章索引 · 来源可溯' : '本地收录 · 按章索引 · 来源可溯'),
+        staticMode ? el('p', { class: 'hero-footnote' }, '这是已收录资料的只读快照，不代表现行有效或审核通过。首次全文搜索会下载检索索引；未托管的 PDF 请打开官方原件。') : null), summary),
     el('section', { class: 'search-section', 'aria-label': '资源检索与筛选' }, el('div', { class: 'page-width' }, search.form)),
     el('div', { class: 'page-width home-body' },
       el('section', { id: 'chapters', class: 'chapter-index', tabindex: '-1', 'aria-label': '九章索引' },
@@ -131,7 +133,7 @@ async function renderHome(signal, generation) {
       resultCount.textContent = `${count(data.total)} 条来源`;
       const filtersActive = ['q', 'chapter', 'status', 'content_kind'].some(key => params.get(key));
       const description = query() ? `“${query()}” 的检索结果` : filtersActive ? '按当前条件筛选' : '全部收录资料';
-      results.replaceChildren(el('p', { class: 'result-description' }, `${description} · 每页 20 条来源`));
+      results.replaceChildren(el('p', { class: 'result-description' }, `${description} · 每页 20 条来源${staticMode ? ' · 按来源编号排序' : ''}`));
       if (!data.items.length) {
         const beyond = (number(data.page) || 1) > 1;
         results.append(empty(beyond ? '这一页没有资料' : filtersActive ? '没有匹配的资源' : '资源尚未入库',
