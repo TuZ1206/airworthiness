@@ -1,0 +1,19 @@
+term_id,term,aliases,definition,group,has_page,anchor_or_url,related_node_id,source_id,review_status
+CH09-T001,试验大纲,试验计划|Test plan,定义试验目标、构型、条件、判据与数据交付的受控方案,试验设计,true,#test-design,CH09-N013,CH09-S003,pending
+CH09-T002,制造符合性,Conformity,试验件材料、零件、工艺、构造和装配符合设计资料的确认,证据闭环,true,#compliance-loop,CH09-N014,CH09-S003,pending
+CH09-T003,制造代表性,Representativeness,试验件对批准材料、工艺、设备、人员与构型状态的可追溯代表程度,试验设计,true,#test-design,CH09-N015,CH09-S005,pending
+CH09-T004,A基准,A-basis,按第25.613条规定存活概率和置信度条件确定的材料设计值,统计设计值,true,#basis-values,CH09-N011,CH09-S001,pending
+CH09-T005,B基准,B-basis,按第25.613条规定存活概率和置信度条件并结合结构后果适用的材料设计值,统计设计值,true,#basis-values,CH09-N012,CH09-S001,pending
+CH09-T006,统计容忍区间,Tolerance interval,在适用统计模型下用于覆盖总体规定比例的区间,统计设计值,true,#distribution-quality,CH09-N025,CH09-S015,pending
+CH09-T007,正态性检验,Normality test,采用正态分布模型前对分布假设适用性进行的检验,数据质量,true,#distribution-quality,CH09-N023,CH09-S014,pending
+CH09-T008,离群值,异常值|Outlier,偏离样本主体且需按受控统计方法判断与处置的观测值,数据质量,true,#distribution-quality,CH09-N024,CH09-S013,pending
+CH09-T009,批间变异,Batch-to-batch variability,不同材料批次或制造批次之间可观察的性能差异,数据质量,true,#distribution-quality,CH09-N027,CH09-S002,pending
+CH09-T010,S-N数据,应力寿命数据,应力水平与疲劳寿命之间的试验数据,疲劳试验,true,#mechanical-fatigue-tests,CH09-N021,CH09-S011,pending
+CH09-T011,ε-N数据,应变寿命数据,应变水平与疲劳寿命之间的试验数据,疲劳试验,true,#mechanical-fatigue-tests,CH09-N021,CH09-S011,pending
+CH09-T012,拉伸性能,Tensile properties,由适用拉伸试验方法获得的材料力学性能,力学试验,true,#mechanical-fatigue-tests,CH09-N018,CH09-S008,pending
+CH09-T013,压缩性能,Compressive properties,由适用压缩试验方法获得的材料力学性能,力学试验,true,#mechanical-fatigue-tests,CH09-N019,CH09-S009,pending
+CH09-T014,弯曲性能,Flexural properties,由适用弯曲试验方法获得的材料力学性能,力学试验,true,#mechanical-fatigue-tests,CH09-N020,CH09-S010,pending
+CH09-T015,试验—分析相关性,Correlation,用适用试验数据校核分析模型及其适用边界,数值分析,true,#analysis-correlation,CH09-N028,CH09-S001,pending
+CH09-T016,蒙特卡洛,Monte Carlo,原稿候选概率分析方法；未自动取得中国适航符合性方法地位,待确认,true,#analysis-correlation,CH09-N029,CH09-S002,pending
+CH09-T017,概率有限元,Probabilistic FEA,原稿候选数值分析方法；须经项目接受并由试验校核,待确认,true,#analysis-correlation,CH09-N029,CH09-S002,pending
+CH09-T018,容限系数,Tolerance factor,原稿统计术语；具体取值、分布与样本量条件须由受控中国官方依据证明,待确认,true,#pending-issues,CH09-N030,CH09-S006,pending

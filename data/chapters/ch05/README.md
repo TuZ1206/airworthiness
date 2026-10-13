@@ -1,10 +1,13 @@
-# 第 5 章
+# 第五章审查数据
 
-本章数据尚未提交。
+本目录保存“等同验证与变更管理”的官方来源台账、知识节点、关系、名词索引、核验摘录和审核记录。正式来源仅限政府网站，全部新增记录均为`pending`，专业批准前不得导入正式Neo4j或Dify。
 
-请复制 `templates/chapter/` 下的模板到本目录，并按要求提交：
+正文采用六条主线：材料与工艺变化的法规基础；设计更改分类与批准路径；受影响区域与审定基础确定；等同证据与重新验证边界；审定计划、符合性验证与证据闭环；证后变更、构型控制与持续适航接口。
 
-- `sources.csv`、`nodes.csv`、`relations.csv`、`glossary.csv`
-- `documents/`、`review.md`、`crawler_config.json`
+运行检查：
 
-专业结论在审核前保持 `review_status=pending`。
+```bash
+python -m unittest tests.test_ch05_data -v
+```
+
+`documents/`是检索摘录，不替代官方原文。台账哈希对应清洗摘录；官方附件原始哈希待稳定下载后另行补录。

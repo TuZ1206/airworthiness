@@ -1,10 +1,20 @@
-# 第 9 章
+# 第九章审查数据
 
-本章数据尚未提交。
+本目录保存“试验与统计方法”的官方来源台账、知识节点、关系、名词索引、核验摘录和审核记录。正式来源仅限中国政府网站，全部新增记录均为 `pending`，专业批准前不得导入正式 Neo4j 或 Dify。
 
-请复制 `templates/chapter/` 下的模板到本目录，并按要求提交：
+正文采用六条主线：试验与统计的法规基础和证据等级；试验设计、取样、批次和制造代表性；材料力学及疲劳试验方法；A/B基准、容忍限和设计值确定；分布检验、异常值、批间差异和数据质量；数值分析、试验相关性及符合性闭环。
 
-- `sources.csv`、`nodes.csv`、`relations.csv`、`glossary.csv`
-- `documents/`、`review.md`、`crawler_config.json`
+## 数据边界
 
-专业结论在审核前保持 `review_status=pending`。
+- `HB 8605-2021` 及仅能访问状态页的国家标准，只支撑标准存在、题名、版本和状态；不可见的技术条文不得支撑量化结论。
+- ASTM、ISO、MIL-HDBK-17、CMH-17和SAE仅在 `review.md` 中追踪，不进入正式CSV、网页或图谱依据。
+- 不完整编号 `AP-21-AA-2023` 已移出正式依据，现行程序候选使用 `AP-21-11R2`。
+- 本章不设通用试样数量、批次数、异常值阈值、容限系数或接受准则。
+
+运行检查：
+
+```bash
+python -m unittest tests.test_ch09_data tests.test_chapter_data_format -v
+```
+
+`documents/` 为检索摘录，不替代官方原文。台账哈希对应本地Markdown摘录；官方附件原始哈希待稳定下载后补录。

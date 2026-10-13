@@ -1,0 +1,13 @@
+node_id,chapter_id,label,name,code,summary,display_type,source_id,source_locator,priority,review_status
+CH02-N001,ch02,Regulation,型号设计与批准,AP-21-14R3,型号设计批准、补充型号合格证和改装设计批准路径。,law,CH02-S007,官方附件标题、目录及全文；具体条款定位待专业审核,high,pending
+CH02-N002,ch02,Process,设计机构与设计保证,AP-21-18,设计机构审定、设计保证系统和设计供应商管理接口。,process,CH02-S006,官方附件标题、目录及全文；具体条款定位待专业审核,high,pending
+CH02-N003,ch02,Process,生产机构与生产批准,AP-21-31R3,生产机构审定、质量系统和生产监督接口。,process,CH02-S002,官方附件标题、目录及全文；具体条款定位待专业审核,high,pending
+CH02-N004,ch02,Process,适航批准与放行,AP-21-AA-2023-51R1,民用航空器适航批准审定和交付放行接口。,process,CH02-S035,官方附件标题、目录及全文；具体条款定位待专业审核,high,pending
+CH02-N005,ch02,Process,持续适航事件管理,AP-21-AA-2023-16R2,持续适航事件报告、处理和责任接口。,process,CH02-S034,官方附件标题、目录及全文；具体条款定位待专业审核,high,pending
+CH02-N006,ch02,Regulation,持续适航文件,AC-91-FS-011R3,持续适航文件、维修资料和结构修理资料接口。,norm,CH02-S023,官方附件标题、目录及全文；具体条款定位待专业审核,high,pending
+CH02-N007,ch02,Regulation,适航指令,AP-39-AA-2023-01R2,不安全状态识别与适航指令管理接口。,norm,CH02-S032,官方附件标题、目录及全文；具体条款定位待专业审核,high,pending
+CH02-N008,ch02,Regulation,复合材料制造质量,AC-21-AA-2017-39,复合材料结构制造质量体系的专门接口。,material,CH02-S059,官方附件标题、目录及全文；具体条款定位待专业审核,high,pending
+CH02-N009,ch02,Process,设计更改审定基础,AP-21-AA-2014-36,设计更改分类、受影响区域和审定基础接口。,process,CH02-S065,官方附件标题、目录及全文；具体条款定位待专业审核,medium,pending
+CH02-N010,ch02,Regulation,持续结构完整性,AC-25-AA-2022-01,运输类飞机持续结构完整性大纲接口。,material,CH02-S045,官方附件标题、目录及全文；具体条款定位待专业审核,medium,pending
+CH02-N011,ch02,Process,维修方案,AC-121/135-53R1,维修方案、检查任务和持续适航实施接口。,process,CH02-S057,官方附件标题、目录及全文；具体条款定位待专业审核,medium,pending
+CH02-N012,ch02,Concept,设计保证系统,AC-21-48,设计保证系统建设与独立核查接口。,concept,CH02-S001,官方附件标题、目录及全文；具体条款定位待专业审核,medium,pending

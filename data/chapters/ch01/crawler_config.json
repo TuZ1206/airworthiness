@@ -1,0 +1,35 @@
+{
+  "chapter_id": "ch01",
+  "review_status": "pending",
+  "allowed_host_rule": "host == 'gov.cn' or host.endswith('.gov.cn')",
+  "seeds": [
+    "https://www.caac.gov.cn/XXGK/XXGK/FLFG/202512/t20251227_229597.html",
+    "https://www.caac.gov.cn/XXGK/XXGK/FLFG/201510/t20151029_2788.html",
+    "https://www.gov.cn/zhengce/content/202306/content_6888799.htm",
+    "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/202208/t20220815_214953.html",
+    "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/202403/t20240313_223201.html",
+    "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202607/t20260701_231208.html",
+    "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/202205/t20220531_213498.html",
+    "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/201606/t20160622_38638.html",
+    "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/202512/t20251217_229433.html",
+    "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/202512/t20251217_229435.html",
+    "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/201606/t20160622_38639.html",
+    "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/201511/t20151102_8582.html",
+    "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/201701/t20170119_41846.html",
+    "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/201511/t20151102_8590.html",
+    "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/202203/t20220302_212092.html",
+    "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/201711/t20171116_47594.html",
+    "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201706/t20170630_45027.html",
+    "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201801/t20180124_48751.html",
+    "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202312/t20231223_222428.html",
+    "https://std.samr.gov.cn/hb/search/stdHBDetailedCNF?id=09C9A09DA897FC93E06397BE0A0A1DFC",
+    "https://www.caac.gov.cn/XXGK/XXGK/ZFGW/202503/t20250314_226931.html"
+  ],
+  "exclude_statuses": [
+    "abolished",
+    "unknown"
+  ],
+  "download_pdf": true,
+  "require_attachment_sha256": true,
+  "note": "查询实施日2026-10-12。全部来源和专业结论保持pending；附件原始哈希和条款定位完成专业复核前不得进入正式Neo4j或Dify。"
+}

@@ -1,0 +1,13 @@
+term_id,term,aliases,definition,group,has_page,anchor_or_url,related_node_id,source_id,review_status
+"CH07-T001","积木式验证","BBA|Building Block Approach","以复杂程度递增的试验与分析组织结构验证证据的方法；五级细节待受控正文核验。","验证体系","true","#building-block-basis","CH07-N007","CH07-S003","pending"
+"CH07-T002","试样","Coupon","用于形成材料性能与统计数据的最低层级试验件；具体任务待受控正文复核。","验证层级","true","#verification-levels","CH07-N008","CH07-S003","pending"
+"CH07-T003","元件","Element","用于验证基本结构特征的层级试验件；具体任务待受控正文复核。","验证层级","true","#verification-levels","CH07-N009","CH07-S003","pending"
+"CH07-T004","典型结构件","Detail","用于验证典型结构细节、局部应变和失效模式的层级试验件。","验证层级","true","#verification-levels","CH07-N010","CH07-S003","pending"
+"CH07-T005","组合件","Subcomponent","用于验证多个结构特征及载荷传递的较高层级试验件。","验证层级","true","#verification-levels","CH07-N011","CH07-S003","pending"
+"CH07-T006","部件","Component|Full-scale Component","用于高层级或全尺寸结构验证的试验对象。","验证层级","true","#verification-levels","CH07-N012","CH07-S003","pending"
+"CH07-T007","A基准","A-basis","以95%置信度保证至少99%材料性能高于该值的统计基准。","统计设计值","true","#statistical-values","CH07-N020","CH07-S001","pending"
+"CH07-T008","B基准","B-basis","以95%置信度保证至少90%材料性能高于该值的统计基准。","统计设计值","true","#statistical-values","CH07-N021","CH07-S001","pending"
+"CH07-T009","制造代表性","Manufacturing Representativeness","试验件材料、工艺、构型和缺陷状态足以代表拟证明对象的程度。","证据质量","true","#manufacturing-representativeness","CH07-N023","CH07-S006","pending"
+"CH07-T010","材料修正系数","Material Correction Factor","结构试验结果用于表明符合性时按规章要求考虑材料变异的修正。","证据质量","true","#test-supported-analysis","CH07-N024","CH07-S001","pending"
+"CH07-T011","点设计试验","Point Design Test","原稿中的统计补充概念，其国内规范定义和适用条件待受控正文核验。","待核验概念","true","#pending-concepts","CH07-N027","CH07-S003","pending"
+"CH07-T012","部件超载系数","Component Overload Factor","原稿中用于覆盖变异性证据不足的概念，其适用条件和数值待核验。","待核验概念","true","#pending-concepts","CH07-N028","CH07-S003","pending"

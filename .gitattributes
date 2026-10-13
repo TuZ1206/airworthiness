@@ -1,0 +1,3 @@
+data/chapters/**/*.md text eol=lf
+data/chapters/**/*.csv text eol=lf
+data/chapters/**/*.json text eol=lf

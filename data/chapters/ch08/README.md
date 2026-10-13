@@ -1,10 +1,13 @@
-# 第 8 章
+# 第八章审查数据
 
-本章数据尚未提交。
+本目录保存“疲劳与损伤容限要求”的官方来源台账、知识节点、关系、名词索引、核验摘录和审核记录。正式来源仅限政府网站，全部新增记录均为 `pending`，专业批准前不得导入正式 Neo4j 或 Dify。
 
-请复制 `templates/chapter/` 下的模板到本目录，并按要求提交：
+正文采用六条主线：法规基础；损伤威胁、可检性与分类边界；损伤扩展、剩余强度、疲劳与WFD；冲击、离散源损伤及环境影响；修理容限、修理验证与损伤限值；检查大纲、持续适航文件和结构完整性管理。
 
-- `sources.csv`、`nodes.csv`、`relations.csv`、`glossary.csv`
-- `documents/`、`review.md`、`crawler_config.json`
+运行检查：
 
-专业结论在审核前保持 `review_status=pending`。
+```bash
+python -m unittest tests.test_ch08_data -v
+```
+
+`documents/` 是检索摘录，不替代官方原文。台账哈希对应清洗摘录；官方附件原始哈希待稳定下载后另行补录。
