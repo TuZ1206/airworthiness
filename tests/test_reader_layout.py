@@ -48,6 +48,53 @@ assert.equal(context.readingPresentation('pre', 'code', 'a\n b', false).lines, u
 assert.equal(context.readingPresentation('p', 'raw', '中国\n民航', true).className, 'extracted-block');
 """)
 
+    def test_pdf_blank_line_fragments_only_reflow_unfinished_sentences(self):
+        self.run_js('hall-content.js', r"""
+assert.equal(context.extractedContinuation('(g) 本分部关于结冰条件下飞', '行的合格审定申请人。'), true);
+assert.equal(context.extractedContinuation('(1) 在结冰条件下必须满足本分部要求。必须按附录C', '定义的冰积聚条件表明符合性'), true);
+assert.equal(context.extractedContinuation('(2) 规定的重心限制与非结冰条件下的限制', '相比不得改变。'), true);
+assert.equal(context.extractedContinuation('申请人。', '(1) 除25.121(a)'), false);
+assert.equal(context.extractedContinuation('下一项要求', '(2) 在结冰条件下飞行'), false);
+assert.equal(context.extractedContinuation('条款要求', '第25条 新的条款'), false);
+assert.equal(context.extractedContinuation('目录项目', '〔交通运输部2016年修订〕'), false);
+assert.equal(context.extractedContinuation('交通运输部规章', '正文开始'), false);
+assert.equal(context.extractedContinuation('轮胎压强和摩擦系数表 10 20', '25 30'), false);
+""")
+
+    def test_extracted_numeric_columns_form_tables_without_guessing_other_text(self):
+        self.run_js('hall-content.js', r"""
+const source = `高度  蒸气压力      比湿度        相对密度
+H          e         W           σ
+(米)  (毫米汞柱)  (公斤水蒸气/公斤干燥空气)  (ρ/零高标准大气密度)
+0        10.2                0.00849                    0.99508
+250       9.21                0.00786                    0.97179
+500       8.28                0.00727                    0.94886
+- 8 -`;
+const segments = context.extractedTableSegments(source);
+assert.equal(segments[0].type, 'table');
+assert.equal(segments[0].columns, 4);
+assert.equal(segments[0].rows.length, 3);
+assert.match(segments[0].headers[0], /高度.*H.*米/u);
+assert.equal(segments[0].rows[2][0], '500');
+assert.equal(segments[1].type, 'text');
+assert.equal(segments[1].raw, '- 8 -');
+assert.equal(context.extractedTableSegments('第25.605条  制造方法\n必须保证强度。')[0].type, 'text');
+assert.equal(context.extractedTableSegments('0 10.2 0.00849 0.99508\n250 9.21 0.00786 0.97179\n500 8.28 0.00727 0.94886')[0].type, 'text');
+assert.equal(context.denseUnstructuredNumbers('0 10.2 0.00849 0.99508\n250 9.21 0.00786 0.97179\n500 8.28 0.00727 0.94886'), true);
+""")
+
+    def test_pdf_private_glyphs_do_not_become_unchecked_legal_symbols(self):
+        self.run_js('hall-content.js', r"""
+assert.equal(context.readablePdfMarkers('\uf09f 条目； \uf0a8类型 \uf06f选项 \uf0fc已核对'),
+ '• 条目； □类型 ○选项 ✓已核对');
+assert.equal(context.unreliablePdfSymbols('VSR \uf8eb nZW W \uf8f6'), 2);
+assert.equal(context.unreliablePdfSymbols('□ 合格证 □ 许可证'), 0, 'Real form boxes are not corruption');
+assert.equal(context.unreliablePdfSymbols(context.readablePdfMarkers('\uf09f 计划性监督')), 0);
+assert.equal(context.unreliablePdfSymbols('� 未识别字符'), 1);
+assert.equal(context.unreliablePdfMathLayout('VSR 可表述为：\n        VCL MAX    VSR ≥\n            nZW'), true);
+assert.equal(context.unreliablePdfMathLayout('第25.103条 失速速度\n申请人确定校正空速。'), false);
+""")
+
     def test_pdf_default_and_search_anchor_override(self):
         self.run_js('hall-document-view.js', r"""
 const doc={source_id:'CH02-S006', content_kind:'extracted'};

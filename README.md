@@ -106,6 +106,7 @@ airworthiness/
 │  └─ qa/
 │     └─ __init__.py         # 预留 Dify 问答服务
 ├─ data/chapters/
+│  ├─ guides.json            # 九章阅读导读与专题导航配置，不含法规原文
 │  ├─ ch01/ ... ch09/        # 九章数据（sources/nodes/relations/glossary 等）
 ├─ templates/
 │  ├─ chapter/               # 章节数据模板
@@ -178,6 +179,8 @@ ch06/
 ```
 
 对应模板位于 [`templates/chapter`](templates/chapter) 和 [`templates/crawler`](templates/crawler)。复制模板后再填写，不要随意增删表头。
+
+九章阅读器的专题路径维护在 [`data/chapters/guides.json`](data/chapters/guides.json)。每个专题只写原创导语并引用本章已有 `source_id`；只有可阅读正文中确实出现的条款才能填写 `locator`。这份导航配置不改变各章 CSV 表头、法规原文或专业审核状态，状态页不得用来证明具体技术条款。
 
 ### `sources.csv`
 

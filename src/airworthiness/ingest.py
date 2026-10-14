@@ -84,6 +84,59 @@ def share_originals(documents):
                 doc["body_provenance"] = donor.get("body_provenance", {"source_id": donor["source_id"], "sha256": donor.get("sha256", ""), "acquisition": donor["acquisition"]})
 
 
+def attach_guides(chapters, documents, chapter_root, errors):
+    """Bind editorial reading paths to existing sources without changing source text."""
+    path = chapter_root / "guides.json"
+    if not path.is_file():
+        return
+    guides = json.loads(path.read_text(encoding="utf-8"))
+    by_chapter = {chapter["id"]: chapter for chapter in chapters}
+    by_source = {doc["source_id"]: doc for doc in documents}
+    if not isinstance(guides, dict):
+        errors.append("guides.json: expected a chapter-keyed object")
+        return
+    for chapter_id, guide in guides.items():
+        chapter = by_chapter.get(chapter_id)
+        if not chapter or not isinstance(guide, dict):
+            errors.append(f"guides.json: unknown chapter {chapter_id}")
+            continue
+        sections = guide.get("sections")
+        if not isinstance(guide.get("positioning"), str) or not guide["positioning"].strip() or not isinstance(sections, list) or not sections:
+            errors.append(f"{chapter_id}: guide positioning and sections required")
+            continue
+        section_ids = set()
+        for section in sections:
+            if not isinstance(section, dict):
+                errors.append(f"{chapter_id}: invalid guide section")
+                continue
+            key = section.get("id", "")
+            if not isinstance(key, str) or not re.fullmatch(r"[a-z][a-z0-9-]*", key) or key in section_ids:
+                errors.append(f"{chapter_id}: invalid or duplicate guide section {key}")
+            section_ids.add(key)
+            if not all(isinstance(section.get(field), str) and section[field].strip() for field in ("title", "summary")):
+                errors.append(f"{chapter_id}: guide section {key} needs title and summary")
+            refs = section.get("sources")
+            if not isinstance(refs, list) or not refs:
+                errors.append(f"{chapter_id}: guide section {key} needs sources")
+                continue
+            for ref in refs:
+                sid = ref if isinstance(ref, str) else ref.get("source_id") if isinstance(ref, dict) else None
+                doc = by_source.get(sid)
+                if not doc or doc["chapter_id"] != chapter_id or doc["document_status"] != "effective":
+                    errors.append(f"{chapter_id}: guide source {sid} missing, cross-chapter or not effective")
+                    continue
+                if isinstance(ref, dict) and ref.get("locator"):
+                    locator = ref["locator"]
+                    body = re.sub(r"\s+", "", doc["body"])
+                    if doc["content_kind"] not in {"fulltext", "extracted"} or not isinstance(locator, str) or re.sub(r"\s+", "", locator) not in body:
+                        errors.append(f"{chapter_id}: guide locator not present in readable source {sid}")
+        for related in guide.get("related", []):
+            target = related.get("chapter_id") if isinstance(related, dict) else None
+            if target not in by_chapter or target == chapter_id or not isinstance(related.get("reason"), str) or not related["reason"].strip():
+                errors.append(f"{chapter_id}: invalid related chapter {target}")
+        chapter["guide"] = guide
+
+
 def load_inputs(root):
     root = Path(root).resolve()
     chapter_root = root / "data/chapters"
@@ -207,4 +260,5 @@ def load_inputs(root):
             located = resolve_terms(group, body, extracted=doc["content_kind"] == "extracted")
             for original, resolved in zip(group, located):
                 original.update(resolved)
+    attach_guides(chapters, documents, chapter_root, errors)
     return chapters, documents, terms, errors, issues

@@ -158,7 +158,18 @@ def chapter(path, chapter_id):
         result = json.loads(row[0])
         result["documents"] = [_public(json.loads(x[0])) for x in db.execute("SELECT payload FROM documents WHERE chapter_id=? ORDER BY source_id", (chapter_id,))]
         result["glossary"] = [json.loads(x[0]) for x in db.execute("SELECT payload FROM terms WHERE chapter_id=? ORDER BY term_id", (chapter_id,))]
-    text = "## 阅读导引\n\n" + result["description"] + "\n\n本页为资料导航，不构成官方原文或专业结论。选择左侧文件，可在本页阅读现有正文。\n\n## 本章主题\n\n" + "\n".join("- " + x for x in result.get("topics", [])) + "\n\n## 使用提示\n\n先查看文件有效状态与正文可用性，再核对相关段落。所有待审资料均需专业成员复核。"
+    guide = result.get("guide")
+    if guide:
+        lines = ["## 本章定位", guide["positioning"], "## 专题路径"]
+        for section in guide["sections"]:
+            lines.extend([f"### {section['title']}", section["summary"],
+                          "关联来源：" + "、".join(ref if isinstance(ref, str) else ref["source_id"] for ref in section["sources"])])
+        lines.extend(["## 跨章衔接"])
+        lines.extend(f"- {item['chapter_id'].upper()}：{item['reason']}" for item in guide.get("related", []))
+        lines.extend(["## 使用提示", "本页仅组织待审核的阅读线索；文件效力、正文可用性和具体条款仍须对照官方来源及专业审核记录。"])
+        text = "\n\n".join(lines)
+    else:
+        text = "## 阅读导引\n\n" + result["description"] + "\n\n本页为资料导航，不构成官方原文或专业结论。选择左侧文件，可在本页阅读现有正文。\n\n## 本章主题\n\n" + "\n".join("- " + x for x in result.get("topics", [])) + "\n\n## 使用提示\n\n先查看文件有效状态与正文可用性，再核对相关段落。所有待审资料均需专业成员复核。"
     result["guide_html"] = render_document(text)[0]
     return result
 

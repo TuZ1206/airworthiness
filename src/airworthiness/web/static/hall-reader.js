@@ -1,10 +1,62 @@
 import { main, announcer, mobile, reducedMotion, kinds, statuses, state, el, list, count, chapterNumber, query, reviewLabel, sourceChapter, chapterURL, resourceURL, link, officialLink, badge, loading, errorBox, overview, record, renderRail, updateChapterSelect, route, navigate } from './hall-core.js';
-import { readingHTML, highlight } from './hall-content.js';
+import { readingHTML, highlight, reflowExtractedBlocks, structureExtractedTables, guardExtractedGlyphs } from './hall-content.js';
 import { createDocumentView } from './hall-document-view.js';
 import { staticMode } from './hall-core.js';
 
 function readerPanel(className, title, content) {
   return el('details', { class: className, open: !mobile.matches }, el('summary', { class: 'panel-summary' }, title), content);
+}
+
+function renderChapterGuide(chapter) {
+  const guide = chapter.guide;
+  if (!guide?.sections?.length) return readingHTML(chapter.guide_html, [], null);
+  const root = el('div', { class: 'chapter-guide' });
+  const toc = [];
+  const sectionHeading = (id, title, level = 2, includeInToc = false) => {
+    if (includeInToc) toc.push({ id, text: title, level, kind: 'guide' });
+    return el(`h${level}`, { id }, title);
+  };
+  const docs = new Map(list(chapter.documents).map(doc => [doc.source_id, doc]));
+  root.append(el('section', { class: 'guide-positioning' },
+    sectionHeading('guide-positioning', '本章定位'), el('p', {}, guide.positioning)));
+  const path = el('nav', { class: 'guide-path', 'aria-label': '本章专题路径' },
+    list(guide.sections).map((section, index) => el('a', { href: `#guide-${section.id}`, 'data-toc-target': `guide-${section.id}` },
+      el('span', { class: 'guide-path-number' }, String(index + 1).padStart(2, '0')),
+      el('span', {}, section.title), el('span', { 'aria-hidden': 'true' }, '↗'))));
+  root.append(el('section', { class: 'guide-path-section' }, sectionHeading('guide-path', '专题路径'), path));
+  const cards = el('div', { class: 'guide-card-list' });
+  for (const [index, section] of guide.sections.entries()) {
+    const sources = el('ul', { class: 'guide-source-list' });
+    for (const ref of section.sources) {
+      const sourceId = typeof ref === 'string' ? ref : ref.source_id;
+      const doc = docs.get(sourceId);
+      if (!doc) continue;
+      sources.append(el('li', { class: 'guide-source' },
+        link([el('span', { class: 'guide-source-id' }, sourceId), el('span', { class: 'guide-source-title' }, doc.title),
+          el('span', { 'aria-hidden': 'true' }, '↗')], resourceURL(doc), { class: 'guide-source-link' }),
+        el('div', { class: 'guide-source-flags' }, badge(doc.content_kind),
+          el('span', { class: 'guide-status' }, statuses[doc.document_status] || '效力待核'),
+          el('span', { class: 'review-label' }, reviewLabel(doc.review_status))),
+        typeof ref === 'object' && ref.locator ?
+          el('p', { class: 'guide-locator' }, `正文定位线索：${ref.locator}（待专业审核）`) : null,
+        doc.content_kind === 'metadata' ?
+          el('p', { class: 'guide-limitation' }, '仅有状态信息，不能据此确认具体条款。') : null));
+    }
+    cards.append(el('section', { class: 'guide-card' },
+      el('div', { class: 'guide-card-heading' }, el('span', { class: 'guide-card-number' }, String(index + 1).padStart(2, '0')),
+        sectionHeading(`guide-${section.id}`, section.title, 3, true)),
+      el('p', { class: 'guide-card-summary' }, section.summary),
+      el('p', { class: 'guide-sources-label' }, '对应资料 · 来源编号'), sources));
+  }
+  root.append(el('section', { class: 'guide-topics' }, sectionHeading('guide-topics', '专题与对应资料'), cards));
+  const related = list(guide.related);
+  if (related.length) root.append(el('section', { class: 'guide-related' }, sectionHeading('guide-related', '跨章衔接'),
+    el('div', { class: 'guide-related-list' }, related.map(item =>
+      link([el('span', { class: 'guide-related-id' }, item.chapter_id.toUpperCase()),
+        el('span', {}, item.reason), el('span', { 'aria-hidden': 'true' }, '↗')], chapterURL(item.chapter_id, '', ''),
+      { class: 'guide-related-link' })))));
+  root.append(el('p', { class: 'guide-footnote' }, '以上仅为资料导航，不代表文件现行有效、条款适用或专业审核通过。请逐份查看效力、收录类型及官方原件。'));
+  return { root, toc };
 }
 
 function renderReaderSidebar(container, chapter, selectedSource, chapters, toc) {
@@ -37,8 +89,8 @@ function renderReaderSidebar(container, chapter, selectedSource, chapters, toc) 
   container.replaceChildren(
     el('p', { class: 'sidebar-label' }, '九章索引'), switcher,
     link('本章导读', chapterURL(chapter.id), { class: 'guide-link', 'aria-current': selectedSource ? null : 'page' }),
-    el('details', { class: 'toc-disclosure' },
-      el('summary', {}, selectedSource ? `文字目录 · ${toc.length} 处定位` : '导读目录'),
+    el('details', { class: 'toc-disclosure', open: !selectedSource && Boolean(chapter.guide?.sections?.length) },
+      el('summary', {}, selectedSource ? `文字目录 · ${toc.length} 处定位` : '专题导航'),
       el('nav', { 'aria-label': '当前内容目录' },
         toc.length ? tocList : el('p', { class: 'sidebar-empty' }, '当前内容没有可用的分节目录。'))),
     el('p', { class: 'sidebar-label' }, '本章文件 · ', fileCount), filter,
@@ -270,7 +322,15 @@ async function renderReader(chapterId, signal, generation) {
     return;
   }
   const isDoc = Boolean(doc);
-  const content = readingHTML(isDoc ? doc.html : chapter.guide_html, isDoc ? doc.toc : [], isDoc ? doc.url : null);
+  const content = isDoc ? readingHTML(doc.html, doc.toc, doc.url) : renderChapterGuide(chapter);
+  if (doc?.content_kind === 'extracted') {
+    const quality = guardExtractedGlyphs(content.root);
+    if (quality.severe) content.toc = [];
+    else {
+      structureExtractedTables(content.root);
+      reflowExtractedBlocks(content.root);
+    }
+  }
   if (!content.root.textContent.trim()) content.root.append(el('p', {}, isDoc
     ? doc.content_kind === 'metadata' ? '尚未收录可阅读正文。请通过上方官方来源查阅。' : '当前条目尚无可展示的内容。请核对官方来源或查看收录质量报告。'
     : '本章导读尚待补充。可从左侧文件列表选择已收录资料。'));
