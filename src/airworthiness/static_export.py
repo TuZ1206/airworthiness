@@ -23,6 +23,8 @@ from . import catalog
 from .access_notes import enrich_access_notes
 from .app import create_app
 from .originals import cached_original, original_snapshot
+from .public_pdfs import publication_candidates
+from .acquire_http import canonical_url
 
 
 MAX_ORIGINAL_BYTES = 20 * 1024 * 1024
@@ -169,6 +171,12 @@ def export_site(root, output, base_path="/airworthiness", include_originals=Fals
     written_bytes = 0
     original_bytes = 0
     original_count = 0
+    eligible_originals = {}
+    if include_originals:
+        candidates, _ = publication_candidates(root)
+        for request, final, expected, source_ids in candidates:
+            for source_id in source_ids:
+                eligible_originals.setdefault(source_id, set()).add((request, final, expected))
 
     def write(name, data):
         nonlocal written_bytes
@@ -250,6 +258,16 @@ def export_site(root, output, base_path="/airworthiness", include_originals=Fals
                 provenance = doc.get("body_provenance") or {}
                 candidates = provenance.get("originals") or [provenance]
                 for index, item in enumerate(candidates[:16]):
+                    if not isinstance(item, dict):
+                        continue
+                    try:
+                        identity = (canonical_url(item.get("request_url") or item["url"]),
+                                    canonical_url(item["url"]),
+                                    item.get("original_sha256") or item.get("pdf_sha256"))
+                    except (KeyError, TypeError, ValueError):
+                        continue
+                    if identity not in eligible_originals.get(source_id, ()):
+                        continue
                     path = cached_original(root, doc, index)
                     if path is None:
                         continue

@@ -51,7 +51,7 @@ def make_inputs(root, count=3):
         path = folder / (sid + ".md")
         path.write_text(body, encoding="utf-8")
         rows_by_chapter[cid].append(dict(
-            source_id=sid, title=f"MixedCase 适航材料 {index}", document_code=f"TEST-{index}",
+            source_id=sid, title=f"MixedCase 适航材料 {index}", document_code=f"CCAR-{index}",
             document_status="effective", publish_date="2026-01-01",
             url=f"https://www.caac.gov.cn/source-{index}.html",
             sha256=hashlib.sha256(path.read_bytes()).hexdigest(), crawled_at="2026-01-02",
@@ -377,6 +377,17 @@ class StaticExportTests(unittest.TestCase):
         self.export(include_originals=True)
         self.assertFalse((self.output / "originals").exists())
         self.assertEqual(self.read_json("manifest.json")["original_count"], 0)
+
+    def test_cached_copyright_restricted_standard_is_not_published(self):
+        cache_pdf(self.root)
+        sources = self.root / "data/chapters/ch01/sources.csv"
+        with sources.open(encoding="utf-8") as stream:
+            rows = list(csv.DictReader(stream))
+        rows[0]["document_code"] = "GB/T 1447-2005"
+        write_csv(sources, ingest.SOURCE_FIELDS, rows)
+        self.export(include_originals=True)
+        self.assertEqual(self.read_json("manifest.json")["original_count"], 0)
+        self.assertEqual(self.read_json("data/documents/CH01-S001.json")["static_originals"], [])
 
     def test_original_20_mib_boundary_is_enforced(self):
         for size in (20 * 1024 * 1024, 20 * 1024 * 1024 + 1):

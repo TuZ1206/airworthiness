@@ -31,10 +31,12 @@ jobs:
       - name: Validate source data and static adapter
         run: |
           python -m airworthiness.cli validate
-          python -m unittest tests.test_static_export tests.test_static_frontend tests.test_reader_layout -v
+          python -m unittest tests.test_static_export tests.test_static_frontend tests.test_reader_layout tests.test_public_pdfs -v
+      - name: Fetch and hash-check eligible official PDFs
+        run: python -m airworthiness.public_pdfs --root .
       - uses: actions/configure-pages@v5
       - name: Export the read-only resource hall
-        run: python -m airworthiness.static_export --root . --output _site --base-path /airworthiness
+        run: python -m airworthiness.static_export --root . --output _site --base-path /airworthiness --include-originals
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site

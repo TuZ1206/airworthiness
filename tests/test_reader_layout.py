@@ -104,7 +104,7 @@ assert.equal(context.initialDocumentMode(doc, originals, {search:'设计'}), 'te
 assert.equal(context.initialDocumentMode(doc, originals, {hash:'#reading-clause-1'}), 'text');
 assert.equal(context.initialDocumentMode(doc, []), 'text');
 assert.equal(context.initialDocumentMode({...doc, content_kind:'fulltext'}, originals), 'text');
-assert.equal(context.initialDocumentMode({...doc, content_kind:'metadata'}, originals), 'original');
+assert.equal(context.initialDocumentMode({...doc, content_kind:'metadata'}, originals), 'text');
 """)
 
     def test_only_fixed_local_original_urls_can_enter_pdf_frame(self):
@@ -119,7 +119,7 @@ for(const path of ['//evil.test/pdf','https://evil.test/pdf','javascript:alert(1
 assert.equal(context.isOriginalPath('../secret',good),false);
 """)
 
-    def test_pages_pdf_paths_are_separate_and_official_links_are_not_iframes(self):
+    def test_pages_pdf_paths_are_separate_and_remote_official_pdfs_remain_link_only(self):
         self.run_js('hall-document-view.js', r"""
 assert.equal(typeof context.isStaticOriginalPath,'function');
 const base='/airworthiness', good=base+'/originals/CH02-S006/0.pdf';
@@ -135,7 +135,19 @@ const doc={source_id:'CH02-S006',content_kind:'extracted',deployment_mode:'stati
 assert.equal(context.officialPDFs(doc).length,1);
 assert.equal(context.initialDocumentMode(doc,[{url:good}],{base}), 'original');
 assert.equal(context.initialDocumentMode({...doc,deployment_mode:'offline'},[{url:good}],{base}), 'text');
-assert.equal(context.initialDocumentMode(doc,[{url:'https://www.caac.gov.cn/document.pdf'}],{base}), 'text');
+assert.equal(context.initialDocumentMode(doc,[{url:'https://www.caac.gov.cn/document.pdf'}],{base}), 'original');
+assert.equal(context.isOfficialPDFPath('https://www.caac.gov.cn/document.pdf'), true);
+assert.equal(context.isOfficialPDFPath('https://xxgk.mot.gov.cn/file.PDF'), true);
+for (const url of ['http://www.caac.gov.cn/document.pdf','https://evil.test/document.pdf',
+ 'https://www.caac.gov.cn.evil.test/document.pdf','https://www.caac.gov.cn/document.pdf?redirect=1',
+ 'https://www.caac.gov.cn/document.pdf#x','javascript:alert(1)']) {
+ assert.equal(context.isOfficialPDFPath(url), false, url);
+}
+assert.equal(context.pdfCandidates(doc,[],base).files.length,1);
+assert.equal(context.pdfCandidates(doc,[],base).verifiedFiles.length,0);
+assert.equal(context.pdfCandidates(doc,[],base).files[0].url,'https://www.caac.gov.cn/document.pdf');
+assert.equal(context.pdfCandidates({...doc,static_originals:[{url:good,label:'已校验'}]},[],base).files[0].url,good);
+assert.equal(context.pdfCandidates({...doc,body_provenance:{url:'https://evil.test/file.pdf'}},[],base).files.length,0);
 """)
 
 

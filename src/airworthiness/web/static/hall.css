@@ -196,6 +196,9 @@ body[data-view="reader"] .chapter-rail, body[data-view="reader"] .site-footer { 
 .text-reading-note { display: flex; gap: 12px; justify-content: space-between; align-items: start; }
 .text-reading-note .text-button { flex-shrink: 0; font-size: 12px; min-height: 32px; }
 .original-frame { display: block; width: 100%; height: 76vh; min-height: 520px; border: 1px solid #d0d5d7; background: #e8ebed; }
+.pdf-external-placeholder { min-height: 260px; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 32px; border: 1px solid var(--line); background: var(--ground); text-align: center; }
+.pdf-external-placeholder strong { font-size: 17px; font-weight: 600; margin-bottom: 9px; }
+.pdf-external-placeholder p { max-width: 520px; color: var(--muted); font-size: 12px; line-height: 1.8; }
 .notice-details { margin-top: 5px; }
 .notice-details summary { cursor: pointer; color: var(--teal); }
 .notice-details[open] summary { margin-bottom: 8px; }
