@@ -1,0 +1,55 @@
+name: Official source acquisition
+on:
+  workflow_dispatch:
+  push:
+    branches: [feat/offline-resource-hall]
+    paths: [.github/workflows/source-acquisition.yml]
+permissions:
+  contents: read
+jobs:
+  collect-official-sources:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      PYTHONUTF8: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install -e .
+      - name: Collect known official alternate originals and archive attachment
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from airworthiness.acquire_http import Fetcher
+          urls = [
+            'https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202607/P020260901517146096577.rar',
+            'https://xxgk.mot.gov.cn/2020/gz/202403/t20240312_4053238.html',
+            'https://xxgk.mot.gov.cn/gz/202112/t20211227_3633506.html',
+            'https://xxgk.mot.gov.cn/gz/202112/W020240527388257449467.pdf',
+            'https://xxgk.mot.gov.cn/gz/202112/t20211227_3633479.html',
+            'https://xxgk.mot.gov.cn/gz/202301/t20230119_3741016.html',
+            'https://xxgk.mot.gov.cn/gz/202208/t20220802_3662120.html',
+          ]
+          fetcher = Fetcher(Path('.cache/acquisition'), retries=0)
+          for url in urls:
+              try:
+                  result = fetcher.fetch(url)
+                  print('retrieved', result.url, len(result.data), flush=True)
+              except Exception as exc:
+                  print('failed', url, str(exc), flush=True)
+          PY
+      - name: Fetch public official sources with bounded verified requests
+        run: python -m airworthiness.acquire --root . --workers 4 --per-host 2
+      - name: Preserve download evidence for local integration
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: official-source-evidence
+          retention-days: 3
+          include-hidden-files: true
+          path: |
+            data/acquired/
+            .cache/acquisition/*.bin
+            .cache/acquisition/*.json

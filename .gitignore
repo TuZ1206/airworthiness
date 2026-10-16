@@ -5,6 +5,7 @@
 
 # Python
 .venv/
+.venv*/
 venv/
 __pycache__/
 *.py[cod]
@@ -29,3 +30,10 @@ Thumbs.db
 *.dump
 downloads/
 exports/
+.cache/
+output/
+_site/
+*.egg-info/
+build/
+dist/
+.playwright-cli/

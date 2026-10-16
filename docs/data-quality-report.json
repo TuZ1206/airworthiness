@@ -1,0 +1,2690 @@
+{
+  "chapters": [
+    {
+      "id": "ch01",
+      "title": "复合材料适航法规体系概论",
+      "description": "从法规层级、适用范围与基本概念开始，建立九章资料的阅读入口。",
+      "topics": [
+        "法规层级与基本概念",
+        "初始适航与证件链",
+        "产品技术标准"
+      ],
+      "count": 21,
+      "fulltext_count": 7,
+      "extracted_count": 13,
+      "excerpt_count": 0,
+      "metadata_count": 1
+    },
+    {
+      "id": "ch02",
+      "title": "复合材料适航全过程概论",
+      "description": "沿设计、生产与持续适航过程，查找各阶段的管理文件和程序依据。",
+      "topics": [
+        "设计与型号审定",
+        "生产与适航批准",
+        "持续适航"
+      ],
+      "count": 86,
+      "fulltext_count": 0,
+      "extracted_count": 86,
+      "excerpt_count": 0,
+      "metadata_count": 0
+    },
+    {
+      "id": "ch03",
+      "title": "材料性能与材料级验证",
+      "description": "围绕材料性能、设计值与材料级证据，阅读相关条款和标准信息。",
+      "topics": [
+        "材料特性与验证依据",
+        "环境影响与代表性",
+        "设计值与材料规范"
+      ],
+      "count": 7,
+      "fulltext_count": 0,
+      "extracted_count": 6,
+      "excerpt_count": 0,
+      "metadata_count": 1
+    },
+    {
+      "id": "ch04",
+      "title": "制造工艺与工艺验证",
+      "description": "集中浏览制造方法、工艺控制及其验证所涉及的法规和文件。",
+      "topics": [
+        "制造方法",
+        "工艺控制",
+        "工艺验证资料"
+      ],
+      "count": 11,
+      "fulltext_count": 0,
+      "extracted_count": 7,
+      "excerpt_count": 0,
+      "metadata_count": 4
+    },
+    {
+      "id": "ch05",
+      "title": "等同验证与变更管理",
+      "description": "查找设计或制造变更、等同性及相关审定程序的资料。",
+      "topics": [
+        "变更分类",
+        "等同性证据",
+        "审定与批准程序"
+      ],
+      "count": 14,
+      "fulltext_count": 0,
+      "extracted_count": 14,
+      "excerpt_count": 0,
+      "metadata_count": 0
+    },
+    {
+      "id": "ch06",
+      "title": "质量体系与供应链适航监管",
+      "description": "阅读生产质量体系、供应商管理和适航监督方面的资料。",
+      "topics": [
+        "质量体系",
+        "供应商与外包管理",
+        "适航监督"
+      ],
+      "count": 17,
+      "fulltext_count": 2,
+      "extracted_count": 15,
+      "excerpt_count": 0,
+      "metadata_count": 0
+    },
+    {
+      "id": "ch07",
+      "title": "积木式验证方法",
+      "description": "围绕逐级验证及证据衔接，组织材料、元件与结构验证资料。",
+      "topics": [
+        "验证层级",
+        "试验与分析",
+        "证据衔接"
+      ],
+      "count": 7,
+      "fulltext_count": 0,
+      "extracted_count": 6,
+      "excerpt_count": 0,
+      "metadata_count": 1
+    },
+    {
+      "id": "ch08",
+      "title": "疲劳与损伤容限要求",
+      "description": "集中检索疲劳、损伤容限和结构持续适航相关文件。",
+      "topics": [
+        "疲劳与损伤容限",
+        "结构评定",
+        "持续适航资料"
+      ],
+      "count": 11,
+      "fulltext_count": 0,
+      "extracted_count": 10,
+      "excerpt_count": 0,
+      "metadata_count": 1
+    },
+    {
+      "id": "ch09",
+      "title": "试验与统计方法",
+      "description": "查找材料试验、统计方法和相关标准的公开资料及状态信息。",
+      "topics": [
+        "试验方法",
+        "统计与设计值",
+        "标准状态与适用边界"
+      ],
+      "count": 15,
+      "fulltext_count": 0,
+      "extracted_count": 5,
+      "excerpt_count": 0,
+      "metadata_count": 10
+    }
+  ],
+  "totals": {
+    "chapters": 9,
+    "sources": 189,
+    "fulltext": 9,
+    "extracted": 162,
+    "excerpt": 0,
+    "metadata": 18
+  },
+  "generated_at": "2026-10-13T10:03:54.986488+00:00",
+  "issues": [
+    {
+      "source_id": "CH04-S010",
+      "kind": "missing_date",
+      "message": "来源台账未提供发布日期，需复核。"
+    }
+  ],
+  "errors": [],
+  "gaps": [
+    {
+      "source_id": "CH01-S020",
+      "title": "飞机复合材料结构适航符合性验证通用要求",
+      "chapter_id": "ch01",
+      "chapter_title": "复合材料适航法规体系概论",
+      "document_code": "HB 8605-2021",
+      "document_status": "effective",
+      "publish_date": "2021-04-19",
+      "url": "https://std.samr.gov.cn/hb/search/stdHBDetailedCNF?id=09C9A09DA897FC93E06397BE0A0A1DFC",
+      "review_status": "pending",
+      "content_kind": "metadata",
+      "snippet": "本章核验摘录全国标准信息公共服务平台将HB8605-2021标注为航空行业强制性现行标准，发布日期为2021年4月19日，实施日期为2021年7月1日。未取得政府渠道受控全文前，本来源只证明标准存在和状态，不支撑具体条款结论。本文件记录第一章所需的官方状态和定位，不替代官方原文。正式批准前须由专业成员对照落地页及附件逐条复核。",
+      "reason": "只读云端原始HTML确认：实际显示的查看文本按钮使用.openhdbpdf处理器，目标为hbba.sacinfo.org.cn；浏览器分支将/attachment/onlineRead改为/portal/online。它不属于gov.cn，本任务没有访问。gov.cn范围内未确认该标准全文入口，不能据此宣称标准不公开。",
+      "access_note": "只读云端原始HTML确认：实际显示的查看文本按钮使用.openhdbpdf处理器，目标为hbba.sacinfo.org.cn；浏览器分支将/attachment/onlineRead改为/portal/online。它不属于gov.cn，本任务没有访问。gov.cn范围内未确认该标准全文入口，不能据此宣称标准不公开。",
+      "access_checked_at": "2026-10-13T16:22:33+08:00",
+      "previous_reason": "当前仅有文件状态或登记信息，未取得受控全文。 本次获取：机械采集结果，待核验；抓取成功不等于专业审核或批准。 国家标准平台状态页，仅为标准元数据，不是标准正文。 保留并共享同一官方URL的已保存正文。"
+    },
+    {
+      "source_id": "CH03-S006",
+      "title": "飞机复合材料结构适航符合性验证通用要求",
+      "chapter_id": "ch03",
+      "chapter_title": "材料性能与材料级验证",
+      "document_code": "HB 8605-2021",
+      "document_status": "effective",
+      "publish_date": "2021-04-19",
+      "url": "https://std.samr.gov.cn/hb/search/stdHBDetailedCNF?id=09C9A09DA897FC93E06397BE0A0A1DFC",
+      "review_status": "pending",
+      "content_kind": "metadata",
+      "snippet": "清洗摘录官方平台确认该航空行业强制性标准存在且现行，主管部门为工业和信息化部。当前未取得政府渠道发布的完整受控正文，因此本来源只能证明标准名称、编号、发布日期、实施日期和状态。原稿涉及的积木式层级、材料性能项目、环境条件、试样数量、统计判据和具体章节不得由状态页推定，也不得用于支撑正式专业结论。>本文件为标准状态记录，不替代标准正文。",
+      "reason": "只读云端原始HTML确认：实际显示的查看文本按钮使用.openhdbpdf处理器，目标为hbba.sacinfo.org.cn；浏览器分支将/attachment/onlineRead改为/portal/online。它不属于gov.cn，本任务没有访问。gov.cn范围内未确认该标准全文入口，不能据此宣称标准不公开。",
+      "access_note": "只读云端原始HTML确认：实际显示的查看文本按钮使用.openhdbpdf处理器，目标为hbba.sacinfo.org.cn；浏览器分支将/attachment/onlineRead改为/portal/online。它不属于gov.cn，本任务没有访问。gov.cn范围内未确认该标准全文入口，不能据此宣称标准不公开。",
+      "access_checked_at": "2026-10-13T16:22:33+08:00",
+      "previous_reason": "当前仅有文件状态或登记信息，未取得受控全文。 本次获取：机械采集结果，待核验；抓取成功不等于专业审核或批准。 国家标准平台状态页，仅为标准元数据，不是标准正文。 保留并共享同一官方URL的已保存正文。"
+    },
+    {
+      "source_id": "CH04-S007",
+      "title": "飞机复合材料结构适航符合性验证通用要求",
+      "chapter_id": "ch04",
+      "chapter_title": "制造工艺与工艺验证",
+      "document_code": "HB 8605-2021",
+      "document_status": "effective",
+      "publish_date": "2021-04-19",
+      "url": "https://std.samr.gov.cn/hb/search/stdHBDetailedCNF?id=09C9A09DA897FC93E06397BE0A0A1DFC",
+      "review_status": "pending",
+      "content_kind": "metadata",
+      "snippet": "清洗摘录政府标准平台确认该标准的名称、编号、发布日期、实施日期和现行状态。当前公开页面不足以逐条核验详细技术要求，因此本轮仅登记文件级节点，不以其支撑温度、压力、批次数量、合格率、审核周期或保存年限等具体结论。>本文件为状态页审查摘录，不替代受控标准正文。正文与原始哈希待补录。",
+      "reason": "只读云端原始HTML确认：实际显示的查看文本按钮使用.openhdbpdf处理器，目标为hbba.sacinfo.org.cn；浏览器分支将/attachment/onlineRead改为/portal/online。它不属于gov.cn，本任务没有访问。gov.cn范围内未确认该标准全文入口，不能据此宣称标准不公开。",
+      "access_note": "只读云端原始HTML确认：实际显示的查看文本按钮使用.openhdbpdf处理器，目标为hbba.sacinfo.org.cn；浏览器分支将/attachment/onlineRead改为/portal/online。它不属于gov.cn，本任务没有访问。gov.cn范围内未确认该标准全文入口，不能据此宣称标准不公开。",
+      "access_checked_at": "2026-10-13T16:22:33+08:00",
+      "previous_reason": "当前仅有文件状态或登记信息，未取得受控全文。 本次获取：机械采集结果，待核验；抓取成功不等于专业审核或批准。 国家标准平台状态页，仅为标准元数据，不是标准正文。 保留并共享同一官方URL的已保存正文。"
+    },
+    {
+      "source_id": "CH04-S008",
+      "title": "无损检测 航空无损检测人员资格鉴定与认证",
+      "chapter_id": "ch04",
+      "chapter_title": "制造工艺与工艺验证",
+      "document_code": "GB/T 36439-2018",
+      "document_status": "effective",
+      "publish_date": "2018-07-13",
+      "url": "https://std.samr.gov.cn/gb/search/gbDetailed?id=71F772D82E8BD3A7E05397BE0A0AB82A",
+      "review_status": "pending",
+      "content_kind": "metadata",
+      "snippet": "清洗摘录官方标准平台显示该标准截至查询日现行，主题为航空无损检测人员资格鉴定与认证。2026版已经发布但尚未实施，因此当前仍以2018版作为现行文件候选；本数据集不从不可见正文推导具体资格级别、经历时长或考试分值。>本文件为状态页审查摘录，不替代受控标准正文。正文与原始哈希待补录。",
+      "reason": "官方页面呈现在线预览/下载标准按钮；远端网页工具只返回页面文本和按钮标签，没有可点击的目标链接或PDF响应，未取得真实下游下载URL。已连接Edge对同一全文平台的36439-2018页面访问报net::ERR_CONNECTION_CLOSED。不能完成下载，不据此判断标准不公开。",
+      "access_note": "官方页面呈现在线预览/下载标准按钮；远端网页工具只返回页面文本和按钮标签，没有可点击的目标链接或PDF响应，未取得真实下游下载URL。已连接Edge对同一全文平台的36439-2018页面访问报net::ERR_CONNECTION_CLOSED。不能完成下载，不据此判断标准不公开。",
+      "access_checked_at": "2026-10-13T16:22:33+08:00",
+      "previous_reason": "当前仅有文件状态或登记信息，未取得受控全文。 本次获取：机械采集结果，待核验；抓取成功不等于专业审核或批准。 国家标准平台状态页，仅为标准元数据，不是标准正文。 保留并共享同一官方URL的已保存正文。"
+    },
+    {
+      "source_id": "CH04-S010",
+      "title": "原稿引用HB 7736-2004（题名与状态待核验）",
+      "chapter_id": "ch04",
+      "chapter_title": "制造工艺与工艺验证",
+      "document_code": "HB 7736-2004",
+      "document_status": "unknown",
+      "publish_date": "",
+      "url": "https://std.samr.gov.cn/search/stdPage?q=HB%207736%202004&tid=",
+      "review_status": "pending",
+      "content_kind": "metadata",
+      "snippet": "核验结论截至2026-09-28，未在政府标准平台确认原稿所写编号、年份与题名的精确匹配，也未取得可核验的效力和替代关系。该引用不得作为现行依据，不得支撑节点、关系、正文或爬虫入口。>本文件只记录争议项，不代表该引用有效。",
+      "reason": "云端缓存中的官方查询HTML明确返回0个相关结果；此前远端打开查询URL失败，但缓存现在提供了查询结果证据。gov.cn多种写法检索仍未确认同号同年的官方详情及全文。此查询未匹配不等于证明标准不存在或不公开。",
+      "access_note": "云端缓存中的官方查询HTML明确返回0个相关结果；此前远端打开查询URL失败，但缓存现在提供了查询结果证据。gov.cn多种写法检索仍未确认同号同年的官方详情及全文。此查询未匹配不等于证明标准不存在或不公开。",
+      "access_checked_at": "2026-10-13T16:22:33+08:00",
+      "previous_reason": "当前仅有文件状态或登记信息，未取得受控全文。 本次获取：机械采集结果，待核验；抓取成功不等于专业审核或批准。 国家标准平台状态页，仅为标准元数据，不是标准正文。 保留并共享同一官方URL的已保存正文。"
+    },
+    {
+      "source_id": "CH04-S011",
+      "title": "无损检测 航空无损检测人员资格鉴定与认证",
+      "chapter_id": "ch04",
+      "chapter_title": "制造工艺与工艺验证",
+      "document_code": "GB/T 36439-2026",
+      "document_status": "unknown",
+      "publish_date": "2026-07-02",
+      "url": "https://std.samr.gov.cn/gb/search/gbDetailed?id=wewep9AmA7A%3D%3D&mode=p",
+      "review_status": "pending",
+      "content_kind": "metadata",
+      "snippet": "核验结论该版本在查询日2026-09-28尚未实施，不能替代当前实施中的2018版，也不得支撑本轮正式节点和关系。应在2027-02-01前后复核实施状态、替代关系和过渡安排。>本文件为版本切换提醒，不替代官方原文。",
+      "reason": "官方页面呈现在线预览/下载标准按钮；远端网页工具只返回页面文本和按钮标签，没有可点击的目标链接或PDF响应，未取得真实下游下载URL。已连接Edge对同一全文平台的36439-2018页面访问报net::ERR_CONNECTION_CLOSED。不能完成下载，不据此判断标准不公开。",
+      "access_note": "官方页面呈现在线预览/下载标准按钮；远端网页工具只返回页面文本和按钮标签，没有可点击的目标链接或PDF响应，未取得真实下游下载URL。已连接Edge对同一全文平台的36439-2018页面访问报net::ERR_CONNECTION_CLOSED。不能完成下载，不据此判断标准不公开。",
+      "access_checked_at": "2026-10-13T16:22:33+08:00",
+      "previous_reason": "当前仅有文件状态或登记信息，未取得受控全文。 本次获取：机械采集结果，待核验；抓取成功不等于专业审核或批准。 国家标准平台状态页，仅为标准元数据，不是标准正文。 保留并共享同一官方URL的已保存正文。"
+    },
+    {
+      "source_id": "CH07-S003",
+      "title": "飞机复合材料结构适航符合性验证通用要求",
+      "chapter_id": "ch07",
+      "chapter_title": "积木式验证方法",
+      "document_code": "HB 8605-2021",
+      "document_status": "effective",
+      "publish_date": "2021-04-19",
+      "url": "https://std.samr.gov.cn/hb/search/stdHBDetailedCNF?id=09C9A09DA897FC93E06397BE0A0A1DFC",
+      "review_status": "pending",
+      "content_kind": "metadata",
+      "snippet": "清洗摘录政府标准平台确认该标准的名称、编号、强制性、现行状态、发布日期、实施日期、主管部门和备案信息。当前政府公开页面未提供可稳定核验的完整正文，因此原稿所引用的第4章、第5.1至5.7条、第6章和附录B均标为待受控正文复核。五级积木结构用于保持项目数据结构一致，但不得被解释为已完成官方条文逐字核验。>本文件为状态页审查摘录，不替代受控标准正文。正文与原始哈…",
+      "reason": "只读云端原始HTML确认：实际显示的查看文本按钮使用.openhdbpdf处理器，目标为hbba.sacinfo.org.cn；浏览器分支将/attachment/onlineRead改为/portal/online。它不属于gov.cn，本任务没有访问。gov.cn范围内未确认该标准全文入口，不能据此宣称标准不公开。",
+      "access_note": "只读云端原始HTML确认：实际显示的查看文本按钮使用.openhdbpdf处理器，目标为hbba.sacinfo.org.cn；浏览器分支将/attachment/onlineRead改为/portal/online。它不属于gov.cn，本任务没有访问。gov.cn范围内未确认该标准全文入口，不能据此宣称标准不公开。",
+      "access_checked_at": "2026-10-13T16:22:33+08:00",
+      "previous_reason": "当前仅有文件状态或登记信息，未取得受控全文。 本次获取：机械采集结果，待核验；抓取成功不等于专业审核或批准。 国家标准平台状态页，仅为标准元数据，不是标准正文。 保留并共享同一官方URL的已保存正文。"
+    },
+    {
+      "source_id": "CH08-S002",
+      "title": "飞机复合材料结构适航符合性验证通用要求",
+      "chapter_id": "ch08",
+      "chapter_title": "疲劳与损伤容限要求",
+      "document_code": "HB 8605-2021",
+      "document_status": "effective",
+      "publish_date": "2021-04-19",
+      "url": "https://std.samr.gov.cn/hb/search/stdHBDetailedCNF?id=09C9A09DA897FC93E06397BE0A0A1DFC",
+      "review_status": "pending",
+      "content_kind": "metadata",
+      "snippet": "官方平台确认《飞机复合材料结构适航符合性验证通用要求》为强制性、现行标准，发布日期为2021-04-19，实施日期为2021-07-01。政府渠道未取得可核验的受控完整正文，因此本来源只证明标准存在及状态，不证明五类损伤、RDL、ADL或具体试验要求。",
+      "reason": "只读云端原始HTML确认：实际显示的查看文本按钮使用.openhdbpdf处理器，目标为hbba.sacinfo.org.cn；浏览器分支将/attachment/onlineRead改为/portal/online。它不属于gov.cn，本任务没有访问。gov.cn范围内未确认该标准全文入口，不能据此宣称标准不公开。",
+      "access_note": "只读云端原始HTML确认：实际显示的查看文本按钮使用.openhdbpdf处理器，目标为hbba.sacinfo.org.cn；浏览器分支将/attachment/onlineRead改为/portal/online。它不属于gov.cn，本任务没有访问。gov.cn范围内未确认该标准全文入口，不能据此宣称标准不公开。",
+      "access_checked_at": "2026-10-13T16:22:33+08:00",
+      "previous_reason": "当前仅有文件状态或登记信息，未取得受控全文。 本次获取：机械采集结果，待核验；抓取成功不等于专业审核或批准。 国家标准平台状态页，仅为标准元数据，不是标准正文。 保留并共享同一官方URL的已保存正文。"
+    },
+    {
+      "source_id": "CH09-S006",
+      "title": "飞机复合材料结构适航符合性验证通用要求",
+      "chapter_id": "ch09",
+      "chapter_title": "试验与统计方法",
+      "document_code": "HB 8605-2021",
+      "document_status": "effective",
+      "publish_date": "2021-04-19",
+      "url": "https://std.samr.gov.cn/hb/search/stdHBDetailedCNF?id=09C9A09DA897FC93E06397BE0A0A1DFC",
+      "review_status": "pending",
+      "content_kind": "metadata",
+      "snippet": "清洗摘录官方平台确认该航空行业强制性标准存在且现行，主管部门为工业和信息化部。当前未取得政府渠道发布的完整受控正文，因此本来源只能证明标准名称、编号、发布日期、实施日期和状态。原稿涉及的积木式层级、批次数、试样数量、统计判据和具体章节不得由状态页推定，也不得用作正式节点或关系的技术证据。>本文件为标准状态记录，不替代标准正文。",
+      "reason": "只读云端原始HTML确认：实际显示的查看文本按钮使用.openhdbpdf处理器，目标为hbba.sacinfo.org.cn；浏览器分支将/attachment/onlineRead改为/portal/online。它不属于gov.cn，本任务没有访问。gov.cn范围内未确认该标准全文入口，不能据此宣称标准不公开。",
+      "access_note": "只读云端原始HTML确认：实际显示的查看文本按钮使用.openhdbpdf处理器，目标为hbba.sacinfo.org.cn；浏览器分支将/attachment/onlineRead改为/portal/online。它不属于gov.cn，本任务没有访问。gov.cn范围内未确认该标准全文入口，不能据此宣称标准不公开。",
+      "access_checked_at": "2026-10-13T16:22:33+08:00",
+      "previous_reason": "当前仅有文件状态或登记信息，未取得受控全文。 本次获取：机械采集结果，待核验；抓取成功不等于专业审核或批准。 国家标准平台状态页，仅为标准元数据，不是标准正文。 保留并共享同一官方URL的已保存正文。"
+    },
+    {
+      "source_id": "CH09-S007",
+      "title": "纤维增强塑料性能试验方法总则",
+      "chapter_id": "ch09",
+      "chapter_title": "试验与统计方法",
+      "document_code": "GB/T 1446-2005",
+      "document_status": "effective",
+      "publish_date": "2005-05-18",
+      "url": "https://std.samr.gov.cn/gb/search/gbDetailed?id=02ylPFn9UOs%3D&mode=p",
+      "review_status": "pending",
+      "content_kind": "metadata",
+      "snippet": "清洗摘录官方平台确认该推荐性国家标准现行，适用于纤维增强塑料性能测定的一般规则，涉及实验室环境、试样、设备、结果和报告等通用环节。修订项目正在进行，不改变本次查询日2005版仍为现行的状态。未取得受控全文前，本章不引用其中具体环境数值、试样数量、有效数字或报告字段。>本文件为标准状态与公开范围记录，不替代标准正文。",
+      "reason": "官方页面呈现在线预览/下载标准按钮；远端网页工具只返回页面文本和按钮标签，没有可点击的目标链接或PDF响应，未取得真实下游下载URL。已连接Edge对同一全文平台的36439-2018页面访问报net::ERR_CONNECTION_CLOSED。不能完成下载，不据此判断标准不公开。",
+      "access_note": "官方页面呈现在线预览/下载标准按钮；远端网页工具只返回页面文本和按钮标签，没有可点击的目标链接或PDF响应，未取得真实下游下载URL。已连接Edge对同一全文平台的36439-2018页面访问报net::ERR_CONNECTION_CLOSED。不能完成下载，不据此判断标准不公开。",
+      "access_checked_at": "2026-10-13T16:22:33+08:00",
+      "previous_reason": "当前仅有文件状态或登记信息，未取得受控全文。 本次获取：机械采集结果，待核验；抓取成功不等于专业审核或批准。 国家标准平台状态页，仅为标准元数据，不是标准正文。 保留并共享同一官方URL的已保存正文。"
+    },
+    {
+      "source_id": "CH09-S008",
+      "title": "纤维增强塑料拉伸性能试验方法",
+      "chapter_id": "ch09",
+      "chapter_title": "试验与统计方法",
+      "document_code": "GB/T 1447-2005",
+      "document_status": "effective",
+      "publish_date": "2005-05-18",
+      "url": "https://std.samr.gov.cn/gb/search/gbDetailed?id=96t08JShETQ%3D&mode=p",
+      "review_status": "pending",
+      "content_kind": "metadata",
+      "snippet": "清洗摘录官方平台确认该推荐性国家标准现行，标准对象为纤维增强塑料拉伸性能试验方法。状态页能够证明标准存在、适用方法类别和版本状态，但不能单独证明原稿中的统一试样数量或接受准则。>本文件为标准状态记录，不替代标准正文。",
+      "reason": "国家标准全文公开系统明确提示该标准涉及国际国外采标版权保护，不提供文本阅读服务；gov.cn补充检索未确认其他同号同年合法官方全文入口。这是该系统的访问限制，不是对全网公开性的断言。",
+      "access_note": "国家标准全文公开系统明确提示该标准涉及国际国外采标版权保护，不提供文本阅读服务；gov.cn补充检索未确认其他同号同年合法官方全文入口。这是该系统的访问限制，不是对全网公开性的断言。",
+      "access_checked_at": "2026-10-13T16:22:33+08:00",
+      "previous_reason": "当前仅有文件状态或登记信息，未取得受控全文。 本次获取：机械采集结果，待核验；抓取成功不等于专业审核或批准。 国家标准平台状态页，仅为标准元数据，不是标准正文。 保留并共享同一官方URL的已保存正文。"
+    },
+    {
+      "source_id": "CH09-S009",
+      "title": "纤维增强塑料压缩性能试验方法",
+      "chapter_id": "ch09",
+      "chapter_title": "试验与统计方法",
+      "document_code": "GB/T 1448-2005",
+      "document_status": "effective",
+      "publish_date": "2005-05-18",
+      "url": "https://std.samr.gov.cn/gb/search/gbDetailed?id=71F772D76837D3A7E05397BE0A0AB82A",
+      "review_status": "pending",
+      "content_kind": "metadata",
+      "snippet": "清洗摘录官方平台确认该推荐性国家标准现行，标准对象为纤维增强塑料压缩性能试验方法。状态页仅用于版本和适用方法确认；具体试样尺寸、数量、加载与失效判据须从受控全文核对。>本文件为标准状态记录，不替代标准正文。",
+      "reason": "官方页面呈现在线预览/下载标准按钮；远端网页工具只返回页面文本和按钮标签，没有可点击的目标链接或PDF响应，未取得真实下游下载URL。已连接Edge对同一全文平台的36439-2018页面访问报net::ERR_CONNECTION_CLOSED。不能完成下载，不据此判断标准不公开。",
+      "access_note": "官方页面呈现在线预览/下载标准按钮；远端网页工具只返回页面文本和按钮标签，没有可点击的目标链接或PDF响应，未取得真实下游下载URL。已连接Edge对同一全文平台的36439-2018页面访问报net::ERR_CONNECTION_CLOSED。不能完成下载，不据此判断标准不公开。",
+      "access_checked_at": "2026-10-13T16:22:33+08:00",
+      "previous_reason": "当前仅有文件状态或登记信息，未取得受控全文。 本次获取：机械采集结果，待核验；抓取成功不等于专业审核或批准。 国家标准平台状态页，仅为标准元数据，不是标准正文。 保留并共享同一官方URL的已保存正文。"
+    },
+    {
+      "source_id": "CH09-S010",
+      "title": "纤维增强塑料弯曲性能试验方法",
+      "chapter_id": "ch09",
+      "chapter_title": "试验与统计方法",
+      "document_code": "GB/T 1449-2005",
+      "document_status": "effective",
+      "publish_date": "2005-05-18",
+      "url": "https://std.samr.gov.cn/gb/search/gbDetailed?id=71F772D76A50D3A7E05397BE0A0AB82A",
+      "review_status": "pending",
+      "content_kind": "metadata",
+      "snippet": "清洗摘录官方平台确认该推荐性国家标准现行，标准对象为纤维增强塑料弯曲性能试验方法。状态页只支撑标准名称、版本和状态，不支撑原稿中的样本量或通用接受准则。>本文件为标准状态记录，不替代标准正文。",
+      "reason": "国家标准全文公开系统明确提示该标准涉及国际国外采标版权保护，不提供文本阅读服务；gov.cn补充检索未确认其他同号同年合法官方全文入口。这是该系统的访问限制，不是对全网公开性的断言。",
+      "access_note": "国家标准全文公开系统明确提示该标准涉及国际国外采标版权保护，不提供文本阅读服务；gov.cn补充检索未确认其他同号同年合法官方全文入口。这是该系统的访问限制，不是对全网公开性的断言。",
+      "access_checked_at": "2026-10-13T16:22:33+08:00",
+      "previous_reason": "当前仅有文件状态或登记信息，未取得受控全文。 本次获取：机械采集结果，待核验；抓取成功不等于专业审核或批准。 国家标准平台状态页，仅为标准元数据，不是标准正文。 保留并共享同一官方URL的已保存正文。"
+    },
+    {
+      "source_id": "CH09-S011",
+      "title": "聚合物基复合材料疲劳性能测试方法 第2部分：线性或线性化应力寿命（S-N）和应变寿命（ε-N）疲劳数据的统计分析",
+      "chapter_id": "ch09",
+      "chapter_title": "试验与统计方法",
+      "document_code": "GB/T 35465.2-2017",
+      "document_status": "effective",
+      "publish_date": "2017-12-29",
+      "url": "https://std.samr.gov.cn/gb/search/gbDetailed?id=71F772D82898D3A7E05397BE0A0AB82A",
+      "review_status": "pending",
+      "content_kind": "metadata",
+      "snippet": "清洗摘录官方平台确认该推荐性国家标准现行，其公开题名明确适用于线性或线性化应力寿命（S-N）和应变寿命（ε-N）疲劳数据的统计分析。未取得受控全文前，本章只建立疲劳数据统计分析的方法接口，不写入回归公式、置信带、样本数量或接受阈值。>本文件为标准状态与公开范围记录，不替代标准正文。",
+      "reason": "官方页面呈现在线预览/下载标准按钮；远端网页工具只返回页面文本和按钮标签，没有可点击的目标链接或PDF响应，未取得真实下游下载URL。已连接Edge对同一全文平台的36439-2018页面访问报net::ERR_CONNECTION_CLOSED。不能完成下载，不据此判断标准不公开。",
+      "access_note": "官方页面呈现在线预览/下载标准按钮；远端网页工具只返回页面文本和按钮标签，没有可点击的目标链接或PDF响应，未取得真实下游下载URL。已连接Edge对同一全文平台的36439-2018页面访问报net::ERR_CONNECTION_CLOSED。不能完成下载，不据此判断标准不公开。",
+      "access_checked_at": "2026-10-13T16:22:33+08:00",
+      "previous_reason": "当前仅有文件状态或登记信息，未取得受控全文。 本次获取：机械采集结果，待核验；抓取成功不等于专业审核或批准。 国家标准平台状态页，仅为标准元数据，不是标准正文。 保留并共享同一官方URL的已保存正文。"
+    },
+    {
+      "source_id": "CH09-S012",
+      "title": "碳纤维复丝拉伸性能试验方法",
+      "chapter_id": "ch09",
+      "chapter_title": "试验与统计方法",
+      "document_code": "GB/T 3362-2017",
+      "document_status": "effective",
+      "publish_date": "2017-10-14",
+      "url": "https://std.samr.gov.cn/gb/search/gbDetailed?id=NFfl7tFizAE%3D&mode=p",
+      "review_status": "pending",
+      "content_kind": "metadata",
+      "snippet": "清洗摘录官方平台确认该推荐性国家标准在查询日仍为现行，并已有修订计划。标准对象为碳纤维复丝拉伸性能试验方法。复审结论“修订”不等同于已废止；在替代标准正式实施前不得自行改变效力状态。具体试验步骤和计算方法须核对受控全文。>本文件为标准状态记录，不替代标准正文。",
+      "reason": "官方页面呈现在线预览/下载标准按钮；远端网页工具只返回页面文本和按钮标签，没有可点击的目标链接或PDF响应，未取得真实下游下载URL。已连接Edge对同一全文平台的36439-2018页面访问报net::ERR_CONNECTION_CLOSED。不能完成下载，不据此判断标准不公开。",
+      "access_note": "官方页面呈现在线预览/下载标准按钮；远端网页工具只返回页面文本和按钮标签，没有可点击的目标链接或PDF响应，未取得真实下游下载URL。已连接Edge对同一全文平台的36439-2018页面访问报net::ERR_CONNECTION_CLOSED。不能完成下载，不据此判断标准不公开。",
+      "access_checked_at": "2026-10-13T16:22:33+08:00",
+      "previous_reason": "当前仅有文件状态或登记信息，未取得受控全文。 本次获取：未取得官方正文；未以原有摘录或模拟内容代替。"
+    },
+    {
+      "source_id": "CH09-S013",
+      "title": "数据的统计处理和解释 正态样本离群值的判断和处理",
+      "chapter_id": "ch09",
+      "chapter_title": "试验与统计方法",
+      "document_code": "GB/T 4883-2008",
+      "document_status": "effective",
+      "publish_date": "2008-07-16",
+      "url": "https://std.samr.gov.cn/gb/search/gbDetailed?id=xe1pIAJCf2A%3D&mode=p",
+      "review_status": "pending",
+      "content_kind": "metadata",
+      "snippet": "清洗摘录官方平台确认该推荐性国家标准现行，标准对象是正态样本离群值的判断和处理。本章据此建立“仅在已确认适用正态样本的条件下处理离群值”的方法边界。未取得受控全文前，不写入奈尔、格拉布斯等具体检验步骤、样本量范围、显著性水平或临界值。>本文件为标准状态与公开范围记录，不替代标准正文。",
+      "reason": "官方页面呈现在线预览/下载标准按钮；远端网页工具只返回页面文本和按钮标签，没有可点击的目标链接或PDF响应，未取得真实下游下载URL。已连接Edge对同一全文平台的36439-2018页面访问报net::ERR_CONNECTION_CLOSED。不能完成下载，不据此判断标准不公开。",
+      "access_note": "官方页面呈现在线预览/下载标准按钮；远端网页工具只返回页面文本和按钮标签，没有可点击的目标链接或PDF响应，未取得真实下游下载URL。已连接Edge对同一全文平台的36439-2018页面访问报net::ERR_CONNECTION_CLOSED。不能完成下载，不据此判断标准不公开。",
+      "access_checked_at": "2026-10-13T16:22:33+08:00",
+      "previous_reason": "当前仅有文件状态或登记信息，未取得受控全文。 本次获取：机械采集结果，待核验；抓取成功不等于专业审核或批准。 国家标准平台状态页，仅为标准元数据，不是标准正文。 保留并共享同一官方URL的已保存正文。"
+    },
+    {
+      "source_id": "CH09-S014",
+      "title": "数据的统计处理和解释 正态性检验",
+      "chapter_id": "ch09",
+      "chapter_title": "试验与统计方法",
+      "document_code": "GB/T 4882-2001",
+      "document_status": "effective",
+      "publish_date": "2001-03-05",
+      "url": "https://std.samr.gov.cn/gb/search/gbDetailed?id=DmMQ3gJ4qKU%3D&mode=p",
+      "review_status": "pending",
+      "content_kind": "metadata",
+      "snippet": "清洗摘录官方平台确认该推荐性国家标准现行，标准对象是数据统计处理中的正态性检验。它可作为在采用正态分布假设前核查分布适用性的国内标准入口。状态页不能证明具体检验统计量、样本量下限或接受阈值；这些内容须从受控全文和适用项目方案核对。>本文件为标准状态与公开范围记录，不替代标准正文。",
+      "reason": "国家标准全文公开系统明确提示该标准涉及国际国外采标版权保护，不提供文本阅读服务；gov.cn补充检索未确认其他同号同年合法官方全文入口。这是该系统的访问限制，不是对全网公开性的断言。",
+      "access_note": "国家标准全文公开系统明确提示该标准涉及国际国外采标版权保护，不提供文本阅读服务；gov.cn补充检索未确认其他同号同年合法官方全文入口。这是该系统的访问限制，不是对全网公开性的断言。",
+      "access_checked_at": "2026-10-13T16:22:33+08:00",
+      "previous_reason": "当前仅有文件状态或登记信息，未取得受控全文。 本次获取：机械采集结果，待核验；抓取成功不等于专业审核或批准。 国家标准平台状态页，仅为标准元数据，不是标准正文。 保留并共享同一官方URL的已保存正文。"
+    },
+    {
+      "source_id": "CH09-S015",
+      "title": "数据的统计处理和解释 统计容忍区间的确定",
+      "chapter_id": "ch09",
+      "chapter_title": "试验与统计方法",
+      "document_code": "GB/T 3359-2009",
+      "document_status": "effective",
+      "publish_date": "2009-10-15",
+      "url": "https://std.samr.gov.cn/gb/search/gbDetailed?id=71F772D7F18CD3A7E05397BE0A0AB82A",
+      "review_status": "pending",
+      "content_kind": "metadata",
+      "snippet": "清洗摘录官方平台确认该推荐性国家标准现行，标准对象是统计容忍区间的确定。它为材料设计值工作中的容忍区间概念提供国内统计标准入口，但不能替代CCAR-25第25.613条对适用设计值的审定要求。未取得受控全文前，不写入容限系数、样本量边界、分布假设或计算公式。>本文件为标准状态与公开范围记录，不替代标准正文。",
+      "reason": "国家标准全文公开系统明确提示该标准涉及国际国外采标版权保护，不提供文本阅读服务；gov.cn补充检索未确认其他同号同年合法官方全文入口。这是该系统的访问限制，不是对全网公开性的断言。",
+      "access_note": "国家标准全文公开系统明确提示该标准涉及国际国外采标版权保护，不提供文本阅读服务；gov.cn补充检索未确认其他同号同年合法官方全文入口。这是该系统的访问限制，不是对全网公开性的断言。",
+      "access_checked_at": "2026-10-13T16:22:33+08:00",
+      "previous_reason": "当前仅有文件状态或登记信息，未取得受控全文。 本次获取：机械采集结果，待核验；抓取成功不等于专业审核或批准。 国家标准平台状态页，仅为标准元数据，不是标准正文。 保留并共享同一官方URL的已保存正文。"
+    }
+  ],
+  "resolved_metadata": [
+    {
+      "finding_id": "P04",
+      "field": "publish_date",
+      "verified_value": "2016-03-17",
+      "evidence_url": [
+        "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/201606/t20160622_38638.html",
+        "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/MHGZ/201606/t20160622_38638.html",
+        "https://www.caac.gov.cn/ZTZL/RDZT/2021BNWY/GGKF/202107/t20210707_208324.html",
+        "https://xxgk.mot.gov.cn/gz/202112/t20211227_3633506.html"
+      ],
+      "evidence": {
+        "type": "paraphrase",
+        "text": "两版 CAAC 网页的发文日期一致为 2016-03-17；官方历史说明指出 2011-11-07 曾颁发修订版，2016 年交通运输部颁布版本与其内容一致；交通运输部正文标明 2016-03-17 公布、2016-04-17 施行。"
+      },
+      "checked_at": "2026-10-13T08:30:58Z",
+      "result": "verified",
+      "scope": "priority",
+      "warning_numbers": [
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "evidence_locator": "CAAC 两页发文日期栏；历史说明正文第2段；交通运输部正文标题下公布说明",
+      "date_roles": {
+        "registered_source_publish_date": "2016-03-17",
+        "earlier_revision_publish_date": "2011-11-07",
+        "effective_date": "2016-04-17"
+      },
+      "affected_corrections": [
+        "CH03-S001",
+        "CH08-S001",
+        "CH09-S001"
+      ],
+      "note": "2011 日期有官方历史依据，但不匹配当前登记的 2016 来源页。不得将两年内容一致解释为两次颁布是同一次事件。",
+      "previous_checked_at": "2026-10-13T08:15:27Z",
+      "cache_evidence_ids": [
+        "C17",
+        "C04"
+      ],
+      "resolution": "corrected",
+      "source_id": "CH01-S008",
+      "application": "already_matches",
+      "applied": false,
+      "original_value": "2016-03-17"
+    },
+    {
+      "finding_id": "P05",
+      "field": "title",
+      "verified_value": "颁发专用条件、批准豁免和做出等效安全水平结论的程序",
+      "evidence_url": [
+        "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202312/t20231223_222428.html"
+      ],
+      "evidence": {
+        "type": "paraphrase",
+        "text": "官方标题在专用条件后保留顿号。三条记录链接、文号一致，CH05-S008 的差异仅为漏掉这一标点。"
+      },
+      "checked_at": "2026-10-13T08:30:58Z",
+      "result": "equivalent_title",
+      "scope": "priority",
+      "warning_numbers": [
+        13,
+        14,
+        15
+      ],
+      "evidence_locator": "HTML 名称、标题、文号和附件名称",
+      "punctuation_variants": [
+        "CH05-S008"
+      ],
+      "limitation": "附件桌面路径访问超时；结论依据已完整读取的官方发布页，不宣称完成附件逐字或版式核验。",
+      "previous_checked_at": "2026-10-13T08:15:27Z",
+      "cache_evidence_ids": [
+        "C02"
+      ],
+      "resolution": "explained",
+      "source_id": "CH01-S019",
+      "application": "explained",
+      "applied": false,
+      "original_value": "颁发专用条件、批准豁免和做出等效安全水平结论的程序"
+    },
+    {
+      "finding_id": "P06",
+      "field": "title",
+      "verified_value": "关于公布《与我国建立双边适航关系的国家及有关文件目录》的通知",
+      "evidence_url": [
+        "https://www.caac.gov.cn/XXGK/XXGK/ZFGW/202503/t20250314_226931.html"
+      ],
+      "evidence": {
+        "type": "paraphrase",
+        "text": "官方通知标题使用书名号，正文说明公布的是截至 2024 年底整理的双边适航文件目录，并署 2025 年 2 月 14 日。CH06-S010 仅省略标题书名号。"
+      },
+      "checked_at": "2026-10-13T08:30:58Z",
+      "result": "equivalent_title",
+      "scope": "priority",
+      "warning_numbers": [
+        16,
+        17
+      ],
+      "evidence_locator": "HTML 名称、标题、完整通知正文及落款",
+      "punctuation_variants": [
+        "CH06-S010"
+      ],
+      "note": "通知与所附目录是不同文献层次；本项只确认两条通知题名的标点等价。",
+      "previous_checked_at": "2026-10-13T08:15:27Z",
+      "cache_evidence_ids": [
+        "C05"
+      ],
+      "resolution": "explained",
+      "source_id": "CH01-S021",
+      "application": "explained",
+      "applied": false,
+      "original_value": "关于公布《与我国建立双边适航关系的国家及有关文件目录》的通知"
+    },
+    {
+      "finding_id": "P02",
+      "field": "document_code",
+      "verified_value": "AC-21-48",
+      "evidence_url": [
+        "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202609/t20260921_231762.html",
+        "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202609/P020260921617424013037.pdf"
+      ],
+      "evidence": {
+        "type": "paraphrase",
+        "text": "正式59页附件封面显示编号 AC-21-48、题名设计保证系统建设指南、下发日期2026-09-17；已读取文本并视觉核对封面。网页空文号栏不否定附件明示编号。"
+      },
+      "checked_at": "2026-10-13T09:09:36Z",
+      "result": "verified",
+      "scope": "priority",
+      "warning_numbers": [
+        2,
+        3
+      ],
+      "evidence_locator": "正式 PDF 物理第1页封面（文本及图像）；HTML 名称、发文日期、有效性",
+      "reason": "新增官方原始 PDF 缓存填补前轮取证缺口；编号与 CH02-S001 相符，CH06-S016 的官网未列编号应修正。",
+      "previous_checked_at": "2026-10-13T08:30:58Z",
+      "cache_evidence_ids": [
+        "C07",
+        "C23",
+        "C22"
+      ],
+      "affected_corrections": [
+        "CH06-S016"
+      ],
+      "resolution": "corrected",
+      "source_id": "CH02-S001",
+      "application": "already_matches",
+      "applied": false,
+      "original_value": "AC-21-48"
+    },
+    {
+      "finding_id": "P05",
+      "field": "title",
+      "verified_value": "颁发专用条件、批准豁免和做出等效安全水平结论的程序",
+      "evidence_url": [
+        "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202312/t20231223_222428.html"
+      ],
+      "evidence": {
+        "type": "paraphrase",
+        "text": "官方标题在专用条件后保留顿号。三条记录链接、文号一致，CH05-S008 的差异仅为漏掉这一标点。"
+      },
+      "checked_at": "2026-10-13T08:30:58Z",
+      "result": "equivalent_title",
+      "scope": "priority",
+      "warning_numbers": [
+        13,
+        14,
+        15
+      ],
+      "evidence_locator": "HTML 名称、标题、文号和附件名称",
+      "punctuation_variants": [
+        "CH05-S008"
+      ],
+      "limitation": "附件桌面路径访问超时；结论依据已完整读取的官方发布页，不宣称完成附件逐字或版式核验。",
+      "previous_checked_at": "2026-10-13T08:15:27Z",
+      "cache_evidence_ids": [
+        "C02"
+      ],
+      "resolution": "explained",
+      "source_id": "CH02-S036",
+      "application": "explained",
+      "applied": false,
+      "original_value": "颁发专用条件、批准豁免和做出等效安全水平结论的程序"
+    },
+    {
+      "finding_id": "P03",
+      "field": "document_code",
+      "verified_value": "民航规〔2023〕36号",
+      "evidence_url": [
+        "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202312/t20231223_222426.html",
+        "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/GFXWJ/202312/P020231223438346814379.pdf"
+      ],
+      "evidence": {
+        "type": "paraphrase",
+        "text": "网页字号栏给出民航规〔2023〕36号，PDF 首页的修订印发通知再次载明该号，并署 2023 年 12 月 4 日。"
+      },
+      "checked_at": "2026-10-13T08:30:58Z",
+      "result": "verified",
+      "scope": "priority",
+      "warning_numbers": [
+        4,
+        5
+      ],
+      "evidence_locator": "HTML 字号栏；PDF 第1页",
+      "normalization": "仅去除编号中排版空格；不要只检查网页的文号栏。",
+      "resource_distinction": "CH02-S037 的长标题对应发布通知；CH05-S012 的短标题对应同一 PDF 第2页起的细化要求正文。它们是通知与所附正文关系。",
+      "previous_checked_at": "2026-10-13T08:15:27Z",
+      "cache_evidence_ids": [
+        "C10"
+      ],
+      "resolution": "corrected",
+      "source_id": "CH02-S037",
+      "application": "corrected",
+      "applied": true,
+      "original_value": "官网未标注文号"
+    },
+    {
+      "finding_id": "P07",
+      "field": "publish_date",
+      "verified_value": "2012-07-02",
+      "evidence_url": [
+        "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201511/t20151102_8170.html",
+        "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201511/P020151103347114963684.pdf"
+      ],
+      "evidence": {
+        "type": "paraphrase",
+        "text": "通知网页的发文日期和正文落款都是 2012-07-02；其所附咨询通告封面下发日期为 2012-06-29，第4.2条亦规定该日实施。"
+      },
+      "checked_at": "2026-10-13T08:30:58Z",
+      "result": "scope_distinction",
+      "scope": "priority",
+      "warning_numbers": [
+        18,
+        20
+      ],
+      "evidence_locator": "通知发文日期和落款；中文 PDF 第1页、第2页第4.2条",
+      "date_roles": {
+        "notice_publish_date": "2012-07-02",
+        "document_issue_date": "2012-06-29",
+        "document_effective_date": "2012-06-29"
+      },
+      "note": "verified_value 对应登记 URL 的通知发布日期；若条目改以通告正文为对象，应独立保留正文下发日期，不把通知和正文日期强制合并。",
+      "previous_checked_at": "2026-10-13T08:15:27Z",
+      "cache_evidence_ids": [
+        "C11"
+      ],
+      "resolution": "explained",
+      "source_id": "CH02-S070",
+      "application": "explained",
+      "applied": false,
+      "original_value": "2012-07-02"
+    },
+    {
+      "finding_id": "P09",
+      "field": "title",
+      "verified_value": "关于发布咨询通告《运输类飞机持续适航和安全改进及点火源防护符合性指南》的通知",
+      "evidence_url": [
+        "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201511/t20151102_8170.html",
+        "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201511/P020151103347114963684.pdf"
+      ],
+      "evidence": {
+        "type": "paraphrase",
+        "text": "登记长标题就是官方发布通知标题；通知明确发布所附 AC-26-AA-2012-01。通告封面有单独的正文题名。"
+      },
+      "checked_at": "2026-10-13T08:30:58Z",
+      "result": "scope_distinction",
+      "scope": "priority",
+      "warning_numbers": [
+        21
+      ],
+      "evidence_locator": "完整通知正文及中文 PDF 第1页",
+      "document_title": "运输类飞机持续适航和安全改进及点火源防护符合性指南",
+      "note": "保留发布通知标题，不与英文版标题强制统一。",
+      "previous_checked_at": "2026-10-13T08:15:27Z",
+      "cache_evidence_ids": [
+        "C11"
+      ],
+      "resolution": "explained",
+      "source_id": "CH02-S070",
+      "application": "explained",
+      "applied": false,
+      "original_value": "关于发布咨询通告《运输类飞机持续适航和安全改进及点火源防护符合性指南》的通知"
+    },
+    {
+      "finding_id": "P08",
+      "field": "publish_date",
+      "verified_value": "2012-06-29",
+      "evidence_url": [
+        "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/GFXWJ/201511/t20151102_8258.html",
+        "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/GFXWJ/201511/P020151103347328337468.pdf",
+        "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201511/t20151102_8170.html",
+        "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201511/P020151103347114963684.pdf",
+        "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201511/t20151102_8258.html"
+      ],
+      "evidence": {
+        "type": "paraphrase",
+        "text": "官方英文版页发文日期是 2012-06-29，英文 PDF 封面的 Issue Date 和第4.2条相互印证；该值与中文通告下发日期一致，早于通知日期。"
+      },
+      "checked_at": "2026-10-13T08:30:58Z",
+      "result": "scope_distinction",
+      "scope": "priority",
+      "warning_numbers": [
+        19
+      ],
+      "evidence_locator": "英文手机版元数据；英文 PDF 第1页、第3页第4.2条",
+      "note": "保留现有日期；本轮缓存补足原桌面页，其日期与上轮已读官方 PHONE 页面和英文 PDF 一致。",
+      "previous_checked_at": "2026-10-13T08:15:27Z",
+      "cache_evidence_ids": [
+        "C11",
+        "C08"
+      ],
+      "resolution": "explained",
+      "source_id": "CH02-S071",
+      "application": "explained",
+      "applied": false,
+      "original_value": "2012-06-29"
+    },
+    {
+      "finding_id": "P10",
+      "field": "title",
+      "verified_value": "运输类飞机持续适航和安全改进及点火源防护符合性指南（英文版）",
+      "evidence_url": [
+        "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/GFXWJ/201511/t20151102_8258.html",
+        "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/GFXWJ/201511/P020151103347328337468.pdf",
+        "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201511/t20151102_8170.html",
+        "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201511/t20151102_8258.html"
+      ],
+      "evidence": {
+        "type": "paraphrase",
+        "text": "官方页明确标识英文版，并与通知互列相关链接；英文 PDF 的编号和下发日期与中文通告一致，属于语言版本关系。"
+      },
+      "checked_at": "2026-10-13T08:30:58Z",
+      "result": "scope_distinction",
+      "scope": "priority",
+      "warning_numbers": [
+        22
+      ],
+      "evidence_locator": "官方手机版名称、相关链接及英文 PDF 第1页",
+      "note": "保留英文版标识；不把该页当作同一 URL 的重复通知，也不宣称中英文附件字节相同。",
+      "previous_checked_at": "2026-10-13T08:15:27Z",
+      "cache_evidence_ids": [
+        "C11",
+        "C08"
+      ],
+      "resolution": "explained",
+      "source_id": "CH02-S071",
+      "application": "explained",
+      "applied": false,
+      "original_value": "运输类飞机持续适航和安全改进及点火源防护符合性指南（英文版）"
+    },
+    {
+      "finding_id": "P04",
+      "field": "publish_date",
+      "verified_value": "2016-03-17",
+      "evidence_url": [
+        "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/201606/t20160622_38638.html",
+        "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/MHGZ/201606/t20160622_38638.html",
+        "https://www.caac.gov.cn/ZTZL/RDZT/2021BNWY/GGKF/202107/t20210707_208324.html",
+        "https://xxgk.mot.gov.cn/gz/202112/t20211227_3633506.html"
+      ],
+      "evidence": {
+        "type": "paraphrase",
+        "text": "两版 CAAC 网页的发文日期一致为 2016-03-17；官方历史说明指出 2011-11-07 曾颁发修订版，2016 年交通运输部颁布版本与其内容一致；交通运输部正文标明 2016-03-17 公布、2016-04-17 施行。"
+      },
+      "checked_at": "2026-10-13T08:30:58Z",
+      "result": "verified",
+      "scope": "priority",
+      "warning_numbers": [
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "evidence_locator": "CAAC 两页发文日期栏；历史说明正文第2段；交通运输部正文标题下公布说明",
+      "date_roles": {
+        "registered_source_publish_date": "2016-03-17",
+        "earlier_revision_publish_date": "2011-11-07",
+        "effective_date": "2016-04-17"
+      },
+      "affected_corrections": [
+        "CH03-S001",
+        "CH08-S001",
+        "CH09-S001"
+      ],
+      "note": "2011 日期有官方历史依据，但不匹配当前登记的 2016 来源页。不得将两年内容一致解释为两次颁布是同一次事件。",
+      "previous_checked_at": "2026-10-13T08:15:27Z",
+      "cache_evidence_ids": [
+        "C17",
+        "C04"
+      ],
+      "resolution": "corrected",
+      "source_id": "CH03-S001",
+      "application": "corrected",
+      "applied": true,
+      "original_value": "2011-11-07"
+    },
+    {
+      "finding_id": "P12",
+      "field": "title",
+      "verified_value": "型号合格审定程序",
+      "evidence_url": [
+        "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/GFXWJ/202312/t20231223_222437.html",
+        "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202312/t20231223_222437.html"
+      ],
+      "evidence": {
+        "type": "paraphrase",
+        "text": "桌面页缓存与此前已读官方 PHONE 页均显示型号合格审定程序、AP-21-AA-2023-11R1、2023-12-06 和废止；历史版本属于台账说明。"
+      },
+      "checked_at": "2026-10-13T08:30:58Z",
+      "result": "verified",
+      "scope": "priority",
+      "warning_numbers": [
+        24,
+        25,
+        26
+      ],
+      "evidence_locator": "官方手机版名称、文号、发文日期、有效性",
+      "affected_corrections": [
+        "CH03-S007"
+      ],
+      "note": "旧版状态继续保留 abolished；本轮已补读桌面 HTML。旧版 PDF 不在本批缓存，尚未核定废止生效日及具体替代条款。",
+      "previous_checked_at": "2026-10-13T08:15:27Z",
+      "cache_evidence_ids": [
+        "C06"
+      ],
+      "resolution": "corrected",
+      "source_id": "CH03-S007",
+      "application": "corrected",
+      "applied": true,
+      "original_value": "型号合格审定程序历史版本"
+    },
+    {
+      "finding_id": "P04",
+      "field": "publish_date",
+      "verified_value": "2016-03-17",
+      "evidence_url": [
+        "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/201606/t20160622_38638.html",
+        "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/MHGZ/201606/t20160622_38638.html",
+        "https://www.caac.gov.cn/ZTZL/RDZT/2021BNWY/GGKF/202107/t20210707_208324.html",
+        "https://xxgk.mot.gov.cn/gz/202112/t20211227_3633506.html"
+      ],
+      "evidence": {
+        "type": "paraphrase",
+        "text": "两版 CAAC 网页的发文日期一致为 2016-03-17；官方历史说明指出 2011-11-07 曾颁发修订版，2016 年交通运输部颁布版本与其内容一致；交通运输部正文标明 2016-03-17 公布、2016-04-17 施行。"
+      },
+      "checked_at": "2026-10-13T08:30:58Z",
+      "result": "verified",
+      "scope": "priority",
+      "warning_numbers": [
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "evidence_locator": "CAAC 两页发文日期栏；历史说明正文第2段；交通运输部正文标题下公布说明",
+      "date_roles": {
+        "registered_source_publish_date": "2016-03-17",
+        "earlier_revision_publish_date": "2011-11-07",
+        "effective_date": "2016-04-17"
+      },
+      "affected_corrections": [
+        "CH03-S001",
+        "CH08-S001",
+        "CH09-S001"
+      ],
+      "note": "2011 日期有官方历史依据，但不匹配当前登记的 2016 来源页。不得将两年内容一致解释为两次颁布是同一次事件。",
+      "previous_checked_at": "2026-10-13T08:15:27Z",
+      "cache_evidence_ids": [
+        "C17",
+        "C04"
+      ],
+      "resolution": "corrected",
+      "source_id": "CH04-S001",
+      "application": "already_matches",
+      "applied": false,
+      "original_value": "2016-03-17"
+    },
+    {
+      "finding_id": "P12",
+      "field": "title",
+      "verified_value": "型号合格审定程序",
+      "evidence_url": [
+        "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/GFXWJ/202312/t20231223_222437.html",
+        "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202312/t20231223_222437.html"
+      ],
+      "evidence": {
+        "type": "paraphrase",
+        "text": "桌面页缓存与此前已读官方 PHONE 页均显示型号合格审定程序、AP-21-AA-2023-11R1、2023-12-06 和废止；历史版本属于台账说明。"
+      },
+      "checked_at": "2026-10-13T08:30:58Z",
+      "result": "verified",
+      "scope": "priority",
+      "warning_numbers": [
+        24,
+        25,
+        26
+      ],
+      "evidence_locator": "官方手机版名称、文号、发文日期、有效性",
+      "affected_corrections": [
+        "CH03-S007"
+      ],
+      "note": "旧版状态继续保留 abolished；本轮已补读桌面 HTML。旧版 PDF 不在本批缓存，尚未核定废止生效日及具体替代条款。",
+      "previous_checked_at": "2026-10-13T08:15:27Z",
+      "cache_evidence_ids": [
+        "C06"
+      ],
+      "resolution": "corrected",
+      "source_id": "CH04-S009",
+      "application": "already_matches",
+      "applied": false,
+      "original_value": "型号合格审定程序"
+    },
+    {
+      "finding_id": "P04",
+      "field": "publish_date",
+      "verified_value": "2016-03-17",
+      "evidence_url": [
+        "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/201606/t20160622_38638.html",
+        "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/MHGZ/201606/t20160622_38638.html",
+        "https://www.caac.gov.cn/ZTZL/RDZT/2021BNWY/GGKF/202107/t20210707_208324.html",
+        "https://xxgk.mot.gov.cn/gz/202112/t20211227_3633506.html"
+      ],
+      "evidence": {
+        "type": "paraphrase",
+        "text": "两版 CAAC 网页的发文日期一致为 2016-03-17；官方历史说明指出 2011-11-07 曾颁发修订版，2016 年交通运输部颁布版本与其内容一致；交通运输部正文标明 2016-03-17 公布、2016-04-17 施行。"
+      },
+      "checked_at": "2026-10-13T08:30:58Z",
+      "result": "verified",
+      "scope": "priority",
+      "warning_numbers": [
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "evidence_locator": "CAAC 两页发文日期栏；历史说明正文第2段；交通运输部正文标题下公布说明",
+      "date_roles": {
+        "registered_source_publish_date": "2016-03-17",
+        "earlier_revision_publish_date": "2011-11-07",
+        "effective_date": "2016-04-17"
+      },
+      "affected_corrections": [
+        "CH03-S001",
+        "CH08-S001",
+        "CH09-S001"
+      ],
+      "note": "2011 日期有官方历史依据，但不匹配当前登记的 2016 来源页。不得将两年内容一致解释为两次颁布是同一次事件。",
+      "previous_checked_at": "2026-10-13T08:15:27Z",
+      "cache_evidence_ids": [
+        "C17",
+        "C04"
+      ],
+      "resolution": "corrected",
+      "source_id": "CH05-S001",
+      "application": "already_matches",
+      "applied": false,
+      "original_value": "2016-03-17"
+    },
+    {
+      "finding_id": "P05",
+      "field": "title",
+      "verified_value": "颁发专用条件、批准豁免和做出等效安全水平结论的程序",
+      "evidence_url": [
+        "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202312/t20231223_222428.html"
+      ],
+      "evidence": {
+        "type": "paraphrase",
+        "text": "官方标题在专用条件后保留顿号。三条记录链接、文号一致，CH05-S008 的差异仅为漏掉这一标点。"
+      },
+      "checked_at": "2026-10-13T08:30:58Z",
+      "result": "equivalent_title",
+      "scope": "priority",
+      "warning_numbers": [
+        13,
+        14,
+        15
+      ],
+      "evidence_locator": "HTML 名称、标题、文号和附件名称",
+      "punctuation_variants": [
+        "CH05-S008"
+      ],
+      "limitation": "附件桌面路径访问超时；结论依据已完整读取的官方发布页，不宣称完成附件逐字或版式核验。",
+      "previous_checked_at": "2026-10-13T08:15:27Z",
+      "cache_evidence_ids": [
+        "C02"
+      ],
+      "resolution": "explained",
+      "source_id": "CH05-S008",
+      "application": "explained",
+      "applied": false,
+      "original_value": "颁发专用条件批准豁免和做出等效安全水平结论的程序"
+    },
+    {
+      "finding_id": "P03",
+      "field": "document_code",
+      "verified_value": "民航规〔2023〕36号",
+      "evidence_url": [
+        "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202312/t20231223_222426.html",
+        "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/GFXWJ/202312/P020231223438346814379.pdf"
+      ],
+      "evidence": {
+        "type": "paraphrase",
+        "text": "网页字号栏给出民航规〔2023〕36号，PDF 首页的修订印发通知再次载明该号，并署 2023 年 12 月 4 日。"
+      },
+      "checked_at": "2026-10-13T08:30:58Z",
+      "result": "verified",
+      "scope": "priority",
+      "warning_numbers": [
+        4,
+        5
+      ],
+      "evidence_locator": "HTML 字号栏；PDF 第1页",
+      "normalization": "仅去除编号中排版空格；不要只检查网页的文号栏。",
+      "resource_distinction": "CH02-S037 的长标题对应发布通知；CH05-S012 的短标题对应同一 PDF 第2页起的细化要求正文。它们是通知与所附正文关系。",
+      "previous_checked_at": "2026-10-13T08:15:27Z",
+      "cache_evidence_ids": [
+        "C10"
+      ],
+      "resolution": "corrected",
+      "source_id": "CH05-S012",
+      "application": "already_matches",
+      "applied": false,
+      "original_value": "民航规〔2023〕36号"
+    },
+    {
+      "finding_id": "P06",
+      "field": "title",
+      "verified_value": "关于公布《与我国建立双边适航关系的国家及有关文件目录》的通知",
+      "evidence_url": [
+        "https://www.caac.gov.cn/XXGK/XXGK/ZFGW/202503/t20250314_226931.html"
+      ],
+      "evidence": {
+        "type": "paraphrase",
+        "text": "官方通知标题使用书名号，正文说明公布的是截至 2024 年底整理的双边适航文件目录，并署 2025 年 2 月 14 日。CH06-S010 仅省略标题书名号。"
+      },
+      "checked_at": "2026-10-13T08:30:58Z",
+      "result": "equivalent_title",
+      "scope": "priority",
+      "warning_numbers": [
+        16,
+        17
+      ],
+      "evidence_locator": "HTML 名称、标题、完整通知正文及落款",
+      "punctuation_variants": [
+        "CH06-S010"
+      ],
+      "note": "通知与所附目录是不同文献层次；本项只确认两条通知题名的标点等价。",
+      "previous_checked_at": "2026-10-13T08:15:27Z",
+      "cache_evidence_ids": [
+        "C05"
+      ],
+      "resolution": "explained",
+      "source_id": "CH06-S010",
+      "application": "explained",
+      "applied": false,
+      "original_value": "关于公布与我国建立双边适航关系的国家及有关文件目录的通知"
+    },
+    {
+      "finding_id": "P02",
+      "field": "document_code",
+      "verified_value": "AC-21-48",
+      "evidence_url": [
+        "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202609/t20260921_231762.html",
+        "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202609/P020260921617424013037.pdf"
+      ],
+      "evidence": {
+        "type": "paraphrase",
+        "text": "正式59页附件封面显示编号 AC-21-48、题名设计保证系统建设指南、下发日期2026-09-17；已读取文本并视觉核对封面。网页空文号栏不否定附件明示编号。"
+      },
+      "checked_at": "2026-10-13T09:09:36Z",
+      "result": "verified",
+      "scope": "priority",
+      "warning_numbers": [
+        2,
+        3
+      ],
+      "evidence_locator": "正式 PDF 物理第1页封面（文本及图像）；HTML 名称、发文日期、有效性",
+      "reason": "新增官方原始 PDF 缓存填补前轮取证缺口；编号与 CH02-S001 相符，CH06-S016 的官网未列编号应修正。",
+      "previous_checked_at": "2026-10-13T08:30:58Z",
+      "cache_evidence_ids": [
+        "C07",
+        "C23",
+        "C22"
+      ],
+      "affected_corrections": [
+        "CH06-S016"
+      ],
+      "resolution": "corrected",
+      "source_id": "CH06-S016",
+      "application": "corrected",
+      "applied": true,
+      "original_value": "官网未列编号"
+    },
+    {
+      "finding_id": "P04",
+      "field": "publish_date",
+      "verified_value": "2016-03-17",
+      "evidence_url": [
+        "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/201606/t20160622_38638.html",
+        "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/MHGZ/201606/t20160622_38638.html",
+        "https://www.caac.gov.cn/ZTZL/RDZT/2021BNWY/GGKF/202107/t20210707_208324.html",
+        "https://xxgk.mot.gov.cn/gz/202112/t20211227_3633506.html"
+      ],
+      "evidence": {
+        "type": "paraphrase",
+        "text": "两版 CAAC 网页的发文日期一致为 2016-03-17；官方历史说明指出 2011-11-07 曾颁发修订版，2016 年交通运输部颁布版本与其内容一致；交通运输部正文标明 2016-03-17 公布、2016-04-17 施行。"
+      },
+      "checked_at": "2026-10-13T08:30:58Z",
+      "result": "verified",
+      "scope": "priority",
+      "warning_numbers": [
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "evidence_locator": "CAAC 两页发文日期栏；历史说明正文第2段；交通运输部正文标题下公布说明",
+      "date_roles": {
+        "registered_source_publish_date": "2016-03-17",
+        "earlier_revision_publish_date": "2011-11-07",
+        "effective_date": "2016-04-17"
+      },
+      "affected_corrections": [
+        "CH03-S001",
+        "CH08-S001",
+        "CH09-S001"
+      ],
+      "note": "2011 日期有官方历史依据，但不匹配当前登记的 2016 来源页。不得将两年内容一致解释为两次颁布是同一次事件。",
+      "previous_checked_at": "2026-10-13T08:15:27Z",
+      "cache_evidence_ids": [
+        "C17",
+        "C04"
+      ],
+      "resolution": "corrected",
+      "source_id": "CH07-S001",
+      "application": "already_matches",
+      "applied": false,
+      "original_value": "2016-03-17"
+    },
+    {
+      "finding_id": "P12",
+      "field": "title",
+      "verified_value": "型号合格审定程序",
+      "evidence_url": [
+        "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/GFXWJ/202312/t20231223_222437.html",
+        "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202312/t20231223_222437.html"
+      ],
+      "evidence": {
+        "type": "paraphrase",
+        "text": "桌面页缓存与此前已读官方 PHONE 页均显示型号合格审定程序、AP-21-AA-2023-11R1、2023-12-06 和废止；历史版本属于台账说明。"
+      },
+      "checked_at": "2026-10-13T08:30:58Z",
+      "result": "verified",
+      "scope": "priority",
+      "warning_numbers": [
+        24,
+        25,
+        26
+      ],
+      "evidence_locator": "官方手机版名称、文号、发文日期、有效性",
+      "affected_corrections": [
+        "CH03-S007"
+      ],
+      "note": "旧版状态继续保留 abolished；本轮已补读桌面 HTML。旧版 PDF 不在本批缓存，尚未核定废止生效日及具体替代条款。",
+      "previous_checked_at": "2026-10-13T08:15:27Z",
+      "cache_evidence_ids": [
+        "C06"
+      ],
+      "resolution": "corrected",
+      "source_id": "CH07-S007",
+      "application": "already_matches",
+      "applied": false,
+      "original_value": "型号合格审定程序"
+    },
+    {
+      "finding_id": "P04",
+      "field": "publish_date",
+      "verified_value": "2016-03-17",
+      "evidence_url": [
+        "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/201606/t20160622_38638.html",
+        "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/MHGZ/201606/t20160622_38638.html",
+        "https://www.caac.gov.cn/ZTZL/RDZT/2021BNWY/GGKF/202107/t20210707_208324.html",
+        "https://xxgk.mot.gov.cn/gz/202112/t20211227_3633506.html"
+      ],
+      "evidence": {
+        "type": "paraphrase",
+        "text": "两版 CAAC 网页的发文日期一致为 2016-03-17；官方历史说明指出 2011-11-07 曾颁发修订版，2016 年交通运输部颁布版本与其内容一致；交通运输部正文标明 2016-03-17 公布、2016-04-17 施行。"
+      },
+      "checked_at": "2026-10-13T08:30:58Z",
+      "result": "verified",
+      "scope": "priority",
+      "warning_numbers": [
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "evidence_locator": "CAAC 两页发文日期栏；历史说明正文第2段；交通运输部正文标题下公布说明",
+      "date_roles": {
+        "registered_source_publish_date": "2016-03-17",
+        "earlier_revision_publish_date": "2011-11-07",
+        "effective_date": "2016-04-17"
+      },
+      "affected_corrections": [
+        "CH03-S001",
+        "CH08-S001",
+        "CH09-S001"
+      ],
+      "note": "2011 日期有官方历史依据，但不匹配当前登记的 2016 来源页。不得将两年内容一致解释为两次颁布是同一次事件。",
+      "previous_checked_at": "2026-10-13T08:15:27Z",
+      "cache_evidence_ids": [
+        "C17",
+        "C04"
+      ],
+      "resolution": "corrected",
+      "source_id": "CH08-S001",
+      "application": "corrected",
+      "applied": true,
+      "original_value": "2011-11-07"
+    },
+    {
+      "finding_id": "M09",
+      "field": "title",
+      "verified_value": "审定维修要求",
+      "evidence_url": [
+        "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/GFXWJ/201511/t20151102_8386.html",
+        "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/GFXWJ/201511/P020151103347692049750.pdf"
+      ],
+      "evidence": {
+        "type": "paraphrase",
+        "text": "官方HTML名称和附件标签均为审定维修要求、文号AC-25.1529-1、发文日期1996-09-18、有效；21页扫描PDF封面视觉核验同题名和编号，生效日期为1996-09-18。台账持续适航文件是错误题名。"
+      },
+      "checked_at": "2026-10-13T09:09:36Z",
+      "result": "verified",
+      "scope": "supplementary",
+      "warning_numbers": [],
+      "resolution": "corrected",
+      "evidence_locator": "完整官方PHONE HTML元数据；21页扫描PDF第1页封面（已视觉核验，无文字层）",
+      "cache_evidence_ids": [
+        "C24",
+        "C26"
+      ],
+      "affected_corrections": [
+        "CH08-S007"
+      ],
+      "identity_check": {
+        "initial_concern": "题名可能指错来源，原拟保留 unresolved_source_identity。",
+        "outcome": "封面与HTML编号一致，登记URL确属AC-25.1529-1；证据支持纠正题名，来源身份疑点已解除。",
+        "document_code": "AC-25.1529-1",
+        "publish_date": "1996-09-18",
+        "effective_date": "1996-09-18",
+        "document_status": "effective"
+      },
+      "note": "只纠正来源题名；不证明原上传摘录与这份扫描PDF逐字对应，不据同URL或题名共享正文。OCR机械提取及最终专业审核由主任务继续。",
+      "source_id": "CH08-S007",
+      "application": "corrected",
+      "applied": true,
+      "original_value": "持续适航文件"
+    },
+    {
+      "finding_id": "P07",
+      "field": "publish_date",
+      "verified_value": "2012-07-02",
+      "evidence_url": [
+        "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201511/t20151102_8170.html",
+        "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201511/P020151103347114963684.pdf"
+      ],
+      "evidence": {
+        "type": "paraphrase",
+        "text": "通知网页的发文日期和正文落款都是 2012-07-02；其所附咨询通告封面下发日期为 2012-06-29，第4.2条亦规定该日实施。"
+      },
+      "checked_at": "2026-10-13T08:30:58Z",
+      "result": "scope_distinction",
+      "scope": "priority",
+      "warning_numbers": [
+        18,
+        20
+      ],
+      "evidence_locator": "通知发文日期和落款；中文 PDF 第1页、第2页第4.2条",
+      "date_roles": {
+        "notice_publish_date": "2012-07-02",
+        "document_issue_date": "2012-06-29",
+        "document_effective_date": "2012-06-29"
+      },
+      "note": "verified_value 对应登记 URL 的通知发布日期；若条目改以通告正文为对象，应独立保留正文下发日期，不把通知和正文日期强制合并。",
+      "previous_checked_at": "2026-10-13T08:15:27Z",
+      "cache_evidence_ids": [
+        "C11"
+      ],
+      "resolution": "explained",
+      "source_id": "CH08-S008",
+      "application": "explained",
+      "applied": false,
+      "original_value": "2012-07-02"
+    },
+    {
+      "finding_id": "P11",
+      "field": "title",
+      "verified_value": "关于发布咨询通告《运输类飞机持续适航和安全改进及点火源防护符合性指南》的通知",
+      "evidence_url": [
+        "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201511/t20151102_8170.html",
+        "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201511/P020151103347114963684.pdf"
+      ],
+      "evidence": {
+        "type": "paraphrase",
+        "text": "该记录与 CH02-S070 指向同一通知；官方通知及中文通告封面均未使用目前登记的符合性方法题名，且现题名遗漏了点火源防护这一部分。"
+      },
+      "checked_at": "2026-10-13T08:30:58Z",
+      "result": "verified",
+      "scope": "priority",
+      "warning_numbers": [
+        23
+      ],
+      "evidence_locator": "通知名称、完整正文、中文 PDF 第1页",
+      "value_scope": "登记 URL 的通知题名",
+      "alternative_document_title": "运输类飞机持续适航和安全改进及点火源防护符合性指南",
+      "note": "若后续台账明确以正文为登记对象，可使用 alternative_document_title，并另存通告下发日期 2012-06-29；不是单纯的标点差异。",
+      "previous_checked_at": "2026-10-13T08:15:27Z",
+      "cache_evidence_ids": [
+        "C11"
+      ],
+      "resolution": "corrected",
+      "source_id": "CH08-S008",
+      "application": "corrected",
+      "applied": true,
+      "original_value": "运输类飞机的持续适航和安全改进规定符合性方法"
+    },
+    {
+      "finding_id": "P04",
+      "field": "publish_date",
+      "verified_value": "2016-03-17",
+      "evidence_url": [
+        "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/201606/t20160622_38638.html",
+        "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/MHGZ/201606/t20160622_38638.html",
+        "https://www.caac.gov.cn/ZTZL/RDZT/2021BNWY/GGKF/202107/t20210707_208324.html",
+        "https://xxgk.mot.gov.cn/gz/202112/t20211227_3633506.html"
+      ],
+      "evidence": {
+        "type": "paraphrase",
+        "text": "两版 CAAC 网页的发文日期一致为 2016-03-17；官方历史说明指出 2011-11-07 曾颁发修订版，2016 年交通运输部颁布版本与其内容一致；交通运输部正文标明 2016-03-17 公布、2016-04-17 施行。"
+      },
+      "checked_at": "2026-10-13T08:30:58Z",
+      "result": "verified",
+      "scope": "priority",
+      "warning_numbers": [
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "evidence_locator": "CAAC 两页发文日期栏；历史说明正文第2段；交通运输部正文标题下公布说明",
+      "date_roles": {
+        "registered_source_publish_date": "2016-03-17",
+        "earlier_revision_publish_date": "2011-11-07",
+        "effective_date": "2016-04-17"
+      },
+      "affected_corrections": [
+        "CH03-S001",
+        "CH08-S001",
+        "CH09-S001"
+      ],
+      "note": "2011 日期有官方历史依据，但不匹配当前登记的 2016 来源页。不得将两年内容一致解释为两次颁布是同一次事件。",
+      "previous_checked_at": "2026-10-13T08:15:27Z",
+      "cache_evidence_ids": [
+        "C17",
+        "C04"
+      ],
+      "resolution": "corrected",
+      "source_id": "CH09-S001",
+      "application": "corrected",
+      "applied": true,
+      "original_value": "2011-11-07"
+    }
+  ],
+  "resolved_issues": [
+    {
+      "source_id": "CH01-S008",
+      "kind": "date_variation",
+      "message": "同一文号跨章登记的发布日期存在差异（2011-11-07；2016-03-17），可能涉及修订、发布通知或记录错误，需核对官方来源。",
+      "resolution": "corrected",
+      "finding_ids": [
+        "P04"
+      ],
+      "evidence": [
+        {
+          "finding_id": "P04",
+          "field": "publish_date",
+          "verified_value": "2016-03-17",
+          "evidence_url": [
+            "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/201606/t20160622_38638.html",
+            "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/MHGZ/201606/t20160622_38638.html",
+            "https://www.caac.gov.cn/ZTZL/RDZT/2021BNWY/GGKF/202107/t20210707_208324.html",
+            "https://xxgk.mot.gov.cn/gz/202112/t20211227_3633506.html"
+          ],
+          "evidence": {
+            "type": "paraphrase",
+            "text": "两版 CAAC 网页的发文日期一致为 2016-03-17；官方历史说明指出 2011-11-07 曾颁发修订版，2016 年交通运输部颁布版本与其内容一致；交通运输部正文标明 2016-03-17 公布、2016-04-17 施行。"
+          },
+          "checked_at": "2026-10-13T08:30:58Z",
+          "result": "verified",
+          "scope": "priority",
+          "warning_numbers": [
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12
+          ],
+          "evidence_locator": "CAAC 两页发文日期栏；历史说明正文第2段；交通运输部正文标题下公布说明",
+          "date_roles": {
+            "registered_source_publish_date": "2016-03-17",
+            "earlier_revision_publish_date": "2011-11-07",
+            "effective_date": "2016-04-17"
+          },
+          "affected_corrections": [
+            "CH03-S001",
+            "CH08-S001",
+            "CH09-S001"
+          ],
+          "note": "2011 日期有官方历史依据，但不匹配当前登记的 2016 来源页。不得将两年内容一致解释为两次颁布是同一次事件。",
+          "previous_checked_at": "2026-10-13T08:15:27Z",
+          "cache_evidence_ids": [
+            "C17",
+            "C04"
+          ],
+          "resolution": "corrected",
+          "source_id": "CH01-S008",
+          "application": "already_matches",
+          "applied": false,
+          "original_value": "2016-03-17"
+        }
+      ]
+    },
+    {
+      "source_id": "CH01-S019",
+      "kind": "title_variation",
+      "message": "同一文号跨章登记的题名存在差异（颁发专用条件、批准豁免和做出等效安全水平结论的程序；颁发专用条件批准豁免和做出等效安全水平结论的程序），可能涉及修订、发布通知或记录错误，需核对官方来源。",
+      "resolution": "explained",
+      "finding_ids": [
+        "P05"
+      ],
+      "evidence": [
+        {
+          "finding_id": "P05",
+          "field": "title",
+          "verified_value": "颁发专用条件、批准豁免和做出等效安全水平结论的程序",
+          "evidence_url": [
+            "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202312/t20231223_222428.html"
+          ],
+          "evidence": {
+            "type": "paraphrase",
+            "text": "官方标题在专用条件后保留顿号。三条记录链接、文号一致，CH05-S008 的差异仅为漏掉这一标点。"
+          },
+          "checked_at": "2026-10-13T08:30:58Z",
+          "result": "equivalent_title",
+          "scope": "priority",
+          "warning_numbers": [
+            13,
+            14,
+            15
+          ],
+          "evidence_locator": "HTML 名称、标题、文号和附件名称",
+          "punctuation_variants": [
+            "CH05-S008"
+          ],
+          "limitation": "附件桌面路径访问超时；结论依据已完整读取的官方发布页，不宣称完成附件逐字或版式核验。",
+          "previous_checked_at": "2026-10-13T08:15:27Z",
+          "cache_evidence_ids": [
+            "C02"
+          ],
+          "resolution": "explained",
+          "source_id": "CH01-S019",
+          "application": "explained",
+          "applied": false,
+          "original_value": "颁发专用条件、批准豁免和做出等效安全水平结论的程序"
+        }
+      ]
+    },
+    {
+      "source_id": "CH01-S021",
+      "kind": "title_variation",
+      "message": "同一文号跨章登记的题名存在差异（关于公布《与我国建立双边适航关系的国家及有关文件目录》的通知；关于公布与我国建立双边适航关系的国家及有关文件目录的通知），可能涉及修订、发布通知或记录错误，需核对官方来源。",
+      "resolution": "explained",
+      "finding_ids": [
+        "P06"
+      ],
+      "evidence": [
+        {
+          "finding_id": "P06",
+          "field": "title",
+          "verified_value": "关于公布《与我国建立双边适航关系的国家及有关文件目录》的通知",
+          "evidence_url": [
+            "https://www.caac.gov.cn/XXGK/XXGK/ZFGW/202503/t20250314_226931.html"
+          ],
+          "evidence": {
+            "type": "paraphrase",
+            "text": "官方通知标题使用书名号，正文说明公布的是截至 2024 年底整理的双边适航文件目录，并署 2025 年 2 月 14 日。CH06-S010 仅省略标题书名号。"
+          },
+          "checked_at": "2026-10-13T08:30:58Z",
+          "result": "equivalent_title",
+          "scope": "priority",
+          "warning_numbers": [
+            16,
+            17
+          ],
+          "evidence_locator": "HTML 名称、标题、完整通知正文及落款",
+          "punctuation_variants": [
+            "CH06-S010"
+          ],
+          "note": "通知与所附目录是不同文献层次；本项只确认两条通知题名的标点等价。",
+          "previous_checked_at": "2026-10-13T08:15:27Z",
+          "cache_evidence_ids": [
+            "C05"
+          ],
+          "resolution": "explained",
+          "source_id": "CH01-S021",
+          "application": "explained",
+          "applied": false,
+          "original_value": "关于公布《与我国建立双边适航关系的国家及有关文件目录》的通知"
+        }
+      ]
+    },
+    {
+      "source_id": "CH02-S001",
+      "kind": "code_conflict",
+      "message": "同一官方链接在不同章节登记的文号不一致，需复核。",
+      "resolution": "corrected",
+      "finding_ids": [
+        "P02"
+      ],
+      "evidence": [
+        {
+          "finding_id": "P02",
+          "field": "document_code",
+          "verified_value": "AC-21-48",
+          "evidence_url": [
+            "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202609/t20260921_231762.html",
+            "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202609/P020260921617424013037.pdf"
+          ],
+          "evidence": {
+            "type": "paraphrase",
+            "text": "正式59页附件封面显示编号 AC-21-48、题名设计保证系统建设指南、下发日期2026-09-17；已读取文本并视觉核对封面。网页空文号栏不否定附件明示编号。"
+          },
+          "checked_at": "2026-10-13T09:09:36Z",
+          "result": "verified",
+          "scope": "priority",
+          "warning_numbers": [
+            2,
+            3
+          ],
+          "evidence_locator": "正式 PDF 物理第1页封面（文本及图像）；HTML 名称、发文日期、有效性",
+          "reason": "新增官方原始 PDF 缓存填补前轮取证缺口；编号与 CH02-S001 相符，CH06-S016 的官网未列编号应修正。",
+          "previous_checked_at": "2026-10-13T08:30:58Z",
+          "cache_evidence_ids": [
+            "C07",
+            "C23",
+            "C22"
+          ],
+          "affected_corrections": [
+            "CH06-S016"
+          ],
+          "resolution": "corrected",
+          "source_id": "CH02-S001",
+          "application": "already_matches",
+          "applied": false,
+          "original_value": "AC-21-48"
+        }
+      ]
+    },
+    {
+      "source_id": "CH02-S036",
+      "kind": "title_variation",
+      "message": "同一文号跨章登记的题名存在差异（颁发专用条件、批准豁免和做出等效安全水平结论的程序；颁发专用条件批准豁免和做出等效安全水平结论的程序），可能涉及修订、发布通知或记录错误，需核对官方来源。",
+      "resolution": "explained",
+      "finding_ids": [
+        "P05"
+      ],
+      "evidence": [
+        {
+          "finding_id": "P05",
+          "field": "title",
+          "verified_value": "颁发专用条件、批准豁免和做出等效安全水平结论的程序",
+          "evidence_url": [
+            "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202312/t20231223_222428.html"
+          ],
+          "evidence": {
+            "type": "paraphrase",
+            "text": "官方标题在专用条件后保留顿号。三条记录链接、文号一致，CH05-S008 的差异仅为漏掉这一标点。"
+          },
+          "checked_at": "2026-10-13T08:30:58Z",
+          "result": "equivalent_title",
+          "scope": "priority",
+          "warning_numbers": [
+            13,
+            14,
+            15
+          ],
+          "evidence_locator": "HTML 名称、标题、文号和附件名称",
+          "punctuation_variants": [
+            "CH05-S008"
+          ],
+          "limitation": "附件桌面路径访问超时；结论依据已完整读取的官方发布页，不宣称完成附件逐字或版式核验。",
+          "previous_checked_at": "2026-10-13T08:15:27Z",
+          "cache_evidence_ids": [
+            "C02"
+          ],
+          "resolution": "explained",
+          "source_id": "CH02-S036",
+          "application": "explained",
+          "applied": false,
+          "original_value": "颁发专用条件、批准豁免和做出等效安全水平结论的程序"
+        }
+      ]
+    },
+    {
+      "source_id": "CH02-S037",
+      "kind": "code_conflict",
+      "message": "同一官方链接在不同章节登记的文号不一致，需复核。",
+      "resolution": "corrected",
+      "finding_ids": [
+        "P03"
+      ],
+      "evidence": [
+        {
+          "finding_id": "P03",
+          "field": "document_code",
+          "verified_value": "民航规〔2023〕36号",
+          "evidence_url": [
+            "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202312/t20231223_222426.html",
+            "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/GFXWJ/202312/P020231223438346814379.pdf"
+          ],
+          "evidence": {
+            "type": "paraphrase",
+            "text": "网页字号栏给出民航规〔2023〕36号，PDF 首页的修订印发通知再次载明该号，并署 2023 年 12 月 4 日。"
+          },
+          "checked_at": "2026-10-13T08:30:58Z",
+          "result": "verified",
+          "scope": "priority",
+          "warning_numbers": [
+            4,
+            5
+          ],
+          "evidence_locator": "HTML 字号栏；PDF 第1页",
+          "normalization": "仅去除编号中排版空格；不要只检查网页的文号栏。",
+          "resource_distinction": "CH02-S037 的长标题对应发布通知；CH05-S012 的短标题对应同一 PDF 第2页起的细化要求正文。它们是通知与所附正文关系。",
+          "previous_checked_at": "2026-10-13T08:15:27Z",
+          "cache_evidence_ids": [
+            "C10"
+          ],
+          "resolution": "corrected",
+          "source_id": "CH02-S037",
+          "application": "corrected",
+          "applied": true,
+          "original_value": "官网未标注文号"
+        }
+      ]
+    },
+    {
+      "source_id": "CH02-S070",
+      "kind": "date_variation",
+      "message": "同一文号跨章登记的发布日期存在差异（2012-06-29；2012-07-02），可能涉及修订、发布通知或记录错误，需核对官方来源。",
+      "resolution": "explained",
+      "finding_ids": [
+        "P07"
+      ],
+      "evidence": [
+        {
+          "finding_id": "P07",
+          "field": "publish_date",
+          "verified_value": "2012-07-02",
+          "evidence_url": [
+            "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201511/t20151102_8170.html",
+            "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201511/P020151103347114963684.pdf"
+          ],
+          "evidence": {
+            "type": "paraphrase",
+            "text": "通知网页的发文日期和正文落款都是 2012-07-02；其所附咨询通告封面下发日期为 2012-06-29，第4.2条亦规定该日实施。"
+          },
+          "checked_at": "2026-10-13T08:30:58Z",
+          "result": "scope_distinction",
+          "scope": "priority",
+          "warning_numbers": [
+            18,
+            20
+          ],
+          "evidence_locator": "通知发文日期和落款；中文 PDF 第1页、第2页第4.2条",
+          "date_roles": {
+            "notice_publish_date": "2012-07-02",
+            "document_issue_date": "2012-06-29",
+            "document_effective_date": "2012-06-29"
+          },
+          "note": "verified_value 对应登记 URL 的通知发布日期；若条目改以通告正文为对象，应独立保留正文下发日期，不把通知和正文日期强制合并。",
+          "previous_checked_at": "2026-10-13T08:15:27Z",
+          "cache_evidence_ids": [
+            "C11"
+          ],
+          "resolution": "explained",
+          "source_id": "CH02-S070",
+          "application": "explained",
+          "applied": false,
+          "original_value": "2012-07-02"
+        }
+      ]
+    },
+    {
+      "source_id": "CH02-S070",
+      "kind": "title_variation",
+      "message": "同一文号跨章登记的题名存在差异（关于发布咨询通告《运输类飞机持续适航和安全改进及点火源防护符合性指南》的通知；运输类飞机持续适航和安全改进及点火源防护符合性指南（英文版）；运输类飞机的持续适航和安全改进规定符合性方法），可能涉及修订、发布通知或记录错误，需核对官方来源。",
+      "resolution": "explained",
+      "finding_ids": [
+        "P09"
+      ],
+      "evidence": [
+        {
+          "finding_id": "P09",
+          "field": "title",
+          "verified_value": "关于发布咨询通告《运输类飞机持续适航和安全改进及点火源防护符合性指南》的通知",
+          "evidence_url": [
+            "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201511/t20151102_8170.html",
+            "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201511/P020151103347114963684.pdf"
+          ],
+          "evidence": {
+            "type": "paraphrase",
+            "text": "登记长标题就是官方发布通知标题；通知明确发布所附 AC-26-AA-2012-01。通告封面有单独的正文题名。"
+          },
+          "checked_at": "2026-10-13T08:30:58Z",
+          "result": "scope_distinction",
+          "scope": "priority",
+          "warning_numbers": [
+            21
+          ],
+          "evidence_locator": "完整通知正文及中文 PDF 第1页",
+          "document_title": "运输类飞机持续适航和安全改进及点火源防护符合性指南",
+          "note": "保留发布通知标题，不与英文版标题强制统一。",
+          "previous_checked_at": "2026-10-13T08:15:27Z",
+          "cache_evidence_ids": [
+            "C11"
+          ],
+          "resolution": "explained",
+          "source_id": "CH02-S070",
+          "application": "explained",
+          "applied": false,
+          "original_value": "关于发布咨询通告《运输类飞机持续适航和安全改进及点火源防护符合性指南》的通知"
+        }
+      ]
+    },
+    {
+      "source_id": "CH02-S071",
+      "kind": "date_variation",
+      "message": "同一文号跨章登记的发布日期存在差异（2012-06-29；2012-07-02），可能涉及修订、发布通知或记录错误，需核对官方来源。",
+      "resolution": "explained",
+      "finding_ids": [
+        "P08"
+      ],
+      "evidence": [
+        {
+          "finding_id": "P08",
+          "field": "publish_date",
+          "verified_value": "2012-06-29",
+          "evidence_url": [
+            "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/GFXWJ/201511/t20151102_8258.html",
+            "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/GFXWJ/201511/P020151103347328337468.pdf",
+            "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201511/t20151102_8170.html",
+            "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201511/P020151103347114963684.pdf",
+            "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201511/t20151102_8258.html"
+          ],
+          "evidence": {
+            "type": "paraphrase",
+            "text": "官方英文版页发文日期是 2012-06-29，英文 PDF 封面的 Issue Date 和第4.2条相互印证；该值与中文通告下发日期一致，早于通知日期。"
+          },
+          "checked_at": "2026-10-13T08:30:58Z",
+          "result": "scope_distinction",
+          "scope": "priority",
+          "warning_numbers": [
+            19
+          ],
+          "evidence_locator": "英文手机版元数据；英文 PDF 第1页、第3页第4.2条",
+          "note": "保留现有日期；本轮缓存补足原桌面页，其日期与上轮已读官方 PHONE 页面和英文 PDF 一致。",
+          "previous_checked_at": "2026-10-13T08:15:27Z",
+          "cache_evidence_ids": [
+            "C11",
+            "C08"
+          ],
+          "resolution": "explained",
+          "source_id": "CH02-S071",
+          "application": "explained",
+          "applied": false,
+          "original_value": "2012-06-29"
+        }
+      ]
+    },
+    {
+      "source_id": "CH02-S071",
+      "kind": "title_variation",
+      "message": "同一文号跨章登记的题名存在差异（关于发布咨询通告《运输类飞机持续适航和安全改进及点火源防护符合性指南》的通知；运输类飞机持续适航和安全改进及点火源防护符合性指南（英文版）；运输类飞机的持续适航和安全改进规定符合性方法），可能涉及修订、发布通知或记录错误，需核对官方来源。",
+      "resolution": "explained",
+      "finding_ids": [
+        "P10"
+      ],
+      "evidence": [
+        {
+          "finding_id": "P10",
+          "field": "title",
+          "verified_value": "运输类飞机持续适航和安全改进及点火源防护符合性指南（英文版）",
+          "evidence_url": [
+            "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/GFXWJ/201511/t20151102_8258.html",
+            "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/GFXWJ/201511/P020151103347328337468.pdf",
+            "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201511/t20151102_8170.html",
+            "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201511/t20151102_8258.html"
+          ],
+          "evidence": {
+            "type": "paraphrase",
+            "text": "官方页明确标识英文版，并与通知互列相关链接；英文 PDF 的编号和下发日期与中文通告一致，属于语言版本关系。"
+          },
+          "checked_at": "2026-10-13T08:30:58Z",
+          "result": "scope_distinction",
+          "scope": "priority",
+          "warning_numbers": [
+            22
+          ],
+          "evidence_locator": "官方手机版名称、相关链接及英文 PDF 第1页",
+          "note": "保留英文版标识；不把该页当作同一 URL 的重复通知，也不宣称中英文附件字节相同。",
+          "previous_checked_at": "2026-10-13T08:15:27Z",
+          "cache_evidence_ids": [
+            "C11",
+            "C08"
+          ],
+          "resolution": "explained",
+          "source_id": "CH02-S071",
+          "application": "explained",
+          "applied": false,
+          "original_value": "运输类飞机持续适航和安全改进及点火源防护符合性指南（英文版）"
+        }
+      ]
+    },
+    {
+      "source_id": "CH03-S001",
+      "kind": "date_variation",
+      "message": "同一文号跨章登记的发布日期存在差异（2011-11-07；2016-03-17），可能涉及修订、发布通知或记录错误，需核对官方来源。",
+      "resolution": "corrected",
+      "finding_ids": [
+        "P04"
+      ],
+      "evidence": [
+        {
+          "finding_id": "P04",
+          "field": "publish_date",
+          "verified_value": "2016-03-17",
+          "evidence_url": [
+            "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/201606/t20160622_38638.html",
+            "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/MHGZ/201606/t20160622_38638.html",
+            "https://www.caac.gov.cn/ZTZL/RDZT/2021BNWY/GGKF/202107/t20210707_208324.html",
+            "https://xxgk.mot.gov.cn/gz/202112/t20211227_3633506.html"
+          ],
+          "evidence": {
+            "type": "paraphrase",
+            "text": "两版 CAAC 网页的发文日期一致为 2016-03-17；官方历史说明指出 2011-11-07 曾颁发修订版，2016 年交通运输部颁布版本与其内容一致；交通运输部正文标明 2016-03-17 公布、2016-04-17 施行。"
+          },
+          "checked_at": "2026-10-13T08:30:58Z",
+          "result": "verified",
+          "scope": "priority",
+          "warning_numbers": [
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12
+          ],
+          "evidence_locator": "CAAC 两页发文日期栏；历史说明正文第2段；交通运输部正文标题下公布说明",
+          "date_roles": {
+            "registered_source_publish_date": "2016-03-17",
+            "earlier_revision_publish_date": "2011-11-07",
+            "effective_date": "2016-04-17"
+          },
+          "affected_corrections": [
+            "CH03-S001",
+            "CH08-S001",
+            "CH09-S001"
+          ],
+          "note": "2011 日期有官方历史依据，但不匹配当前登记的 2016 来源页。不得将两年内容一致解释为两次颁布是同一次事件。",
+          "previous_checked_at": "2026-10-13T08:15:27Z",
+          "cache_evidence_ids": [
+            "C17",
+            "C04"
+          ],
+          "resolution": "corrected",
+          "source_id": "CH03-S001",
+          "application": "corrected",
+          "applied": true,
+          "original_value": "2011-11-07"
+        }
+      ]
+    },
+    {
+      "source_id": "CH03-S007",
+      "kind": "title_variation",
+      "message": "同一文号跨章登记的题名存在差异（型号合格审定程序；型号合格审定程序历史版本），可能涉及修订、发布通知或记录错误，需核对官方来源。",
+      "resolution": "corrected",
+      "finding_ids": [
+        "P12"
+      ],
+      "evidence": [
+        {
+          "finding_id": "P12",
+          "field": "title",
+          "verified_value": "型号合格审定程序",
+          "evidence_url": [
+            "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/GFXWJ/202312/t20231223_222437.html",
+            "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202312/t20231223_222437.html"
+          ],
+          "evidence": {
+            "type": "paraphrase",
+            "text": "桌面页缓存与此前已读官方 PHONE 页均显示型号合格审定程序、AP-21-AA-2023-11R1、2023-12-06 和废止；历史版本属于台账说明。"
+          },
+          "checked_at": "2026-10-13T08:30:58Z",
+          "result": "verified",
+          "scope": "priority",
+          "warning_numbers": [
+            24,
+            25,
+            26
+          ],
+          "evidence_locator": "官方手机版名称、文号、发文日期、有效性",
+          "affected_corrections": [
+            "CH03-S007"
+          ],
+          "note": "旧版状态继续保留 abolished；本轮已补读桌面 HTML。旧版 PDF 不在本批缓存，尚未核定废止生效日及具体替代条款。",
+          "previous_checked_at": "2026-10-13T08:15:27Z",
+          "cache_evidence_ids": [
+            "C06"
+          ],
+          "resolution": "corrected",
+          "source_id": "CH03-S007",
+          "application": "corrected",
+          "applied": true,
+          "original_value": "型号合格审定程序历史版本"
+        }
+      ]
+    },
+    {
+      "source_id": "CH04-S001",
+      "kind": "date_variation",
+      "message": "同一文号跨章登记的发布日期存在差异（2011-11-07；2016-03-17），可能涉及修订、发布通知或记录错误，需核对官方来源。",
+      "resolution": "corrected",
+      "finding_ids": [
+        "P04"
+      ],
+      "evidence": [
+        {
+          "finding_id": "P04",
+          "field": "publish_date",
+          "verified_value": "2016-03-17",
+          "evidence_url": [
+            "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/201606/t20160622_38638.html",
+            "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/MHGZ/201606/t20160622_38638.html",
+            "https://www.caac.gov.cn/ZTZL/RDZT/2021BNWY/GGKF/202107/t20210707_208324.html",
+            "https://xxgk.mot.gov.cn/gz/202112/t20211227_3633506.html"
+          ],
+          "evidence": {
+            "type": "paraphrase",
+            "text": "两版 CAAC 网页的发文日期一致为 2016-03-17；官方历史说明指出 2011-11-07 曾颁发修订版，2016 年交通运输部颁布版本与其内容一致；交通运输部正文标明 2016-03-17 公布、2016-04-17 施行。"
+          },
+          "checked_at": "2026-10-13T08:30:58Z",
+          "result": "verified",
+          "scope": "priority",
+          "warning_numbers": [
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12
+          ],
+          "evidence_locator": "CAAC 两页发文日期栏；历史说明正文第2段；交通运输部正文标题下公布说明",
+          "date_roles": {
+            "registered_source_publish_date": "2016-03-17",
+            "earlier_revision_publish_date": "2011-11-07",
+            "effective_date": "2016-04-17"
+          },
+          "affected_corrections": [
+            "CH03-S001",
+            "CH08-S001",
+            "CH09-S001"
+          ],
+          "note": "2011 日期有官方历史依据，但不匹配当前登记的 2016 来源页。不得将两年内容一致解释为两次颁布是同一次事件。",
+          "previous_checked_at": "2026-10-13T08:15:27Z",
+          "cache_evidence_ids": [
+            "C17",
+            "C04"
+          ],
+          "resolution": "corrected",
+          "source_id": "CH04-S001",
+          "application": "already_matches",
+          "applied": false,
+          "original_value": "2016-03-17"
+        }
+      ]
+    },
+    {
+      "source_id": "CH04-S009",
+      "kind": "title_variation",
+      "message": "同一文号跨章登记的题名存在差异（型号合格审定程序；型号合格审定程序历史版本），可能涉及修订、发布通知或记录错误，需核对官方来源。",
+      "resolution": "corrected",
+      "finding_ids": [
+        "P12"
+      ],
+      "evidence": [
+        {
+          "finding_id": "P12",
+          "field": "title",
+          "verified_value": "型号合格审定程序",
+          "evidence_url": [
+            "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/GFXWJ/202312/t20231223_222437.html",
+            "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202312/t20231223_222437.html"
+          ],
+          "evidence": {
+            "type": "paraphrase",
+            "text": "桌面页缓存与此前已读官方 PHONE 页均显示型号合格审定程序、AP-21-AA-2023-11R1、2023-12-06 和废止；历史版本属于台账说明。"
+          },
+          "checked_at": "2026-10-13T08:30:58Z",
+          "result": "verified",
+          "scope": "priority",
+          "warning_numbers": [
+            24,
+            25,
+            26
+          ],
+          "evidence_locator": "官方手机版名称、文号、发文日期、有效性",
+          "affected_corrections": [
+            "CH03-S007"
+          ],
+          "note": "旧版状态继续保留 abolished；本轮已补读桌面 HTML。旧版 PDF 不在本批缓存，尚未核定废止生效日及具体替代条款。",
+          "previous_checked_at": "2026-10-13T08:15:27Z",
+          "cache_evidence_ids": [
+            "C06"
+          ],
+          "resolution": "corrected",
+          "source_id": "CH04-S009",
+          "application": "already_matches",
+          "applied": false,
+          "original_value": "型号合格审定程序"
+        }
+      ]
+    },
+    {
+      "source_id": "CH05-S001",
+      "kind": "date_variation",
+      "message": "同一文号跨章登记的发布日期存在差异（2011-11-07；2016-03-17），可能涉及修订、发布通知或记录错误，需核对官方来源。",
+      "resolution": "corrected",
+      "finding_ids": [
+        "P04"
+      ],
+      "evidence": [
+        {
+          "finding_id": "P04",
+          "field": "publish_date",
+          "verified_value": "2016-03-17",
+          "evidence_url": [
+            "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/201606/t20160622_38638.html",
+            "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/MHGZ/201606/t20160622_38638.html",
+            "https://www.caac.gov.cn/ZTZL/RDZT/2021BNWY/GGKF/202107/t20210707_208324.html",
+            "https://xxgk.mot.gov.cn/gz/202112/t20211227_3633506.html"
+          ],
+          "evidence": {
+            "type": "paraphrase",
+            "text": "两版 CAAC 网页的发文日期一致为 2016-03-17；官方历史说明指出 2011-11-07 曾颁发修订版，2016 年交通运输部颁布版本与其内容一致；交通运输部正文标明 2016-03-17 公布、2016-04-17 施行。"
+          },
+          "checked_at": "2026-10-13T08:30:58Z",
+          "result": "verified",
+          "scope": "priority",
+          "warning_numbers": [
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12
+          ],
+          "evidence_locator": "CAAC 两页发文日期栏；历史说明正文第2段；交通运输部正文标题下公布说明",
+          "date_roles": {
+            "registered_source_publish_date": "2016-03-17",
+            "earlier_revision_publish_date": "2011-11-07",
+            "effective_date": "2016-04-17"
+          },
+          "affected_corrections": [
+            "CH03-S001",
+            "CH08-S001",
+            "CH09-S001"
+          ],
+          "note": "2011 日期有官方历史依据，但不匹配当前登记的 2016 来源页。不得将两年内容一致解释为两次颁布是同一次事件。",
+          "previous_checked_at": "2026-10-13T08:15:27Z",
+          "cache_evidence_ids": [
+            "C17",
+            "C04"
+          ],
+          "resolution": "corrected",
+          "source_id": "CH05-S001",
+          "application": "already_matches",
+          "applied": false,
+          "original_value": "2016-03-17"
+        }
+      ]
+    },
+    {
+      "source_id": "CH05-S008",
+      "kind": "title_variation",
+      "message": "同一文号跨章登记的题名存在差异（颁发专用条件、批准豁免和做出等效安全水平结论的程序；颁发专用条件批准豁免和做出等效安全水平结论的程序），可能涉及修订、发布通知或记录错误，需核对官方来源。",
+      "resolution": "explained",
+      "finding_ids": [
+        "P05"
+      ],
+      "evidence": [
+        {
+          "finding_id": "P05",
+          "field": "title",
+          "verified_value": "颁发专用条件、批准豁免和做出等效安全水平结论的程序",
+          "evidence_url": [
+            "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202312/t20231223_222428.html"
+          ],
+          "evidence": {
+            "type": "paraphrase",
+            "text": "官方标题在专用条件后保留顿号。三条记录链接、文号一致，CH05-S008 的差异仅为漏掉这一标点。"
+          },
+          "checked_at": "2026-10-13T08:30:58Z",
+          "result": "equivalent_title",
+          "scope": "priority",
+          "warning_numbers": [
+            13,
+            14,
+            15
+          ],
+          "evidence_locator": "HTML 名称、标题、文号和附件名称",
+          "punctuation_variants": [
+            "CH05-S008"
+          ],
+          "limitation": "附件桌面路径访问超时；结论依据已完整读取的官方发布页，不宣称完成附件逐字或版式核验。",
+          "previous_checked_at": "2026-10-13T08:15:27Z",
+          "cache_evidence_ids": [
+            "C02"
+          ],
+          "resolution": "explained",
+          "source_id": "CH05-S008",
+          "application": "explained",
+          "applied": false,
+          "original_value": "颁发专用条件批准豁免和做出等效安全水平结论的程序"
+        }
+      ]
+    },
+    {
+      "source_id": "CH05-S012",
+      "kind": "code_conflict",
+      "message": "同一官方链接在不同章节登记的文号不一致，需复核。",
+      "resolution": "corrected",
+      "finding_ids": [
+        "P03"
+      ],
+      "evidence": [
+        {
+          "finding_id": "P03",
+          "field": "document_code",
+          "verified_value": "民航规〔2023〕36号",
+          "evidence_url": [
+            "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202312/t20231223_222426.html",
+            "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/GFXWJ/202312/P020231223438346814379.pdf"
+          ],
+          "evidence": {
+            "type": "paraphrase",
+            "text": "网页字号栏给出民航规〔2023〕36号，PDF 首页的修订印发通知再次载明该号，并署 2023 年 12 月 4 日。"
+          },
+          "checked_at": "2026-10-13T08:30:58Z",
+          "result": "verified",
+          "scope": "priority",
+          "warning_numbers": [
+            4,
+            5
+          ],
+          "evidence_locator": "HTML 字号栏；PDF 第1页",
+          "normalization": "仅去除编号中排版空格；不要只检查网页的文号栏。",
+          "resource_distinction": "CH02-S037 的长标题对应发布通知；CH05-S012 的短标题对应同一 PDF 第2页起的细化要求正文。它们是通知与所附正文关系。",
+          "previous_checked_at": "2026-10-13T08:15:27Z",
+          "cache_evidence_ids": [
+            "C10"
+          ],
+          "resolution": "corrected",
+          "source_id": "CH05-S012",
+          "application": "already_matches",
+          "applied": false,
+          "original_value": "民航规〔2023〕36号"
+        }
+      ]
+    },
+    {
+      "source_id": "CH06-S010",
+      "kind": "title_variation",
+      "message": "同一文号跨章登记的题名存在差异（关于公布《与我国建立双边适航关系的国家及有关文件目录》的通知；关于公布与我国建立双边适航关系的国家及有关文件目录的通知），可能涉及修订、发布通知或记录错误，需核对官方来源。",
+      "resolution": "explained",
+      "finding_ids": [
+        "P06"
+      ],
+      "evidence": [
+        {
+          "finding_id": "P06",
+          "field": "title",
+          "verified_value": "关于公布《与我国建立双边适航关系的国家及有关文件目录》的通知",
+          "evidence_url": [
+            "https://www.caac.gov.cn/XXGK/XXGK/ZFGW/202503/t20250314_226931.html"
+          ],
+          "evidence": {
+            "type": "paraphrase",
+            "text": "官方通知标题使用书名号，正文说明公布的是截至 2024 年底整理的双边适航文件目录，并署 2025 年 2 月 14 日。CH06-S010 仅省略标题书名号。"
+          },
+          "checked_at": "2026-10-13T08:30:58Z",
+          "result": "equivalent_title",
+          "scope": "priority",
+          "warning_numbers": [
+            16,
+            17
+          ],
+          "evidence_locator": "HTML 名称、标题、完整通知正文及落款",
+          "punctuation_variants": [
+            "CH06-S010"
+          ],
+          "note": "通知与所附目录是不同文献层次；本项只确认两条通知题名的标点等价。",
+          "previous_checked_at": "2026-10-13T08:15:27Z",
+          "cache_evidence_ids": [
+            "C05"
+          ],
+          "resolution": "explained",
+          "source_id": "CH06-S010",
+          "application": "explained",
+          "applied": false,
+          "original_value": "关于公布与我国建立双边适航关系的国家及有关文件目录的通知"
+        }
+      ]
+    },
+    {
+      "source_id": "CH06-S016",
+      "kind": "code_conflict",
+      "message": "同一官方链接在不同章节登记的文号不一致，需复核。",
+      "resolution": "corrected",
+      "finding_ids": [
+        "P02"
+      ],
+      "evidence": [
+        {
+          "finding_id": "P02",
+          "field": "document_code",
+          "verified_value": "AC-21-48",
+          "evidence_url": [
+            "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202609/t20260921_231762.html",
+            "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202609/P020260921617424013037.pdf"
+          ],
+          "evidence": {
+            "type": "paraphrase",
+            "text": "正式59页附件封面显示编号 AC-21-48、题名设计保证系统建设指南、下发日期2026-09-17；已读取文本并视觉核对封面。网页空文号栏不否定附件明示编号。"
+          },
+          "checked_at": "2026-10-13T09:09:36Z",
+          "result": "verified",
+          "scope": "priority",
+          "warning_numbers": [
+            2,
+            3
+          ],
+          "evidence_locator": "正式 PDF 物理第1页封面（文本及图像）；HTML 名称、发文日期、有效性",
+          "reason": "新增官方原始 PDF 缓存填补前轮取证缺口；编号与 CH02-S001 相符，CH06-S016 的官网未列编号应修正。",
+          "previous_checked_at": "2026-10-13T08:30:58Z",
+          "cache_evidence_ids": [
+            "C07",
+            "C23",
+            "C22"
+          ],
+          "affected_corrections": [
+            "CH06-S016"
+          ],
+          "resolution": "corrected",
+          "source_id": "CH06-S016",
+          "application": "corrected",
+          "applied": true,
+          "original_value": "官网未列编号"
+        }
+      ]
+    },
+    {
+      "source_id": "CH07-S001",
+      "kind": "date_variation",
+      "message": "同一文号跨章登记的发布日期存在差异（2011-11-07；2016-03-17），可能涉及修订、发布通知或记录错误，需核对官方来源。",
+      "resolution": "corrected",
+      "finding_ids": [
+        "P04"
+      ],
+      "evidence": [
+        {
+          "finding_id": "P04",
+          "field": "publish_date",
+          "verified_value": "2016-03-17",
+          "evidence_url": [
+            "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/201606/t20160622_38638.html",
+            "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/MHGZ/201606/t20160622_38638.html",
+            "https://www.caac.gov.cn/ZTZL/RDZT/2021BNWY/GGKF/202107/t20210707_208324.html",
+            "https://xxgk.mot.gov.cn/gz/202112/t20211227_3633506.html"
+          ],
+          "evidence": {
+            "type": "paraphrase",
+            "text": "两版 CAAC 网页的发文日期一致为 2016-03-17；官方历史说明指出 2011-11-07 曾颁发修订版，2016 年交通运输部颁布版本与其内容一致；交通运输部正文标明 2016-03-17 公布、2016-04-17 施行。"
+          },
+          "checked_at": "2026-10-13T08:30:58Z",
+          "result": "verified",
+          "scope": "priority",
+          "warning_numbers": [
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12
+          ],
+          "evidence_locator": "CAAC 两页发文日期栏；历史说明正文第2段；交通运输部正文标题下公布说明",
+          "date_roles": {
+            "registered_source_publish_date": "2016-03-17",
+            "earlier_revision_publish_date": "2011-11-07",
+            "effective_date": "2016-04-17"
+          },
+          "affected_corrections": [
+            "CH03-S001",
+            "CH08-S001",
+            "CH09-S001"
+          ],
+          "note": "2011 日期有官方历史依据，但不匹配当前登记的 2016 来源页。不得将两年内容一致解释为两次颁布是同一次事件。",
+          "previous_checked_at": "2026-10-13T08:15:27Z",
+          "cache_evidence_ids": [
+            "C17",
+            "C04"
+          ],
+          "resolution": "corrected",
+          "source_id": "CH07-S001",
+          "application": "already_matches",
+          "applied": false,
+          "original_value": "2016-03-17"
+        }
+      ]
+    },
+    {
+      "source_id": "CH07-S007",
+      "kind": "title_variation",
+      "message": "同一文号跨章登记的题名存在差异（型号合格审定程序；型号合格审定程序历史版本），可能涉及修订、发布通知或记录错误，需核对官方来源。",
+      "resolution": "corrected",
+      "finding_ids": [
+        "P12"
+      ],
+      "evidence": [
+        {
+          "finding_id": "P12",
+          "field": "title",
+          "verified_value": "型号合格审定程序",
+          "evidence_url": [
+            "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/GFXWJ/202312/t20231223_222437.html",
+            "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202312/t20231223_222437.html"
+          ],
+          "evidence": {
+            "type": "paraphrase",
+            "text": "桌面页缓存与此前已读官方 PHONE 页均显示型号合格审定程序、AP-21-AA-2023-11R1、2023-12-06 和废止；历史版本属于台账说明。"
+          },
+          "checked_at": "2026-10-13T08:30:58Z",
+          "result": "verified",
+          "scope": "priority",
+          "warning_numbers": [
+            24,
+            25,
+            26
+          ],
+          "evidence_locator": "官方手机版名称、文号、发文日期、有效性",
+          "affected_corrections": [
+            "CH03-S007"
+          ],
+          "note": "旧版状态继续保留 abolished；本轮已补读桌面 HTML。旧版 PDF 不在本批缓存，尚未核定废止生效日及具体替代条款。",
+          "previous_checked_at": "2026-10-13T08:15:27Z",
+          "cache_evidence_ids": [
+            "C06"
+          ],
+          "resolution": "corrected",
+          "source_id": "CH07-S007",
+          "application": "already_matches",
+          "applied": false,
+          "original_value": "型号合格审定程序"
+        }
+      ]
+    },
+    {
+      "source_id": "CH08-S001",
+      "kind": "date_variation",
+      "message": "同一文号跨章登记的发布日期存在差异（2011-11-07；2016-03-17），可能涉及修订、发布通知或记录错误，需核对官方来源。",
+      "resolution": "corrected",
+      "finding_ids": [
+        "P04"
+      ],
+      "evidence": [
+        {
+          "finding_id": "P04",
+          "field": "publish_date",
+          "verified_value": "2016-03-17",
+          "evidence_url": [
+            "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/201606/t20160622_38638.html",
+            "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/MHGZ/201606/t20160622_38638.html",
+            "https://www.caac.gov.cn/ZTZL/RDZT/2021BNWY/GGKF/202107/t20210707_208324.html",
+            "https://xxgk.mot.gov.cn/gz/202112/t20211227_3633506.html"
+          ],
+          "evidence": {
+            "type": "paraphrase",
+            "text": "两版 CAAC 网页的发文日期一致为 2016-03-17；官方历史说明指出 2011-11-07 曾颁发修订版，2016 年交通运输部颁布版本与其内容一致；交通运输部正文标明 2016-03-17 公布、2016-04-17 施行。"
+          },
+          "checked_at": "2026-10-13T08:30:58Z",
+          "result": "verified",
+          "scope": "priority",
+          "warning_numbers": [
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12
+          ],
+          "evidence_locator": "CAAC 两页发文日期栏；历史说明正文第2段；交通运输部正文标题下公布说明",
+          "date_roles": {
+            "registered_source_publish_date": "2016-03-17",
+            "earlier_revision_publish_date": "2011-11-07",
+            "effective_date": "2016-04-17"
+          },
+          "affected_corrections": [
+            "CH03-S001",
+            "CH08-S001",
+            "CH09-S001"
+          ],
+          "note": "2011 日期有官方历史依据，但不匹配当前登记的 2016 来源页。不得将两年内容一致解释为两次颁布是同一次事件。",
+          "previous_checked_at": "2026-10-13T08:15:27Z",
+          "cache_evidence_ids": [
+            "C17",
+            "C04"
+          ],
+          "resolution": "corrected",
+          "source_id": "CH08-S001",
+          "application": "corrected",
+          "applied": true,
+          "original_value": "2011-11-07"
+        }
+      ]
+    },
+    {
+      "source_id": "CH08-S008",
+      "kind": "date_variation",
+      "message": "同一文号跨章登记的发布日期存在差异（2012-06-29；2012-07-02），可能涉及修订、发布通知或记录错误，需核对官方来源。",
+      "resolution": "explained",
+      "finding_ids": [
+        "P07"
+      ],
+      "evidence": [
+        {
+          "finding_id": "P07",
+          "field": "publish_date",
+          "verified_value": "2012-07-02",
+          "evidence_url": [
+            "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201511/t20151102_8170.html",
+            "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201511/P020151103347114963684.pdf"
+          ],
+          "evidence": {
+            "type": "paraphrase",
+            "text": "通知网页的发文日期和正文落款都是 2012-07-02；其所附咨询通告封面下发日期为 2012-06-29，第4.2条亦规定该日实施。"
+          },
+          "checked_at": "2026-10-13T08:30:58Z",
+          "result": "scope_distinction",
+          "scope": "priority",
+          "warning_numbers": [
+            18,
+            20
+          ],
+          "evidence_locator": "通知发文日期和落款；中文 PDF 第1页、第2页第4.2条",
+          "date_roles": {
+            "notice_publish_date": "2012-07-02",
+            "document_issue_date": "2012-06-29",
+            "document_effective_date": "2012-06-29"
+          },
+          "note": "verified_value 对应登记 URL 的通知发布日期；若条目改以通告正文为对象，应独立保留正文下发日期，不把通知和正文日期强制合并。",
+          "previous_checked_at": "2026-10-13T08:15:27Z",
+          "cache_evidence_ids": [
+            "C11"
+          ],
+          "resolution": "explained",
+          "source_id": "CH08-S008",
+          "application": "explained",
+          "applied": false,
+          "original_value": "2012-07-02"
+        }
+      ]
+    },
+    {
+      "source_id": "CH08-S008",
+      "kind": "title_variation",
+      "message": "同一文号跨章登记的题名存在差异（关于发布咨询通告《运输类飞机持续适航和安全改进及点火源防护符合性指南》的通知；运输类飞机持续适航和安全改进及点火源防护符合性指南（英文版）；运输类飞机的持续适航和安全改进规定符合性方法），可能涉及修订、发布通知或记录错误，需核对官方来源。",
+      "resolution": "corrected",
+      "finding_ids": [
+        "P11"
+      ],
+      "evidence": [
+        {
+          "finding_id": "P11",
+          "field": "title",
+          "verified_value": "关于发布咨询通告《运输类飞机持续适航和安全改进及点火源防护符合性指南》的通知",
+          "evidence_url": [
+            "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201511/t20151102_8170.html",
+            "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201511/P020151103347114963684.pdf"
+          ],
+          "evidence": {
+            "type": "paraphrase",
+            "text": "该记录与 CH02-S070 指向同一通知；官方通知及中文通告封面均未使用目前登记的符合性方法题名，且现题名遗漏了点火源防护这一部分。"
+          },
+          "checked_at": "2026-10-13T08:30:58Z",
+          "result": "verified",
+          "scope": "priority",
+          "warning_numbers": [
+            23
+          ],
+          "evidence_locator": "通知名称、完整正文、中文 PDF 第1页",
+          "value_scope": "登记 URL 的通知题名",
+          "alternative_document_title": "运输类飞机持续适航和安全改进及点火源防护符合性指南",
+          "note": "若后续台账明确以正文为登记对象，可使用 alternative_document_title，并另存通告下发日期 2012-06-29；不是单纯的标点差异。",
+          "previous_checked_at": "2026-10-13T08:15:27Z",
+          "cache_evidence_ids": [
+            "C11"
+          ],
+          "resolution": "corrected",
+          "source_id": "CH08-S008",
+          "application": "corrected",
+          "applied": true,
+          "original_value": "运输类飞机的持续适航和安全改进规定符合性方法"
+        }
+      ]
+    },
+    {
+      "source_id": "CH09-S001",
+      "kind": "date_variation",
+      "message": "同一文号跨章登记的发布日期存在差异（2011-11-07；2016-03-17），可能涉及修订、发布通知或记录错误，需核对官方来源。",
+      "resolution": "corrected",
+      "finding_ids": [
+        "P04"
+      ],
+      "evidence": [
+        {
+          "finding_id": "P04",
+          "field": "publish_date",
+          "verified_value": "2016-03-17",
+          "evidence_url": [
+            "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/201606/t20160622_38638.html",
+            "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/MHGZ/201606/t20160622_38638.html",
+            "https://www.caac.gov.cn/ZTZL/RDZT/2021BNWY/GGKF/202107/t20210707_208324.html",
+            "https://xxgk.mot.gov.cn/gz/202112/t20211227_3633506.html"
+          ],
+          "evidence": {
+            "type": "paraphrase",
+            "text": "两版 CAAC 网页的发文日期一致为 2016-03-17；官方历史说明指出 2011-11-07 曾颁发修订版，2016 年交通运输部颁布版本与其内容一致；交通运输部正文标明 2016-03-17 公布、2016-04-17 施行。"
+          },
+          "checked_at": "2026-10-13T08:30:58Z",
+          "result": "verified",
+          "scope": "priority",
+          "warning_numbers": [
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12
+          ],
+          "evidence_locator": "CAAC 两页发文日期栏；历史说明正文第2段；交通运输部正文标题下公布说明",
+          "date_roles": {
+            "registered_source_publish_date": "2016-03-17",
+            "earlier_revision_publish_date": "2011-11-07",
+            "effective_date": "2016-04-17"
+          },
+          "affected_corrections": [
+            "CH03-S001",
+            "CH08-S001",
+            "CH09-S001"
+          ],
+          "note": "2011 日期有官方历史依据，但不匹配当前登记的 2016 来源页。不得将两年内容一致解释为两次颁布是同一次事件。",
+          "previous_checked_at": "2026-10-13T08:15:27Z",
+          "cache_evidence_ids": [
+            "C17",
+            "C04"
+          ],
+          "resolution": "corrected",
+          "source_id": "CH09-S001",
+          "application": "corrected",
+          "applied": true,
+          "original_value": "2011-11-07"
+        }
+      ]
+    }
+  ]
+}

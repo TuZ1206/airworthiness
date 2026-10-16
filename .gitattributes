@@ -1,3 +1,11 @@
 data/chapters/**/*.md text eol=lf
 data/chapters/**/*.csv text eol=lf
 data/chapters/**/*.json text eol=lf
+data/acquired/**/*.md text eol=lf
+data/acquired/**/*.json text eol=lf
+data/acquired/*.json text eol=lf
+data/acquired/*.jsonl text eol=lf
+*.py text eol=lf
+*.js text eol=lf
+*.css text eol=lf
+*.html text eol=lf

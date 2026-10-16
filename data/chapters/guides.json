@@ -1,0 +1,137 @@
+{
+  "ch01": {
+    "positioning": "从上位法、民航规章和审定程序进入九章资料；本章只提供制度与文件层级的阅读路径。",
+    "sections": [
+      {"id": "legal-hierarchy", "title": "法规层级与基本概念", "summary": "依次查阅民航法、适航管理条例和规范性文件管理资料，辨认不同文件的层级。", "sources": ["CH01-S001", "CH01-S002", "CH01-S017"]},
+      {"id": "certification-chain", "title": "型号、生产与委任的证件链", "summary": "从产品合格审定规定进入型号审定程序，再查看委任体系的制度入口。", "sources": ["CH01-S005", "CH01-S006", "CH01-S016"]},
+      {"id": "airworthiness-standards", "title": "产品适航标准与复合材料", "summary": "按航空器类别查阅适航标准；复合材料行业标准目前仅可用于确认标准身份与状态。", "sources": ["CH01-S007", "CH01-S008", "CH01-S020"]},
+      {"id": "continued-airworthiness", "title": "持续适航与后续管理", "summary": "从持续适航、安全改进、适航指令和维修单位规则认识证后资料的边界。", "sources": ["CH01-S013", "CH01-S014", "CH01-S015"]}
+    ],
+    "related": [{"chapter_id": "ch02", "reason": "全过程审定路径"}, {"chapter_id": "ch03", "reason": "材料性能证据"}]
+  },
+  "ch02": {
+    "positioning": "沿设计、生产、交付与持续适航过程检索程序性资料；专题列出优先入口，完整清单仍在左侧文件区。",
+    "sections": [
+      {"id": "design-certification", "title": "设计与型号审定", "summary": "从设计机构程序、补充型号审定程序和运输类飞机审定资料进入设计阶段。", "sources": ["CH02-S006", "CH02-S007", "CH02-S030"]},
+      {"id": "production-approval", "title": "生产与适航批准", "summary": "集中查阅生产机构审定、批准放行和无生产机构许可证生产的监管入口。", "sources": ["CH02-S002", "CH02-S003", "CH02-S005"]},
+      {"id": "continued-operation", "title": "运行与持续适航", "summary": "沿计划维修、持续适航文件和结构完整性资料查找运营阶段的来源。", "sources": ["CH02-S022", "CH02-S023", "CH02-S045"]},
+      {"id": "delegated-review", "title": "审查组织与委任", "summary": "将委任代表管理和审定特殊处理程序作为流程索引，具体职责以相应正文为准。", "sources": ["CH02-S054", "CH02-S055", "CH02-S036"]},
+      {"id": "aircraft-categories", "title": "特定类别航空器", "summary": "按无人驾驶航空器和动力提升航空器类别进入对应标准，不将类别要求互相套用。", "sources": ["CH02-S008", "CH02-S009", "CH02-S010"]}
+    ],
+    "related": [{"chapter_id": "ch01", "reason": "法规与文件层级"}, {"chapter_id": "ch05", "reason": "更改批准路径"}, {"chapter_id": "ch08", "reason": "持续结构完整性"}]
+  },
+  "ch03": {
+    "positioning": "围绕材料性能、环境影响和设计值的证据边界查找资料；试验方法与统计计算另见第九章。",
+    "sections": [
+      {"id": "material-basis", "title": "材料性能的法规基础", "summary": "先阅读材料适用性和设计值条款，再对照运输类飞机审定资料。", "sources": [{"source_id": "CH03-S001", "locator": "第25.613条"}, "CH03-S002"]},
+      {"id": "environment", "title": "环境影响与试验代表性", "summary": "从环境影响和制造质量资料寻找材料级证据的适用范围，不引入未经核验的统一参数。", "sources": ["CH03-S002", "CH03-S005"]},
+      {"id": "design-values", "title": "材料变异性与设计值", "summary": "按规章条款查阅材料设计值的适用条件；统计处理步骤转入第九章。", "sources": ["CH03-S001", "CH03-S002"]},
+      {"id": "specification-records", "title": "材料规范、验收与记录", "summary": "区分质量体系指南的可读正文与行业标准的状态登记，后者不支撑不可见条款。", "sources": ["CH03-S005", "CH03-S006"]}
+    ],
+    "related": [{"chapter_id": "ch04", "reason": "制造工艺控制"}, {"chapter_id": "ch07", "reason": "分层级证据传递"}, {"chapter_id": "ch09", "reason": "试验与统计方法"}]
+  },
+  "ch04": {
+    "positioning": "按制造方法、过程控制、鉴定和符合性证据阅读；具体工艺参数不得由导读替代批准规范。",
+    "sections": [
+      {"id": "method-basis", "title": "制造方法的法规入口", "summary": "从制造方法条款进入审定资料，并与材料条款保持分界。", "sources": [{"source_id": "CH04-S001", "locator": "第25.605条"}, "CH04-S002"]},
+      {"id": "process-control", "title": "成型环境与过程控制", "summary": "查阅复合材料制造质量体系指南和生产机构程序中的工艺文件入口。", "sources": ["CH04-S003", "CH04-S006"]},
+      {"id": "qualification", "title": "工艺鉴定与变更再鉴定", "summary": "将工艺验证与型号审定、生产审定资料衔接；样本量和参数以受控文件为准。", "sources": ["CH04-S002", "CH04-S005", "CH04-S006"]},
+      {"id": "defects-ndi", "title": "缺陷控制与无损检测", "summary": "区分可读的质量体系资料和仅能确认身份或状态的检测人员标准。", "sources": ["CH04-S003", "CH04-S008"]},
+      {"id": "conformity-records", "title": "制造符合性、记录与偏离", "summary": "对照产品合格审定规定和现行程序查找制造符合性与记录的资料入口。", "sources": ["CH04-S004", "CH04-S005", "CH04-S006"]},
+      {"id": "standard-boundary", "title": "行业标准的正文核验边界", "summary": "HB 8605 目前只登记官方状态；未取得受控全文前不据此展示工艺细节。", "sources": ["CH04-S007"]}
+    ],
+    "related": [{"chapter_id": "ch03", "reason": "材料设计值"}, {"chapter_id": "ch05", "reason": "工艺更改批准"}, {"chapter_id": "ch06", "reason": "生产质量体系"}]
+  },
+  "ch05": {
+    "positioning": "先识别变化和批准路径，再查找符合性证据；等同资料本身不代替更改分类或批准。",
+    "sections": [
+      {"id": "change-basis", "title": "材料与工艺变化的法规基础", "summary": "从材料、制造方法与产品合格审定规则辨认变化可能涉及的文件。", "sources": ["CH05-S001", "CH05-S002", "CH05-S003"]},
+      {"id": "classification", "title": "设计更改分类与审定基础", "summary": "按设计更改规定和审定基础确定程序查找判断入口，避免先设定试验方案再倒推分类。", "sources": ["CH05-S003", "CH05-S004", "CH05-S005"]},
+      {"id": "equivalence-evidence", "title": "等同证据与重新验证边界", "summary": "将材料设计值、工艺代表性和质量记录作为待核对的证据线索，不作自动等同结论。", "sources": ["CH05-S001", "CH05-S002", "CH05-S011"]},
+      {"id": "approval-path", "title": "审定计划与批准路径", "summary": "沿型号、补充型号和专用条件等程序查找适用的审定路径。", "sources": ["CH05-S006", "CH05-S007", "CH05-S008"]},
+      {"id": "post-approval", "title": "证后更改与持续适航接口", "summary": "查找批准资料、构型与后续文件的管理入口，生产组织持续监督转入第六章。", "sources": ["CH05-S003", "CH05-S012"]}
+    ],
+    "related": [{"chapter_id": "ch03", "reason": "材料性能与设计值"}, {"chapter_id": "ch04", "reason": "工艺验证"}, {"chapter_id": "ch06", "reason": "供应商与质量体系"}, {"chapter_id": "ch07", "reason": "追加验证证据"}]
+  },
+  "ch06": {
+    "positioning": "按生产、设计与委任三条责任线查找质量体系和供应链监管资料；以下仅是待审核的阅读线索。",
+    "sections": [
+      {
+        "id": "production-quality",
+        "title": "生产质量体系与质量手册",
+        "summary": "先阅读生产质量体系的规章入口，再对照生产机构审定程序与质量体系资料。",
+        "sources": ["CH06-S002", "CH06-S003"]
+      },
+      {
+        "id": "supplier-control",
+        "title": "供应商控制与供应链穿透监管",
+        "summary": "集中查看供应商管理、直接发货和跨境协作的文件入口；具体适用条款仍须核对原件。",
+        "sources": ["CH06-S004", "CH06-S017", "CH06-S010"]
+      },
+      {
+        "id": "design-assurance",
+        "title": "设计保证系统及设计供应商",
+        "summary": "区分设计机构审定、设计保证系统建设与生产机构质量体系的资料边界。",
+        "sources": ["CH06-S005", "CH06-S016"]
+      },
+      {
+        "id": "delegation",
+        "title": "委任代表和委任单位监管",
+        "summary": "按规章、个人委任程序和单位委任程序依次查阅，不把委任责任与持证人责任混同。",
+        "sources": ["CH06-S006", "CH06-S007", "CH06-S008"]
+      },
+      {
+        "id": "oversight",
+        "title": "生产监督工具与问题闭环",
+        "summary": "查阅审定监督、放行和无生产机构许可证生产的相关程序，注意文件版本及过渡安排。",
+        "sources": ["CH06-S003", "CH06-S011", "CH06-S012"]
+      },
+      {
+        "id": "composites",
+        "title": "复合材料质量体系与跨章接口",
+        "summary": "从复合材料制造质量体系指南进入材料、工艺和验证的交叉资料。",
+        "sources": ["CH06-S009"]
+      }
+    ],
+    "related": [
+      {"chapter_id": "ch04", "reason": "制造工艺与工艺验证"},
+      {"chapter_id": "ch05", "reason": "材料、工艺及设计变更"},
+      {"chapter_id": "ch07", "reason": "试验件与验证证据"}
+    ]
+  },
+  "ch07": {
+    "positioning": "按验证层级组织材料、试验与分析资料；层级名称和具体试验任务仍须以可核验正文为准。",
+    "sections": [
+      {"id": "regulatory-foundation", "title": "积木式验证的法规基础", "summary": "从强度、试验支持分析和制造方法的法规入口进入本章。", "sources": ["CH07-S001", "CH07-S002"]},
+      {"id": "verification-levels", "title": "验证层级与各层级任务", "summary": "将行业标准状态与审定资料并列展示；未取得标准受控正文时不填补层级数量或试验判据。", "sources": ["CH07-S003", "CH07-S002"]},
+      {"id": "evidence-transfer", "title": "低层级数据与高层级证据", "summary": "查找设计值、符合性方法和型号审定程序之间的证据衔接资料。", "sources": ["CH07-S001", "CH07-S002", "CH07-S005"]},
+      {"id": "representativeness", "title": "环境影响与制造代表性", "summary": "通过制造质量体系和审定资料查看试验件状态的相关来源，不移植国外手册数值。", "sources": ["CH07-S006", "CH07-S002"]},
+      {"id": "structural-verification", "title": "静强度、损伤容限与变更接口", "summary": "把高层级结构验证和试验程序连接起来；详细损伤分类转入第八章。", "sources": ["CH07-S001", "CH07-S005"]}
+    ],
+    "related": [{"chapter_id": "ch03", "reason": "材料级数据"}, {"chapter_id": "ch04", "reason": "试验件制造"}, {"chapter_id": "ch08", "reason": "损伤容限"}, {"chapter_id": "ch09", "reason": "统计处理"}]
+  },
+  "ch08": {
+    "positioning": "以结构评定、检查和持续适航为阅读主线；损伤尺寸、间隔和寿命结论均须回到适用原文。",
+    "sections": [
+      {"id": "damage-tolerance-basis", "title": "疲劳与损伤容限的法规基础", "summary": "先定位结构强度、损伤容限和持续适航文件的法规入口。", "sources": [{"source_id": "CH08-S001", "locator": "第25.571条"}, "CH08-S004"]},
+      {"id": "damage-threats", "title": "损伤威胁与可检性", "summary": "以结构完整性资料为线索；HB 标准仅有状态信息时，不展示五类损伤等未核实细节。", "sources": ["CH08-S006", "CH08-S002"]},
+      {"id": "fatigue-wfd", "title": "损伤扩展、疲劳与广布疲劳损伤", "summary": "对照适航标准、持续适航规章及结构完整性大纲资料。", "sources": ["CH08-S001", "CH08-S004", "CH08-S006"]},
+      {"id": "impact-environment", "title": "冲击、离散源损伤与环境影响", "summary": "查阅条款和指导材料，避免把未经核验的冲击能量或概率目标写成统一要求。", "sources": ["CH08-S001", "CH08-S006"]},
+      {"id": "repair-boundary", "title": "修理批准与验证边界", "summary": "区分产品设计批准、持续适航文件和修理资料的不同入口。", "sources": ["CH08-S003", "CH08-S007", "CH08-S009"]},
+      {"id": "inspection-program", "title": "检查大纲与持续结构完整性", "summary": "沿运行规则、持续适航文件和结构完整性大纲查看检查责任与资料。", "sources": ["CH08-S005", "CH08-S007", "CH08-S008"]}
+    ],
+    "related": [{"chapter_id": "ch04", "reason": "制造缺陷"}, {"chapter_id": "ch05", "reason": "修理与更改"}, {"chapter_id": "ch07", "reason": "逐级验证证据"}]
+  },
+  "ch09": {
+    "positioning": "集中浏览试验设计和统计处理的法规入口与标准状态；未取得标准本体时只提供身份与效力导航。",
+    "sections": [
+      {"id": "evidence-basis", "title": "试验与统计的法规基础", "summary": "从材料设计值条款、运输类飞机审定资料和型号审定程序建立证据入口。", "sources": [{"source_id": "CH09-S001", "locator": "第25.613条"}, "CH09-S002", "CH09-S004"]},
+      {"id": "sampling-representativeness", "title": "试验设计、取样与制造代表性", "summary": "对照型号审定程序和质量体系资料；不在导读中设定统一样本量或批次数。", "sources": ["CH09-S004", "CH09-S005"]},
+      {"id": "mechanical-testing", "title": "材料力学试验标准", "summary": "这些国家标准目前主要提供身份与状态信息，具体试验步骤需受控全文核验。", "sources": ["CH09-S007", "CH09-S008", "CH09-S009", "CH09-S010"]},
+      {"id": "design-values", "title": "A/B 基准、容忍限与设计值", "summary": "将法规设计值条款与统计容忍区间标准分开阅读，不把后者的未知正文当作接受准则。", "sources": ["CH09-S001", "CH09-S002", "CH09-S015"]},
+      {"id": "data-quality", "title": "分布检验、离群值与数据质量", "summary": "提供正态性与离群值标准的索引；公式和阈值须待合法受控正文核验。", "sources": ["CH09-S013", "CH09-S014"]},
+      {"id": "fatigue-correlation", "title": "疲劳数据与试验分析闭环", "summary": "查阅疲劳数据统计标准和试验支持分析资料，避免将方法名称写成普遍强制要求。", "sources": ["CH09-S011", "CH09-S012", "CH09-S002"]}
+    ],
+    "related": [{"chapter_id": "ch03", "reason": "材料性能应用"}, {"chapter_id": "ch07", "reason": "积木式证据传递"}, {"chapter_id": "ch08", "reason": "疲劳与损伤容限"}]
+  }
+}
