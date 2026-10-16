@@ -11,6 +11,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from .ingest import load_inputs
+from .chapter_graph import build_chapter_graph
 from .reading import render_document
 
 PUBLIC_FIELDS = "source_id,title,chapter_id,chapter_title,document_code,document_status,publish_date,url,review_status,content_kind".split(",")
@@ -34,7 +35,7 @@ def input_fingerprint(root):
     paths = [path for folder in ("chapters", "acquired", "verification")
              for path in sorted((root / "data" / folder).rglob("*"))]
     digest = hashlib.sha256()
-    for module in ("catalog.py", "ingest.py", "reading.py", "locators.py", "verification.py"):
+    for module in ("catalog.py", "chapter_graph.py", "ingest.py", "reading.py", "locators.py", "verification.py"):
         path = Path(__file__).with_name(module)
         digest.update(module.encode())
         digest.update(path.read_bytes() if path.is_file() else b"<not-installed>")
@@ -68,6 +69,7 @@ def build_catalog(root, path):
                 CREATE VIRTUAL TABLE search USING fts5(search_text, tokenize='trigram');
             """)
             for chapter in chapters:
+                chapter["graph"] = build_chapter_graph(root, chapter, docs)
                 db.execute("INSERT INTO chapters VALUES (?,?)", (chapter["id"], json.dumps(chapter, ensure_ascii=False)))
             for doc in docs:
                 search_text = re.sub(r"\s+", "", doc["title"] + " " + doc["document_code"] + " " + doc["body"]).lower()
@@ -113,6 +115,7 @@ def overview(path):
         chapters = [json.loads(row[0]) for row in db.execute("SELECT payload FROM chapters ORDER BY id")]
         totals = dict(chapters=len(chapters), sources=0, fulltext=0, extracted=0, excerpt=0, metadata=0)
         for chapter in chapters:
+            chapter.pop("graph", None)
             chapter["count"] = 0
             for kind in ("fulltext", "extracted", "excerpt", "metadata"):
                 count = db.execute("SELECT count(*) FROM documents WHERE chapter_id=? AND content_kind=?", (chapter["id"], kind)).fetchone()[0]
