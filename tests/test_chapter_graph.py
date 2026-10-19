@@ -1,5 +1,7 @@
 """The chapter-end graph must remain a traceable, pending-review preview."""
 import unittest
+import shutil
+import subprocess
 from pathlib import Path
 
 from airworthiness.chapter_graph import build_chapter_graph
@@ -45,6 +47,31 @@ class ChapterGraphTests(unittest.TestCase):
         self.assertTrue(all(edge["relation_id"] in raw_relations for edge in graph["relations"]))
         self.assertTrue(all(section["id"] not in {edge["type"] for edge in graph["relations"]}
                             for section in graph["sections"]))
+
+    def test_visual_graph_uses_real_edges_and_bounded_nodes(self):
+        if not shutil.which("node"):
+            self.skipTest("Node.js unavailable")
+        script = r"""
+const fs=require('node:fs'), vm=require('node:vm'), assert=require('node:assert/strict');
+const code=fs.readFileSync(process.argv[1],'utf8').replace(/^import .*;\r?$/gm,'').replace(/^export .*;\r?$/gm,'');
+const context={list:value=>Array.isArray(value)?value:[]};
+vm.createContext(context); vm.runInContext(code,context);
+const graph={nodes:['a','b','c','d','e'].map(node_id=>({node_id})),
+  relations:[{from_node_id:'a',to_node_id:'b'},{from_node_id:'a',to_node_id:'c'},
+    {from_node_id:'a',to_node_id:'d'},{from_node_id:'e',to_node_id:'missing'}],
+  sections:[{id:'topic',node_ids:['a','b','c','d','e']}]};
+const layout=context.layoutGraph(graph);
+assert.equal(layout.points.size,5);
+assert.equal(layout.edges.length,3);
+assert.equal(layout.hubId,'a');
+assert.ok([...layout.points.values()].every(p=>p.x>=96&&p.x<=layout.width-96));
+assert.ok([...layout.points.values()].every(p=>p.y>=72&&p.y<=layout.height-72));
+assert.ok(layout.width>=1000&&layout.height>=780);
+"""
+        path = ROOT / "src/airworthiness/web/static/hall-graph.js"
+        result = subprocess.run([shutil.which("node"), "-e", script, str(path)],
+                                capture_output=True, text=True, encoding="utf-8", timeout=15)
+        self.assertEqual(result.returncode, 0, result.stderr)
 
 
 if __name__ == "__main__":
