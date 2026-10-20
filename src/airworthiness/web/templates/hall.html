@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="按九章组织的适航资源馆：查阅法规资料、章节导读与术语释义。">
+  <title>适航离线资源馆</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='hall.css') }}">
+  <script type="module" src="{{ url_for('static', filename='hall.js') }}"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳至主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="/" data-route aria-label="适航离线资源馆首页">
+      <span class="brand-symbol" aria-hidden="true">航</span>
+      <span class="brand-name">适航<span class="brand-divider"> / </span>资源馆<small>AIRWORTHINESS ARCHIVE</small></span>
+    </a>
+    <span class="edition-label">离线资料库</span>
+  </header>
+  <nav id="chapter-rail" class="chapter-rail" aria-label="快速章节导航" hidden></nav>
+  <main id="main" tabindex="-1">
+    <div class="state-box initial-state" role="status"><span class="loading-indicator" aria-hidden="true"></span><p>正在打开资源馆…</p></div>
+  </main>
+  <footer id="site-footer" class="site-footer">
+    <span>适航离线资源馆 <span class="footer-separator">/</span> 复合材料 · 法规 · 验证</span>
+    <p>法规效力、版本和具体条款请核对官方来源。</p>
+  </footer>
+  <div id="announcer" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></div>
+  <noscript><div class="noscript-message">资源馆需要启用 JavaScript 才能读取本地资料。请启用后刷新页面。</div></noscript>
+</body>
+</html>

@@ -1,6 +1,71 @@
-# 民用航空适航知识图谱与智能问答
+# 民用航空适航法规资源大厅
 
-本仓库用于复现一个面向国内民用航空适航资料的演示系统。当前只完成两个板块：
+## GitHub Pages 在线验收版
+
+发布地址由仓库 Settings → Pages 提供；目标地址为 <https://tuz1206.github.io/airworthiness/>。只有 `Publish resource hall to GitHub Pages` 工作流成功并完成访问验证后才视为上线，不能把分支推送成功当成部署完成。
+
+- 在线版复用九章正文、目录、术语和质量报告，不需要访问者安装 Python，也不依赖分享电脑开机。它是构建时的只读快照，不代表法规现行有效或专业审核通过。
+- 浏览器执行标题、文号和正文的字面关键词检索，支持章节/效力/收录类型筛选与分页。结果按来源编号排列，与本机 SQLite 的相关性排序不同；首次有关键词搜索会下载压缩的章节索引，旧浏览器可回退普通 JSON。
+- 自动发布不把本机 `.cache`、数据库、密钥或原始二进制附件提交到 Git。Pages 构建时只下载并校验台账中有原件 SHA-256 的现行 CCAR、AP、AC、MD、CPG 官方 PDF；校验成功的副本只进入临时站点产物供页内阅读。标准全文、失效文件、仅有状态页及哈希不符的文件不进入产物，页面保留政府官网原件入口。图表、公式与扫描版式以原件为准，不能把提取文字当作完整原件。
+- Pages 的 Source 使用 **GitHub Actions**，`github-pages` 环境允许发布分支 **feat/offline-resource-hall**。推送该分支会测试、导出并发布；不自动合并草稿 PR，不修改 `main`。如以后更换发布分支，需要同时更新工作流触发分支与环境允许列表。
+
+本机复现静态站（输出目录必须为空或不存在）：
+
+```powershell
+.\.venv\Scripts\python.exe -m airworthiness.static_export --root . --output output/pages/airworthiness --base-path /airworthiness
+.\.venv\Scripts\python.exe -m http.server 8000 --bind 127.0.0.1 --directory output/pages
+```
+
+打开 <http://127.0.0.1:8000/airworthiness/>。需要复现在线 PDF 阅读时，先运行 `python -m airworthiness.public_pdfs --root .`，再给静态导出命令添加 `--include-originals`；只会纳入已校验且符合发布范围的官方 PDF。下载缓存和 PDF 均不提交到 Git。静态站导出是生成副本，不修改原始正文、哈希或审核状态。
+
+## 当前可运行版本：九章离线资源大厅
+
+本轮重建提供九章资料浏览、多文档本地阅读、中文全文检索、来源追溯、资料质量报告和章节末尾的待审图谱预览。图谱直接读取每章 `nodes.csv`、`relations.csv`，以圆形节点和实际关系连线呈现，不增加专题分组的虚构关系。**暂不启用正式 Neo4j、Dify 或 AI 问答**；专业审核与数据规则继续保留。旧版硬编码页面和程序已在本分支移除，可通过 Git 历史恢复。
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -e .
+.\.venv\Scripts\python.exe -m airworthiness.app
+```
+
+打开 <http://127.0.0.1:5000>。也可运行 `powershell -ExecutionPolicy Bypass -File .\start.ps1`。无需配置密钥或 `.env`；首次安装依赖需要联网，之后已保存内容可离线浏览。
+
+- 一份文件独立保存；同一章节内切换文件无需跳官网。官方链接用于额外核验。
+- 九章文件页统一先显示 PDF 阅读区：只有现行、可公开使用且哈希校验通过的官方 CCAR／AP／AC／MD／CPG 原件才在页内嵌入。没有可嵌入原件时显示官网入口和缺口说明，不将网页或待校对提取文字转换成伪原件；受版权限制的标准只保留合法官网入口。可切换“文字检索”；搜索结果或条款定位仍直接打开文字位置。章节导读、术语和图谱继续保持交互页面，不伪装成法规 PDF。
+- 提取文字采用自动换行，可手动恢复提取换行，但不承诺还原表格、公式和 OCR；网页目录和分项逐行显示。排版优化只作用于界面，不修改原始正文和哈希。
+- 来源记录数包含跨章重复引用，不等于独立法规数。
+- **网页正文**：从已识别的官方正文区域提取；**提取正文**：附件机械提取，表格、公式和完整性待校对；**摘录／状态信息**：未获得全文，不冒充原文。
+- 上传资料位于 `data/chapters/`，补抓正文和获取记录位于 `data/acquired/`，SQLite 检索索引位于被忽略的 `.cache/`。资料变化后重启应用自动重建索引。
+- 来源审核状态不会因自动采集成功而改变；页面仍显示待专业审核。
+
+2026-10-13 本轮补齐后：189 条来源登记中，9 条为网页正文、162 条为提取正文、18 条为标准状态信息，整理摘录为 0。171 条可读正文包含跨章引用，不等于 171 份独立、完整或已审核的法规。剩余 18 条对应 13 项标准，获取限制逐项见 [标准访问核对](docs/standards-access.md)。
+
+- CCAR-25-R4 主文 434 页和独立附录 82 页分别保留分页，并提供两个本地 PDF 对照入口。
+- AP-21-11R2 从官方 RAR 内 PDF 提取 233 页；RAR 和包内 PDF 各自校验哈希。本机取得并校验包内原件后可嵌入阅读；该 PDF 约 159 MB，超出当前 Pages 单件发布上限，在线版保留官方 RAR 入口，不伪装为已嵌入。
+- 两份扫描 PDF 已完成本地 OCR，仍标“识别文字，待校对”；公式指数、表格和错字必须对照原件。
+- 132 个术语中 68 个有原文文本匹配定位，64 个仅定位到来源文件；状态说明和整理摘录不作为原文匹配依据。这些匹配不是定义审核，也不冒充核实后的条款依据。
+- 元数据采用独立证据覆盖层，保留上传原值和已处理提示。26 项原提示中 25 项已修正或解释，HB 7736-2004 的日期与官方详情仍待核对。
+
+本地 PDF 按钮只在对应缓存原件及哈希有效时出现；Git 仓库只保存提取文字和追溯信息。其他电脑克隆后能离线阅读文字，但需要单独获取原件缓存，不能把“仓库包含正文”理解为“仓库包含 PDF”。
+
+### 验证与报告
+
+```powershell
+.\.venv\Scripts\python.exe -m unittest discover -s tests -v
+.\.venv\Scripts\python.exe -m airworthiness.cli validate
+.\.venv\Scripts\python.exe -m airworthiness.cli build
+.\.venv\Scripts\python.exe -m airworthiness.cli report
+```
+
+页面 `/quality` 显示同一份质量统计；生成报告位于 `docs/data-quality-report.md`。详细操作见 [验收说明](docs/offline-acceptance.md)。重新获取官方资料使用 `python -m airworthiness.acquire --root .`，其输出不会覆盖上传原稿，下载失败会明确记录。原始二进制附件留在本地缓存，不提交 Git。
+
+当前实现分工：`ingest.py` 读取和校验资料，`catalog.py` 构建和查询 SQLite，`reading.py` 安全渲染正文，`app.py` 提供本机 API，`acquire.py` 获取官方资料，`cli.py` 提供构建和报告命令。
+
+---
+
+## 后续系统目标与资料规则
+
+本仓库的后续目标是面向国内民用航空适航资料完成两个板块：
 
 1. **知识图谱**：把九章资料整理为可审查的节点和关系，审核后导入 Neo4j。
 2. **AI 问答**：把审核通过的原文资料交给 Dify 建立知识库，由 DeepSeek 生成带来源的回答。
@@ -21,7 +86,7 @@ gov.cn / *.gov.cn 官方页面
 
 ## 二、建议目录
 
-以下是团队确认清理旧文件后采用的目标结构。当前仓库中的旧版单文件程序和压缩包暂时保留，不要继续在压缩包或千行脚本中增加新内容。
+以下为包含后续图谱与问答模块的目标结构；当前离线实现见本文开头，不要恢复旧版硬编码程序或在压缩包中开发。
 
 ```text
 airworthiness/
@@ -41,6 +106,7 @@ airworthiness/
 │  └─ qa/
 │     └─ __init__.py         # 预留 Dify 问答服务
 ├─ data/chapters/
+│  ├─ guides.json            # 九章阅读导读与专题导航配置，不含法规原文
 │  ├─ ch01/ ... ch09/        # 九章数据（sources/nodes/relations/glossary 等）
 ├─ templates/
 │  ├─ chapter/               # 章节数据模板
@@ -54,9 +120,9 @@ airworthiness/
 └─ README.md
 ```
 
-## 三、从零构建环境
+## 三、后续图谱与问答服务环境
 
-推荐 Windows、Python 3.11、Neo4j 5.x。Dify 可以使用云服务或本地部署，本项目通过 HTTP API 调用，不在仓库中重复实现 RAG。
+离线资源大厅只需要 Python 3.11 或以上（SQLite 需支持 FTS5 trigram，官方 Python 发行版通常已包含）。后续图谱采用 Neo4j 5.x；Dify 可以使用云服务或本地部署，通过 HTTP API 调用，不在仓库中重复实现 RAG。
 
 ```powershell
 git clone https://github.com/TuZ1206/airworthiness.git
@@ -65,10 +131,9 @@ py -3.11 -m venv .venv
 .\.venv\Scripts\Activate.ps1
 python -m pip install --upgrade pip
 pip install -e .
-Copy-Item .env.example .env
 ```
 
-然后在本机 `.env` 中填写 Neo4j、Dify 和 DeepSeek 配置。`.env` 只保存在个人电脑，不得上传。
+当前离线版本无需 `.env`。后续恢复服务接入时再添加 Neo4j、Dify 配置；真实密钥只保存在本机，不能上传。
 
 `pip install -e .` 会按 `pyproject.toml` 安装依赖，并以可编辑方式注册 `airworthiness` 包（源码在 `src/` 下）。启动命令固定为：
 
@@ -114,6 +179,8 @@ ch06/
 ```
 
 对应模板位于 [`templates/chapter`](templates/chapter) 和 [`templates/crawler`](templates/crawler)。复制模板后再填写，不要随意增删表头。
+
+九章阅读器的专题路径维护在 [`data/chapters/guides.json`](data/chapters/guides.json)。每个专题只写原创导语并引用本章已有 `source_id`；只有可阅读正文中确实出现的条款才能填写 `locator`。这份导航配置不改变各章 CSV 表头、法规原文或专业审核状态，状态页不得用来证明具体技术条款。
 
 ### `sources.csv`
 
@@ -232,11 +299,11 @@ docs/repository-guidelines
 
 ## 十、旧文件处理结果
 
-历史遗留文件已完成清理：
+旧版本曾完成文件归类，本轮进一步移除了旧应用实现：
 
-- 根目录 `app.py`、`neo4j_setup.py`、`data_generator.py` 已归入 `src/airworthiness/`。
-- 原 `测试.py`（实际是另一版 neo4j 实现）经对比确认是旧版且数据不全，已删除；当前保留 `src/airworthiness/graph/neo4j_setup.py` 作为唯一实现。
-- `Web开发.zip` 已解压并分类到 `src/airworthiness/web/`，压缩包已删除。
+- `src/airworthiness/app.py` 已替换为离线资源大厅，不包含硬编码法规、模型调用或 Neo4j 启动依赖。
+- 旧图谱脚本、旧问答页面、旧章节详情和静态法规页面已移除；需要时从 Git 历史查看，不作为当前运行内容。
+- 九章 `nodes.csv` 和 `relations.csv` 驱动页面底部的交互式待审图谱；仅供浏览与核对，不执行正式 Neo4j 导入。
 - 含密钥的 `.env` 已从仓库删除；该文件曾进入 Git 历史，相关密钥应尽快轮换。
 
 后续不要再提交 ZIP、缓存（`__pycache__`、`.pytest_cache`）或 `.env`。

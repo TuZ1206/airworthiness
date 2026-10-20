@@ -1,0 +1,1618 @@
+{
+  "schema_version": "1.0",
+  "task": "GB/T与HB标准官方全文入口独立资料核验",
+  "checked_at": "2026-10-13T16:22:33+08:00",
+  "checked_date_basis": "2026-10-13 Asia/Shanghai",
+  "scope": {
+    "target_count": 13,
+    "repository_inputs": "data/chapters/**/sources.csv中的目标标准引用；用户随后授权只读复用.cache/ci-acquisition-38367606768/.cache/acquisition中官方缓存。",
+    "allowed_domains": [
+      "gov.cn及其子域"
+    ],
+    "final_review_performed": false,
+    "original_csv_modified": false,
+    "data_acquired_written": false,
+    "commit_or_push_performed": false,
+    "no_captcha_permission_or_paywall_bypass": true,
+    "no_commercial_full_text_copied": true
+  },
+  "summary": {
+    "covered_standards": 13,
+    "official_status_records_confirmed": 12,
+    "official_identity_unconfirmed": 1,
+    "official_platform_preview_download_entry_pages": 7,
+    "platform_explicit_copyright_no_text_service": 4,
+    "actual_standard_pdfs_retrieved": 0,
+    "actual_standard_full_text_tool_responses_retrieved": 0,
+    "visual_inspections_performed": 0,
+    "note": "缓存中的官方状态页、搜索响应、全文公开通知或备案目录线索均不计入标准全文取回数量。",
+    "ci_html_evidence_files_verified": 13,
+    "ci_valid_standard_detail_pages": 11,
+    "ci_official_error_pages": 1,
+    "ci_zero_result_search_pages": 1,
+    "out_of_scope_full_text_target_observed": 1,
+    "gov_cn_full_text_entry_unconfirmed": 2
+  },
+  "methodology": [
+    "只采用gov.cn官方页和限定gov.cn搜索；远端工具的Crawled时间可能早于checked_at，checked_at表示本次检查时间，不承诺源站实时状态。",
+    "11项GB/T均实际打开全文平台对应页面；7项可见在线预览/下载按钮，4项显示采标版权限制。HB8605仅确认状态元数据，HB7736身份未确认。",
+    "依据官方搜索提供的完整URL及官方通知实际点击发现入口；不猜下游PDF链接，不将页面按钮标签当作已下载文件。",
+    "远端网页工具无法对无链接ID的动态按钮继续点击；本地Edge访问36439-2018的入口页面报连接关闭。其余6项按钮入口未逐项本地尝试，逐项证据仅为远端页面内容。",
+    "页面含通用浏览器预览提示模板，其存在本身不能证明浏览器不兼容、需验证码或标准不公开。",
+    "本任务不决定最终审核通过、正文适用性、替代标准整合或原始CSV修订。",
+    "随后只读复用了用户指定GitHub Actions缓存，对13份目标URL对应原始HTML逐一校验original_sha256和size，全部一致；只静态读取源码，不执行页面脚本。",
+    "缓存确认10项GB/T状态页的查看文本处理器含明确openstd入口URL；HB8605处理器目标为sacinfo.org.cn，超出gov.cn范围；HB7736查询返回0条；36439-2026原URL返回官方错误页。上述HTML均不是目标标准全文。"
+  ],
+  "evidence_cache": {
+    "directory": ".cache/standards",
+    "raw_remote_responses": "access-search-01.json及access-web-02.json至access-web-29.json",
+    "semantics": "保存工具返回的完整响应值；返回内容本身可能为摘要/截断视口，不是完整HTML、PDF二进制或标准全文。",
+    "browser_errors": ".cache/standards/access-browser-attempts.json",
+    "ci_extraction": ".cache/standards/ci-status-evidence.json",
+    "ci_raw_bytes_directory": ".cache/ci-acquisition-38367606768/.cache/acquisition"
+  },
+  "standards": [
+    {
+      "standard_code": "HB 8605-2021",
+      "title": "飞机复合材料结构适航符合性验证通用要求",
+      "input_sources": [
+        {
+          "path": "data/chapters/ch09/sources.csv",
+          "source_id": "CH09-S006",
+          "title_as_recorded": "飞机复合材料结构适航符合性验证通用要求",
+          "url_as_recorded": "https://std.samr.gov.cn/hb/search/stdHBDetailedCNF?id=09C9A09DA897FC93E06397BE0A0A1DFC"
+        },
+        {
+          "path": "data/chapters/ch08/sources.csv",
+          "source_id": "CH08-S002",
+          "title_as_recorded": "飞机复合材料结构适航符合性验证通用要求",
+          "url_as_recorded": "https://std.samr.gov.cn/hb/search/stdHBDetailedCNF?id=09C9A09DA897FC93E06397BE0A0A1DFC"
+        },
+        {
+          "path": "data/chapters/ch07/sources.csv",
+          "source_id": "CH07-S003",
+          "title_as_recorded": "飞机复合材料结构适航符合性验证通用要求",
+          "url_as_recorded": "https://std.samr.gov.cn/hb/search/stdHBDetailedCNF?id=09C9A09DA897FC93E06397BE0A0A1DFC"
+        },
+        {
+          "path": "data/chapters/ch01/sources.csv",
+          "source_id": "CH01-S020",
+          "title_as_recorded": "飞机复合材料结构适航符合性验证通用要求",
+          "url_as_recorded": "https://std.samr.gov.cn/hb/search/stdHBDetailedCNF?id=09C9A09DA897FC93E06397BE0A0A1DFC"
+        },
+        {
+          "path": "data/chapters/ch04/sources.csv",
+          "source_id": "CH04-S007",
+          "title_as_recorded": "飞机复合材料结构适航符合性验证通用要求",
+          "url_as_recorded": "https://std.samr.gov.cn/hb/search/stdHBDetailedCNF?id=09C9A09DA897FC93E06397BE0A0A1DFC"
+        },
+        {
+          "path": "data/chapters/ch03/sources.csv",
+          "source_id": "CH03-S006",
+          "title_as_recorded": "飞机复合材料结构适航符合性验证通用要求",
+          "url_as_recorded": "https://std.samr.gov.cn/hb/search/stdHBDetailedCNF?id=09C9A09DA897FC93E06397BE0A0A1DFC"
+        }
+      ],
+      "checked_at": "2026-10-13T16:22:33+08:00",
+      "review_status": "not_final_reviewed",
+      "official_status_page": "https://std.samr.gov.cn/hb/search/stdHBDetailedCNF?id=09C9A09DA897FC93E06397BE0A0A1DFC",
+      "official_status_observed": "现行",
+      "publish_date": "2021-04-19",
+      "implementation_date": "2021-07-01",
+      "official_status_evidence": {
+        "cache_file": ".cache/standards/access-web-05.json",
+        "source_url": "https://std.samr.gov.cn/hb/search/stdHBDetailedCNF?id=09C9A09DA897FC93E06397BE0A0A1DFC"
+      },
+      "official_lookup_page": null,
+      "full_text_platform_page": null,
+      "full_text_entry": null,
+      "public_access": {
+        "category": "out_of_scope_target",
+        "full_text_offered_on_observed_platform": null,
+        "public_retrievability_verified": null,
+        "retrievable_in_this_run": false,
+        "conclusion": "已发现真实查看文本目标，但该目标为非gov.cn域名；本任务不访问，gov.cn全文入口未确认。",
+        "inference_limit": "本次取回失败或未检索到，不等于标准不公开。入口可见不等于实际下载可用。"
+      },
+      "acquisition": {
+        "status": "not_retrieved",
+        "pdf_retrieved": false,
+        "full_text_tool_response_retrieved": false,
+        "cache_files": [],
+        "sha256": null,
+        "bytes": null,
+        "page_count": null
+      },
+      "visual_inspection": {
+        "performed": false,
+        "pages": [],
+        "reason": "没有取得目标标准PDF或正文页，无法进行代表页视觉检查。"
+      },
+      "blocker_codes": [
+        "OFFICIAL_FULL_TEXT_TARGET_OUTSIDE_GOV_CN_SCOPE",
+        "GOV_CN_FULL_TEXT_ENTRY_UNCONFIRMED"
+      ],
+      "not_retrieved_reason": "只读云端原始HTML确认：实际显示的查看文本按钮使用.openhdbpdf处理器，目标为hbba.sacinfo.org.cn；浏览器分支将/attachment/onlineRead改为/portal/online。它不属于gov.cn，本任务没有访问。gov.cn范围内未确认该标准全文入口，不能据此宣称标准不公开。",
+      "browser_attempt": {
+        "attempted": false,
+        "note": "仅使用远端工具核验该标准页面；没有声称逐项点击下载。"
+      },
+      "captcha": {
+        "encountered": false,
+        "note": "未到达已观察的验证码界面；不能将未获取归因于CAPTCHA。"
+      },
+      "external_sources": [
+        {
+          "label": "HB 8605-2021 官方状态页",
+          "url": "https://std.samr.gov.cn/hb/search/stdHBDetailedCNF?id=09C9A09DA897FC93E06397BE0A0A1DFC",
+          "use": "状态与元数据引用；不代表已获取全文"
+        }
+      ],
+      "external_use_scope": "仅提供官方页面链接与元数据证据；不授予标准全文转载、公开镜像或商业复制许可。",
+      "notes": [
+        "备案号91609-2023；备案公告目录PDF是目录而非标准全文，未作为全文取回。",
+        "官方页链接的sacinfo.org.cn不属于gov.cn，本任务没有跟随访问。",
+        "同一模板中的.openpdf处理器hcno为空，并非本标准真实入口；不能将空hcno的模板URL列为全文链接。"
+      ],
+      "evidence_files": [
+        ".cache/standards/access-search-01.json",
+        ".cache/standards/access-web-05.json",
+        ".cache/standards/access-web-10.json",
+        ".cache/standards/access-web-11.json",
+        ".cache/standards/access-web-25.json",
+        ".cache/standards/ci-status-evidence.json"
+      ],
+      "ci_cached_evidence": {
+        "metadata_path": ".cache/ci-acquisition-38367606768/.cache/acquisition/c6ef0ac5c863f08ac4ddd64915b329ec7faa57d914205b7002d7c962f1f7f151.json",
+        "binary_path": ".cache/ci-acquisition-38367606768/.cache/acquisition/c6ef0ac5c863f08ac4ddd64915b329ec7faa57d914205b7002d7c962f1f7f151.bin",
+        "request_url": "https://std.samr.gov.cn/hb/search/stdHBDetailedCNF?id=09C9A09DA897FC93E06397BE0A0A1DFC",
+        "final_url": "https://std.samr.gov.cn/hb/search/stdHBDetailedCNF?id=09C9A09DA897FC93E06397BE0A0A1DFC",
+        "content_type": "text/html;charset=UTF-8",
+        "crawled_at": "2026-10-13T16:12:19+08:00",
+        "original_sha256": "d6955de71f31d5155584ec0461838d26431ad23b9adbae97684088c7174763d4",
+        "size": 23728,
+        "sha256_verified": true,
+        "size_verified": true,
+        "kind": "official_standard_status_html",
+        "extraction_file": ".cache/standards/ci-status-evidence.json"
+      },
+      "status_page_text_navigation": null,
+      "out_of_scope_link_observation": {
+        "literal_url": "https://hbba.sacinfo.org.cn/attachment/onlineRead/82361f287d72e00dbf1f887ecda48945e21d2b7e7663bb5bcd4c0d7c97276027",
+        "desktop_url_from_explicit_handler": "https://hbba.sacinfo.org.cn/portal/online/82361f287d72e00dbf1f887ecda48945e21d2b7e7663bb5bcd4c0d7c97276027",
+        "source_lines": [
+          577,
+          685,
+          688,
+          691,
+          692
+        ],
+        "visited": false,
+        "accepted_as_in_scope_full_text_source": false,
+        "reason": "域名不是gov.cn；仅保存官方gov.cn源码中的导航证据，未跟随。"
+      }
+    },
+    {
+      "standard_code": "HB 7736-2004",
+      "title": null,
+      "input_sources": [
+        {
+          "path": "data/chapters/ch04/sources.csv",
+          "source_id": "CH04-S010",
+          "title_as_recorded": "原稿引用HB 7736-2004（题名与状态待核验）",
+          "url_as_recorded": "https://std.samr.gov.cn/search/stdPage?q=HB%207736%202004&tid="
+        }
+      ],
+      "checked_at": "2026-10-13T16:22:33+08:00",
+      "review_status": "not_final_reviewed",
+      "official_status_page": null,
+      "official_status_observed": "未核实",
+      "publish_date": null,
+      "implementation_date": null,
+      "official_status_evidence": null,
+      "official_lookup_page": "https://std.samr.gov.cn/search/stdPage?q=HB%207736%202004&tid=",
+      "full_text_platform_page": null,
+      "full_text_entry": null,
+      "public_access": {
+        "category": "identity_unverified",
+        "full_text_offered_on_observed_platform": null,
+        "public_retrievability_verified": null,
+        "retrievable_in_this_run": false,
+        "conclusion": "官方身份与全文公开性均未确认",
+        "inference_limit": "本次取回失败或未检索到，不等于标准不公开。入口可见不等于实际下载可用。"
+      },
+      "acquisition": {
+        "status": "not_retrieved",
+        "pdf_retrieved": false,
+        "full_text_tool_response_retrieved": false,
+        "cache_files": [],
+        "sha256": null,
+        "bytes": null,
+        "page_count": null
+      },
+      "visual_inspection": {
+        "performed": false,
+        "pages": [],
+        "reason": "没有取得目标标准PDF或正文页，无法进行代表页视觉检查。"
+      },
+      "blocker_codes": [
+        "EXACT_OFFICIAL_RECORD_UNCONFIRMED",
+        "OFFICIAL_QUERY_RETURNS_ZERO_RESULTS"
+      ],
+      "not_retrieved_reason": "云端缓存中的官方查询HTML明确返回0个相关结果；此前远端打开查询URL失败，但缓存现在提供了查询结果证据。gov.cn多种写法检索仍未确认同号同年的官方详情及全文。此查询未匹配不等于证明标准不存在或不公开。",
+      "browser_attempt": {
+        "attempted": false,
+        "note": "仅使用远端工具核验该标准页面；没有声称逐项点击下载。"
+      },
+      "captcha": {
+        "encountered": false,
+        "note": "未到达已观察的验证码界面；不能将未获取归因于CAPTCHA。"
+      },
+      "external_sources": [
+        {
+          "label": "HB 7736 2004 官方查询页",
+          "url": "https://std.samr.gov.cn/search/stdPage?q=HB%207736%202004&tid=",
+          "use": "仅作为本次特定查询返回0条的证据；不可作为标准身份、题名、现行状态或不公开的证明。"
+        }
+      ],
+      "external_use_scope": "仅提供官方页面链接与元数据证据；不授予标准全文转载、公开镜像或商业复制许可。",
+      "notes": [
+        "题名保留为未核实；现有CSV题名属于原稿待核提示，不作为标准正式题名。",
+        "HB、GB/T、JB/T及备案编号里的7736不可混同；搜索中相近编号均未采纳。",
+        "原查询页现在有用户提供的云端原始HTML，5937字节，源码第118行显示0个相关结果；这是特定查询的结果，不是标准状态判定。"
+      ],
+      "evidence_files": [
+        ".cache/standards/access-search-01.json",
+        ".cache/standards/access-web-07.json",
+        ".cache/standards/access-web-09.json",
+        ".cache/standards/access-web-10.json",
+        ".cache/standards/access-web-11.json",
+        ".cache/standards/access-web-14.json",
+        ".cache/standards/access-web-25.json",
+        ".cache/standards/ci-status-evidence.json"
+      ],
+      "ci_cached_evidence": {
+        "metadata_path": ".cache/ci-acquisition-38367606768/.cache/acquisition/fdb02bb5a910f38328c22934c6e007c1771303dc98358f213cb082b16f2f9765.json",
+        "binary_path": ".cache/ci-acquisition-38367606768/.cache/acquisition/fdb02bb5a910f38328c22934c6e007c1771303dc98358f213cb082b16f2f9765.bin",
+        "request_url": "https://std.samr.gov.cn/search/stdPage?q=HB%207736%202004&tid=",
+        "final_url": "https://std.samr.gov.cn/search/stdPage?q=HB%207736%202004&tid=",
+        "content_type": "text/html;charset=UTF-8",
+        "crawled_at": "2026-10-13T16:13:58+08:00",
+        "original_sha256": "77b39a1b2203499b2a166d31a4cdf5bec326e46088031c3dbe11fbdfb1dabd1a",
+        "size": 5937,
+        "sha256_verified": true,
+        "size_verified": true,
+        "kind": "official_zero_result_search_page",
+        "extraction_file": ".cache/standards/ci-status-evidence.json"
+      },
+      "status_page_text_navigation": null
+    },
+    {
+      "standard_code": "GB/T 36439-2018",
+      "title": "无损检测 航空无损检测人员资格鉴定与认证",
+      "input_sources": [
+        {
+          "path": "data/chapters/ch04/sources.csv",
+          "source_id": "CH04-S008",
+          "title_as_recorded": "无损检测 航空无损检测人员资格鉴定与认证",
+          "url_as_recorded": "https://std.samr.gov.cn/gb/search/gbDetailed?id=71F772D82E8BD3A7E05397BE0A0AB82A"
+        }
+      ],
+      "checked_at": "2026-10-13T16:22:33+08:00",
+      "review_status": "not_final_reviewed",
+      "official_status_page": "https://std.samr.gov.cn/gb/search/gbDetailed?id=71F772D82E8BD3A7E05397BE0A0AB82A",
+      "official_status_observed": "现行",
+      "publish_date": "2018-07-13",
+      "implementation_date": "2019-02-01",
+      "official_status_evidence": {
+        "cache_file": ".cache/standards/access-web-28.json",
+        "source_url": "https://std.samr.gov.cn/gb/search/gbDetailed?id=71F772D82E8BD3A7E05397BE0A0AB82A"
+      },
+      "official_lookup_page": null,
+      "full_text_platform_page": "https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=B0C67B9A6B3EBD006E8A85A68E13765D",
+      "full_text_entry": {
+        "url": "https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=B0C67B9A6B3EBD006E8A85A68E13765D",
+        "type": "official_landing_page_with_preview_and_download_buttons",
+        "discovery": "official_search_result_then_open_corroborated_by_cached_official_html_click_handler",
+        "action_labels": [
+          "在线预览",
+          "下载标准"
+        ],
+        "viewer_url": null,
+        "download_url": null,
+        "pdf_url": null,
+        "downstream_url_verified": false,
+        "evidence": {
+          "cache_file": ".cache/standards/access-web-05.json",
+          "source_url": "https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=B0C67B9A6B3EBD006E8A85A68E13765D"
+        },
+        "note": "这是已观察到的官方入口页，不是PDF直链；没有推导或拼接showGb、download或hcno下游URL。",
+        "status_page_handler_literal_url": "http://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=B0C67B9A6B3EBD006E8A85A68E13765D"
+      },
+      "public_access": {
+        "category": "offered",
+        "full_text_offered_on_observed_platform": true,
+        "public_retrievability_verified": null,
+        "retrievable_in_this_run": false,
+        "conclusion": "官方提供入口，本次未取得全文",
+        "inference_limit": "本次取回失败或未检索到，不等于标准不公开。入口可见不等于实际下载可用。"
+      },
+      "acquisition": {
+        "status": "not_retrieved",
+        "pdf_retrieved": false,
+        "full_text_tool_response_retrieved": false,
+        "cache_files": [],
+        "sha256": null,
+        "bytes": null,
+        "page_count": null
+      },
+      "visual_inspection": {
+        "performed": false,
+        "pages": [],
+        "reason": "没有取得目标标准PDF或正文页，无法进行代表页视觉检查。"
+      },
+      "blocker_codes": [
+        "DYNAMIC_BUTTON_TARGET_NOT_EXPOSED",
+        "FULL_TEXT_NOT_RETURNED"
+      ],
+      "not_retrieved_reason": "官方页面呈现在线预览/下载标准按钮；远端网页工具只返回页面文本和按钮标签，没有可点击的目标链接或PDF响应，未取得真实下游下载URL。已连接Edge对同一全文平台的36439-2018页面访问报net::ERR_CONNECTION_CLOSED。不能完成下载，不据此判断标准不公开。",
+      "browser_attempt": {
+        "attempted": true,
+        "result": "net::ERR_CONNECTION_CLOSED",
+        "evidence": ".cache/standards/access-browser-attempts.json"
+      },
+      "captcha": {
+        "encountered": false,
+        "note": "未到达已观察的验证码界面；不能将未获取归因于CAPTCHA。"
+      },
+      "external_sources": [
+        {
+          "label": "GB/T 36439-2018 官方状态页",
+          "url": "https://std.samr.gov.cn/gb/search/gbDetailed?id=71F772D82E8BD3A7E05397BE0A0AB82A",
+          "use": "状态与元数据引用；不代表已获取全文"
+        },
+        {
+          "label": "GB/T 36439-2018 国家标准全文公开系统页面",
+          "url": "https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=B0C67B9A6B3EBD006E8A85A68E13765D",
+          "use": "官方预览/下载入口导航；下载成功性未验证"
+        }
+      ],
+      "external_use_scope": "仅提供官方页面链接与元数据证据；不授予标准全文转载、公开镜像或商业复制许可。",
+      "notes": [
+        "官方状态页说明将被GB/T 36439-2026全部代替；在本次观察中2018版仍为现行。"
+      ],
+      "evidence_files": [
+        ".cache/standards/access-search-01.json",
+        ".cache/standards/access-web-05.json",
+        ".cache/standards/access-web-08.json",
+        ".cache/standards/access-web-20.json",
+        ".cache/standards/access-web-26.json",
+        ".cache/standards/access-web-28.json",
+        ".cache/standards/access-browser-attempts.json",
+        ".cache/standards/ci-status-evidence.json"
+      ],
+      "ci_cached_evidence": {
+        "metadata_path": ".cache/ci-acquisition-38367606768/.cache/acquisition/ec08810ff77a3f95bd654dfa0def1cb6992f32ed0c0ccecf863259b37e9c4b75.json",
+        "binary_path": ".cache/ci-acquisition-38367606768/.cache/acquisition/ec08810ff77a3f95bd654dfa0def1cb6992f32ed0c0ccecf863259b37e9c4b75.bin",
+        "request_url": "https://std.samr.gov.cn/gb/search/gbDetailed?id=71F772D82E8BD3A7E05397BE0A0AB82A",
+        "final_url": "https://std.samr.gov.cn/gb/search/gbDetailed?id=71F772D82E8BD3A7E05397BE0A0AB82A",
+        "content_type": "text/html;charset=UTF-8",
+        "crawled_at": "2026-10-13T16:13:58+08:00",
+        "original_sha256": "d18c350db3e10a43064b86135dad231e73190d9b3e5e1e4d022617d84a245863",
+        "size": 79983,
+        "sha256_verified": true,
+        "size_verified": true,
+        "kind": "official_standard_status_html",
+        "extraction_file": ".cache/standards/ci-status-evidence.json"
+      },
+      "status_page_text_navigation": {
+        "literal_url": "http://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=B0C67B9A6B3EBD006E8A85A68E13765D",
+        "source_line": 2246,
+        "source_binary": ".cache/ci-acquisition-38367606768/.cache/acquisition/ec08810ff77a3f95bd654dfa0def1cb6992f32ed0c0ccecf863259b37e9c4b75.bin",
+        "found_in": ".openpdf click handler",
+        "classification": "gov_cn_official_full_text_platform_landing_page_not_pdf",
+        "visited_in_this_task": false,
+        "related_https_page_already_opened": "https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=B0C67B9A6B3EBD006E8A85A68E13765D"
+      }
+    },
+    {
+      "standard_code": "GB/T 36439-2026",
+      "title": "无损检测 航空无损检测人员资格鉴定与认证",
+      "input_sources": [
+        {
+          "path": "data/chapters/ch04/sources.csv",
+          "source_id": "CH04-S011",
+          "title_as_recorded": "无损检测 航空无损检测人员资格鉴定与认证",
+          "url_as_recorded": "https://std.samr.gov.cn/gb/search/gbDetailed?id=wewep9AmA7A%3D%3D&mode=p"
+        }
+      ],
+      "checked_at": "2026-10-13T16:22:33+08:00",
+      "review_status": "not_final_reviewed",
+      "official_status_page": "https://std.samr.gov.cn/gb/search/gbDetailed?id=55B3892F9607336AE06397BE0A0A4BF9",
+      "official_status_observed": "即将实施",
+      "publish_date": "2026-07-02",
+      "implementation_date": "2027-02-01",
+      "official_status_evidence": {
+        "cache_file": ".cache/standards/access-web-29.json",
+        "source_url": "https://std.samr.gov.cn/gb/search/gbDetailed?id=55B3892F9607336AE06397BE0A0A4BF9"
+      },
+      "official_lookup_page": null,
+      "full_text_platform_page": "https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=FD9B53489C6116CC5A8BE413CB863C71",
+      "full_text_entry": {
+        "url": "https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=FD9B53489C6116CC5A8BE413CB863C71",
+        "type": "official_landing_page_with_preview_and_download_buttons",
+        "discovery": "official_search_result_then_open",
+        "action_labels": [
+          "在线预览",
+          "下载标准"
+        ],
+        "viewer_url": null,
+        "download_url": null,
+        "pdf_url": null,
+        "downstream_url_verified": false,
+        "evidence": {
+          "cache_file": ".cache/standards/access-web-05.json",
+          "source_url": "https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=FD9B53489C6116CC5A8BE413CB863C71"
+        },
+        "note": "这是已观察到的官方入口页，不是PDF直链；没有推导或拼接showGb、download或hcno下游URL。"
+      },
+      "public_access": {
+        "category": "offered",
+        "full_text_offered_on_observed_platform": true,
+        "public_retrievability_verified": null,
+        "retrievable_in_this_run": false,
+        "conclusion": "官方提供入口，本次未取得全文",
+        "inference_limit": "本次取回失败或未检索到，不等于标准不公开。入口可见不等于实际下载可用。"
+      },
+      "acquisition": {
+        "status": "not_retrieved",
+        "pdf_retrieved": false,
+        "full_text_tool_response_retrieved": false,
+        "cache_files": [],
+        "sha256": null,
+        "bytes": null,
+        "page_count": null
+      },
+      "visual_inspection": {
+        "performed": false,
+        "pages": [],
+        "reason": "没有取得目标标准PDF或正文页，无法进行代表页视觉检查。"
+      },
+      "blocker_codes": [
+        "DYNAMIC_BUTTON_TARGET_NOT_EXPOSED",
+        "FULL_TEXT_NOT_RETURNED"
+      ],
+      "not_retrieved_reason": "官方页面呈现在线预览/下载标准按钮；远端网页工具只返回页面文本和按钮标签，没有可点击的目标链接或PDF响应，未取得真实下游下载URL。已连接Edge对同一全文平台的36439-2018页面访问报net::ERR_CONNECTION_CLOSED。不能完成下载，不据此判断标准不公开。",
+      "browser_attempt": {
+        "attempted": false,
+        "note": "仅使用远端工具核验该标准页面；没有声称逐项点击下载。"
+      },
+      "captcha": {
+        "encountered": false,
+        "note": "未到达已观察的验证码界面；不能将未获取归因于CAPTCHA。"
+      },
+      "external_sources": [
+        {
+          "label": "GB/T 36439-2026 官方状态页",
+          "url": "https://std.samr.gov.cn/gb/search/gbDetailed?id=55B3892F9607336AE06397BE0A0A4BF9",
+          "use": "状态与元数据引用；不代表已获取全文"
+        },
+        {
+          "label": "GB/T 36439-2026 国家标准全文公开系统页面",
+          "url": "https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=FD9B53489C6116CC5A8BE413CB863C71",
+          "use": "官方预览/下载入口导航；下载成功性未验证"
+        },
+        {
+          "label": "官方全文公开通知（目录行489）",
+          "url": "https://openstd.samr.gov.cn/bzgk/std/nd?no=2841",
+          "use": "入口及公开说明的辅助证据；通知本身不是标准全文"
+        }
+      ],
+      "external_use_scope": "仅提供官方页面链接与元数据证据；不授予标准全文转载、公开镜像或商业复制许可。",
+      "notes": [
+        "CSV原URL含wewep9AmA7A%3D%3D，远端工具打开失败；由官方搜索发现并打开上述55B389...规范ID详情页。保留CSV原值，未直接改动或凭猜测修复URL。",
+        "已发布但2027-02-01才实施，不按2026-10-13现行标准记载。",
+        "用户提供的原URL云端缓存实际是1045字节官方错误页，标题为系统提示、正文为无法找到该页面；不是目标标准全文。"
+      ],
+      "evidence_files": [
+        ".cache/standards/access-search-01.json",
+        ".cache/standards/access-web-05.json",
+        ".cache/standards/access-web-25.json",
+        ".cache/standards/access-web-28.json",
+        ".cache/standards/access-web-29.json",
+        ".cache/standards/access-browser-attempts.json",
+        ".cache/standards/ci-status-evidence.json"
+      ],
+      "ci_cached_evidence": {
+        "metadata_path": ".cache/ci-acquisition-38367606768/.cache/acquisition/75fbfe3281c46ceaede190d3f1638c46b1bc9ac82c605fed824a04e7fa10a9da.json",
+        "binary_path": ".cache/ci-acquisition-38367606768/.cache/acquisition/75fbfe3281c46ceaede190d3f1638c46b1bc9ac82c605fed824a04e7fa10a9da.bin",
+        "request_url": "https://std.samr.gov.cn/gb/search/gbDetailed?id=wewep9AmA7A%3D%3D&mode=p",
+        "final_url": "https://std.samr.gov.cn/gb/search/gbDetailed?id=wewep9AmA7A%3D%3D&mode=p",
+        "content_type": "text/html;charset=utf-8",
+        "crawled_at": "2026-10-13T16:13:59+08:00",
+        "original_sha256": "447d4f375dc9ae3ed873b7488a4a7bf2d53205fc94278ab4d867bc0fb4e7ea77",
+        "size": 1045,
+        "sha256_verified": true,
+        "size_verified": true,
+        "kind": "official_error_page",
+        "extraction_file": ".cache/standards/ci-status-evidence.json"
+      },
+      "status_page_text_navigation": null,
+      "original_source_url_observation": {
+        "result": "official_page_not_found",
+        "source_line": 12,
+        "message": "无法找到该页面",
+        "bytes": 1045,
+        "cache_file": ".cache/ci-acquisition-38367606768/.cache/acquisition/75fbfe3281c46ceaede190d3f1638c46b1bc9ac82c605fed824a04e7fa10a9da.bin",
+        "explanation": "这证明CSV现有URL本次返回官方错误页；规范ID官方页面另经远端工具打开成功。"
+      }
+    },
+    {
+      "standard_code": "GB/T 1446-2005",
+      "title": "纤维增强塑料性能试验方法总则",
+      "input_sources": [
+        {
+          "path": "data/chapters/ch09/sources.csv",
+          "source_id": "CH09-S007",
+          "title_as_recorded": "纤维增强塑料性能试验方法总则",
+          "url_as_recorded": "https://std.samr.gov.cn/gb/search/gbDetailed?id=02ylPFn9UOs%3D&mode=p"
+        }
+      ],
+      "checked_at": "2026-10-13T16:22:33+08:00",
+      "review_status": "not_final_reviewed",
+      "official_status_page": "https://std.samr.gov.cn/gb/search/gbDetailed?id=02ylPFn9UOs%3D&mode=p",
+      "official_status_observed": "现行",
+      "publish_date": "2005-05-18",
+      "implementation_date": "2005-12-01",
+      "official_status_evidence": {
+        "cache_file": ".cache/standards/access-web-27.json",
+        "source_url": "https://std.samr.gov.cn/gb/search/gbDetailed?id=02ylPFn9UOs%3D&mode=p"
+      },
+      "official_lookup_page": null,
+      "full_text_platform_page": "https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=C516406CCEE2616623D857EC42848BAD",
+      "full_text_entry": {
+        "url": "https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=C516406CCEE2616623D857EC42848BAD",
+        "type": "official_landing_page_with_preview_and_download_buttons",
+        "discovery": "official_search_result_then_open_corroborated_by_cached_official_html_click_handler",
+        "action_labels": [
+          "在线预览",
+          "下载标准"
+        ],
+        "viewer_url": null,
+        "download_url": null,
+        "pdf_url": null,
+        "downstream_url_verified": false,
+        "evidence": {
+          "cache_file": ".cache/standards/access-web-06.json",
+          "source_url": "https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=C516406CCEE2616623D857EC42848BAD"
+        },
+        "note": "这是已观察到的官方入口页，不是PDF直链；没有推导或拼接showGb、download或hcno下游URL。",
+        "status_page_handler_literal_url": "http://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=C516406CCEE2616623D857EC42848BAD"
+      },
+      "public_access": {
+        "category": "offered",
+        "full_text_offered_on_observed_platform": true,
+        "public_retrievability_verified": null,
+        "retrievable_in_this_run": false,
+        "conclusion": "官方提供入口，本次未取得全文",
+        "inference_limit": "本次取回失败或未检索到，不等于标准不公开。入口可见不等于实际下载可用。"
+      },
+      "acquisition": {
+        "status": "not_retrieved",
+        "pdf_retrieved": false,
+        "full_text_tool_response_retrieved": false,
+        "cache_files": [],
+        "sha256": null,
+        "bytes": null,
+        "page_count": null
+      },
+      "visual_inspection": {
+        "performed": false,
+        "pages": [],
+        "reason": "没有取得目标标准PDF或正文页，无法进行代表页视觉检查。"
+      },
+      "blocker_codes": [
+        "DYNAMIC_BUTTON_TARGET_NOT_EXPOSED",
+        "FULL_TEXT_NOT_RETURNED"
+      ],
+      "not_retrieved_reason": "官方页面呈现在线预览/下载标准按钮；远端网页工具只返回页面文本和按钮标签，没有可点击的目标链接或PDF响应，未取得真实下游下载URL。已连接Edge对同一全文平台的36439-2018页面访问报net::ERR_CONNECTION_CLOSED。不能完成下载，不据此判断标准不公开。",
+      "browser_attempt": {
+        "attempted": false,
+        "note": "仅使用远端工具核验该标准页面；没有声称逐项点击下载。"
+      },
+      "captcha": {
+        "encountered": false,
+        "note": "未到达已观察的验证码界面；不能将未获取归因于CAPTCHA。"
+      },
+      "external_sources": [
+        {
+          "label": "GB/T 1446-2005 官方状态页",
+          "url": "https://std.samr.gov.cn/gb/search/gbDetailed?id=02ylPFn9UOs%3D&mode=p",
+          "use": "状态与元数据引用；不代表已获取全文"
+        },
+        {
+          "label": "GB/T 1446-2005 国家标准全文公开系统页面",
+          "url": "https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=C516406CCEE2616623D857EC42848BAD",
+          "use": "官方预览/下载入口导航；下载成功性未验证"
+        }
+      ],
+      "external_use_scope": "仅提供官方页面链接与元数据证据；不授予标准全文转载、公开镜像或商业复制许可。",
+      "notes": [],
+      "evidence_files": [
+        ".cache/standards/access-search-01.json",
+        ".cache/standards/access-web-02.json",
+        ".cache/standards/access-web-06.json",
+        ".cache/standards/access-web-08.json",
+        ".cache/standards/access-web-12.json",
+        ".cache/standards/access-web-26.json",
+        ".cache/standards/access-web-27.json",
+        ".cache/standards/access-browser-attempts.json",
+        ".cache/standards/ci-status-evidence.json"
+      ],
+      "ci_cached_evidence": {
+        "metadata_path": ".cache/ci-acquisition-38367606768/.cache/acquisition/e779881c50855f6adb515689507012bef467a61c55a61e3e214e4beffc795ca4.json",
+        "binary_path": ".cache/ci-acquisition-38367606768/.cache/acquisition/e779881c50855f6adb515689507012bef467a61c55a61e3e214e4beffc795ca4.bin",
+        "request_url": "https://std.samr.gov.cn/gb/search/gbDetailed?id=02ylPFn9UOs%3D&mode=p",
+        "final_url": "https://std.samr.gov.cn/gb/search/gbDetailed?id=02ylPFn9UOs%3D&mode=p",
+        "content_type": "text/html;charset=UTF-8",
+        "crawled_at": "2026-10-13T16:14:18+08:00",
+        "original_sha256": "5010da02edeaadddc5f350f339c61060ed71ae8c35b214c89680b650b95faef8",
+        "size": 67660,
+        "sha256_verified": true,
+        "size_verified": true,
+        "kind": "official_standard_status_html",
+        "extraction_file": ".cache/standards/ci-status-evidence.json"
+      },
+      "status_page_text_navigation": {
+        "literal_url": "http://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=C516406CCEE2616623D857EC42848BAD",
+        "source_line": 1803,
+        "source_binary": ".cache/ci-acquisition-38367606768/.cache/acquisition/e779881c50855f6adb515689507012bef467a61c55a61e3e214e4beffc795ca4.bin",
+        "found_in": ".openpdf click handler",
+        "classification": "gov_cn_official_full_text_platform_landing_page_not_pdf",
+        "visited_in_this_task": false,
+        "related_https_page_already_opened": "https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=C516406CCEE2616623D857EC42848BAD"
+      }
+    },
+    {
+      "standard_code": "GB/T 1447-2005",
+      "title": "纤维增强塑料拉伸性能试验方法",
+      "input_sources": [
+        {
+          "path": "data/chapters/ch09/sources.csv",
+          "source_id": "CH09-S008",
+          "title_as_recorded": "纤维增强塑料拉伸性能试验方法",
+          "url_as_recorded": "https://std.samr.gov.cn/gb/search/gbDetailed?id=96t08JShETQ%3D&mode=p"
+        }
+      ],
+      "checked_at": "2026-10-13T16:22:33+08:00",
+      "review_status": "not_final_reviewed",
+      "official_status_page": "https://std.samr.gov.cn/gb/search/gbDetailed?id=96t08JShETQ%3D&mode=p",
+      "official_status_observed": "现行",
+      "publish_date": "2005-05-18",
+      "implementation_date": "2005-12-01",
+      "official_status_evidence": {
+        "cache_file": ".cache/standards/access-web-27.json",
+        "source_url": "https://std.samr.gov.cn/gb/search/gbDetailed?id=96t08JShETQ%3D&mode=p"
+      },
+      "official_lookup_page": null,
+      "full_text_platform_page": "https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=6856A2CAA76987D8EF07C010401CD8B8",
+      "full_text_entry": null,
+      "public_access": {
+        "category": "copyright_notice",
+        "full_text_offered_on_observed_platform": false,
+        "public_retrievability_verified": null,
+        "retrievable_in_this_run": false,
+        "conclusion": "该平台明确不提供文本阅读，其他官方全文入口未确认",
+        "inference_limit": "本次取回失败或未检索到，不等于标准不公开。入口可见不等于实际下载可用。"
+      },
+      "acquisition": {
+        "status": "not_retrieved",
+        "pdf_retrieved": false,
+        "full_text_tool_response_retrieved": false,
+        "cache_files": [],
+        "sha256": null,
+        "bytes": null,
+        "page_count": null
+      },
+      "visual_inspection": {
+        "performed": false,
+        "pages": [],
+        "reason": "没有取得目标标准PDF或正文页，无法进行代表页视觉检查。"
+      },
+      "blocker_codes": [
+        "PLATFORM_COPYRIGHT_RESTRICTION"
+      ],
+      "not_retrieved_reason": "国家标准全文公开系统明确提示该标准涉及国际国外采标版权保护，不提供文本阅读服务；gov.cn补充检索未确认其他同号同年合法官方全文入口。这是该系统的访问限制，不是对全网公开性的断言。",
+      "browser_attempt": {
+        "attempted": false,
+        "note": "仅使用远端工具核验该标准页面；没有声称逐项点击下载。"
+      },
+      "captcha": {
+        "encountered": false,
+        "note": "未到达已观察的验证码界面；不能将未获取归因于CAPTCHA。"
+      },
+      "external_sources": [
+        {
+          "label": "GB/T 1447-2005 官方状态页",
+          "url": "https://std.samr.gov.cn/gb/search/gbDetailed?id=96t08JShETQ%3D&mode=p",
+          "use": "状态与元数据引用；不代表已获取全文"
+        },
+        {
+          "label": "GB/T 1447-2005 国家标准全文公开系统页面",
+          "url": "https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=6856A2CAA76987D8EF07C010401CD8B8",
+          "use": "官方元数据与不提供文本阅读服务的说明"
+        }
+      ],
+      "external_use_scope": "仅提供官方页面链接与元数据证据；不授予标准全文转载、公开镜像或商业复制许可。",
+      "notes": [],
+      "evidence_files": [
+        ".cache/standards/access-search-01.json",
+        ".cache/standards/access-web-02.json",
+        ".cache/standards/access-web-06.json",
+        ".cache/standards/access-web-21.json",
+        ".cache/standards/access-web-25.json",
+        ".cache/standards/access-web-27.json",
+        ".cache/standards/ci-status-evidence.json"
+      ],
+      "ci_cached_evidence": {
+        "metadata_path": ".cache/ci-acquisition-38367606768/.cache/acquisition/ede0be2e1d5e5c5e7900ef1ef99859bce6e0b7e4dd0ed904da2ce4094364fac6.json",
+        "binary_path": ".cache/ci-acquisition-38367606768/.cache/acquisition/ede0be2e1d5e5c5e7900ef1ef99859bce6e0b7e4dd0ed904da2ce4094364fac6.bin",
+        "request_url": "https://std.samr.gov.cn/gb/search/gbDetailed?id=96t08JShETQ%3D&mode=p",
+        "final_url": "https://std.samr.gov.cn/gb/search/gbDetailed?id=96t08JShETQ%3D&mode=p",
+        "content_type": "text/html;charset=UTF-8",
+        "crawled_at": "2026-10-13T16:14:21+08:00",
+        "original_sha256": "7a3a2894f06cfd197a91736f934ff2ebdc0b583728907d6b0c17fbbe59984906",
+        "size": 67037,
+        "sha256_verified": true,
+        "size_verified": true,
+        "kind": "official_standard_status_html",
+        "extraction_file": ".cache/standards/ci-status-evidence.json"
+      },
+      "status_page_text_navigation": {
+        "literal_url": "http://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=6856A2CAA76987D8EF07C010401CD8B8",
+        "source_line": 1785,
+        "source_binary": ".cache/ci-acquisition-38367606768/.cache/acquisition/ede0be2e1d5e5c5e7900ef1ef99859bce6e0b7e4dd0ed904da2ce4094364fac6.bin",
+        "found_in": ".openpdf click handler",
+        "classification": "gov_cn_official_full_text_platform_landing_page_not_pdf",
+        "visited_in_this_task": false,
+        "related_https_page_already_opened": "https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=6856A2CAA76987D8EF07C010401CD8B8"
+      }
+    },
+    {
+      "standard_code": "GB/T 1448-2005",
+      "title": "纤维增强塑料压缩性能试验方法",
+      "input_sources": [
+        {
+          "path": "data/chapters/ch09/sources.csv",
+          "source_id": "CH09-S009",
+          "title_as_recorded": "纤维增强塑料压缩性能试验方法",
+          "url_as_recorded": "https://std.samr.gov.cn/gb/search/gbDetailed?id=71F772D76837D3A7E05397BE0A0AB82A"
+        }
+      ],
+      "checked_at": "2026-10-13T16:22:33+08:00",
+      "review_status": "not_final_reviewed",
+      "official_status_page": "https://std.samr.gov.cn/gb/search/gbDetailed?id=71F772D76837D3A7E05397BE0A0AB82A",
+      "official_status_observed": "现行",
+      "publish_date": "2005-05-18",
+      "implementation_date": "2005-12-01",
+      "official_status_evidence": {
+        "cache_file": ".cache/standards/access-web-27.json",
+        "source_url": "https://std.samr.gov.cn/gb/search/gbDetailed?id=71F772D76837D3A7E05397BE0A0AB82A"
+      },
+      "official_lookup_page": null,
+      "full_text_platform_page": "https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=DF53B47F8F8BE1F9F29CDA44F2BB6BF7",
+      "full_text_entry": {
+        "url": "https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=DF53B47F8F8BE1F9F29CDA44F2BB6BF7",
+        "type": "official_landing_page_with_preview_and_download_buttons",
+        "discovery": "official_search_result_then_open_corroborated_by_cached_official_html_click_handler",
+        "action_labels": [
+          "在线预览",
+          "下载标准"
+        ],
+        "viewer_url": null,
+        "download_url": null,
+        "pdf_url": null,
+        "downstream_url_verified": false,
+        "evidence": {
+          "cache_file": ".cache/standards/access-web-06.json",
+          "source_url": "https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=DF53B47F8F8BE1F9F29CDA44F2BB6BF7"
+        },
+        "note": "这是已观察到的官方入口页，不是PDF直链；没有推导或拼接showGb、download或hcno下游URL。",
+        "status_page_handler_literal_url": "http://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=DF53B47F8F8BE1F9F29CDA44F2BB6BF7"
+      },
+      "public_access": {
+        "category": "offered",
+        "full_text_offered_on_observed_platform": true,
+        "public_retrievability_verified": null,
+        "retrievable_in_this_run": false,
+        "conclusion": "官方提供入口，本次未取得全文",
+        "inference_limit": "本次取回失败或未检索到，不等于标准不公开。入口可见不等于实际下载可用。"
+      },
+      "acquisition": {
+        "status": "not_retrieved",
+        "pdf_retrieved": false,
+        "full_text_tool_response_retrieved": false,
+        "cache_files": [],
+        "sha256": null,
+        "bytes": null,
+        "page_count": null
+      },
+      "visual_inspection": {
+        "performed": false,
+        "pages": [],
+        "reason": "没有取得目标标准PDF或正文页，无法进行代表页视觉检查。"
+      },
+      "blocker_codes": [
+        "DYNAMIC_BUTTON_TARGET_NOT_EXPOSED",
+        "FULL_TEXT_NOT_RETURNED"
+      ],
+      "not_retrieved_reason": "官方页面呈现在线预览/下载标准按钮；远端网页工具只返回页面文本和按钮标签，没有可点击的目标链接或PDF响应，未取得真实下游下载URL。已连接Edge对同一全文平台的36439-2018页面访问报net::ERR_CONNECTION_CLOSED。不能完成下载，不据此判断标准不公开。",
+      "browser_attempt": {
+        "attempted": false,
+        "note": "仅使用远端工具核验该标准页面；没有声称逐项点击下载。"
+      },
+      "captcha": {
+        "encountered": false,
+        "note": "未到达已观察的验证码界面；不能将未获取归因于CAPTCHA。"
+      },
+      "external_sources": [
+        {
+          "label": "GB/T 1448-2005 官方状态页",
+          "url": "https://std.samr.gov.cn/gb/search/gbDetailed?id=71F772D76837D3A7E05397BE0A0AB82A",
+          "use": "状态与元数据引用；不代表已获取全文"
+        },
+        {
+          "label": "GB/T 1448-2005 国家标准全文公开系统页面",
+          "url": "https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=DF53B47F8F8BE1F9F29CDA44F2BB6BF7",
+          "use": "官方预览/下载入口导航；下载成功性未验证"
+        }
+      ],
+      "external_use_scope": "仅提供官方页面链接与元数据证据；不授予标准全文转载、公开镜像或商业复制许可。",
+      "notes": [],
+      "evidence_files": [
+        ".cache/standards/access-search-01.json",
+        ".cache/standards/access-web-02.json",
+        ".cache/standards/access-web-06.json",
+        ".cache/standards/access-web-08.json",
+        ".cache/standards/access-web-12.json",
+        ".cache/standards/access-web-26.json",
+        ".cache/standards/access-web-27.json",
+        ".cache/standards/access-browser-attempts.json",
+        ".cache/standards/ci-status-evidence.json"
+      ],
+      "ci_cached_evidence": {
+        "metadata_path": ".cache/ci-acquisition-38367606768/.cache/acquisition/d2bea447069c603c55a75bd5ffb88703bd02f9360fe5b75c7d70ef882c5a111f.json",
+        "binary_path": ".cache/ci-acquisition-38367606768/.cache/acquisition/d2bea447069c603c55a75bd5ffb88703bd02f9360fe5b75c7d70ef882c5a111f.bin",
+        "request_url": "https://std.samr.gov.cn/gb/search/gbDetailed?id=71F772D76837D3A7E05397BE0A0AB82A",
+        "final_url": "https://std.samr.gov.cn/gb/search/gbDetailed?id=71F772D76837D3A7E05397BE0A0AB82A",
+        "content_type": "text/html;charset=UTF-8",
+        "crawled_at": "2026-10-13T16:14:20+08:00",
+        "original_sha256": "70d789ed3c66db09f1eaa0f62a0555f8bd89772f9519968ace26b76d6c79cfd0",
+        "size": 66885,
+        "sha256_verified": true,
+        "size_verified": true,
+        "kind": "official_standard_status_html",
+        "extraction_file": ".cache/standards/ci-status-evidence.json"
+      },
+      "status_page_text_navigation": {
+        "literal_url": "http://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=DF53B47F8F8BE1F9F29CDA44F2BB6BF7",
+        "source_line": 1779,
+        "source_binary": ".cache/ci-acquisition-38367606768/.cache/acquisition/d2bea447069c603c55a75bd5ffb88703bd02f9360fe5b75c7d70ef882c5a111f.bin",
+        "found_in": ".openpdf click handler",
+        "classification": "gov_cn_official_full_text_platform_landing_page_not_pdf",
+        "visited_in_this_task": false,
+        "related_https_page_already_opened": "https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=DF53B47F8F8BE1F9F29CDA44F2BB6BF7"
+      }
+    },
+    {
+      "standard_code": "GB/T 1449-2005",
+      "title": "纤维增强塑料弯曲性能试验方法",
+      "input_sources": [
+        {
+          "path": "data/chapters/ch09/sources.csv",
+          "source_id": "CH09-S010",
+          "title_as_recorded": "纤维增强塑料弯曲性能试验方法",
+          "url_as_recorded": "https://std.samr.gov.cn/gb/search/gbDetailed?id=71F772D76A50D3A7E05397BE0A0AB82A"
+        }
+      ],
+      "checked_at": "2026-10-13T16:22:33+08:00",
+      "review_status": "not_final_reviewed",
+      "official_status_page": "https://std.samr.gov.cn/gb/search/gbDetailed?id=71F772D76A50D3A7E05397BE0A0AB82A",
+      "official_status_observed": "现行",
+      "publish_date": "2005-05-18",
+      "implementation_date": "2005-12-01",
+      "official_status_evidence": {
+        "cache_file": ".cache/standards/access-web-27.json",
+        "source_url": "https://std.samr.gov.cn/gb/search/gbDetailed?id=71F772D76A50D3A7E05397BE0A0AB82A"
+      },
+      "official_lookup_page": null,
+      "full_text_platform_page": "https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=B368D711A6933BB9AAEDDD09D04A1DD4",
+      "full_text_entry": null,
+      "public_access": {
+        "category": "copyright_notice",
+        "full_text_offered_on_observed_platform": false,
+        "public_retrievability_verified": null,
+        "retrievable_in_this_run": false,
+        "conclusion": "该平台明确不提供文本阅读，其他官方全文入口未确认",
+        "inference_limit": "本次取回失败或未检索到，不等于标准不公开。入口可见不等于实际下载可用。"
+      },
+      "acquisition": {
+        "status": "not_retrieved",
+        "pdf_retrieved": false,
+        "full_text_tool_response_retrieved": false,
+        "cache_files": [],
+        "sha256": null,
+        "bytes": null,
+        "page_count": null
+      },
+      "visual_inspection": {
+        "performed": false,
+        "pages": [],
+        "reason": "没有取得目标标准PDF或正文页，无法进行代表页视觉检查。"
+      },
+      "blocker_codes": [
+        "PLATFORM_COPYRIGHT_RESTRICTION"
+      ],
+      "not_retrieved_reason": "国家标准全文公开系统明确提示该标准涉及国际国外采标版权保护，不提供文本阅读服务；gov.cn补充检索未确认其他同号同年合法官方全文入口。这是该系统的访问限制，不是对全网公开性的断言。",
+      "browser_attempt": {
+        "attempted": false,
+        "note": "仅使用远端工具核验该标准页面；没有声称逐项点击下载。"
+      },
+      "captcha": {
+        "encountered": false,
+        "note": "未到达已观察的验证码界面；不能将未获取归因于CAPTCHA。"
+      },
+      "external_sources": [
+        {
+          "label": "GB/T 1449-2005 官方状态页",
+          "url": "https://std.samr.gov.cn/gb/search/gbDetailed?id=71F772D76A50D3A7E05397BE0A0AB82A",
+          "use": "状态与元数据引用；不代表已获取全文"
+        },
+        {
+          "label": "GB/T 1449-2005 国家标准全文公开系统页面",
+          "url": "https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=B368D711A6933BB9AAEDDD09D04A1DD4",
+          "use": "官方元数据与不提供文本阅读服务的说明"
+        }
+      ],
+      "external_use_scope": "仅提供官方页面链接与元数据证据；不授予标准全文转载、公开镜像或商业复制许可。",
+      "notes": [],
+      "evidence_files": [
+        ".cache/standards/access-search-01.json",
+        ".cache/standards/access-web-02.json",
+        ".cache/standards/access-web-06.json",
+        ".cache/standards/access-web-24.json",
+        ".cache/standards/access-web-27.json",
+        ".cache/standards/ci-status-evidence.json"
+      ],
+      "ci_cached_evidence": {
+        "metadata_path": ".cache/ci-acquisition-38367606768/.cache/acquisition/f2e6b0a761f8761a4077b22f27e826e538a8d4b7d7c849cdbf2f789a561aed91.json",
+        "binary_path": ".cache/ci-acquisition-38367606768/.cache/acquisition/f2e6b0a761f8761a4077b22f27e826e538a8d4b7d7c849cdbf2f789a561aed91.bin",
+        "request_url": "https://std.samr.gov.cn/gb/search/gbDetailed?id=71F772D76A50D3A7E05397BE0A0AB82A",
+        "final_url": "https://std.samr.gov.cn/gb/search/gbDetailed?id=71F772D76A50D3A7E05397BE0A0AB82A",
+        "content_type": "text/html;charset=UTF-8",
+        "crawled_at": "2026-10-13T16:14:21+08:00",
+        "original_sha256": "73808e0be8e73a2044e5f7ba5c1a862a9cd4ceabef1a72fdf53abb94c10f9bba",
+        "size": 67019,
+        "sha256_verified": true,
+        "size_verified": true,
+        "kind": "official_standard_status_html",
+        "extraction_file": ".cache/standards/ci-status-evidence.json"
+      },
+      "status_page_text_navigation": {
+        "literal_url": "http://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=B368D711A6933BB9AAEDDD09D04A1DD4",
+        "source_line": 1785,
+        "source_binary": ".cache/ci-acquisition-38367606768/.cache/acquisition/f2e6b0a761f8761a4077b22f27e826e538a8d4b7d7c849cdbf2f789a561aed91.bin",
+        "found_in": ".openpdf click handler",
+        "classification": "gov_cn_official_full_text_platform_landing_page_not_pdf",
+        "visited_in_this_task": false,
+        "related_https_page_already_opened": "https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=B368D711A6933BB9AAEDDD09D04A1DD4"
+      }
+    },
+    {
+      "standard_code": "GB/T 35465.2-2017",
+      "title": "聚合物基复合材料疲劳性能测试方法 第2部分：线性或线性化应力寿命（S-N）和应变寿命（ε-N）疲劳数据的统计分析",
+      "input_sources": [
+        {
+          "path": "data/chapters/ch09/sources.csv",
+          "source_id": "CH09-S011",
+          "title_as_recorded": "聚合物基复合材料疲劳性能测试方法 第2部分：线性或线性化应力寿命（S-N）和应变寿命（ε-N）疲劳数据的统计分析",
+          "url_as_recorded": "https://std.samr.gov.cn/gb/search/gbDetailed?id=71F772D82898D3A7E05397BE0A0AB82A"
+        }
+      ],
+      "checked_at": "2026-10-13T16:22:33+08:00",
+      "review_status": "not_final_reviewed",
+      "official_status_page": "https://std.samr.gov.cn/gb/search/gbDetailed?id=71F772D82898D3A7E05397BE0A0AB82A",
+      "official_status_observed": "现行",
+      "publish_date": "2017-12-29",
+      "implementation_date": "2018-11-01",
+      "official_status_evidence": {
+        "cache_file": ".cache/standards/access-web-27.json",
+        "source_url": "https://std.samr.gov.cn/gb/search/gbDetailed?id=71F772D82898D3A7E05397BE0A0AB82A"
+      },
+      "official_lookup_page": null,
+      "full_text_platform_page": "https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=F87F8751778BE92632B486593D91E5C1&refer=outter",
+      "full_text_entry": {
+        "url": "https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=F87F8751778BE92632B486593D91E5C1&refer=outter",
+        "type": "official_landing_page_with_preview_and_download_buttons",
+        "discovery": "official_search_and_actual_click_from_official_notice_corroborated_by_cached_official_html_click_handler",
+        "action_labels": [
+          "在线预览",
+          "下载标准"
+        ],
+        "viewer_url": null,
+        "download_url": null,
+        "pdf_url": null,
+        "downstream_url_verified": false,
+        "evidence": {
+          "cache_file": ".cache/standards/access-web-06.json",
+          "source_url": "https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=F87F8751778BE92632B486593D91E5C1&refer=outter"
+        },
+        "note": "这是已观察到的官方入口页，不是PDF直链；没有推导或拼接showGb、download或hcno下游URL。",
+        "status_page_handler_literal_url": "http://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=F87F8751778BE92632B486593D91E5C1"
+      },
+      "public_access": {
+        "category": "offered",
+        "full_text_offered_on_observed_platform": true,
+        "public_retrievability_verified": null,
+        "retrievable_in_this_run": false,
+        "conclusion": "官方提供入口，本次未取得全文",
+        "inference_limit": "本次取回失败或未检索到，不等于标准不公开。入口可见不等于实际下载可用。"
+      },
+      "acquisition": {
+        "status": "not_retrieved",
+        "pdf_retrieved": false,
+        "full_text_tool_response_retrieved": false,
+        "cache_files": [],
+        "sha256": null,
+        "bytes": null,
+        "page_count": null
+      },
+      "visual_inspection": {
+        "performed": false,
+        "pages": [],
+        "reason": "没有取得目标标准PDF或正文页，无法进行代表页视觉检查。"
+      },
+      "blocker_codes": [
+        "DYNAMIC_BUTTON_TARGET_NOT_EXPOSED",
+        "FULL_TEXT_NOT_RETURNED"
+      ],
+      "not_retrieved_reason": "官方页面呈现在线预览/下载标准按钮；远端网页工具只返回页面文本和按钮标签，没有可点击的目标链接或PDF响应，未取得真实下游下载URL。已连接Edge对同一全文平台的36439-2018页面访问报net::ERR_CONNECTION_CLOSED。不能完成下载，不据此判断标准不公开。",
+      "browser_attempt": {
+        "attempted": false,
+        "note": "仅使用远端工具核验该标准页面；没有声称逐项点击下载。"
+      },
+      "captcha": {
+        "encountered": false,
+        "note": "未到达已观察的验证码界面；不能将未获取归因于CAPTCHA。"
+      },
+      "external_sources": [
+        {
+          "label": "GB/T 35465.2-2017 官方状态页",
+          "url": "https://std.samr.gov.cn/gb/search/gbDetailed?id=71F772D82898D3A7E05397BE0A0AB82A",
+          "use": "状态与元数据引用；不代表已获取全文"
+        },
+        {
+          "label": "GB/T 35465.2-2017 国家标准全文公开系统页面",
+          "url": "https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=F87F8751778BE92632B486593D91E5C1&refer=outter",
+          "use": "官方预览/下载入口导航；下载成功性未验证"
+        },
+        {
+          "label": "官方全文公开通知（目录行672）",
+          "url": "https://openstd.samr.gov.cn/bzgk/std/nd?no=401",
+          "use": "入口及公开说明的辅助证据；通知本身不是标准全文"
+        }
+      ],
+      "external_use_scope": "仅提供官方页面链接与元数据证据；不授予标准全文转载、公开镜像或商业复制许可。",
+      "notes": [],
+      "evidence_files": [
+        ".cache/standards/access-search-01.json",
+        ".cache/standards/access-web-03.json",
+        ".cache/standards/access-web-06.json",
+        ".cache/standards/access-web-12.json",
+        ".cache/standards/access-web-13.json",
+        ".cache/standards/access-web-17.json",
+        ".cache/standards/access-web-18.json",
+        ".cache/standards/access-web-19.json",
+        ".cache/standards/access-web-26.json",
+        ".cache/standards/access-web-27.json",
+        ".cache/standards/access-browser-attempts.json",
+        ".cache/standards/ci-status-evidence.json"
+      ],
+      "ci_cached_evidence": {
+        "metadata_path": ".cache/ci-acquisition-38367606768/.cache/acquisition/230823daa6950ab9ff8f727737437790f95c66c5f5ad44fa95b12c6564742c12.json",
+        "binary_path": ".cache/ci-acquisition-38367606768/.cache/acquisition/230823daa6950ab9ff8f727737437790f95c66c5f5ad44fa95b12c6564742c12.bin",
+        "request_url": "https://std.samr.gov.cn/gb/search/gbDetailed?id=71F772D82898D3A7E05397BE0A0AB82A",
+        "final_url": "https://std.samr.gov.cn/gb/search/gbDetailed?id=71F772D82898D3A7E05397BE0A0AB82A",
+        "content_type": "text/html;charset=UTF-8",
+        "crawled_at": "2026-10-13T16:14:22+08:00",
+        "original_sha256": "c9c7f25756f2ce43eda1756ed6a8be57faeec98975b13d532fb6231e10b10e76",
+        "size": 73865,
+        "sha256_verified": true,
+        "size_verified": true,
+        "kind": "official_standard_status_html",
+        "extraction_file": ".cache/standards/ci-status-evidence.json"
+      },
+      "status_page_text_navigation": {
+        "literal_url": "http://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=F87F8751778BE92632B486593D91E5C1",
+        "source_line": 1988,
+        "source_binary": ".cache/ci-acquisition-38367606768/.cache/acquisition/230823daa6950ab9ff8f727737437790f95c66c5f5ad44fa95b12c6564742c12.bin",
+        "found_in": ".openpdf click handler",
+        "classification": "gov_cn_official_full_text_platform_landing_page_not_pdf",
+        "visited_in_this_task": false,
+        "related_https_page_already_opened": "https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=F87F8751778BE92632B486593D91E5C1&refer=outter"
+      }
+    },
+    {
+      "standard_code": "GB/T 3362-2017",
+      "title": "碳纤维复丝拉伸性能试验方法",
+      "input_sources": [
+        {
+          "path": "data/chapters/ch09/sources.csv",
+          "source_id": "CH09-S012",
+          "title_as_recorded": "碳纤维复丝拉伸性能试验方法",
+          "url_as_recorded": "https://std.samr.gov.cn/gb/search/gbDetailed?id=NFfl7tFizAE%3D&mode=p"
+        }
+      ],
+      "checked_at": "2026-10-13T16:22:33+08:00",
+      "review_status": "not_final_reviewed",
+      "official_status_page": "https://std.samr.gov.cn/gb/search/gbDetailed?id=NFfl7tFizAE%3D&mode=p",
+      "official_status_observed": "现行",
+      "publish_date": "2017-10-14",
+      "implementation_date": "2018-09-01",
+      "official_status_evidence": {
+        "cache_file": ".cache/standards/access-web-10.json",
+        "source_url": "https://std.samr.gov.cn/gb/search/gbDetailed?id=NFfl7tFizAE%3D&mode=p"
+      },
+      "official_lookup_page": null,
+      "full_text_platform_page": "https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=54B16FC0761DAFF523E8E5290B61555B",
+      "full_text_entry": {
+        "url": "https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=54B16FC0761DAFF523E8E5290B61555B",
+        "type": "official_landing_page_with_preview_and_download_buttons",
+        "discovery": "official_search_and_actual_click_from_official_notice_corroborated_by_cached_official_html_click_handler",
+        "action_labels": [
+          "在线预览",
+          "下载标准"
+        ],
+        "viewer_url": null,
+        "download_url": null,
+        "pdf_url": null,
+        "downstream_url_verified": false,
+        "evidence": {
+          "cache_file": ".cache/standards/access-web-06.json",
+          "source_url": "https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=54B16FC0761DAFF523E8E5290B61555B"
+        },
+        "note": "这是已观察到的官方入口页，不是PDF直链；没有推导或拼接showGb、download或hcno下游URL。",
+        "status_page_handler_literal_url": "http://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=54B16FC0761DAFF523E8E5290B61555B"
+      },
+      "public_access": {
+        "category": "offered",
+        "full_text_offered_on_observed_platform": true,
+        "public_retrievability_verified": null,
+        "retrievable_in_this_run": false,
+        "conclusion": "官方提供入口，本次未取得全文",
+        "inference_limit": "本次取回失败或未检索到，不等于标准不公开。入口可见不等于实际下载可用。"
+      },
+      "acquisition": {
+        "status": "not_retrieved",
+        "pdf_retrieved": false,
+        "full_text_tool_response_retrieved": false,
+        "cache_files": [],
+        "sha256": null,
+        "bytes": null,
+        "page_count": null
+      },
+      "visual_inspection": {
+        "performed": false,
+        "pages": [],
+        "reason": "没有取得目标标准PDF或正文页，无法进行代表页视觉检查。"
+      },
+      "blocker_codes": [
+        "DYNAMIC_BUTTON_TARGET_NOT_EXPOSED",
+        "FULL_TEXT_NOT_RETURNED"
+      ],
+      "not_retrieved_reason": "官方页面呈现在线预览/下载标准按钮；远端网页工具只返回页面文本和按钮标签，没有可点击的目标链接或PDF响应，未取得真实下游下载URL。已连接Edge对同一全文平台的36439-2018页面访问报net::ERR_CONNECTION_CLOSED。不能完成下载，不据此判断标准不公开。",
+      "browser_attempt": {
+        "attempted": false,
+        "note": "仅使用远端工具核验该标准页面；没有声称逐项点击下载。"
+      },
+      "captcha": {
+        "encountered": false,
+        "note": "未到达已观察的验证码界面；不能将未获取归因于CAPTCHA。"
+      },
+      "external_sources": [
+        {
+          "label": "GB/T 3362-2017 官方状态页",
+          "url": "https://std.samr.gov.cn/gb/search/gbDetailed?id=NFfl7tFizAE%3D&mode=p",
+          "use": "状态与元数据引用；不代表已获取全文"
+        },
+        {
+          "label": "GB/T 3362-2017 国家标准全文公开系统页面",
+          "url": "https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=54B16FC0761DAFF523E8E5290B61555B",
+          "use": "官方预览/下载入口导航；下载成功性未验证"
+        },
+        {
+          "label": "官方全文公开通知（目录行387）",
+          "url": "https://openstd.samr.gov.cn/bzgk/std/nd?no=341",
+          "use": "入口及公开说明的辅助证据；通知本身不是标准全文"
+        }
+      ],
+      "external_use_scope": "仅提供官方页面链接与元数据证据；不授予标准全文转载、公开镜像或商业复制许可。",
+      "notes": [
+        "全文平台备注“第1号修改单”；从2017年全文公开通知中真实点击标准号也到达同一hcno页面。未取得正文，因此无法确认下载载荷是否含本体、修改单或合并文本，不将修改单单独计作标准全文。"
+      ],
+      "evidence_files": [
+        ".cache/standards/access-search-01.json",
+        ".cache/standards/access-web-03.json",
+        ".cache/standards/access-web-06.json",
+        ".cache/standards/access-web-09.json",
+        ".cache/standards/access-web-10.json",
+        ".cache/standards/access-web-15.json",
+        ".cache/standards/access-web-17.json",
+        ".cache/standards/access-web-18.json",
+        ".cache/standards/access-web-19.json",
+        ".cache/standards/access-web-27.json",
+        ".cache/standards/access-browser-attempts.json",
+        ".cache/standards/ci-status-evidence.json"
+      ],
+      "ci_cached_evidence": {
+        "metadata_path": ".cache/ci-acquisition-38367606768/.cache/acquisition/2bb574112bc732ae5aea84a90f8148d16a724d8fe3d4224d4a9695eb89f51ddd.json",
+        "binary_path": ".cache/ci-acquisition-38367606768/.cache/acquisition/2bb574112bc732ae5aea84a90f8148d16a724d8fe3d4224d4a9695eb89f51ddd.bin",
+        "request_url": "https://std.samr.gov.cn/gb/search/gbDetailed?id=NFfl7tFizAE%3D&mode=p",
+        "final_url": "https://std.samr.gov.cn/gb/search/gbDetailed?id=NFfl7tFizAE%3D&mode=p",
+        "content_type": "text/html;charset=UTF-8",
+        "crawled_at": "2026-10-13T16:14:23+08:00",
+        "original_sha256": "e037b6b5af71b364dc48f48a7261bea336cb53a32737fa32a88be6d84523c92c",
+        "size": 71893,
+        "sha256_verified": true,
+        "size_verified": true,
+        "kind": "official_standard_status_html",
+        "extraction_file": ".cache/standards/ci-status-evidence.json"
+      },
+      "status_page_text_navigation": {
+        "literal_url": "http://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=54B16FC0761DAFF523E8E5290B61555B",
+        "source_line": 1965,
+        "source_binary": ".cache/ci-acquisition-38367606768/.cache/acquisition/2bb574112bc732ae5aea84a90f8148d16a724d8fe3d4224d4a9695eb89f51ddd.bin",
+        "found_in": ".openpdf click handler",
+        "classification": "gov_cn_official_full_text_platform_landing_page_not_pdf",
+        "visited_in_this_task": false,
+        "related_https_page_already_opened": "https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=54B16FC0761DAFF523E8E5290B61555B"
+      }
+    },
+    {
+      "standard_code": "GB/T 4883-2008",
+      "title": "数据的统计处理和解释 正态样本离群值的判断和处理",
+      "input_sources": [
+        {
+          "path": "data/chapters/ch09/sources.csv",
+          "source_id": "CH09-S013",
+          "title_as_recorded": "数据的统计处理和解释 正态样本离群值的判断和处理",
+          "url_as_recorded": "https://std.samr.gov.cn/gb/search/gbDetailed?id=xe1pIAJCf2A%3D&mode=p"
+        }
+      ],
+      "checked_at": "2026-10-13T16:22:33+08:00",
+      "review_status": "not_final_reviewed",
+      "official_status_page": "https://std.samr.gov.cn/gb/search/gbDetailed?id=xe1pIAJCf2A%3D&mode=p",
+      "official_status_observed": "现行",
+      "publish_date": "2008-07-16",
+      "implementation_date": "2009-01-01",
+      "official_status_evidence": {
+        "cache_file": ".cache/standards/access-web-28.json",
+        "source_url": "https://std.samr.gov.cn/gb/search/gbDetailed?id=xe1pIAJCf2A%3D&mode=p"
+      },
+      "official_lookup_page": null,
+      "full_text_platform_page": "https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=C2966D04269D7A4E9E8082F632BA81DD",
+      "full_text_entry": {
+        "url": "https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=C2966D04269D7A4E9E8082F632BA81DD",
+        "type": "official_landing_page_with_preview_and_download_buttons",
+        "discovery": "official_search_result_then_open_corroborated_by_cached_official_html_click_handler",
+        "action_labels": [
+          "在线预览",
+          "下载标准"
+        ],
+        "viewer_url": null,
+        "download_url": null,
+        "pdf_url": null,
+        "downstream_url_verified": false,
+        "evidence": {
+          "cache_file": ".cache/standards/access-web-06.json",
+          "source_url": "https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=C2966D04269D7A4E9E8082F632BA81DD"
+        },
+        "note": "这是已观察到的官方入口页，不是PDF直链；没有推导或拼接showGb、download或hcno下游URL。",
+        "status_page_handler_literal_url": "http://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=C2966D04269D7A4E9E8082F632BA81DD"
+      },
+      "public_access": {
+        "category": "offered",
+        "full_text_offered_on_observed_platform": true,
+        "public_retrievability_verified": null,
+        "retrievable_in_this_run": false,
+        "conclusion": "官方提供入口，本次未取得全文",
+        "inference_limit": "本次取回失败或未检索到，不等于标准不公开。入口可见不等于实际下载可用。"
+      },
+      "acquisition": {
+        "status": "not_retrieved",
+        "pdf_retrieved": false,
+        "full_text_tool_response_retrieved": false,
+        "cache_files": [],
+        "sha256": null,
+        "bytes": null,
+        "page_count": null
+      },
+      "visual_inspection": {
+        "performed": false,
+        "pages": [],
+        "reason": "没有取得目标标准PDF或正文页，无法进行代表页视觉检查。"
+      },
+      "blocker_codes": [
+        "DYNAMIC_BUTTON_TARGET_NOT_EXPOSED",
+        "FULL_TEXT_NOT_RETURNED"
+      ],
+      "not_retrieved_reason": "官方页面呈现在线预览/下载标准按钮；远端网页工具只返回页面文本和按钮标签，没有可点击的目标链接或PDF响应，未取得真实下游下载URL。已连接Edge对同一全文平台的36439-2018页面访问报net::ERR_CONNECTION_CLOSED。不能完成下载，不据此判断标准不公开。",
+      "browser_attempt": {
+        "attempted": false,
+        "note": "仅使用远端工具核验该标准页面；没有声称逐项点击下载。"
+      },
+      "captcha": {
+        "encountered": false,
+        "note": "未到达已观察的验证码界面；不能将未获取归因于CAPTCHA。"
+      },
+      "external_sources": [
+        {
+          "label": "GB/T 4883-2008 官方状态页",
+          "url": "https://std.samr.gov.cn/gb/search/gbDetailed?id=xe1pIAJCf2A%3D&mode=p",
+          "use": "状态与元数据引用；不代表已获取全文"
+        },
+        {
+          "label": "GB/T 4883-2008 国家标准全文公开系统页面",
+          "url": "https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=C2966D04269D7A4E9E8082F632BA81DD",
+          "use": "官方预览/下载入口导航；下载成功性未验证"
+        }
+      ],
+      "external_use_scope": "仅提供官方页面链接与元数据证据；不授予标准全文转载、公开镜像或商业复制许可。",
+      "notes": [],
+      "evidence_files": [
+        ".cache/standards/access-search-01.json",
+        ".cache/standards/access-web-03.json",
+        ".cache/standards/access-web-06.json",
+        ".cache/standards/access-web-09.json",
+        ".cache/standards/access-web-16.json",
+        ".cache/standards/access-web-24.json",
+        ".cache/standards/access-web-28.json",
+        ".cache/standards/access-browser-attempts.json",
+        ".cache/standards/ci-status-evidence.json"
+      ],
+      "ci_cached_evidence": {
+        "metadata_path": ".cache/ci-acquisition-38367606768/.cache/acquisition/6a480648a47bd9959105bc6875bf970f87beffcd59b6fa297beecbb13174ea89.json",
+        "binary_path": ".cache/ci-acquisition-38367606768/.cache/acquisition/6a480648a47bd9959105bc6875bf970f87beffcd59b6fa297beecbb13174ea89.bin",
+        "request_url": "https://std.samr.gov.cn/gb/search/gbDetailed?id=xe1pIAJCf2A%3D&mode=p",
+        "final_url": "https://std.samr.gov.cn/gb/search/gbDetailed?id=xe1pIAJCf2A%3D&mode=p",
+        "content_type": "text/html;charset=UTF-8",
+        "crawled_at": "2026-10-13T16:14:23+08:00",
+        "original_sha256": "bf350a98d07f6c69a901a9171062e337f552ebca6d2ccc2c83eb887e48d592a2",
+        "size": 68756,
+        "sha256_verified": true,
+        "size_verified": true,
+        "kind": "official_standard_status_html",
+        "extraction_file": ".cache/standards/ci-status-evidence.json"
+      },
+      "status_page_text_navigation": {
+        "literal_url": "http://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=C2966D04269D7A4E9E8082F632BA81DD",
+        "source_line": 1840,
+        "source_binary": ".cache/ci-acquisition-38367606768/.cache/acquisition/6a480648a47bd9959105bc6875bf970f87beffcd59b6fa297beecbb13174ea89.bin",
+        "found_in": ".openpdf click handler",
+        "classification": "gov_cn_official_full_text_platform_landing_page_not_pdf",
+        "visited_in_this_task": false,
+        "related_https_page_already_opened": "https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=C2966D04269D7A4E9E8082F632BA81DD"
+      }
+    },
+    {
+      "standard_code": "GB/T 4882-2001",
+      "title": "数据的统计处理和解释 正态性检验",
+      "input_sources": [
+        {
+          "path": "data/chapters/ch09/sources.csv",
+          "source_id": "CH09-S014",
+          "title_as_recorded": "数据的统计处理和解释 正态性检验",
+          "url_as_recorded": "https://std.samr.gov.cn/gb/search/gbDetailed?id=DmMQ3gJ4qKU%3D&mode=p"
+        }
+      ],
+      "checked_at": "2026-10-13T16:22:33+08:00",
+      "review_status": "not_final_reviewed",
+      "official_status_page": "https://std.samr.gov.cn/gb/search/gbDetailed?id=DmMQ3gJ4qKU%3D&mode=p",
+      "official_status_observed": "现行",
+      "publish_date": "2001-03-05",
+      "implementation_date": "2001-09-01",
+      "official_status_evidence": {
+        "cache_file": ".cache/standards/access-web-28.json",
+        "source_url": "https://std.samr.gov.cn/gb/search/gbDetailed?id=DmMQ3gJ4qKU%3D&mode=p"
+      },
+      "official_lookup_page": null,
+      "full_text_platform_page": "https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=55264A621099714C39AE824C295F3FB8",
+      "full_text_entry": null,
+      "public_access": {
+        "category": "copyright_notice",
+        "full_text_offered_on_observed_platform": false,
+        "public_retrievability_verified": null,
+        "retrievable_in_this_run": false,
+        "conclusion": "该平台明确不提供文本阅读，其他官方全文入口未确认",
+        "inference_limit": "本次取回失败或未检索到，不等于标准不公开。入口可见不等于实际下载可用。"
+      },
+      "acquisition": {
+        "status": "not_retrieved",
+        "pdf_retrieved": false,
+        "full_text_tool_response_retrieved": false,
+        "cache_files": [],
+        "sha256": null,
+        "bytes": null,
+        "page_count": null
+      },
+      "visual_inspection": {
+        "performed": false,
+        "pages": [],
+        "reason": "没有取得目标标准PDF或正文页，无法进行代表页视觉检查。"
+      },
+      "blocker_codes": [
+        "PLATFORM_COPYRIGHT_RESTRICTION"
+      ],
+      "not_retrieved_reason": "国家标准全文公开系统明确提示该标准涉及国际国外采标版权保护，不提供文本阅读服务；gov.cn补充检索未确认其他同号同年合法官方全文入口。这是该系统的访问限制，不是对全网公开性的断言。",
+      "browser_attempt": {
+        "attempted": false,
+        "note": "仅使用远端工具核验该标准页面；没有声称逐项点击下载。"
+      },
+      "captcha": {
+        "encountered": false,
+        "note": "未到达已观察的验证码界面；不能将未获取归因于CAPTCHA。"
+      },
+      "external_sources": [
+        {
+          "label": "GB/T 4882-2001 官方状态页",
+          "url": "https://std.samr.gov.cn/gb/search/gbDetailed?id=DmMQ3gJ4qKU%3D&mode=p",
+          "use": "状态与元数据引用；不代表已获取全文"
+        },
+        {
+          "label": "GB/T 4882-2001 国家标准全文公开系统页面",
+          "url": "https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=55264A621099714C39AE824C295F3FB8",
+          "use": "官方元数据与不提供文本阅读服务的说明"
+        }
+      ],
+      "external_use_scope": "仅提供官方页面链接与元数据证据；不授予标准全文转载、公开镜像或商业复制许可。",
+      "notes": [],
+      "evidence_files": [
+        ".cache/standards/access-search-01.json",
+        ".cache/standards/access-web-03.json",
+        ".cache/standards/access-web-06.json",
+        ".cache/standards/access-web-22.json",
+        ".cache/standards/access-web-24.json",
+        ".cache/standards/access-web-28.json",
+        ".cache/standards/ci-status-evidence.json"
+      ],
+      "ci_cached_evidence": {
+        "metadata_path": ".cache/ci-acquisition-38367606768/.cache/acquisition/7d30d0660b038d00ffb42d651c95fdbc727f3f994ef75ea64f28a1b59d0d4cee.json",
+        "binary_path": ".cache/ci-acquisition-38367606768/.cache/acquisition/7d30d0660b038d00ffb42d651c95fdbc727f3f994ef75ea64f28a1b59d0d4cee.bin",
+        "request_url": "https://std.samr.gov.cn/gb/search/gbDetailed?id=DmMQ3gJ4qKU%3D&mode=p",
+        "final_url": "https://std.samr.gov.cn/gb/search/gbDetailed?id=DmMQ3gJ4qKU%3D&mode=p",
+        "content_type": "text/html;charset=UTF-8",
+        "crawled_at": "2026-10-13T16:14:24+08:00",
+        "original_sha256": "3bf6171eaf1dd8647db4c1850c4acc87a4ba80b29e6acf168729405b919c4ed3",
+        "size": 67969,
+        "sha256_verified": true,
+        "size_verified": true,
+        "kind": "official_standard_status_html",
+        "extraction_file": ".cache/standards/ci-status-evidence.json"
+      },
+      "status_page_text_navigation": {
+        "literal_url": "http://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=55264A621099714C39AE824C295F3FB8",
+        "source_line": 1819,
+        "source_binary": ".cache/ci-acquisition-38367606768/.cache/acquisition/7d30d0660b038d00ffb42d651c95fdbc727f3f994ef75ea64f28a1b59d0d4cee.bin",
+        "found_in": ".openpdf click handler",
+        "classification": "gov_cn_official_full_text_platform_landing_page_not_pdf",
+        "visited_in_this_task": false,
+        "related_https_page_already_opened": "https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=55264A621099714C39AE824C295F3FB8"
+      }
+    },
+    {
+      "standard_code": "GB/T 3359-2009",
+      "title": "数据的统计处理和解释 统计容忍区间的确定",
+      "input_sources": [
+        {
+          "path": "data/chapters/ch09/sources.csv",
+          "source_id": "CH09-S015",
+          "title_as_recorded": "数据的统计处理和解释 统计容忍区间的确定",
+          "url_as_recorded": "https://std.samr.gov.cn/gb/search/gbDetailed?id=71F772D7F18CD3A7E05397BE0A0AB82A"
+        }
+      ],
+      "checked_at": "2026-10-13T16:22:33+08:00",
+      "review_status": "not_final_reviewed",
+      "official_status_page": "https://std.samr.gov.cn/gb/search/gbDetailed?id=71F772D7F18CD3A7E05397BE0A0AB82A",
+      "official_status_observed": "现行",
+      "publish_date": "2009-10-15",
+      "implementation_date": "2009-12-01",
+      "official_status_evidence": {
+        "cache_file": ".cache/standards/access-web-28.json",
+        "source_url": "https://std.samr.gov.cn/gb/search/gbDetailed?id=71F772D7F18CD3A7E05397BE0A0AB82A"
+      },
+      "official_lookup_page": null,
+      "full_text_platform_page": "https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=74DD0ABBB390FC4439060182BE054E95",
+      "full_text_entry": null,
+      "public_access": {
+        "category": "copyright_notice",
+        "full_text_offered_on_observed_platform": false,
+        "public_retrievability_verified": null,
+        "retrievable_in_this_run": false,
+        "conclusion": "该平台明确不提供文本阅读，其他官方全文入口未确认",
+        "inference_limit": "本次取回失败或未检索到，不等于标准不公开。入口可见不等于实际下载可用。"
+      },
+      "acquisition": {
+        "status": "not_retrieved",
+        "pdf_retrieved": false,
+        "full_text_tool_response_retrieved": false,
+        "cache_files": [],
+        "sha256": null,
+        "bytes": null,
+        "page_count": null
+      },
+      "visual_inspection": {
+        "performed": false,
+        "pages": [],
+        "reason": "没有取得目标标准PDF或正文页，无法进行代表页视觉检查。"
+      },
+      "blocker_codes": [
+        "PLATFORM_COPYRIGHT_RESTRICTION"
+      ],
+      "not_retrieved_reason": "国家标准全文公开系统明确提示该标准涉及国际国外采标版权保护，不提供文本阅读服务；gov.cn补充检索未确认其他同号同年合法官方全文入口。这是该系统的访问限制，不是对全网公开性的断言。",
+      "browser_attempt": {
+        "attempted": false,
+        "note": "仅使用远端工具核验该标准页面；没有声称逐项点击下载。"
+      },
+      "captcha": {
+        "encountered": false,
+        "note": "未到达已观察的验证码界面；不能将未获取归因于CAPTCHA。"
+      },
+      "external_sources": [
+        {
+          "label": "GB/T 3359-2009 官方状态页",
+          "url": "https://std.samr.gov.cn/gb/search/gbDetailed?id=71F772D7F18CD3A7E05397BE0A0AB82A",
+          "use": "状态与元数据引用；不代表已获取全文"
+        },
+        {
+          "label": "GB/T 3359-2009 国家标准全文公开系统页面",
+          "url": "https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=74DD0ABBB390FC4439060182BE054E95",
+          "use": "官方元数据与不提供文本阅读服务的说明"
+        }
+      ],
+      "external_use_scope": "仅提供官方页面链接与元数据证据；不授予标准全文转载、公开镜像或商业复制许可。",
+      "notes": [],
+      "evidence_files": [
+        ".cache/standards/access-search-01.json",
+        ".cache/standards/access-web-04.json",
+        ".cache/standards/access-web-10.json",
+        ".cache/standards/access-web-23.json",
+        ".cache/standards/access-web-24.json",
+        ".cache/standards/access-web-28.json",
+        ".cache/standards/ci-status-evidence.json"
+      ],
+      "ci_cached_evidence": {
+        "metadata_path": ".cache/ci-acquisition-38367606768/.cache/acquisition/c125a88fdfd96a93c4925531a3c0fba6acf762eb1fda3818b66448272b4c242e.json",
+        "binary_path": ".cache/ci-acquisition-38367606768/.cache/acquisition/c125a88fdfd96a93c4925531a3c0fba6acf762eb1fda3818b66448272b4c242e.bin",
+        "request_url": "https://std.samr.gov.cn/gb/search/gbDetailed?id=71F772D7F18CD3A7E05397BE0A0AB82A",
+        "final_url": "https://std.samr.gov.cn/gb/search/gbDetailed?id=71F772D7F18CD3A7E05397BE0A0AB82A",
+        "content_type": "text/html;charset=UTF-8",
+        "crawled_at": "2026-10-13T16:14:24+08:00",
+        "original_sha256": "c589abc00308a6ccb519b81ad9376405d0bdf278d1eb1ecb0f5e8aa349486dce",
+        "size": 71000,
+        "sha256_verified": true,
+        "size_verified": true,
+        "kind": "official_standard_status_html",
+        "extraction_file": ".cache/standards/ci-status-evidence.json"
+      },
+      "status_page_text_navigation": {
+        "literal_url": "http://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=74DD0ABBB390FC4439060182BE054E95",
+        "source_line": 1932,
+        "source_binary": ".cache/ci-acquisition-38367606768/.cache/acquisition/c125a88fdfd96a93c4925531a3c0fba6acf762eb1fda3818b66448272b4c242e.bin",
+        "found_in": ".openpdf click handler",
+        "classification": "gov_cn_official_full_text_platform_landing_page_not_pdf",
+        "visited_in_this_task": false,
+        "related_https_page_already_opened": "https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=74DD0ABBB390FC4439060182BE054E95"
+      }
+    }
+  ]
+}
