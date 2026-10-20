@@ -312,7 +312,7 @@ const list = x=>Array.isArray(x)?x:[];
 const chapterURL = (chapter, source)=>`/chapters/${chapter}?source=${source}`;
 const sourceChapter = (source, fallback)=>/^CH\d{2}-/.test(source)?source.slice(0,4).toLowerCase():fallback;
 const link = (text, href, attrs={})=>el('a', {href, ...attrs}, text);
-const context = {URL, location, el, list, chapterURL, sourceChapter, link, reviewLabel:()=> '待专业审核',
+const context = {URL, location, el, list, chapterURL, sourceChapter, link,
   document:{getElementById:()=>null}, kinds:{extracted:'提取正文'}, state:{}, mobile:{matches:false}};
 vm.createContext(context);
 vm.runInContext(source, context);
@@ -348,7 +348,7 @@ context.renderReader('ch01', {aborted:false}, 1).then(()=>{
 }).catch(error=>{console.error(error); process.exitCode=1;});
 """)
 
-    def test_glossary_uses_real_location_and_explains_keyword_evidence(self):
+    def test_glossary_uses_real_location_without_processing_labels(self):
         self.run_js(r"""
 const root=el('div');
 context.renderGlossary(root, [{term:'适航证', definition:'编辑释义', source_id:'CH01-S002',
@@ -356,7 +356,7 @@ context.renderGlossary(root, [{term:'适航证', definition:'编辑释义', sour
   anchor_or_url:'/chapters/ch01?source=CH01-S002#clause-9'}], {id:'ch01'});
 const target=walk(root).find(x=>x.tag==='a');
 assert.equal(target.attrs.href, '/chapters/ch01?source=CH01-S002#reading-clause-9');
-assert.match(root.textContent, /关键词/); assert.match(root.textContent, /未核验.*释义/);
+assert.doesNotMatch(root.textContent, /关键词匹配|未核验.*释义/);
 assert.match(root.textContent, /原文 <script> 不执行/);
 assert.equal(walk(root).some(x=>x.tag==='script'), false);
 """)
@@ -367,15 +367,15 @@ const root=el('div');
 context.renderGlossary(root, [{term:'术语', source_id:'CH01-S002', locator_status:'source_only',
   anchor_or_url:'#invented', original_anchor_or_url:'#invented'}], {id:'ch01'});
 assert.equal(walk(root).find(x=>x.tag==='a').attrs.href, '/chapters/ch01?source=CH01-S002');
-assert.match(root.textContent, /仅定位来源/);
+assert.doesNotMatch(root.textContent, /仅定位来源/);
 """)
 
-    def test_reader_shows_navigation_note_without_losing_extraction_limit(self):
+    def test_reader_keeps_brief_official_original_notice(self):
         self.run_js(r"""
 const notice=context.documentNotice({content_kind:'extracted', extraction_note:'图片公式缺失说明',
   navigation_note:'自动阅读分段不代表原文条款'});
-assert.match(notice.textContent, /图片公式缺失说明/);
-assert.match(notice.textContent, /自动阅读分段不代表原文条款/);
+assert.match(notice.textContent, /官方原件为准/);
+assert.doesNotMatch(notice.textContent, /图片公式缺失说明|自动阅读分段/);
 """)
 
     def test_local_pdf_button_uses_fixed_same_origin_endpoint_and_new_tab(self):
@@ -426,16 +426,16 @@ const url='/api/documents/CH01-S002/original?index=1';
 for(const originals of [undefined,[],[{label:'附录',url}]]) {
   const doc={source_id:'CH01-S002',content_kind:'metadata',original_available:true,original_url:url,originals};
   assert.equal(walk(context.provenanceDetails(doc)).find(x=>x.tag==='a')?.attrs.href,url);
-  assert.match(context.documentNotice(doc).textContent,/暂缺可检索文字/);
+  assert.match(context.documentNotice(doc).textContent,/官方来源查阅原文/);
 }
 """)
 
-    def test_metadata_with_original_explains_missing_searchable_text(self):
+    def test_metadata_with_original_points_to_official_source(self):
         self.run_js(r"""
 const notice=context.documentNotice({source_id:'CH01-S002', content_kind:'metadata', original_available:true,
   original_url:'/api/documents/CH01-S002/original', extraction_note:'扫描页面需对照'});
-assert.match(notice.textContent, /暂缺可检索文字/);
-assert.match(notice.textContent, /PDF/); assert.match(notice.textContent, /扫描页面需对照/);
+assert.match(notice.textContent, /官方来源查阅原文/);
+assert.doesNotMatch(notice.textContent, /扫描页面需对照|待校对/);
 """)
 
     def test_provenance_shows_metadata_changes_and_official_evidence_without_approval(self):
@@ -449,7 +449,7 @@ const before=JSON.stringify(doc), box=context.provenanceDetails(doc);
 assert.match(box.textContent,/元数据核对记录/);
 assert.match(box.textContent,/题名.*原题名<script> → 官方题名/);
 assert.match(box.textContent,/发布日期.*2011-11-07 → 2016-03-17/);
-assert.match(box.textContent,/已纠正/); assert.match(box.textContent,/不改变专业审核状态.*待专业审核/);
+assert.match(box.textContent,/已纠正/); assert.match(box.textContent,/仅记录元数据核对，不作专业结论/);
 const anchors=walk(box).filter(x=>x.tag==='a');
 assert.deepEqual(anchors.map(x=>x.attrs.href),['https://www.caac.gov.cn/title.html','https://www.gov.cn/date.html']);
 for(const a of anchors) {assert.equal(a.attrs.target,'_blank');assert.match(a.attrs.rel,/noopener/);}

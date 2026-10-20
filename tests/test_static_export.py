@@ -151,8 +151,8 @@ class StaticExportTests(unittest.TestCase):
             self.assertEqual(soup.find("meta", attrs={"name": "airworthiness-base"})["content"], "/team/airworthiness")
             self.assertIsNotNone(soup.select_one("#chapter-rail"))
             self.assertEqual(soup.select_one("a.brand")["href"], "/team/airworthiness/")
-            self.assertEqual(soup.select_one('[data-nav="chapters"]')["href"], "/team/airworthiness/#chapters")
-            self.assertEqual(soup.select_one('[data-nav="quality"]')["href"], "/team/airworthiness/quality/")
+            self.assertIsNone(soup.select_one('.main-nav'))
+            self.assertIsNone(soup.select_one('a[href="/team/airworthiness/quality/"]'))
             for node in soup.select("[href], [src]"):
                 value = node.get("href", node.get("src"))
                 if value.startswith("/"):
@@ -169,7 +169,7 @@ class StaticExportTests(unittest.TestCase):
         self.export(base_path="/")
         soup = BeautifulSoup((self.output / "index.html").read_text(encoding="utf-8"), "html.parser")
         self.assertEqual(soup.find("meta", attrs={"name": "airworthiness-base"})["content"], "")
-        self.assertEqual(soup.select_one('[data-nav="quality"]')["href"], "/quality/")
+        self.assertIsNone(soup.select_one('.main-nav'))
         self.assertEqual(soup.find("script")["src"], "/static/hall.js")
 
     def test_online_shell_labels_change_only_in_exported_html(self):

@@ -1,4 +1,4 @@
-import { main, announcer, mobile, reducedMotion, kinds, statuses, state, el, list, count, chapterNumber, query, reviewLabel, sourceChapter, chapterURL, resourceURL, link, officialLink, badge, loading, errorBox, overview, record, renderRail, updateChapterSelect, route, navigate } from './hall-core.js';
+import { main, announcer, mobile, reducedMotion, state, el, list, count, chapterNumber, query, sourceChapter, chapterURL, resourceURL, link, officialLink, loading, errorBox, overview, record, renderRail, updateChapterSelect, route, navigate } from './hall-core.js';
 import { readingHTML, highlight, reflowExtractedBlocks, structureExtractedTables, guardExtractedGlyphs } from './hall-content.js';
 import { createDocumentView } from './hall-document-view.js';
 import { renderChapterGraph } from './hall-graph.js';
@@ -35,13 +35,10 @@ function renderChapterGuide(chapter) {
       sources.append(el('li', { class: 'guide-source' },
         link([el('span', { class: 'guide-source-id' }, sourceId), el('span', { class: 'guide-source-title' }, doc.title),
           el('span', { 'aria-hidden': 'true' }, '↗')], resourceURL(doc), { class: 'guide-source-link' }),
-        el('div', { class: 'guide-source-flags' }, badge(doc.content_kind),
-          el('span', { class: 'guide-status' }, statuses[doc.document_status] || '效力待核'),
-          el('span', { class: 'review-label' }, reviewLabel(doc.review_status))),
         typeof ref === 'object' && ref.locator ?
-          el('p', { class: 'guide-locator' }, `正文定位线索：${ref.locator}（待专业审核）`) : null,
+          el('p', { class: 'guide-locator' }, `正文定位线索：${ref.locator}`) : null,
         doc.content_kind === 'metadata' ?
-          el('p', { class: 'guide-limitation' }, '仅有状态信息，不能据此确认具体条款。') : null));
+          el('p', { class: 'guide-limitation' }, '正文请查阅官方来源。') : null));
     }
     cards.append(el('section', { class: 'guide-card' },
       el('div', { class: 'guide-card-heading' }, el('span', { class: 'guide-card-number' }, String(index + 1).padStart(2, '0')),
@@ -56,7 +53,6 @@ function renderChapterGuide(chapter) {
       link([el('span', { class: 'guide-related-id' }, item.chapter_id.toUpperCase()),
         el('span', {}, item.reason), el('span', { 'aria-hidden': 'true' }, '↗')], chapterURL(item.chapter_id, '', ''),
       { class: 'guide-related-link' })))));
-  root.append(el('p', { class: 'guide-footnote' }, '以上仅为资料导航，不代表文件现行有效、条款适用或专业审核通过。请逐份查看效力、收录类型及官方原件。'));
   return { root, toc };
 }
 
@@ -73,7 +69,7 @@ function renderReaderSidebar(container, chapter, selectedSource, chapters, toc) 
     const shown = documents.filter(doc => `${doc.source_id} ${doc.title} ${doc.document_code || ''}`.toLocaleLowerCase().includes(term));
     fileCount.textContent = term ? `${shown.length} / ${documents.length}` : count(documents.length);
     files.replaceChildren(...shown.map(doc => el('li', {}, link([
-      el('span', { class: 'file-id' }, doc.source_id), el('span', {}, doc.title), el('br'), badge(doc.content_kind)
+      el('span', { class: 'file-id' }, doc.source_id), el('span', {}, doc.title)
     ], resourceURL({ ...doc, chapter_id: doc.chapter_id || chapter.id }), {
       class: 'file-link', 'aria-current': doc.source_id === selectedSource ? 'page' : null
     }))));
@@ -112,14 +108,6 @@ function glossaryTarget(item, chapter) {
   return `${base}#${anchor.startsWith('reading-') ? anchor : `reading-${anchor}`}`;
 }
 
-function locatorDescription(item) {
-  return {
-    verified_clause: '精确引文位置已核对；未核验术语释义，也不代表专业审核通过。',
-    text_match: '仅关键词匹配；未核验术语释义，不表示此处支持该定义。',
-    source_only: '仅定位来源；尚未找到可靠的正文匹配。'
-  }[item.locator_status] || '仅定位来源；尚未找到可靠的正文匹配。';
-}
-
 function renderGlossary(container, entries, chapter) {
   const terms = list(entries);
   const rows = el('div');
@@ -132,18 +120,14 @@ function renderGlossary(container, entries, chapter) {
     rows.replaceChildren(...filtered.map(item => el('section', { class: 'glossary-entry' },
       item.group ? el('div', { class: 'term-group' }, item.group) : null,
       el('h3', {}, item.term), el('p', {}, item.definition || '释义尚待补充。'),
-      item.source_id ? link(`来源 ${item.source_id} ↗`, glossaryTarget(item, chapter), { class: 'term-source' }) :
-        el('span', { class: 'review-label' }, '来源尚待补充'),
-      el('p', { class: 'sidebar-empty' }, locatorDescription(item)),
+      item.source_id ? link(`来源 ${item.source_id} ↗`, glossaryTarget(item, chapter), { class: 'term-source' }) : null,
       ['text_match', 'verified_clause'].includes(item.locator_status) && item.locator_evidence ?
-        el('p', { class: 'locator-evidence' }, `原文片段：${item.locator_evidence}`) : null,
-      el('span', { class: 'review-label' }, reviewLabel(item.review_status)))));
+        el('p', { class: 'locator-evidence' }, `原文片段：${item.locator_evidence}`) : null)));
     if (!filtered.length) rows.append(el('p', { class: 'sidebar-empty' }, term ? '没有匹配的术语。' : '当前内容暂无关联术语。'));
   };
   input.addEventListener('input', render);
   render();
-  container.replaceChildren(el('h2', { class: 'glossary-title' }, '术语释义', shownCount),
-    el('p', { class: 'glossary-intro' }, '随文参照 · 原文定位不等于释义核验'), input, rows);
+  container.replaceChildren(el('h2', { class: 'glossary-title' }, '术语释义', shownCount), input, rows);
 }
 
 function readerTools(content, q) {
@@ -192,24 +176,15 @@ function originalPDFs(doc) {
 
 function documentNotice(doc) {
   const messages = {
-    fulltext: '本页收录网页正文。法规效力与版本请核对官方来源。',
-    extracted: '本页为文件提取正文，尚待校对；表格、公式与分页可能存在提取误差。',
-    excerpt: '本页为整理摘录，可能包含归纳或转述，不代表完整原文，不宜作为逐字引用。请核对官方来源。',
-    metadata: '本条目仅收录来源登记及获取状态信息，尚无可用正文。下方信息不代表原文。'
+    extracted: '文字版仅供检索；图表、公式和分页请以官方原件为准。',
+    excerpt: '此处为内容摘要，完整条文请查看官方来源。',
+    metadata: '请通过官方来源查阅原文。'
   };
-  if (doc.content_kind === 'metadata' && originalPDFs(doc).length) {
-    messages.metadata = '本条目暂缺可检索文字，可查看本地 PDF 原件并对照图表、公式。下方登记信息不代表原文。';
-  }
   if (doc.content_kind === 'extracted' && originalPDFs(doc).length) {
-    messages.extracted = '已保存 PDF 原件，可按原件版式阅读。提取文字仅用于辅助检索，表格、公式及 OCR 文字仍需对照原件。';
+    messages.extracted = '可阅读 PDF 原件；文字版仅供检索。';
   }
-  return el('aside', { class: 'content-notice', 'aria-label': '收录与审核说明' },
-    el('strong', {}, `${kinds[doc.content_kind] || '收录类型未注明'} · ${reviewLabel(doc.review_status)}`),
-    el('p', {}, messages[doc.content_kind] || '收录范围尚未确认，请核对官方来源。'),
-    doc.navigation_note || doc.extraction_note ? el('details', { class: 'notice-details' },
-      el('summary', {}, '提取限制与定位说明'),
-      doc.navigation_note ? el('p', {}, doc.navigation_note) : null,
-      doc.extraction_note ? el('p', { class: 'extraction-note' }, doc.extraction_note) : null) : null);
+  if (!messages[doc.content_kind]) return null;
+  return el('aside', { class: 'content-notice' }, el('p', {}, messages[doc.content_kind]));
 }
 
 function metadataEvidenceLink(value, index) {
@@ -241,7 +216,7 @@ function metadataDetails(doc) {
       return el('li', {}, el('p', {}, `${label}：${detail} · ${actions[entry.application] || '未应用'}`),
         evidence.length ? evidence : el('span', { class: 'sidebar-empty' }, '未提供可用的官方证据链接。'));
     })),
-    el('p', { class: 'sidebar-empty' }, `仅核对登记字段，不改变专业审核状态（${reviewLabel(doc.review_status)}）。`));
+    el('p', { class: 'sidebar-empty' }, '此处仅记录元数据核对，不作专业结论。'));
 }
 
 function provenanceDetails(doc) {
@@ -262,8 +237,7 @@ function provenanceDetails(doc) {
       `查看本地 PDF 原件${item.label ? ` · ${item.label}` : ''} ↗`)),
     originals.length ? el('p', {}, '请对照 PDF 原件中的图表、公式；提取正文可能存在缺失。') : null,
     attachment ? officialLink(attachment, '查看官方附件 ↗') : null,
-    metadataDetails(doc),
-    el('p', { class: 'sidebar-empty' }, '哈希用于核对保存文件的一致性，不代表专业审核通过。'));
+    metadataDetails(doc));
 }
 
 function documentFacts(doc) {
@@ -271,7 +245,6 @@ function documentFacts(doc) {
     ['资料标识', doc.source_id],
     ['文件文号', doc.document_code || '未注明'],
     ['发布日期', doc.publish_date || '未注明'],
-    ['文件效力', el('span', {}, statuses[doc.document_status] || statuses.unknown, ' · ', el('span', { class: 'review-label' }, reviewLabel(doc.review_status)))],
     ['官方来源', officialLink(doc.url, '打开官方原始页面 ↗') || '未提供可用的官方链接']
   ];
   // These optional acquisition fields are user-facing provenance, not local paths.
@@ -335,7 +308,7 @@ async function renderReader(chapterId, signal, generation) {
     }
   }
   if (!content.root.textContent.trim()) content.root.append(el('p', {}, isDoc
-    ? doc.content_kind === 'metadata' ? '尚未收录可阅读正文。请通过上方官方来源查阅。' : '当前条目尚无可展示的内容。请核对官方来源或查看收录质量报告。'
+    ? doc.content_kind === 'metadata' ? '尚未收录可阅读正文。请通过上方官方来源查阅。' : '当前条目尚无可展示的内容。请核对官方来源。'
     : '本章导读尚待补充。可从左侧文件列表选择已收录资料。'));
   const title = isDoc ? doc.title || doc.source_id : chapter.title;
   const heading = el('h1', { class: 'reader-heading', id: 'reader-title', tabindex: '-1' }, title);
@@ -344,12 +317,11 @@ async function renderReader(chapterId, signal, generation) {
       el('span', { class: 'breadcrumb-divider', 'aria-hidden': 'true' }, '/'),
       isDoc ? link(`第 ${chapterNumber(chapter.id)} 章`, chapterURL(chapter.id)) : el('span', {}, `第 ${chapterNumber(chapter.id)} 章`),
       el('span', { class: 'breadcrumb-divider', 'aria-hidden': 'true' }, '/'), el('span', {}, isDoc ? doc.source_id : '本章导读')),
-    el('p', { class: 'eyebrow' }, isDoc ? `${doc.source_id} / ${kinds[doc.content_kind] || '收录资料'}` : `CHAPTER ${chapterNumber(chapter.id)} / READING GUIDE`), heading,
-    isDoc ? el('p', { class: 'document-meta' }, doc.document_code || doc.source_id, ' · ', doc.publish_date || '发布日期待核对') :
-      el('p', { class: 'reader-description' }, chapter.description),
+    el('p', { class: 'eyebrow' }, isDoc ? doc.source_id : `CHAPTER ${chapterNumber(chapter.id)} / READING GUIDE`), heading,
+    isDoc ? el('p', { class: 'document-meta' }, doc.document_code || doc.source_id, ' · ', doc.publish_date || '发布日期待核对') : null,
     isDoc ? el('details', { class: 'document-details' }, el('summary', {}, '文件信息、来源与校验记录'),
       documentFacts(doc), provenanceDetails(doc)) : null,
-    isDoc ? documentNotice(doc) : el('aside', { class: 'content-notice' }, el('strong', {}, '章节导读 · 待专业审核'), '导读用于组织阅读线索。查阅具体条文时，请选择已收录的来源文件。'),
+    isDoc ? documentNotice(doc) : null,
     isDoc ? createDocumentView({ doc, originals: originalPDFs(doc), content: content.root,
       tools: readerTools(content.root, query()), search: query(), hash: location.hash }) :
       el('div', {}, readerTools(content.root, query()), content.root));
@@ -359,8 +331,7 @@ async function renderReader(chapterId, signal, generation) {
   const graph = renderChapterGraph(chapter, isDoc);
   if (graph) inner.append(graph);
   inner.append(el('div', { class: 'reading-end' }, el('span', {}, '阅读位置自动保存在当前浏览器会话中'),
-    el('button', { type: 'button', class: 'text-button', onclick: () => scrollToReadingStart(pane) }, '回到顶部 ↑'),
-    link('收录质量 ↗', '/quality')));
+    el('button', { type: 'button', class: 'text-button', onclick: () => scrollToReadingStart(pane) }, '回到顶部 ↑')));
   pane.replaceChildren(inner);
   pane.setAttribute('aria-busy', 'false');
   renderReaderSidebar(sidebar, chapter, sourceId, chapters, content.toc);

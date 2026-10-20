@@ -11,11 +11,11 @@ const mobile = window.matchMedia('(max-width: 1023px)');
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 const kinds = {
   fulltext: '网页正文',
-  extracted: '提取正文（待校对）',
+  extracted: '文档正文',
   excerpt: '整理摘录',
-  metadata: '状态信息'
+  metadata: '官方来源'
 };
-const statuses = { effective: '登记有效', abolished: '已废止', unknown: '效力未确认' };
+const statuses = { effective: '有效', abolished: '已废止', unknown: '效力未确认' };
 const state = {
   generation: 0,
   controller: null,
@@ -53,7 +53,6 @@ const number = value => value !== null && value !== undefined && value !== '' &&
 const count = value => number(value) === null ? '—' : number(value).toLocaleString('zh-CN');
 const chapterNumber = id => String(id || '').replace(/^ch/i, '').padStart(2, '0');
 const query = () => new URLSearchParams(location.search).get('q')?.trim().slice(0, 200) || '';
-const reviewLabel = value => value === 'approved' || value === 'reviewed' ? '已专业审核' : '待专业审核';
 
 function sourceChapter(sourceId, fallback = '') {
   const match = /^CH(\d{2})-/i.exec(String(sourceId || ''));
@@ -195,5 +194,5 @@ function updateChapterSelect(select, chapters, selected, all = true) {
 
 export const route = (...args) => state.route(...args);
 export const navigate = (...args) => state.navigate(...args);
-export { main, rail, announcer, mobile, reducedMotion, kinds, statuses, state, el, list, number, count, chapterNumber, query, reviewLabel, sourceChapter, chapterURL, resourceURL, link, safeURL, officialLink, badge, sectionHeading, loading, empty, errorBox, api, overview, record, renderRail, selectField, updateChapterSelect };
+export { main, rail, announcer, mobile, reducedMotion, kinds, statuses, state, el, list, number, count, chapterNumber, query, sourceChapter, chapterURL, resourceURL, link, safeURL, officialLink, badge, sectionHeading, loading, empty, errorBox, api, overview, record, renderRail, selectField, updateChapterSelect };
 export { staticMode, basePath, sitePath, routePath };

@@ -55,13 +55,15 @@ class PublicPDFTests(unittest.TestCase):
                 self.row("CH01-S003", "AP-21-11R1", "repealed"),
                 self.row("CH01-S004", "AC-25-01", "unknown"),
                 self.row("CH01-S005", "CCAR-21-R5", url="https://example.com/a.html"),
-                self.row("CH01-S006", "CCAR-25-R4")]
+                self.row("CH01-S006", "CCAR-25-R4"),
+                self.row("CH01-S007", "MD-AA-2017-01"),
+                self.row("CH01-S008", "CPG-13")]
         manifest = {row["source_id"]: self.acquired(kind="metadata" if row["source_id"] == "CH01-S006" else "extracted") for row in rows}
         self.write(rows, manifest)
         candidates, conflicts = publication_candidates(self.root)
         self.assertEqual(conflicts, [])
         self.assertEqual(len(candidates), 1)
-        self.assertEqual(candidates[0][3], ("CH01-S001",))
+        self.assertEqual(candidates[0][3], ("CH01-S001", "CH01-S007", "CH01-S008"))
 
     def test_shared_pdf_is_downloaded_once_and_hash_checked(self):
         self.write([self.row(), self.row("CH01-S002", "AP-21-31R3")],

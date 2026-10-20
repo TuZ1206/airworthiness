@@ -10,6 +10,55 @@ STATIC = ROOT / 'src/airworthiness/web/static'
 
 
 class ReaderLayoutTests(unittest.TestCase):
+    def test_no_chapter_content_displays_pending_review_phrase(self):
+        for folder in (ROOT / 'src/airworthiness', ROOT / 'data/chapters'):
+            for path in folder.rglob('*'):
+                if path.suffix in {'.js', '.html', '.py', '.csv', '.md'}:
+                    self.assertNotIn('待专业审核', path.read_text(encoding='utf-8'), str(path))
+
+    def test_chapter_cards_and_graph_show_aviation_content_without_processing_badges(self):
+        reader = (STATIC / 'hall-reader.js').read_text(encoding='utf-8')
+        graph = (STATIC / 'hall-graph.js').read_text(encoding='utf-8')
+        home = (STATIC / 'hall-home.js').read_text(encoding='utf-8')
+        self.assertNotIn('guide-source-flags', reader)
+        self.assertNotIn('badge(doc.content_kind)', reader)
+        self.assertNotIn('graph-node-flags', graph)
+        self.assertNotIn('登记有效', graph)
+        self.assertNotIn('提取正文待校对', graph)
+        self.assertNotIn('badge(resource.content_kind)', home)
+        self.assertNotIn('status-label', home)
+        self.assertNotIn("['文件效力', statuses[doc.document_status] || statuses.unknown]", reader)
+
+    def test_all_chapter_guides_skip_redundant_intro_and_notice(self):
+        reader = (STATIC / 'hall-reader.js').read_text(encoding='utf-8')
+        self.assertNotIn("class: 'reader-description'", reader)
+        self.assertNotIn('章节导读 · 待专业审核', reader)
+        self.assertNotIn('导读用于组织阅读线索。', reader)
+        self.assertIn('isDoc ? documentNotice(doc) : null', reader)
+        self.assertIn('renderChapterGuide(chapter)', reader)
+
+    def test_home_removes_annotated_intro_and_summary_without_hiding_resources(self):
+        home = (STATIC / 'hall-home.js').read_text(encoding='utf-8')
+        css = (STATIC / 'hall.css').read_text(encoding='utf-8')
+        for removed in ('从法规到验证，沿九章阅读。', '查阅资料、对照术语',
+                        'collectionSummary', 'collection-summary', 'hero-description'):
+            self.assertNotIn(removed, home)
+        self.assertNotIn('.collection-summary', css)
+        for preserved in ("class: 'page-width home-hero'", "class: 'search-section'",
+                          "class: 'chapter-index'", "class: 'resource-area'"):
+            self.assertIn(preserved, home)
+
+    def test_pdf_and_official_link_states_share_one_reader_canvas(self):
+        view = (STATIC / 'hall-document-view.js').read_text(encoding='utf-8')
+        css = (STATIC / 'hall.css').read_text(encoding='utf-8')
+        self.assertIn("const holder = el('div', { class: 'pdf-holder' })", view)
+        self.assertIn("originalPane.append(el('div', { class: 'pdf-status'", view)
+        self.assertIn("holder.append(el('div', { class: 'pdf-external-placeholder' }", view)
+        self.assertIn('.pdf-holder { min-width: 0; height:', css)
+        self.assertIn('.original-frame { display: block; width: 100%; height: 100%;', css)
+        self.assertIn('.pdf-external-placeholder { min-height: 100%;', css)
+        self.assertIn('.document-toolbar { display: grid;', css)
+
     def run_js(self, filename, check):
         self.assertTrue((STATIC / filename).is_file(), f'Missing reader module: {filename}')
         runner = r"""
@@ -95,16 +144,22 @@ assert.equal(context.unreliablePdfMathLayout('VSR 可表述为：\n        VCL M
 assert.equal(context.unreliablePdfMathLayout('第25.103条 失速速度\n申请人确定校正空速。'), false);
 """)
 
-    def test_pdf_default_and_search_anchor_override(self):
+    def test_pdf_first_for_all_records_and_text_search_override(self):
         self.run_js('hall-document-view.js', r"""
-const doc={source_id:'CH02-S006', content_kind:'extracted'};
+const doc={source_id:'CH02-S006', content_kind:'extracted', document_code:'CCAR-21-R5', document_status:'effective'};
 const originals=[{url:'/api/documents/CH02-S006/original',label:'原件'}];
 assert.equal(context.initialDocumentMode(doc, originals), 'original');
 assert.equal(context.initialDocumentMode(doc, originals, {search:'设计'}), 'text');
 assert.equal(context.initialDocumentMode(doc, originals, {hash:'#reading-clause-1'}), 'text');
-assert.equal(context.initialDocumentMode(doc, []), 'text');
-assert.equal(context.initialDocumentMode({...doc, content_kind:'fulltext'}, originals), 'text');
-assert.equal(context.initialDocumentMode({...doc, content_kind:'metadata'}, originals), 'text');
+assert.equal(context.initialDocumentMode(doc, []), 'original');
+assert.equal(context.initialDocumentMode({...doc, content_kind:'fulltext'}, originals), 'original');
+assert.equal(context.initialDocumentMode({...doc, content_kind:'metadata'}, originals), 'original');
+assert.equal(context.initialDocumentMode(doc, originals, {hash:'#chapter-graph'}), 'original');
+assert.equal(context.canEmbedOriginal(doc), true);
+assert.equal(context.canEmbedOriginal({...doc, document_code:'MD-AA-2017-01'}), true);
+assert.equal(context.canEmbedOriginal({...doc, document_code:'CPG-13'}), true);
+assert.equal(context.canEmbedOriginal({...doc, document_code:'HB 8605-2021'}), false);
+assert.equal(context.canEmbedOriginal({...doc, document_status:'unknown'}), false);
 """)
 
     def test_only_fixed_local_original_urls_can_enter_pdf_frame(self):
@@ -129,12 +184,13 @@ for(const path of [good+'?redirect=evil',good+'/../x','https://evil.test/x.pdf',
  assert.equal(context.isStaticOriginalPath('CH02-S006',path,base),false,path);
 }
 const doc={source_id:'CH02-S006',content_kind:'extracted',deployment_mode:'static',
+ document_code:'CCAR-21-R5',document_status:'effective',
  body_provenance:{url:'https://www.caac.gov.cn/document.pdf',originals:[
  {url:'https://www.caac.gov.cn/document.pdf',label:'主文'},
  {url:'javascript:alert(1)'},{url:'https://evil.test/test.pdf'}]}};
 assert.equal(context.officialPDFs(doc).length,1);
 assert.equal(context.initialDocumentMode(doc,[{url:good}],{base}), 'original');
-assert.equal(context.initialDocumentMode({...doc,deployment_mode:'offline'},[{url:good}],{base}), 'text');
+assert.equal(context.initialDocumentMode({...doc,deployment_mode:'offline'},[{url:good}],{base}), 'original');
 assert.equal(context.initialDocumentMode(doc,[{url:'https://www.caac.gov.cn/document.pdf'}],{base}), 'original');
 assert.equal(context.isOfficialPDFPath('https://www.caac.gov.cn/document.pdf'), true);
 assert.equal(context.isOfficialPDFPath('https://xxgk.mot.gov.cn/file.PDF'), true);
@@ -147,6 +203,7 @@ assert.equal(context.pdfCandidates(doc,[],base).files.length,1);
 assert.equal(context.pdfCandidates(doc,[],base).verifiedFiles.length,0);
 assert.equal(context.pdfCandidates(doc,[],base).files[0].url,'https://www.caac.gov.cn/document.pdf');
 assert.equal(context.pdfCandidates({...doc,static_originals:[{url:good,label:'已校验'}]},[],base).files[0].url,good);
+assert.equal(context.pdfCandidates({...doc,document_code:'GB/T 1447-2005',static_originals:[{url:good}]},[],base).verifiedFiles.length,0);
 assert.equal(context.pdfCandidates({...doc,body_provenance:{url:'https://evil.test/file.pdf'}},[],base).files.length,0);
 """)
 

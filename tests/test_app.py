@@ -29,6 +29,14 @@ class AppTests(unittest.TestCase):
         self.assertIn('html', self.client.get('/api/documents/CH03-S001').json)
         self.assertEqual(len(self.client.get('/api/quality').json['chapters']), 9)
 
+    def test_quality_page_returns_to_resource_overview(self):
+        response = self.client.get('/quality')
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.headers['Location'], '/')
+        home = self.client.get('/').get_data(as_text=True)
+        self.assertNotIn('class="main-nav"', home)
+        self.assertIn('id="chapter-rail"', home)
+
     def test_invalid_requests_return_actionable_errors(self):
         for url in ['/api/resources?page=bad', '/api/resources?status=bad', '/api/resources?content_kind=bad', '/api/resources?chapter=ch99', '/api/resources?q=abc%00def']:
             self.assertEqual(self.client.get(url).status_code, 400, url)

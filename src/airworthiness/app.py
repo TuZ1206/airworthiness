@@ -1,7 +1,7 @@
 """Offline resource hall. No credentials, Neo4j or model service required."""
 import os
 
-from flask import Flask, abort, jsonify, render_template, request, send_file, url_for
+from flask import Flask, abort, jsonify, redirect, render_template, request, send_file, url_for
 from werkzeug.exceptions import HTTPException
 
 from . import catalog
@@ -20,9 +20,12 @@ def create_app(settings=None):
     catalog.ensure_catalog(app.config["DATA_ROOT"], app.config["DATABASE"])
 
     @app.get("/")
-    @app.get("/quality")
     def home():
         return render_template("hall.html")
+
+    @app.get("/quality")
+    def quality_page():
+        return redirect(url_for("home"))
 
     @app.get("/chapters/<chapter_id>")
     def chapter_page(chapter_id):

@@ -1,4 +1,4 @@
-/* Original layout is the default for PDFs; extracted text is a reading aid. */
+/* Source-backed PDFs are the primary reader; text remains a search aid. */
 import { el, officialLink, basePath } from './hall-core.js';
 
 function isOriginalPath(sourceId, path) {
@@ -49,16 +49,21 @@ function allowedOriginal(doc, path, base) {
     ? isStaticOriginalPath(doc.source_id, path, base) : isOriginalPath(doc.source_id, path);
 }
 
+function canEmbedOriginal(doc) {
+  return doc.document_status === 'effective' &&
+    /^(?:CCAR|AP|AC|MD|CPG)-[A-Za-z0-9]/i.test(doc.document_code || '');
+}
+
 function initialDocumentMode(doc, originals, { search = '', hash = '', base = '' } = {}) {
-  if (search || hash) return 'text';
-  return doc.content_kind === 'extracted' &&
-    originals.some(item => allowedOriginal(doc, item?.url, base) || isOfficialPDFPath(item?.url)) ? 'original' : 'text';
+  // Search and precise text anchors still land on the searchable transcript.
+  if (search || /^#(?:reading-|document-text)/.test(hash)) return 'text';
+  return 'original';
 }
 
 function pdfCandidates(doc, originals, base = '') {
   const candidates = doc.deployment_mode === 'static'
     ? Array.isArray(doc.static_originals) ? doc.static_originals : [] : originals;
-  const verifiedFiles = (Array.isArray(candidates) ? candidates : [])
+  const verifiedFiles = (canEmbedOriginal(doc) && Array.isArray(candidates) ? candidates : [])
     .filter(item => allowedOriginal(doc, item?.url, base));
   return { verifiedFiles, files: verifiedFiles.length ? verifiedFiles : officialPDFs(doc)
     .filter(item => isOfficialPDFPath(item.url)) };
@@ -100,19 +105,27 @@ function createDocumentView({ doc, originals, content, tools, search = '', hash 
   }
 
   let frame = null;
-  let selected = files[0];
+  let selected = files[0] || null;
   let mode = initialDocumentMode(doc, files, { search, hash, base: basePath });
-  const originalButton = el('button', { type: 'button', class: 'view-button', 'aria-controls': 'document-original' }, 'PDF 原件');
-  const textButton = el('button', { type: 'button', class: 'view-button', 'aria-controls': 'document-text' }, extracted ? '文字检索' : '正文阅读');
+  const originalButton = el('button', { type: 'button', class: 'view-button', 'aria-controls': 'document-original' }, 'PDF 阅读');
+  const textButton = el('button', { type: 'button', class: 'view-button', 'aria-controls': 'document-text' },
+    doc.content_kind === 'metadata' ? '资料登记' : '文字检索');
   const modes = el('div', { class: 'document-modes', role: 'group', 'aria-label': '阅读方式' });
 
+  const holder = el('div', { class: 'pdf-holder' });
+  const availability = verifiedFiles.length ? 'verified' : files.length ? 'official-link' : 'unavailable';
+  originalPane.dataset.availability = availability;
+  originalPane.append(el('div', { class: 'pdf-status', role: 'status' },
+    el('span', { class: 'pdf-status-marker', 'aria-hidden': 'true' }, 'PDF'),
+    el('span', { class: 'pdf-status-copy' }, verifiedFiles.length
+      ? '官方原件 · 已校验，可在本页阅读'
+      : files.length ? '官方原件 · 请前往官网阅读' : '官方原件 · 尚未取得可嵌入文件')));
   if (files.length) {
     const open = el('a', { href: selected.url, target: '_blank', rel: 'noopener noreferrer', class: 'button open-original' }, '新窗口打开原件 ↗');
     actions.prepend(open);
     const picker = el('select', { class: 'original-select', 'aria-label': '选择 PDF 附件' },
       files.map((item, i) => el('option', { value: String(i) }, item.label || `PDF 附件 ${i + 1}`)));
     if (files.length > 1) actions.prepend(picker);
-    const holder = el('div', { class: 'pdf-holder' });
     const showPDF = () => {
       if (!verifiedFiles.length) return;
       if (!frame) {
@@ -127,38 +140,39 @@ function createDocumentView({ doc, originals, content, tools, search = '', hash 
       if (frame) frame.src = `${selected.url}#view=FitH`;
     });
     if (!verifiedFiles.length) holder.append(el('div', { class: 'pdf-external-placeholder' },
+      el('span', { class: 'pdf-placeholder-mark', 'aria-hidden': 'true' }, 'PDF'),
       el('strong', {}, '该 PDF 需在政府官网阅读'),
       el('p', {}, '官网不一定允许第三方页面嵌入原件；本站没有托管该文件，也不会用错乱的提取文字代替原版式。'),
       el('p', {}, '请选择上方附件后，使用“新窗口打开原件”。')));
-    originalPane.append(el('p', { class: 'pdf-help' }, verifiedFiles.length
-      ? '以下展示已校验的 PDF 原件。若浏览器未显示预览、手机显示不全或加载较慢，请使用“新窗口打开原件”。'
-      : '此文件有政府官网 PDF，但本站没有可嵌入的已校验副本。请使用“新窗口打开原件”；提取文字仅辅助检索。'), holder);
-    originalButton.addEventListener('click', () => selectMode('original'));
-    modes.append(originalButton);
-    function selectMode(next) {
-      mode = next;
-      shell.dataset.mode = mode;
-      textPane.hidden = mode !== 'text';
-      originalPane.hidden = mode !== 'original';
-      originalButton.setAttribute('aria-pressed', String(mode === 'original'));
-      textButton.setAttribute('aria-pressed', String(mode === 'text'));
-      if (mode === 'original') showPDF();
-      onModeChange(mode);
-    }
-    textButton.addEventListener('click', () => selectMode('text'));
-    // Expose only the mode transition, not arbitrary frame URLs.
-    shell.showText = () => selectMode('text');
-    selectMode(mode);
+    originalPane.showPDF = showPDF;
   } else {
-    textButton.setAttribute('aria-pressed', 'true');
-    shell.dataset.mode = 'text';
-    originalPane.hidden = true;
-    shell.showText = () => {};
+    holder.append(el('div', { class: 'pdf-external-placeholder' },
+      el('span', { class: 'pdf-placeholder-mark', 'aria-hidden': 'true' }, 'PDF'),
+      el('strong', {}, '暂无可嵌入的官方 PDF'),
+      el('p', {}, '请通过“官方来源”查看原始页面或授权渠道。')));
   }
-  modes.append(textButton);
+  originalPane.append(holder);
+  originalPane.append(el('p', { class: 'pdf-help' }, verifiedFiles.length
+    ? '若浏览器未显示预览，请在新窗口打开原件；正文仍以官方版本为准。'
+    : '没有可嵌入的已校验原件时仅保留官网入口；文字视图只作检索辅助，不替代原件。'));
+  function selectMode(next) {
+    mode = next;
+    shell.dataset.mode = mode;
+    textPane.hidden = mode !== 'text';
+    originalPane.hidden = mode !== 'original';
+    originalButton.setAttribute('aria-pressed', String(mode === 'original'));
+    textButton.setAttribute('aria-pressed', String(mode === 'text'));
+    if (mode === 'original') originalPane.showPDF?.();
+    onModeChange(mode);
+  }
+  originalButton.addEventListener('click', () => selectMode('original'));
+  textButton.addEventListener('click', () => selectMode('text'));
+  shell.showText = () => selectMode('text');
+  modes.append(originalButton, textButton);
+  selectMode(mode);
   shell.append(el('div', { class: 'document-toolbar' }, modes, actions), originalPane, textPane);
   return shell;
 }
 
 export { createDocumentView, initialDocumentMode, isOriginalPath };
-export { isStaticOriginalPath, isOfficialPDFPath, officialPDFs, pdfCandidates };
+export { isStaticOriginalPath, isOfficialPDFPath, officialPDFs, pdfCandidates, canEmbedOriginal };

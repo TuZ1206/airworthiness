@@ -60,4 +60,4 @@ def build_chapter_graph(root, chapter, documents):
         relation.update(source_kind=source["content_kind"], source_status=source["document_status"])
         relations.append(relation)
     return {"nodes": nodes, "relations": relations, "sections": sections, "omitted_nodes": omitted,
-            "review_status": "pending", "navigation_note": "圆点来自节点表，连线仅来自关系表，均待专业审核。"}
+            "review_status": "pending", "navigation_note": "圆点来自节点表，连线仅来自关系表；请对照来源和证据核查。"}

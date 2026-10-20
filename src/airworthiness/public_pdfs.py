@@ -1,6 +1,6 @@
 """Prefetch hash-verified official regulatory PDFs for a Pages build.
 
-Only currently effective CCAR, AP and AC records from CAAC landing pages are
+Only currently effective CCAR, AP, AC, MD and CPG records from CAAC landing pages are
 eligible. Standards, status-only records and material without a known PDF
 digest remain link-only. Downloads stay in ignored .cache; no PDF enters Git.
 """
@@ -19,7 +19,7 @@ from .acquire_http import AcquisitionError, Fetcher, canonical_url
 
 MAX_PDF_BYTES = 20 * 1024 * 1024
 MAX_FETCH_BYTES = 240 * 1024 * 1024
-PUBLISHABLE_CODES = re.compile(r"^(?:CCAR|AP|AC)-[A-Za-z0-9]", re.I)
+PUBLISHABLE_CODES = re.compile(r"^(?:CCAR|AP|AC|MD|CPG)-[A-Za-z0-9]", re.I)
 SHA256 = re.compile(r"[0-9a-f]{64}")
 
 

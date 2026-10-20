@@ -2,7 +2,6 @@
 import { el, list, link, resourceURL } from './hall-core.js';
 
 const kindName = { law: '法规', norm: '规范', concept: '概念', process: '过程', material: '材料' };
-const evidenceName = { fulltext: '网页正文', extracted: '提取正文待校对' };
 const SVG_NS = 'http://www.w3.org/2000/svg';
 
 function svgEl(tag, attrs = {}) {
@@ -125,12 +124,10 @@ function renderChapterGraph(chapter, inDocument = false) {
       line.classList.toggle('is-active', edge.from_node_id === id || edge.to_node_id === id);
       line.classList.toggle('is-dim', edge.from_node_id !== id && edge.to_node_id !== id);
     }
-    const flags = [evidenceName[node.source_kind] || '来源状态待核', '登记有效', '待专业审核'];
     panel.replaceChildren(
       el('p', { class: 'graph-inspector-kicker' }, node.node_id, ' · ', kindName[node.display_type] || '节点'),
       el('h3', {}, node.name), node.code ? el('p', { class: 'graph-node-code' }, node.code) : null,
-      el('p', { class: 'graph-node-summary' }, node.summary || '节点说明待核对。'),
-      el('p', { class: 'graph-node-flags' }, flags.map(flag => el('span', {}, flag))),
+      node.summary ? el('p', { class: 'graph-node-summary' }, node.summary) : null,
       el('p', { class: 'graph-locator' }, `来源定位：${node.source_id} · ${node.source_locator || '条款待定位'}`),
       link('查看来源资料 ↗', resourceURL({ source_id: node.source_id, chapter_id: chapter.id }, ''), { class: 'graph-source-link' }),
       el('h4', {}, `关联关系 · ${connected.length}`),
@@ -143,7 +140,7 @@ function renderChapterGraph(chapter, inDocument = false) {
             selectNode(peerId);
             nodeButtons.get(peerId)?.scrollIntoView({ block: 'nearest', inline: 'nearest' });
           } }, `${outgoing ? '→' : '←'} ${edge.type} · ${peer?.name || peerId}`),
-          el('p', { class: 'graph-edge-evidence' }, `${edge.source_id} · ${edge.evidence || '证据待核'} · ${evidenceName[edge.source_kind] || '来源待核'}`));
+          el('p', { class: 'graph-edge-evidence' }, `${edge.source_id} · ${edge.evidence}`));
       })) : el('p', { class: 'graph-empty' }, '此节点在现有关系表中没有关联项。'));
   }
 
@@ -152,7 +149,7 @@ function renderChapterGraph(chapter, inDocument = false) {
       el('span', { class: 'graph-summary-title', id: 'chapter-graph-title' }, '本章知识图谱'),
       el('span', { class: 'graph-summary-count' }, `${nodes.size} 个节点 · ${relations.length} 条关联`),
       el('span', { class: 'graph-summary-action' }, '展开／收起')),
-    el('p', { class: 'graph-intro' }, `圆点是本章的真实节点，连线仅表示关系表中的实际关联；蓝色深浅区分节点类型。点击圆点可突出关联并查看证据。仅有状态页、摘录或效力不明的来源不进入图谱（本章排除 ${graph.omitted_nodes || 0} 个节点）。全部关系仍待专业审核。`),
+    el('p', { class: 'graph-intro' }, '点击节点查看适航概念、关联关系及来源条款。'),
     el('p', { class: 'graph-key' }, el('span', { class: 'graph-key-relation' }, '连线：已有关系'),
       el('span', { class: 'graph-key-focus' }, '深蓝：当前节点及关联'),
       el('span', { class: 'graph-key-pan' }, '图幅较宽时可横向滚动')),

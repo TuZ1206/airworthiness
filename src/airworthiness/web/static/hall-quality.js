@@ -2,7 +2,7 @@ import { main, announcer, kinds, state, el, list, number, count, chapterNumber, 
 
 
 function reportTable(chapters) {
-  const columns = [['章节', null], ['资料', 'count'], ['网页正文', 'fulltext_count'], ['提取正文（待校对）', 'extracted_count'], ['整理摘录', 'excerpt_count'], ['状态信息', 'metadata_count']];
+  const columns = [['章节', null], ['资料', 'count'], ['网页正文', 'fulltext_count'], ['文档正文', 'extracted_count'], ['整理摘录', 'excerpt_count'], ['官方来源', 'metadata_count']];
   return el('div', { class: 'table-scroll', tabindex: '0', role: 'region', 'aria-label': '各章收录统计，可横向滚动' },
     el('table', { class: 'report-table' },
       el('caption', { class: 'sr-only' }, '按章节与收录类型统计资料数量'),
@@ -27,7 +27,7 @@ function reportList(items, type) {
         item.content_kind ? el('div', { class: 'tag-group' }, badge(item.content_kind)) : null),
       el('p', {}, isGap ? item.reason || '待补充完整正文。' : item.message || '待补充检查说明。'))));
     if (!filtered.length) rows.append(el('li', {}, empty(term ? '没有匹配的记录' : isGap ? '当前报告未列出缺失条目' : '当前报告未列出检查问题',
-      term ? '试试其他关键词。' : '这不代表内容已通过专业审核。')));
+      term ? '试试其他关键词。' : '请按资料名称或编号查找。')));
   }
   input.addEventListener('input', render);
   render();
@@ -45,7 +45,7 @@ async function renderQuality(signal, generation) {
   const page = el('div', { class: 'page-width quality-page' },
     el('header', { class: 'quality-header' },
       el('div', {}, el('p', { class: 'eyebrow' }, 'COLLECTION / QUALITY REPORT'), el('h1', {}, '收录质量与缺失清单'),
-        el('p', {}, '查看各章收录范围、正文缺口与待处理问题。提取正文仍需校对，整理摘录与状态信息不计作完整原文。来源登记包含跨章重复引用。')),
+        el('p', {}, '查看各章资料范围与正文可用情况。来源登记包含跨章重复引用。')),
       el('button', { type: 'button', class: 'button', onclick: () => { state.overview = null; route(); } }, '刷新报告 ↻')), content);
   main.replaceChildren(page);
   const railTask = overview(signal).then(data => { if (generation === state.generation) renderRail(data); }).catch(() => {});
@@ -64,8 +64,8 @@ async function renderQuality(signal, generation) {
       el('p', { class: 'report-time' }, `报告生成时间：${reportDate(data.generated_at)}`),
       el('dl', { class: 'quality-metrics' }, metrics.map(([label, value]) => el('div', { class: 'quality-metric' }, el('dt', {}, label), el('dd', {}, count(value))))),
       el('aside', { class: 'content-notice' },
-        el('strong', {}, `${count(incomplete)} 份资料未收录完整正文 · ${count(totals.extracted)} 份提取正文待校对`),
-        el('p', {}, `未收录完整正文数量为整理摘录与状态信息之和。本次报告列出 ${gaps.length} 项缺失记录、${issues.length} 项检查问题；所有资料的专业审核状态请以条目标注为准。`)),
+        el('strong', {}, `${count(incomplete)} 份资料未收录完整正文 · ${count(totals.extracted)} 份文档正文`),
+        el('p', {}, `未收录完整正文数量为整理摘录与官方来源入口之和。本次报告列出 ${gaps.length} 项缺失记录、${issues.length} 项检查问题。`)),
       el('section', { class: 'quality-section', 'aria-label': '各章收录情况' }, sectionHeading('各章收录情况', `${chapters.length} 个章节`),
         chapters.length ? reportTable(chapters) : empty('暂无章节统计', '当前质量报告未返回各章统计。')),
       el('section', { class: 'quality-section', 'aria-label': '正文缺失清单' }, sectionHeading('正文缺失清单', `${gaps.length} 项`),

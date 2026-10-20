@@ -1,14 +1,6 @@
-import { main, announcer, kinds, statuses, state, el, number, count, chapterNumber, query, reviewLabel, chapterURL, resourceURL, link, officialLink, badge, sectionHeading, loading, empty, errorBox, api, overview, renderRail, selectField, updateChapterSelect, route, navigate } from './hall-core.js';
+import { main, announcer, kinds, statuses, state, el, number, count, chapterNumber, query, chapterURL, resourceURL, link, officialLink, sectionHeading, loading, empty, errorBox, api, overview, renderRail, selectField, updateChapterSelect, route, navigate } from './hall-core.js';
 import { highlight } from './hall-content.js';
 import { staticMode } from './hall-core.js';
-
-function collectionSummary(totals) {
-  return el('div', { class: 'collection-summary' },
-    el('div', { class: 'collection-total' }, el('strong', {}, count(totals.sources)), el('span', { class: 'collection-unit' }, '条来源登记')),
-    el('p', { class: 'collection-caption' }, `覆盖 ${count(totals.chapters)} 章 · 含跨章重复引用`),
-    el('dl', { class: 'collection-breakdown' }, Object.entries(kinds).map(([kind, label]) =>
-      el('div', {}, el('dt', {}, label), el('dd', {}, count(totals[kind]))))));
-}
 
 function homeSearch(params) {
   const chapter = selectField('filter-chapter', '章节', 'chapter', [['', '全部章节']], params.get('chapter'));
@@ -37,7 +29,7 @@ function chapterIndex(chapters) {
   return el('ol', { class: 'chapter-list' }, chapters.map(chapter => el('li', {},
     link([
       el('span', { class: 'chapter-number', 'aria-hidden': 'true' }, chapterNumber(chapter.id)),
-      el('div', {}, el('h3', {}, chapter.title), el('p', {}, `${count(chapter.count)} 条来源 · ${count((number(chapter.fulltext_count) || 0) + (number(chapter.extracted_count) || 0))} 份可读正文${number(chapter.extracted_count) ? '（含待校对）' : ''}`)),
+      el('div', {}, el('h3', {}, chapter.title), el('p', {}, `${count(chapter.count)} 条来源 · ${count((number(chapter.fulltext_count) || 0) + (number(chapter.extracted_count) || 0))} 份可读正文`)),
       el('span', { class: 'entry-arrow', 'aria-hidden': 'true' }, '↗')
     ], chapterURL(chapter.id, '', ''), { class: 'chapter-entry', title: chapter.description || chapter.title }))));
 }
@@ -54,11 +46,7 @@ function resourceRow(resource, searchTerm) {
       resource.document_code ? el('span', {}, `· ${resource.document_code}`) : null,
       resource.publish_date ? el('time', {}, resource.publish_date) : null),
     el('h3', {}, title), snippet,
-    el('div', { class: 'resource-bottom' },
-      el('div', { class: 'tag-group' }, badge(resource.content_kind),
-        el('span', { class: 'status-label' }, statuses[resource.document_status] || statuses.unknown),
-        el('span', { class: 'review-label' }, reviewLabel(resource.review_status))),
-      officialLink(resource.url)));
+    el('div', { class: 'resource-bottom' }, officialLink(resource.url)));
 }
 
 function pagination(data, params) {
@@ -89,7 +77,6 @@ function pagination(data, params) {
 async function renderHome(signal, generation) {
   const params = new URLSearchParams(location.search);
   const search = homeSearch(params);
-  const summary = el('div', {}, loading('正在统计馆藏…', true));
   const chapters = el('div', {}, loading('正在读取章节…'));
   const results = el('div', { 'aria-live': 'polite', 'aria-busy': 'true' }, loading('正在检索资料…'));
   const resultCount = el('small', {}, '读取中');
@@ -99,9 +86,8 @@ async function renderHome(signal, generation) {
     el('section', { class: 'page-width home-hero', 'aria-labelledby': 'home-title' },
       el('div', {}, el('p', { class: 'eyebrow' }, 'AIRWORTHINESS / RESOURCE HALL'),
         el('h1', { id: 'home-title' }, staticMode ? '适航法规资源馆' : '适航离线资源馆'),
-        el('p', { class: 'hero-description' }, '从法规到验证，沿九章阅读。', el('br'), '查阅资料、对照术语，让每一次引用都有出处。'),
         el('p', { class: 'hero-footnote' }, el('span', {}, '复合材料适航'), staticMode ? '在线验收 · 按章索引 · 来源可溯' : '本地收录 · 按章索引 · 来源可溯'),
-        staticMode ? el('p', { class: 'hero-footnote' }, '这是已收录资料的只读快照，不代表现行有效或审核通过。首次全文搜索会下载检索索引；未托管的 PDF 请打开官方原件。') : null), summary),
+        staticMode ? el('p', { class: 'hero-footnote' }, '点击章节可查看适航资料；PDF 原件请从官方来源打开。') : null)),
     el('section', { class: 'search-section', 'aria-label': '资源检索与筛选' }, el('div', { class: 'page-width' }, search.form)),
     el('div', { class: 'page-width home-body' },
       el('section', { id: 'chapters', class: 'chapter-index', tabindex: '-1', 'aria-label': '九章索引' },
@@ -118,13 +104,11 @@ async function renderHome(signal, generation) {
   await Promise.all([
     overview(signal).then(data => {
       if (!current()) return;
-      summary.replaceChildren(collectionSummary(data.totals));
       chapters.replaceChildren(chapterIndex(data.chapters));
       updateChapterSelect(search.chapterSelect, data.chapters, params.get('chapter'));
       renderRail(data);
     }).catch(error => {
       if (!current() || signal.aborted) return;
-      summary.replaceChildren(el('p', { class: 'hero-footnote' }, '馆藏统计暂不可用'));
       chapters.replaceChildren(errorBox(error, () => route(), true));
     }),
     api(`/api/resources?${requestParams}`, signal).then(data => {

@@ -2,7 +2,6 @@
 import { main, state, mobile, reducedMotion, safeURL, renderRail, empty, link, errorBox, sitePath, routePath, staticMode } from './hall-core.js';
 import { renderHome } from './hall-home.js';
 import { renderReader, saveReadingPosition, scheduleSave, hashTarget } from './hall-reader.js';
-import { renderQuality } from './hall-quality.js';
 
 function clearReader() {
   saveReadingPosition();
@@ -16,28 +15,25 @@ function clearReader() {
 }
 
 async function route({ focus = false } = {}) {
+  const pathname = routePath(location.pathname);
+  if (/^\/quality\/?$/.test(pathname || '')) {
+    history.replaceState(null, '', sitePath('/'));
+    return route({ focus });
+  }
   clearReader();
   state.controller?.abort();
   state.controller = new AbortController();
   const signal = state.controller.signal;
   const generation = ++state.generation;
-  const pathname = routePath(location.pathname);
   const chapterMatch = /^\/chapters\/(ch\d{2})\/?$/i.exec(pathname || '');
   const isHome = pathname === '/';
-  const isQuality = /^\/quality\/?$/.test(pathname || '');
-  const view = chapterMatch ? 'reader' : isQuality ? 'quality' : 'home';
+  const view = chapterMatch ? 'reader' : 'home';
   document.body.dataset.view = view;
-  document.title = (isQuality ? '收录质量 · ' : '') + (staticMode ? '适航资源馆 · 在线验收版' : '适航离线资源馆');
+  document.title = staticMode ? '适航资源馆 · 在线验收版' : '适航离线资源馆';
   main.setAttribute('aria-busy', 'true');
-  for (const anchor of document.querySelectorAll('[data-nav]')) {
-    const active = isQuality ? 'quality' : chapterMatch || location.hash === '#chapters' ? 'chapters' : 'resources';
-    if (anchor.dataset.nav === active) anchor.setAttribute('aria-current', 'page');
-    else anchor.removeAttribute('aria-current');
-  }
   if (state.overview) renderRail(state.overview);
   try {
     if (chapterMatch) await renderReader(chapterMatch[1].toLowerCase(), signal, generation);
-    else if (isQuality) await renderQuality(signal, generation);
     else if (isHome) await renderHome(signal, generation);
     else main.replaceChildren(empty('页面不存在', '请从资源总览选择章节或资料。', link('返回资源总览', '/', { class: 'button' })));
     if (generation !== state.generation) return;
@@ -70,7 +66,7 @@ document.addEventListener('click', event => {
     const target = document.getElementById(anchor.dataset.tocTarget);
     if (!target) return;
     event.preventDefault();
-    main.querySelector('.document-view')?.showText?.();
+    if (target.closest('.document-text')) main.querySelector('.document-view')?.showText?.();
     if (mobile.matches) main.querySelectorAll('.reader-sidebar, .glossary-sidebar').forEach(panel => { panel.open = false; });
     history.replaceState(null, '', `${location.pathname}${location.search}#${encodeURIComponent(target.id)}`);
     target.scrollIntoView({ block: 'start', behavior: reducedMotion.matches ? 'auto' : 'smooth' });
