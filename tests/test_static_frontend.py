@@ -94,6 +94,23 @@ assert.equal(context.searchResources([],[],new URLSearchParams('page=-2&page_siz
 })().catch(e=>{console.error(e);process.exitCode=1;});
 """)
 
+    def test_knowledge_map_snapshot_never_exposes_missing_or_unapproved_nodes(self):
+        self.run_js(r"""
+(async()=>{
+ const calls=[];
+ context.fetch=async(url)=>{
+  calls.push(url);
+  if(url.endsWith('.gz')) return new Response('not found',{status:404});
+  return new Response(JSON.stringify({knowledge_map:{chapter_id:'ch01',available:false,message:'暂无已审核内容'}}),{status:200});
+ };
+ const signal=new AbortController().signal;
+ const map=await context.staticRequest('/api/chapters/ch01/knowledge-map','/airworthiness',signal);
+ assert.equal(map.available,false); assert.equal(map.chapter_id,'ch01');
+ await assert.rejects(context.staticRequest('/api/knowledge-nodes/KM-CH01-N001','/airworthiness',signal),e=>e.status===404);
+ assert.ok(calls.every(url=>url.includes('/data/chapters/ch01.json')));
+})().catch(e=>{console.error(e);process.exitCode=1;});
+""")
+
     def test_gzip_bytes_decode_and_failed_shards_are_not_partial_results(self):
         self.run_js(r"""
 (async()=>{

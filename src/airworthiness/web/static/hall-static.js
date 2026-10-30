@@ -115,6 +115,22 @@ async function staticRequest(path, base, signal) {
   if (pathname === '/api/overview') file = 'overview';
   else if (pathname === '/api/quality') file = 'quality';
   else if (/^\/api\/chapters\/ch0[1-9]$/.test(pathname)) file = pathname.slice(5);
+  else if (/^\/api\/chapters\/ch0[1-9]\/knowledge-map$/.test(pathname)) {
+    const chapterId = pathname.slice(14, 18);
+    const chapter = await snapshotJSON(`${base}/data/chapters/${chapterId}.json`, signal);
+    return chapter.knowledge_map || { chapter_id: chapterId, available: false, message: '章节知识导图暂未发布。' };
+  }
+  else if (/^\/api\/knowledge-nodes\/KM-CH0[1-9]-N\d{3}$/.test(pathname)) {
+    const chapterId = `ch${pathname.slice(26, 28)}`;
+    const chapter = await snapshotJSON(`${base}/data/chapters/${chapterId}.json`, signal);
+    const map = chapter.knowledge_map;
+    const nodeId = pathname.slice('/api/knowledge-nodes/'.length);
+    const node = map?.nodes?.find(item => item.knowledge_node_id === nodeId);
+    if (!map?.available || !node) throw requestError(404, '未找到已审核的知识节点。');
+    return { node, relations: map.relations.filter(item => item.from_node_id === nodeId || item.to_node_id === nodeId),
+      question_context: { chapter_id: chapterId, knowledge_node_id: nodeId, name: node.name,
+        allowed_sources: node.source_refs.map(ref => ({ ...ref, canonical_id: '' })) } };
+  }
   else if (/^\/api\/documents\/CH0[1-9]-S\d{3}$/.test(pathname)) file = pathname.slice(5);
   else if (pathname !== '/api/resources') throw requestError(404, '未找到资料。');
   if (file) return snapshotJSON(`${base}/data/${file}.json`, signal);

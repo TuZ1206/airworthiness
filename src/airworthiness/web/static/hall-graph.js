@@ -3,6 +3,14 @@ import { el, list, link, resourceURL } from './hall-core.js';
 
 const kindName = { law: '法规', norm: '规范', concept: '概念', process: '过程', material: '材料' };
 const SVG_NS = 'http://www.w3.org/2000/svg';
+// Each color describes a relation, never an inferred property of either endpoint.
+const relationColors = {
+  依据: '#2859a3', 规定: '#165f88', 细化: '#087e8b', 操作化: '#a5621b',
+  验证: '#2f7957', 支撑: '#648227', 传递: '#328a73', 约束: '#b34859',
+  衔接: '#6261a7', 触发: '#b85a32', 包含: '#6f7190', 责任锚定: '#825378',
+  延伸监管: '#8b6940', 边界: '#8c5155', 补充: '#936ba2', 前置: '#935b2c'
+};
+const relationColor = type => relationColors[type] || '#607688';
 
 function svgEl(tag, attrs = {}) {
   const node = document.createElementNS(SVG_NS, tag);
@@ -78,7 +86,7 @@ function renderChapterGraph(chapter, inDocument = false) {
   const relations = layout.edges;
   const root = el('section', { id: 'chapter-graph', class: 'chapter-graph', 'aria-labelledby': 'chapter-graph-title' });
   const details = el('details', { class: 'graph-disclosure', open: !inDocument });
-  const stage = el('div', { class: 'graph-stage', role: 'group', 'aria-label': '章节节点关系图' });
+  const stage = el('div', { class: 'graph-stage', role: 'group', 'aria-label': '资料关系索引图' });
   stage.style.width = `${layout.width}px`;
   stage.style.height = `${layout.height}px`;
   const svg = svgEl('svg', { class: 'graph-lines', width: layout.width, height: layout.height,
@@ -87,7 +95,9 @@ function renderChapterGraph(chapter, inDocument = false) {
   for (const edge of relations) {
     const a = layout.points.get(edge.from_node_id), b = layout.points.get(edge.to_node_id);
     const line = svgEl('line', { x1: a.x, y1: a.y, x2: b.x, y2: b.y,
-      class: 'graph-relation-line', 'data-from': edge.from_node_id, 'data-to': edge.to_node_id });
+      class: 'graph-relation-line', 'data-from': edge.from_node_id, 'data-to': edge.to_node_id,
+      'data-relation-type': edge.type });
+    line.style.setProperty('--relation-color', relationColor(edge.type));
     edgeEls.push({ edge, line });
     svg.append(line);
   }
@@ -135,24 +145,34 @@ function renderChapterGraph(chapter, inDocument = false) {
         const outgoing = edge.from_node_id === id;
         const peerId = outgoing ? edge.to_node_id : edge.from_node_id;
         const peer = nodes.get(peerId);
-        return el('li', {},
+        const item = el('li', {},
           el('button', { type: 'button', class: 'graph-edge-button', onclick: () => {
             selectNode(peerId);
             nodeButtons.get(peerId)?.scrollIntoView({ block: 'nearest', inline: 'nearest' });
-          } }, `${outgoing ? '→' : '←'} ${edge.type} · ${peer?.name || peerId}`),
+          } }, el('span', { class: 'graph-edge-swatch', 'aria-hidden': 'true' }),
+          `${outgoing ? '→' : '←'} ${edge.type} · ${peer?.name || peerId}`),
           el('p', { class: 'graph-edge-evidence' }, `${edge.source_id} · ${edge.evidence}`));
+        item.style.setProperty('--relation-color', relationColor(edge.type));
+        return item;
       })) : el('p', { class: 'graph-empty' }, '此节点在现有关系表中没有关联项。'));
   }
 
+  const relationLegend = [...new Set(relations.map(edge => edge.type))].map(type => {
+    const item = el('span', { class: 'graph-key-item' },
+      el('span', { class: 'graph-key-swatch', 'aria-hidden': 'true' }), type);
+    item.style.setProperty('--relation-color', relationColor(type));
+    return item;
+  });
+
   details.append(
     el('summary', { class: 'graph-summary' },
-      el('span', { class: 'graph-summary-title', id: 'chapter-graph-title' }, '本章知识图谱'),
+      el('span', { class: 'graph-summary-title', id: 'chapter-graph-title' }, '资料关系索引'),
       el('span', { class: 'graph-summary-count' }, `${nodes.size} 个节点 · ${relations.length} 条关联`),
       el('span', { class: 'graph-summary-action' }, '展开／收起')),
-    el('p', { class: 'graph-intro' }, '点击节点查看适航概念、关联关系及来源条款。'),
-    el('p', { class: 'graph-key' }, el('span', { class: 'graph-key-relation' }, '连线：已有关系'),
-      el('span', { class: 'graph-key-focus' }, '深蓝：当前节点及关联'),
-      el('span', { class: 'graph-key-pan' }, '图幅较宽时可横向滚动')),
+    el('p', { class: 'graph-intro' }, '此索引按已收录资料及其“依据、细化、衔接”等关系生成，用于来源追溯和资料跳转；它不替代章节知识总览。'),
+    el('div', { class: 'graph-key', 'aria-label': '关联类型颜色图例' },
+      el('span', { class: 'graph-key-label' }, '关联类型'), relationLegend,
+      el('span', { class: 'graph-key-pan' }, '点击节点突出其关联；图幅较宽时可横向滚动')),
     el('div', { class: 'graph-layout' }, el('div', { class: 'graph-tree-wrap' }, stage), panel));
   root.append(details);
   selectNode(layout.hubId);

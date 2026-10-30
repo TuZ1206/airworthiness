@@ -12,6 +12,8 @@ from pathlib import Path
 
 from .ingest import load_inputs
 from .chapter_graph import build_chapter_graph
+from .identity import build_document_identity
+from .knowledge_maps import load_knowledge_maps, load_review_ledger, public_map
 from .reading import render_document
 
 PUBLIC_FIELDS = "source_id,title,chapter_id,chapter_title,document_code,document_status,publish_date,url,review_status,content_kind".split(",")
@@ -32,10 +34,10 @@ def connect(path):
 
 def input_fingerprint(root):
     root = Path(root).resolve()
-    paths = [path for folder in ("chapters", "acquired", "verification")
+    paths = [path for folder in ("chapters", "acquired", "verification", "knowledge-maps", "reviews")
              for path in sorted((root / "data" / folder).rglob("*"))]
     digest = hashlib.sha256()
-    for module in ("catalog.py", "chapter_graph.py", "ingest.py", "reading.py", "locators.py", "verification.py"):
+    for module in ("catalog.py", "chapter_graph.py", "identity.py", "knowledge_maps.py", "ingest.py", "reading.py", "locators.py", "verification.py"):
         path = Path(__file__).with_name(module)
         digest.update(module.encode())
         digest.update(path.read_bytes() if path.is_file() else b"<not-installed>")
@@ -51,6 +53,11 @@ def input_fingerprint(root):
 def build_catalog(root, path):
     root, path = Path(root).resolve(), Path(path).resolve()
     chapters, docs, terms, errors, issues = load_inputs(root)
+    review_rows, review_ledger, review_errors = load_review_ledger(root)
+    knowledge_maps, _, knowledge_errors = load_knowledge_maps(root, chapters, docs, review_ledger)
+    identity = build_document_identity(docs)
+    errors.extend(review_errors)
+    errors.extend(knowledge_errors)
     if errors:
         raise ValueError("Data validation failed:\n" + "\n".join(errors))
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -65,12 +72,97 @@ def build_catalog(root, path):
                   search_text TEXT, payload TEXT NOT NULL);
                 CREATE INDEX docs_chapter ON documents(chapter_id);
                 CREATE TABLE terms (term_id TEXT PRIMARY KEY, chapter_id TEXT, source_id TEXT, payload TEXT);
+                CREATE TABLE canonical_documents (
+                  canonical_id TEXT PRIMARY KEY, canonical_url TEXT NOT NULL,
+                  normalized_code TEXT NOT NULL, markdown_sha256 TEXT NOT NULL,
+                  title TEXT, document_status TEXT, review_status TEXT, payload TEXT NOT NULL,
+                  UNIQUE(canonical_url, normalized_code, markdown_sha256)
+                );
+                CREATE TABLE chapter_sources (
+                  source_id TEXT PRIMARY KEY, chapter_id TEXT NOT NULL,
+                  canonical_id TEXT NOT NULL REFERENCES canonical_documents(canonical_id)
+                );
+                CREATE INDEX chapter_sources_canonical ON chapter_sources(canonical_id);
+                CREATE TABLE document_aliases (
+                  canonical_id TEXT NOT NULL REFERENCES canonical_documents(canonical_id),
+                  alias_type TEXT NOT NULL, alias TEXT NOT NULL, source_id TEXT NOT NULL,
+                  PRIMARY KEY(canonical_id, alias_type, alias, source_id)
+                );
+                CREATE INDEX document_aliases_lookup ON document_aliases(alias);
+                CREATE TABLE identity_conflicts (
+                  conflict_id INTEGER PRIMARY KEY, conflict_type TEXT NOT NULL, conflict_key TEXT NOT NULL,
+                  source_ids TEXT NOT NULL, detail TEXT NOT NULL
+                );
+                CREATE TABLE knowledge_maps (
+                  chapter_id TEXT PRIMARY KEY, review_status TEXT NOT NULL, version TEXT NOT NULL,
+                  payload TEXT NOT NULL
+                );
+                CREATE TABLE knowledge_nodes (
+                  knowledge_node_id TEXT PRIMARY KEY, chapter_id TEXT NOT NULL, name TEXT NOT NULL,
+                  category TEXT NOT NULL, review_status TEXT NOT NULL, payload TEXT NOT NULL
+                );
+                CREATE INDEX knowledge_nodes_name ON knowledge_nodes(name);
+                CREATE TABLE knowledge_relations (
+                  knowledge_relation_id TEXT PRIMARY KEY, chapter_id TEXT NOT NULL,
+                  from_node_id TEXT NOT NULL, relation_type TEXT NOT NULL, to_node_id TEXT NOT NULL,
+                  review_status TEXT NOT NULL, payload TEXT NOT NULL
+                );
+                CREATE TABLE knowledge_source_refs (
+                  entity_type TEXT NOT NULL, entity_id TEXT NOT NULL, source_id TEXT NOT NULL,
+                  source_locator TEXT NOT NULL,
+                  PRIMARY KEY(entity_type, entity_id, source_id, source_locator)
+                );
+                CREATE TABLE review_ledger (
+                  entity_type TEXT NOT NULL, entity_id TEXT NOT NULL, review_status TEXT NOT NULL,
+                  reviewer TEXT, reviewed_at TEXT, basis_source_ids TEXT, comment TEXT,
+                  data_version TEXT, line INTEGER NOT NULL,
+                  PRIMARY KEY(entity_type, entity_id, line)
+                );
                 CREATE TABLE metadata (key TEXT PRIMARY KEY, value TEXT NOT NULL);
                 CREATE VIRTUAL TABLE search USING fts5(search_text, tokenize='trigram');
             """)
             for chapter in chapters:
                 chapter["graph"] = build_chapter_graph(root, chapter, docs)
+                chapter["knowledge_map"] = public_map(
+                    knowledge_maps.get(chapter["id"]), review_ledger,
+                    {doc["source_id"]: doc for doc in docs})
                 db.execute("INSERT INTO chapters VALUES (?,?)", (chapter["id"], json.dumps(chapter, ensure_ascii=False)))
+            for item in identity["canonical_documents"]:
+                db.execute("INSERT INTO canonical_documents VALUES (?,?,?,?,?,?,?,?)", (
+                    item["canonical_id"], item["canonical_url"], item["normalized_code"],
+                    item["markdown_sha256"], item["title"], item["document_status"],
+                    item["review_status"], json.dumps(item, ensure_ascii=False)))
+            for item in identity["chapter_sources"]:
+                db.execute("INSERT INTO chapter_sources VALUES (?,?,?)", (
+                    item["source_id"], item["chapter_id"], item["canonical_id"]))
+            for item in identity["aliases"]:
+                db.execute("INSERT INTO document_aliases VALUES (?,?,?,?)", (
+                    item["canonical_id"], item["alias_type"], item["alias"], item["source_id"]))
+            for item in identity["conflicts"]:
+                db.execute("INSERT INTO identity_conflicts(conflict_type,conflict_key,source_ids,detail) VALUES (?,?,?,?)", (
+                    item["conflict_type"], item["conflict_key"], json.dumps(item["source_ids"], ensure_ascii=False), item["detail"]))
+            for chapter_id, item in knowledge_maps.items():
+                db.execute("INSERT INTO knowledge_maps VALUES (?,?,?,?)", (
+                    chapter_id, item["review_status"], item["version"], json.dumps(item, ensure_ascii=False)))
+                for node in item["nodes"]:
+                    db.execute("INSERT INTO knowledge_nodes VALUES (?,?,?,?,?,?)", (
+                        node["knowledge_node_id"], chapter_id, node["name"], node["category"],
+                        node["review_status"], json.dumps(node, ensure_ascii=False)))
+                    for ref in node["source_refs"]:
+                        db.execute("INSERT INTO knowledge_source_refs VALUES (?,?,?,?)", (
+                            "knowledge_node", node["knowledge_node_id"], ref["source_id"], ref["source_locator"]))
+                for relation in item["relations"]:
+                    db.execute("INSERT INTO knowledge_relations VALUES (?,?,?,?,?,?,?)", (
+                        relation["knowledge_relation_id"], chapter_id, relation["from_node_id"], relation["type"],
+                        relation["to_node_id"], relation["review_status"], json.dumps(relation, ensure_ascii=False)))
+                    for ref in relation["source_refs"]:
+                        db.execute("INSERT INTO knowledge_source_refs VALUES (?,?,?,?)", (
+                            "knowledge_relation", relation["knowledge_relation_id"], ref["source_id"], ref["source_locator"]))
+            for line, item in enumerate(review_rows, start=2):
+                db.execute("INSERT INTO review_ledger VALUES (?,?,?,?,?,?,?,?,?)", (
+                    item["entity_type"], item["entity_id"], item["review_status"], item["reviewer"],
+                    item["reviewed_at"], item["basis_source_ids"], item["comment"], item["data_version"],
+                    line))
             for doc in docs:
                 search_text = re.sub(r"\s+", "", doc["title"] + " " + doc["document_code"] + " " + doc["body"]).lower()
                 db.execute("INSERT INTO documents VALUES (?,?,?,?,?,?,?,?)", (doc["source_id"], doc["chapter_id"], doc["title"], doc["document_code"], doc["document_status"], doc["content_kind"], search_text, json.dumps(doc, ensure_ascii=False)))
@@ -78,7 +170,8 @@ def build_catalog(root, path):
                 db.execute("INSERT INTO search(rowid,search_text) VALUES (?,?)", (rowid, search_text))
             for term in terms:
                 db.execute("INSERT INTO terms VALUES (?,?,?,?)", (term["term_id"], term["chapter_id"], term["source_id"], json.dumps(term, ensure_ascii=False)))
-            for key, value in {"generated_at": datetime.now(timezone.utc).isoformat(), "fingerprint": input_fingerprint(root), "issues": issues, "errors": errors}.items():
+            for key, value in {"generated_at": datetime.now(timezone.utc).isoformat(), "fingerprint": input_fingerprint(root), "issues": issues, "errors": errors,
+                               "identity_conflicts": identity["conflicts"]}.items():
                 db.execute("INSERT INTO metadata VALUES (?,?)", (key, json.dumps(value, ensure_ascii=False)))
             db.commit()
         os.replace(temporary, path)
@@ -175,6 +268,44 @@ def chapter(path, chapter_id):
         text = "## 阅读导引\n\n" + result["description"] + "\n\n本页为资料导航，不构成官方原文或专业结论。选择左侧文件，可在本页阅读现有正文。\n\n## 本章主题\n\n" + "\n".join("- " + x for x in result.get("topics", [])) + "\n\n## 使用提示\n\n先查看文件有效状态与正文可用性，再核对相关段落。所有待审资料均需专业成员复核。"
     result["guide_html"] = render_document(text)[0]
     return result
+
+
+def knowledge_map(path, chapter_id):
+    """Return the public, professionally reviewed knowledge map only."""
+    with connect(path) as db:
+        row = db.execute("SELECT payload FROM chapters WHERE id=?", (chapter_id,)).fetchone()
+    if not row:
+        return None
+    return json.loads(row[0]).get("knowledge_map", {
+        "chapter_id": chapter_id, "available": False, "message": "章节知识导图暂未发布。"})
+
+
+def knowledge_node(path, knowledge_node_id):
+    """Return an approved node and a deliberately bounded future AI context."""
+    with connect(path) as db:
+        row = db.execute("SELECT chapter_id FROM knowledge_nodes WHERE knowledge_node_id=?", (knowledge_node_id,)).fetchone()
+        if not row:
+            return None
+        chapter_row = db.execute("SELECT payload FROM chapters WHERE id=?", (row["chapter_id"],)).fetchone()
+    if not chapter_row:
+        return None
+    payload = json.loads(chapter_row[0]).get("knowledge_map")
+    if not payload or not payload.get("available"):
+        return None
+    node = next((item for item in payload.get("nodes", []) if item["knowledge_node_id"] == knowledge_node_id), None)
+    if not node:
+        return None
+    related = [item for item in payload.get("relations", []) if knowledge_node_id in
+               (item["from_node_id"], item["to_node_id"])]
+    with connect(path) as db:
+        allowed = []
+        for ref in node["source_refs"]:
+            source = db.execute("SELECT canonical_id FROM chapter_sources WHERE source_id=?", (ref["source_id"],)).fetchone()
+            if source:
+                allowed.append({**ref, "canonical_id": source["canonical_id"]})
+    return {"node": node, "relations": related, "question_context": {
+        "chapter_id": payload["chapter_id"], "knowledge_node_id": knowledge_node_id,
+        "name": node["name"], "allowed_sources": allowed}}
 
 
 def document(path, source_id):

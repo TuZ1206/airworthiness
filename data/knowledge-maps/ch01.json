@@ -1,0 +1,16 @@
+{
+  "chapter_id": "ch01", "title": "复合材料适航法规体系概论", "version": "v1", "review_status": "pending",
+  "nodes": [
+    {"knowledge_node_id":"KM-CH01-N001","name":"复合材料适航法规体系","category":"章节总览","summary":"组织法规层级、初始适航、产品标准和持续适航四条阅读主线。","source_refs":[{"source_id":"CH01-S001","source_locator":""}],"review_status":"pending"},
+    {"knowledge_node_id":"KM-CH01-N002","name":"法规层级与基本概念","category":"法规基础","summary":"辨认法律、行政法规和规范性文件在适航管理中的层级与适用边界。","source_refs":[{"source_id":"CH01-S001","source_locator":""},{"source_id":"CH01-S002","source_locator":""}],"review_status":"pending"},
+    {"knowledge_node_id":"KM-CH01-N003","name":"型号、生产与委任的证件链","category":"审定活动","summary":"从型号审定、生产批准和委任制度理解初始适航的责任链。","source_refs":[{"source_id":"CH01-S005","source_locator":""},{"source_id":"CH01-S006","source_locator":""}],"review_status":"pending"},
+    {"knowledge_node_id":"KM-CH01-N004","name":"产品适航标准与复合材料","category":"法规基础","summary":"按航空器类别进入适航标准，并区分公开正文与仅有状态信息的标准。","source_refs":[{"source_id":"CH01-S008","source_locator":""},{"source_id":"CH01-S020","source_locator":""}],"review_status":"pending"},
+    {"knowledge_node_id":"KM-CH01-N005","name":"持续适航与后续管理","category":"跨章接口","summary":"连接适航批准后的安全改进、适航指令和维修活动。","source_refs":[{"source_id":"CH01-S013","source_locator":""},{"source_id":"CH01-S014","source_locator":""}],"review_status":"pending"}
+  ],
+  "relations": [
+    {"knowledge_relation_id":"KM-CH01-R001","from_node_id":"KM-CH01-N001","type":"组成","to_node_id":"KM-CH01-N002","source_refs":[{"source_id":"CH01-S001","source_locator":""}],"review_status":"pending"},
+    {"knowledge_relation_id":"KM-CH01-R002","from_node_id":"KM-CH01-N001","type":"组成","to_node_id":"KM-CH01-N003","source_refs":[{"source_id":"CH01-S005","source_locator":""}],"review_status":"pending"},
+    {"knowledge_relation_id":"KM-CH01-R003","from_node_id":"KM-CH01-N001","type":"组成","to_node_id":"KM-CH01-N004","source_refs":[{"source_id":"CH01-S008","source_locator":""}],"review_status":"pending"},
+    {"knowledge_relation_id":"KM-CH01-R004","from_node_id":"KM-CH01-N001","type":"组成","to_node_id":"KM-CH01-N005","source_refs":[{"source_id":"CH01-S013","source_locator":""}],"review_status":"pending"}
+  ]
+}

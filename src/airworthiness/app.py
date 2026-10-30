@@ -62,6 +62,20 @@ def create_app(settings=None):
             abort(404, description="未找到该章节")
         return jsonify(result)
 
+    @app.get("/api/chapters/<chapter_id>/knowledge-map")
+    def knowledge_map(chapter_id):
+        result = catalog.knowledge_map(app.config["DATABASE"], chapter_id)
+        if not result:
+            abort(404, description="未找到该章节")
+        return jsonify(result)
+
+    @app.get("/api/knowledge-nodes/<knowledge_node_id>")
+    def knowledge_node(knowledge_node_id):
+        result = catalog.knowledge_node(app.config["DATABASE"], knowledge_node_id)
+        if not result:
+            abort(404, description="未找到已审核的知识节点")
+        return jsonify(result)
+
     @app.get("/api/documents/<source_id>")
     def document(source_id):
         result = catalog.document(app.config["DATABASE"], source_id)

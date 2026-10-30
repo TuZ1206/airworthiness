@@ -2,6 +2,7 @@ import { main, announcer, mobile, reducedMotion, state, el, list, count, chapter
 import { readingHTML, highlight, reflowExtractedBlocks, structureExtractedTables, guardExtractedGlyphs } from './hall-content.js';
 import { createDocumentView } from './hall-document-view.js';
 import { renderChapterGraph } from './hall-graph.js';
+import { renderKnowledgeMap } from './hall-knowledge-map.js';
 import { staticMode } from './hall-core.js';
 
 function readerPanel(className, title, content) {
@@ -86,8 +87,9 @@ function renderReaderSidebar(container, chapter, selectedSource, chapters, toc) 
   container.replaceChildren(
     el('p', { class: 'sidebar-label' }, '九章索引'), switcher,
     link('本章导读', chapterURL(chapter.id), { class: 'guide-link', 'aria-current': selectedSource ? null : 'page' }),
+    el('a', { href: '#knowledge-map', class: 'guide-link', 'data-toc-target': 'knowledge-map' }, '章节知识导图'),
     chapter.graph?.nodes?.length ? el('a', { href: '#chapter-graph', class: 'guide-link', 'data-toc-target': 'chapter-graph' },
-      `本章知识图谱 · ${chapter.graph.nodes.length} 个节点`) : null,
+      `资料关系索引 · ${chapter.graph.nodes.length} 个节点`) : null,
     el('details', { class: 'toc-disclosure', open: !selectedSource && Boolean(chapter.guide?.sections?.length) },
       el('summary', {}, selectedSource ? `文字目录 · ${toc.length} 处定位` : '专题导航'),
       el('nav', { 'aria-label': '当前内容目录' },
@@ -328,6 +330,8 @@ async function renderReader(chapterId, signal, generation) {
   const related = isDoc ? list(doc.related_sources) : [];
   if (related.length) inner.append(el('section', { class: 'related-sources', 'aria-label': '相关资料' }, el('h2', {}, '继续阅读 · 相关资料'),
     related.map(item => link([item.title || item.source_id, el('small', {}, `${item.source_id} · ${item.chapter_title || item.chapter_id || ''}`)], resourceURL(item)))));
+  const knowledgeMap = renderKnowledgeMap(chapter.knowledge_map, chapter, isDoc);
+  if (knowledgeMap) inner.append(knowledgeMap);
   const graph = renderChapterGraph(chapter, isDoc);
   if (graph) inner.append(graph);
   inner.append(el('div', { class: 'reading-end' }, el('span', {}, '阅读位置自动保存在当前浏览器会话中'),

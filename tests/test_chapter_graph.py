@@ -2,6 +2,8 @@
 import unittest
 import shutil
 import subprocess
+import csv
+import re
 from pathlib import Path
 
 from airworthiness.chapter_graph import build_chapter_graph
@@ -72,6 +74,22 @@ assert.ok(layout.width>=1000&&layout.height>=780);
         result = subprocess.run([shutil.which("node"), "-e", script, str(path)],
                                 capture_output=True, text=True, encoding="utf-8", timeout=15)
         self.assertEqual(result.returncode, 0, result.stderr)
+
+    def test_relation_types_have_distinct_colors_and_matching_legend(self):
+        script = (ROOT / "src/airworthiness/web/static/hall-graph.js").read_text(encoding="utf-8")
+        css = (ROOT / "src/airworthiness/web/static/hall.css").read_text(encoding="utf-8")
+        colors = dict(re.findall(r"([\u4e00-\u9fff]+): '(#[0-9a-f]{6})'", script))
+        types = set()
+        for chapter in self.chapters:
+            path = ROOT / "data" / "chapters" / chapter["id"] / "relations.csv"
+            with path.open(encoding="utf-8-sig", newline="") as source:
+                types.update(row["type"] for row in csv.DictReader(source))
+        self.assertTrue(types <= colors.keys(), types - colors.keys())
+        self.assertEqual(len(colors), len(set(colors.values())))
+        self.assertIn("line.style.setProperty('--relation-color', relationColor(edge.type))", script)
+        self.assertIn("relationLegend", script)
+        self.assertIn("stroke: var(--relation-color", css)
+        self.assertNotRegex(css, r"\.graph-relation-line\.is-active\s*\{[^}]*stroke:")
 
 
 if __name__ == "__main__":

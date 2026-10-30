@@ -1,0 +1,20 @@
+{
+  "chapter_id":"ch08","title":"疲劳与损伤容限要求","version":"v1","review_status":"pending",
+  "nodes":[
+    {"knowledge_node_id":"KM-CH08-N001","name":"疲劳与损伤容限要求","category":"章节总览","summary":"组织法规基础、损伤威胁、疲劳与广布疲劳损伤、修理和检查大纲。","source_refs":[{"source_id":"CH08-S001","source_locator":""}],"review_status":"pending"},
+    {"knowledge_node_id":"KM-CH08-N002","name":"疲劳与损伤容限的法规基础","category":"法规基础","summary":"从结构强度和持续适航资料识别疲劳与损伤容限的适用边界。","source_refs":[{"source_id":"CH08-S001","source_locator":""},{"source_id":"CH08-S004","source_locator":""}],"review_status":"pending"},
+    {"knowledge_node_id":"KM-CH08-N003","name":"损伤威胁与可检性","category":"评定活动","summary":"组织损伤威胁识别、可检性和相关标准状态的资料线索。","source_refs":[{"source_id":"CH08-S006","source_locator":""},{"source_id":"CH08-S002","source_locator":""}],"review_status":"pending"},
+    {"knowledge_node_id":"KM-CH08-N004","name":"损伤扩展、疲劳与广布疲劳损伤","category":"评定活动","summary":"连接损伤扩展、疲劳分析和广布疲劳损伤的资料入口。","source_refs":[{"source_id":"CH08-S001","source_locator":""},{"source_id":"CH08-S004","source_locator":""}],"review_status":"pending"},
+    {"knowledge_node_id":"KM-CH08-N005","name":"冲击、离散源损伤与环境影响","category":"评定活动","summary":"将冲击和环境影响作为损伤容限评定的专题边界。","source_refs":[{"source_id":"CH08-S001","source_locator":""},{"source_id":"CH08-S006","source_locator":""}],"review_status":"pending"},
+    {"knowledge_node_id":"KM-CH08-N006","name":"修理批准与验证边界","category":"审定活动","summary":"区分设计修理、批准资料与运营维修责任。","source_refs":[{"source_id":"CH08-S003","source_locator":""},{"source_id":"CH08-S007","source_locator":""}],"review_status":"pending"},
+    {"knowledge_node_id":"KM-CH08-N007","name":"检查大纲与持续结构完整性","category":"跨章接口","summary":"连接检查大纲、持续结构完整性和运行阶段资料。","source_refs":[{"source_id":"CH08-S005","source_locator":""},{"source_id":"CH08-S008","source_locator":""}],"review_status":"pending"}
+  ],
+  "relations":[
+    {"knowledge_relation_id":"KM-CH08-R001","from_node_id":"KM-CH08-N001","type":"组成","to_node_id":"KM-CH08-N002","source_refs":[{"source_id":"CH08-S001","source_locator":""}],"review_status":"pending"},
+    {"knowledge_relation_id":"KM-CH08-R002","from_node_id":"KM-CH08-N002","type":"前提","to_node_id":"KM-CH08-N003","source_refs":[{"source_id":"CH08-S006","source_locator":""}],"review_status":"pending"},
+    {"knowledge_relation_id":"KM-CH08-R003","from_node_id":"KM-CH08-N003","type":"验证","to_node_id":"KM-CH08-N004","source_refs":[{"source_id":"CH08-S001","source_locator":""}],"review_status":"pending"},
+    {"knowledge_relation_id":"KM-CH08-R004","from_node_id":"KM-CH08-N004","type":"约束","to_node_id":"KM-CH08-N005","source_refs":[{"source_id":"CH08-S006","source_locator":""}],"review_status":"pending"},
+    {"knowledge_relation_id":"KM-CH08-R005","from_node_id":"KM-CH08-N004","type":"衔接","to_node_id":"KM-CH08-N006","source_refs":[{"source_id":"CH08-S003","source_locator":""}],"review_status":"pending"},
+    {"knowledge_relation_id":"KM-CH08-R006","from_node_id":"KM-CH08-N006","type":"输出","to_node_id":"KM-CH08-N007","source_refs":[{"source_id":"CH08-S007","source_locator":""}],"review_status":"pending"}
+  ]
+}

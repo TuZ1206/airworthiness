@@ -26,6 +26,10 @@ class AppTests(unittest.TestCase):
         self.assertEqual(self.client.get('/api/overview').json['totals']['sources'], 189)
         self.assertGreater(self.client.get('/api/resources?q=适航').json['total'], 0)
         self.assertEqual(self.client.get('/api/chapters/ch03').json['id'], 'ch03')
+        knowledge_map = self.client.get('/api/chapters/ch03/knowledge-map')
+        self.assertEqual(knowledge_map.status_code, 200)
+        self.assertFalse(knowledge_map.json['available'])
+        self.assertEqual(self.client.get('/api/knowledge-nodes/KM-CH03-N001').status_code, 404)
         self.assertIn('html', self.client.get('/api/documents/CH03-S001').json)
         self.assertEqual(len(self.client.get('/api/quality').json['chapters']), 9)
 

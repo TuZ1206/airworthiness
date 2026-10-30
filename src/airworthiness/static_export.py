@@ -32,7 +32,7 @@ MAX_ORIGINALS_BYTES = 350 * 1024 * 1024
 MAX_SITE_BYTES = 1024 ** 3
 STATIC_ASSETS = (
     "hall.css", "hall.js", "hall-core.js", "hall-app.js", "hall-home.js",
-    "hall-content.js", "hall-document-view.js", "hall-graph.js", "hall-reader.js",
+    "hall-content.js", "hall-document-view.js", "hall-graph.js", "hall-knowledge-map.js", "hall-reader.js",
     "hall-quality.js", "hall-static.js",
 )
 # Acquisition payloads also contain local paths and raw diagnostic logs.
