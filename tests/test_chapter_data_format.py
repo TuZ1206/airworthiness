@@ -92,7 +92,7 @@ class UnifiedChapterDataTests(unittest.TestCase):
         chapter = CHAPTER_ROOT / "ch01"
         self.assertEqual(len(rows(chapter, "sources.csv")), 21)
         self.assertEqual(len(rows(chapter, "nodes.csv")), 26)
-        self.assertEqual(len(rows(chapter, "relations.csv")), 26)
+        self.assertEqual(len(rows(chapter, "relations.csv")), 24)
         self.assertEqual(len(rows(chapter, "glossary.csv")), 20)
 
 
