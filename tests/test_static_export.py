@@ -60,12 +60,21 @@ def make_inputs(root, count=3):
         cid = chapter["id"]
         folder = chapter_root / cid
         write_csv(folder / "sources.csv", ingest.SOURCE_FIELDS, rows_by_chapter[cid])
+        write_csv(folder / "nodes.csv", "node_id,chapter_id,label,name,code,summary,display_type,source_id,source_locator,priority,review_status".split(","), [])
+        write_csv(folder / "relations.csv", "relation_id,from_node_id,type,to_node_id,source_id,evidence,review_status".split(","), [])
         terms = []
         if cid == "ch01":
             terms.append(dict(term_id="CH01-T001", term="适航材料", aliases="", definition="编辑释义",
                               group="测试", has_page="true", anchor_or_url="#original-anchor",
                               related_node_id="", source_id="CH01-S001", review_status="pending", quote=""))
         write_csv(folder / "glossary.csv", GLOSSARY_FIELDS, terms)
+    property_folder = root / "data/property-index"
+    property_folder.mkdir(parents=True)
+    write_csv(property_folder / "source-map.csv",
+              "source_id,property_id,sort_order,mapping_status,mapping_note".split(","),
+              [dict(source_id=row["source_id"], property_id="general", sort_order=str(index),
+                    mapping_status="pending", mapping_note="测试目录")
+               for index, row in enumerate(rows_by_chapter["ch01"] + rows_by_chapter["ch02"], 1)])
     acquired = root / "data/acquired/documents"
     acquired.mkdir(parents=True)
     source = acquired / "fixture.md"

@@ -3,6 +3,7 @@ import unittest
 import shutil
 import subprocess
 import csv
+import json
 import re
 from pathlib import Path
 
@@ -90,6 +91,38 @@ assert.ok(layout.width>=1000&&layout.height>=780);
         self.assertIn("relationLegend", script)
         self.assertIn("stroke: var(--relation-color", css)
         self.assertNotRegex(css, r"\.graph-relation-line\.is-active\s*\{[^}]*stroke:")
+
+    def test_group_outlines_do_not_overlap_in_any_chapter(self):
+        if not shutil.which("node"):
+            self.skipTest("Node.js unavailable")
+        graphs = [build_chapter_graph(ROOT, chapter, self.documents) for chapter in self.chapters]
+        script = r"""
+const fs=require('node:fs'), vm=require('node:vm'), assert=require('node:assert/strict');
+const code=fs.readFileSync(process.argv[1],'utf8').replace(/^import .*;\r?$/gm,'').replace(/^export .*;\r?$/gm,'');
+const context={list:value=>Array.isArray(value)?value:[]};
+vm.createContext(context); vm.runInContext(code,context);
+const {groupFor,clusterOutline}=vm.runInContext('({groupFor,clusterOutline})',context);
+for (const [chapterIndex,graph] of JSON.parse(fs.readFileSync(0,'utf8')).entries()) {
+  const layout=context.layoutGraph(graph), groups=new Map();
+  assert.equal(layout.points.size,graph.nodes.length);
+  for (const node of graph.nodes) {
+    const group=groupFor(node);
+    if (!groups.has(group)) groups.set(group,[]);
+    groups.get(group).push(layout.points.get(node.node_id));
+  }
+  const outlines=[...groups].map(([group,points])=>({group,...clusterOutline(points).bounds}));
+  for (let i=0;i<outlines.length;i++) for (let j=i+1;j<outlines.length;j++) {
+    const a=outlines[i],b=outlines[j];
+    assert.ok(a.right<b.left||b.right<a.left||a.bottom<b.top||b.bottom<a.top,
+      `chapter ${chapterIndex+1}: ${a.group} overlaps ${b.group}`);
+  }
+}
+"""
+        path = ROOT / "src/airworthiness/web/static/hall-graph.js"
+        result = subprocess.run([shutil.which("node"), "-e", script, str(path)],
+                                input=json.dumps(graphs, ensure_ascii=False), capture_output=True,
+                                text=True, encoding="utf-8", timeout=30)
+        self.assertEqual(result.returncode, 0, result.stderr)
 
 
 if __name__ == "__main__":

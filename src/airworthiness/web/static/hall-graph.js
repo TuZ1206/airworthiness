@@ -1,4 +1,4 @@
-/* Circles are source-backed nodes; lines are actual CSV relations. */
+/* Circles are source-backed nodes; colored lines are actual CSV relations. */
 import { el, list, link, resourceURL } from './hall-core.js';
 
 const kindName = { law: '法规', norm: '规范', concept: '概念', process: '过程', material: '材料' };
@@ -11,6 +11,19 @@ const relationColors = {
   延伸监管: '#8b6940', 边界: '#8c5155', 补充: '#936ba2', 前置: '#935b2c'
 };
 const relationColor = type => relationColors[type] || '#607688';
+const groupFor = node => {
+  if (['law', 'norm', 'article', 'standard', 'guidance'].includes(node.display_type)) return 'source';
+  if (['process', 'method', 'control', 'procedure', 'inspection', 'responsibility', 'interface'].includes(node.display_type)) return 'activity';
+  if (['evidence', 'record'].includes(node.display_type)) return 'evidence';
+  return 'concept';
+};
+const groupNames = { source: '法规与资料', concept: '概念与要求', activity: '过程与方法', evidence: '证据与记录' };
+const groupCenters = (cellWidth, cellHeight, gap, padding) => ({
+  source: { x: padding + cellWidth / 2, y: padding + cellHeight / 2 },
+  concept: { x: padding + cellWidth * 1.5 + gap, y: padding + cellHeight / 2 },
+  activity: { x: padding + cellWidth * 1.5 + gap, y: padding + cellHeight * 1.5 + gap },
+  evidence: { x: padding + cellWidth / 2, y: padding + cellHeight * 1.5 + gap }
+});
 
 function svgEl(tag, attrs = {}) {
   const node = document.createElementNS(SVG_NS, tag);
@@ -18,15 +31,48 @@ function svgEl(tag, attrs = {}) {
   return node;
 }
 
+function clusterOutline(points) {
+  const corners = points.flatMap(point => [
+    { x: point.x - 140, y: point.y - 115 }, { x: point.x + 140, y: point.y - 115 },
+    { x: point.x + 140, y: point.y + 135 }, { x: point.x - 140, y: point.y + 135 }
+  ]).sort((a, b) => a.x - b.x || a.y - b.y);
+  const cross = (a, b, c) => (b.x - a.x) * (c.y - a.y) - (b.y - a.y) * (c.x - a.x);
+  const lower = [], upper = [];
+  for (const point of corners) {
+    while (lower.length > 1 && cross(lower[lower.length - 2], lower[lower.length - 1], point) <= 0) lower.pop();
+    lower.push(point);
+  }
+  for (const point of [...corners].reverse()) {
+    while (upper.length > 1 && cross(upper[upper.length - 2], upper[upper.length - 1], point) <= 0) upper.pop();
+    upper.push(point);
+  }
+  const hull = lower.slice(0, -1).concat(upper.slice(0, -1));
+  const middle = (a, b) => ({ x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 });
+  const start = middle(hull[hull.length - 1], hull[0]);
+  const path = `M ${start.x} ${start.y} ${hull.map((point, index) => {
+    const next = middle(point, hull[(index + 1) % hull.length]);
+    return `Q ${point.x} ${point.y} ${next.x} ${next.y}`;
+  }).join(' ')} Z`;
+  const bounds = { left: Math.min(...corners.map(point => point.x)), right: Math.max(...corners.map(point => point.x)),
+    top: Math.min(...corners.map(point => point.y)), bottom: Math.max(...corners.map(point => point.y)) };
+  return { path, bounds, labelX: (bounds.left + bounds.right) / 2, labelY: bounds.top + 31 };
+}
+
 // Deterministic, offline node-link layout. No inferred chapter/topic edges.
 function layoutGraph(graph) {
   const nodes = list(graph.nodes);
   const ids = new Set(nodes.map(node => node.node_id));
   const edges = list(graph.relations).filter(edge => ids.has(edge.from_node_id) && ids.has(edge.to_node_id));
-  const count = nodes.length;
-  const width = count > 36 ? 1360 : count > 24 ? 1200 : 1040;
-  const height = count > 36 ? 1100 : count > 24 ? 940 : 800;
-  const cx = width / 2, cy = height / 2;
+  const groupCounts = new Map();
+  for (const node of nodes) groupCounts.set(groupFor(node), (groupCounts.get(groupFor(node)) || 0) + 1);
+  const largestGroup = Math.max(1, ...groupCounts.values());
+  const cellWidth = Math.max(760, Math.ceil(Math.sqrt(largestGroup) * 180));
+  const cellHeight = Math.max(660, Math.ceil(Math.sqrt(largestGroup) * 155));
+  const gap = 120, padding = 70;
+  const width = cellWidth * 2 + gap + padding * 2;
+  const height = cellHeight * 2 + gap + padding * 2;
+  const centers = groupCenters(cellWidth, cellHeight, gap, padding);
+  const limitX = cellWidth / 2 - 150, limitY = cellHeight / 2 - 150;
   const degree = new Map(nodes.map(node => [node.node_id, 0]));
   for (const edge of edges) {
     degree.set(edge.from_node_id, degree.get(edge.from_node_id) + 1);
@@ -35,11 +81,14 @@ function layoutGraph(graph) {
   const ordered = [...nodes].sort((a, b) =>
     degree.get(b.node_id) - degree.get(a.node_id) || a.node_id.localeCompare(b.node_id));
   const points = new Map();
-  ordered.forEach((node, index) => {
+  const groupIndex = new Map();
+  ordered.forEach(node => {
+    const group = groupFor(node), index = groupIndex.get(group) || 0, center = centers[group];
+    groupIndex.set(group, index + 1);
     const angle = index * 2.399963229728653;
-    const radius = index ? Math.sqrt(index) * (count > 36 ? 92 : 82) : 0;
-    points.set(node.node_id, { x: cx + Math.cos(angle) * radius,
-      y: cy + Math.sin(angle) * radius, degree: degree.get(node.node_id) });
+    const radius = index ? Math.sqrt(index) * 74 : 0;
+    points.set(node.node_id, { x: center.x + Math.cos(angle) * radius,
+      y: center.y + Math.sin(angle) * radius, degree: degree.get(node.node_id) });
   });
   for (let iteration = 0; iteration < 420; iteration++) {
     const movement = new Map(nodes.map(node => [node.node_id, { x: 0, y: 0 }]));
@@ -70,12 +119,14 @@ function layoutGraph(graph) {
     }
     for (const node of ordered) {
       const point = points.get(node.node_id), delta = movement.get(node.node_id);
-      const anchor = node === ordered[0] ? 0.035 : 0.0015;
-      point.x = Math.max(96, Math.min(width - 96, point.x + delta.x + (cx - point.x) * anchor));
-      point.y = Math.max(72, Math.min(height - 72, point.y + delta.y + (cy - point.y) * anchor));
+      const center = centers[groupFor(node)];
+      point.x = Math.max(center.x - limitX, Math.min(center.x + limitX,
+        point.x + delta.x + (center.x - point.x) * .018));
+      point.y = Math.max(center.y - limitY, Math.min(center.y + limitY,
+        point.y + delta.y + (center.y - point.y) * .018));
     }
   }
-  return { width, height, points, degree, hubId: ordered[0]?.node_id || null, edges };
+  return { width, height, points, degree, centers, hubId: ordered[0]?.node_id || null, edges };
 }
 
 function renderChapterGraph(chapter, inDocument = false) {
@@ -89,6 +140,23 @@ function renderChapterGraph(chapter, inDocument = false) {
   const stage = el('div', { class: 'graph-stage', role: 'group', 'aria-label': '资料关系索引图' });
   stage.style.width = `${layout.width}px`;
   stage.style.height = `${layout.height}px`;
+  const grouped = new Map();
+  for (const node of nodes.values()) {
+    const group = groupFor(node);
+    if (!grouped.has(group)) grouped.set(group, []);
+    grouped.get(group).push(layout.points.get(node.node_id));
+  }
+  const clusterLayer = svgEl('svg', { class: 'graph-cluster-layer', width: layout.width, height: layout.height,
+    viewBox: `0 0 ${layout.width} ${layout.height}`, 'aria-hidden': 'true' });
+  for (const [group, points] of grouped) {
+    const outline = clusterOutline(points);
+    clusterLayer.append(svgEl('path', { d: outline.path, class: `graph-cluster-shape graph-cluster-${group}` }));
+    const label = svgEl('text', { x: outline.labelX, y: outline.labelY,
+      class: 'graph-cluster-label', 'text-anchor': 'middle' });
+    label.textContent = `${groupNames[group]} · ${points.length}`;
+    clusterLayer.append(label);
+  }
+  stage.append(clusterLayer);
   const svg = svgEl('svg', { class: 'graph-lines', width: layout.width, height: layout.height,
     viewBox: `0 0 ${layout.width} ${layout.height}`, 'aria-hidden': 'true' });
   const edgeEls = [];
@@ -107,7 +175,7 @@ function renderChapterGraph(chapter, inDocument = false) {
   for (const node of nodes.values()) {
     const point = layout.points.get(node.node_id);
     const button = el('button', { type: 'button',
-      class: `graph-node graph-node-${node.display_type || 'concept'}${node.node_id === layout.hubId ? ' graph-node-hub' : ''}`,
+      class: `graph-node graph-node-${node.display_type || 'concept'} graph-node-group-${groupFor(node)}`,
       title: `${node.name} · ${node.node_id}`,
       'aria-label': `${node.name}，${kindName[node.display_type] || '节点'}，查看关联`,
       'aria-pressed': 'false', onclick: () => selectNode(node.node_id) },
@@ -164,18 +232,43 @@ function renderChapterGraph(chapter, inDocument = false) {
     return item;
   });
 
+  const wrap = el('div', { class: 'graph-tree-wrap' }, stage);
+  const zoomLabel = el('span', { class: 'graph-zoom-label' }, '100%');
+  let zoom = 1, manualZoom = false;
+  const setZoom = value => {
+    zoom = Math.max(.35, Math.min(1.6, Math.round(value * 100) / 100));
+    stage.style.zoom = String(zoom);
+    zoomLabel.textContent = `${Math.round(zoom * 100)}%`;
+  };
+  const fit = () => {
+    if (!wrap.clientWidth || !wrap.clientHeight) return;
+    setZoom(Math.min(1, (wrap.clientWidth - 18) / layout.width, (wrap.clientHeight - 18) / layout.height));
+    wrap.scrollTo(0, 0);
+  };
+  const controls = el('div', { class: 'graph-controls' },
+    el('span', { class: 'graph-controls-title' }, `全章网络 · ${nodes.size} 个节点`),
+    el('button', { type: 'button', 'aria-label': '缩小图谱', onclick: () => { manualZoom = true; setZoom(zoom - .15); } }, '−'),
+    zoomLabel,
+    el('button', { type: 'button', 'aria-label': '放大图谱', onclick: () => { manualZoom = true; setZoom(zoom + .15); } }, '+'),
+    el('button', { type: 'button', class: 'graph-fit-button', onclick: () => { manualZoom = false; fit(); } }, '适应视图'));
+
   details.append(
     el('summary', { class: 'graph-summary' },
-      el('span', { class: 'graph-summary-title', id: 'chapter-graph-title' }, '资料关系索引'),
+    el('span', { class: 'graph-summary-title', id: 'chapter-graph-title' }, '本章概念关联图'),
       el('span', { class: 'graph-summary-count' }, `${nodes.size} 个节点 · ${relations.length} 条关联`),
       el('span', { class: 'graph-summary-action' }, '展开／收起')),
-    el('p', { class: 'graph-intro' }, '此索引按已收录资料及其“依据、细化、衔接”等关系生成，用于来源追溯和资料跳转；它不替代章节知识总览。'),
+    el('p', { class: 'graph-intro' }, '本章全部可展示节点按概念、过程和法规资料分组；彩色连线表示已记录的关系。点击节点查看关系证据和来源定位。'),
+    controls,
     el('div', { class: 'graph-key', 'aria-label': '关联类型颜色图例' },
       el('span', { class: 'graph-key-label' }, '关联类型'), relationLegend,
-      el('span', { class: 'graph-key-pan' }, '点击节点突出其关联；图幅较宽时可横向滚动')),
-    el('div', { class: 'graph-layout' }, el('div', { class: 'graph-tree-wrap' }, stage), panel));
+      el('span', { class: 'graph-key-pan' }, '先看全图，再放大查看节点；点击节点可突出关联')),
+    el('div', { class: 'graph-layout' }, wrap, panel));
   root.append(details);
-  selectNode(layout.hubId);
+  panel.replaceChildren(el('p', { class: 'graph-inspector-kicker' }, '全章概览'),
+    el('h3', {}, `${nodes.size} 个节点 · ${relations.length} 条关系`),
+    el('p', { class: 'graph-node-summary' }, '点击图中的任一节点，可查看与它直接相连的关系、证据和来源定位。'));
+  details.addEventListener('toggle', () => { if (details.open && !manualZoom) requestAnimationFrame(fit); });
+  requestAnimationFrame(() => { if (details.open && !manualZoom) fit(); });
   return root;
 }
 
