@@ -15,6 +15,7 @@ from .chapter_graph import build_chapter_graph
 from .identity import build_document_identity
 from .knowledge_maps import load_knowledge_maps, load_review_ledger, public_map
 from .reading import render_document
+from .property_index import CATEGORIES, entity_mappings, load_property_index
 
 PUBLIC_FIELDS = "source_id,title,chapter_id,chapter_title,document_code,document_status,publish_date,url,review_status,content_kind".split(",")
 NAVIGATION_NOTE = ("条款、章节定位依据正文的明确编号；PDF 页目录依据提取页码。"
@@ -34,10 +35,10 @@ def connect(path):
 
 def input_fingerprint(root):
     root = Path(root).resolve()
-    paths = [path for folder in ("chapters", "acquired", "verification", "knowledge-maps", "reviews")
+    paths = [path for folder in ("chapters", "acquired", "verification", "knowledge-maps", "reviews", "property-index")
              for path in sorted((root / "data" / folder).rglob("*"))]
     digest = hashlib.sha256()
-    for module in ("catalog.py", "chapter_graph.py", "identity.py", "knowledge_maps.py", "ingest.py", "reading.py", "locators.py", "verification.py"):
+    for module in ("catalog.py", "chapter_graph.py", "identity.py", "knowledge_maps.py", "ingest.py", "reading.py", "locators.py", "verification.py", "property_index.py"):
         path = Path(__file__).with_name(module)
         digest.update(module.encode())
         digest.update(path.read_bytes() if path.is_file() else b"<not-installed>")
@@ -56,6 +57,8 @@ def build_catalog(root, path):
     review_rows, review_ledger, review_errors = load_review_ledger(root)
     knowledge_maps, _, knowledge_errors = load_knowledge_maps(root, chapters, docs, review_ledger)
     identity = build_document_identity(docs)
+    property_rows = load_property_index(root, docs)
+    property_entities = entity_mappings(root, property_rows)
     errors.extend(review_errors)
     errors.extend(knowledge_errors)
     if errors:
@@ -72,6 +75,11 @@ def build_catalog(root, path):
                   search_text TEXT, payload TEXT NOT NULL);
                 CREATE INDEX docs_chapter ON documents(chapter_id);
                 CREATE TABLE terms (term_id TEXT PRIMARY KEY, chapter_id TEXT, source_id TEXT, payload TEXT);
+                CREATE TABLE property_categories (property_id TEXT PRIMARY KEY, name TEXT NOT NULL, sort_order INTEGER NOT NULL);
+                CREATE TABLE property_source_map (source_id TEXT NOT NULL REFERENCES documents(source_id), property_id TEXT NOT NULL REFERENCES property_categories(property_id), sort_order INTEGER NOT NULL, mapping_status TEXT NOT NULL, mapping_note TEXT NOT NULL, PRIMARY KEY(source_id,property_id));
+                CREATE INDEX property_source_order ON property_source_map(property_id, sort_order);
+                CREATE TABLE property_entity_map (entity_type TEXT NOT NULL, entity_id TEXT NOT NULL, source_id TEXT NOT NULL REFERENCES documents(source_id), property_id TEXT NOT NULL REFERENCES property_categories(property_id), review_status TEXT NOT NULL, PRIMARY KEY(entity_type,entity_id,property_id));
+                CREATE INDEX property_entity_order ON property_entity_map(property_id,entity_type,entity_id);
                 CREATE TABLE canonical_documents (
                   canonical_id TEXT PRIMARY KEY, canonical_url TEXT NOT NULL,
                   normalized_code TEXT NOT NULL, markdown_sha256 TEXT NOT NULL,
@@ -168,6 +176,13 @@ def build_catalog(root, path):
                 db.execute("INSERT INTO documents VALUES (?,?,?,?,?,?,?,?)", (doc["source_id"], doc["chapter_id"], doc["title"], doc["document_code"], doc["document_status"], doc["content_kind"], search_text, json.dumps(doc, ensure_ascii=False)))
                 rowid = db.execute("SELECT last_insert_rowid()").fetchone()[0]
                 db.execute("INSERT INTO search(rowid,search_text) VALUES (?,?)", (rowid, search_text))
+            for position, (property_id, name) in enumerate(CATEGORIES, 1):
+                db.execute("INSERT INTO property_categories VALUES (?,?,?)", (property_id, name, position))
+            for row in property_rows:
+                db.execute("INSERT INTO property_source_map VALUES (?,?,?,?,?)", (
+                    row["source_id"], row["property_id"], int(row["sort_order"]),
+                    row["mapping_status"], row["mapping_note"]))
+            db.executemany("INSERT INTO property_entity_map VALUES (?,?,?,?,?)", property_entities)
             for term in terms:
                 db.execute("INSERT INTO terms VALUES (?,?,?,?)", (term["term_id"], term["chapter_id"], term["source_id"], json.dumps(term, ensure_ascii=False)))
             for key, value in {"generated_at": datetime.now(timezone.utc).isoformat(), "fingerprint": input_fingerprint(root), "issues": issues, "errors": errors,
@@ -217,6 +232,28 @@ def overview(path):
                 totals[kind] += count
             totals["sources"] += chapter["count"]
     return {"chapters": chapters, "totals": totals}
+
+
+def property_index(path):
+    """Return every source once in the editorial property browsing order."""
+    with connect(path) as db:
+        groups = [dict(property_id=row[0], name=row[1], items=[])
+                  for row in db.execute("SELECT property_id,name FROM property_categories ORDER BY sort_order")]
+        by_id = {group["property_id"]: group for group in groups}
+        for row in db.execute("""
+            SELECT m.property_id,m.mapping_status,m.mapping_note,d.payload
+            FROM property_source_map m JOIN documents d ON d.source_id=m.source_id
+            ORDER BY (SELECT sort_order FROM property_categories WHERE property_id=m.property_id),
+                     m.sort_order,m.source_id
+        """):
+            item = json.loads(row["payload"])
+            by_id[row["property_id"]]["items"].append({
+                "source_id": item["source_id"], "title": item["title"],
+                "document_code": item["document_code"], "chapter_id": item["chapter_id"],
+                "document_status": item["document_status"], "content_kind": item["content_kind"],
+                "mapping_status": row["mapping_status"], "mapping_note": row["mapping_note"],
+            })
+    return groups
 
 
 def resources(path, q="", chapter="", status="", content_kind="", page=1, page_size=20):

@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>按结构特性浏览 · 目录样版</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='properties-preview.css') }}">
+</head>
+<body>
+  <a class="skip" href="#main">跳至正文</a>
+  <header class="topbar"><a class="brand" href="/">航 <span>适航 / 资源馆</span></a><span class="topnote">目录样版 · 本地预览</span></header>
+  <main id="main">
+    <section class="hero wrap">
+      <p class="eyebrow">COMPOSITE STRUCTURES / PROPERTY INDEX</p>
+      <h1>按结构特性，找到适航证据</h1>
+      <p class="lead">从强度、刚度、冲击、疲劳和环境适应性进入主题，再回到对应章节与原始资料。一个来源可以用于多个主题。</p>
+      <div class="hero-actions"><a class="primary" href="#properties">浏览特性目录 <span aria-hidden="true">↓</span></a><a class="secondary" href="/">返回九章资源馆 ↗</a></div>
+    </section>
+    <section class="wrap contents" id="properties" aria-labelledby="properties-heading">
+      <div class="section-title"><div><p class="eyebrow">01 / DIRECTORY</p><h2 id="properties-heading">结构特性目录</h2></div><p>选择主题，查看对应的法规入口与章节资料</p></div>
+      <div class="property-grid">
+        <a class="property-card" href="#strength"><span class="number">01</span><span class="glyph">↗</span><h3>强度与承载</h3><p>拉伸、压缩、弯曲、剪切与剩余强度</p><span class="chapters">第 3 · 7 · 8 · 9 章</span></a>
+        <a class="property-card" href="#stiffness"><span class="number">02</span><span class="glyph">↗</span><h3>刚度与稳定性</h3><p>弹性性能、变形与结构稳定性</p><span class="chapters">第 3 · 7 · 9 章</span></a>
+        <a class="property-card" href="#impact"><span class="number">03</span><span class="glyph">↗</span><h3>冲击与损伤</h3><p>损伤威胁、可检性与损伤容限</p><span class="chapters">第 7 · 8 章</span></a>
+        <a class="property-card" href="#fatigue"><span class="number">04</span><span class="glyph">↗</span><h3>疲劳与寿命</h3><p>疲劳试验、损伤扩展与持续适航</p><span class="chapters">第 7 · 8 · 9 章</span></a>
+        <a class="property-card" href="#environment"><span class="number">05</span><span class="glyph">↗</span><h3>环境适应性</h3><p>高温、低温、湿热与环境影响</p><span class="chapters">第 3 · 4 · 7 章</span></a>
+        <a class="property-card" href="#manufacturing"><span class="number">06</span><span class="glyph">↗</span><h3>制造与一致性</h3><p>工艺、缺陷、材料批次与质量控制</p><span class="chapters">第 4 · 5 · 6 章</span></a>
+        <a class="property-card" href="#index-general"><span class="number">07</span><span class="glyph">↗</span><h3>通用适航与管理流程</h3><p>法规层级、审定、设计更改与委任</p><span class="chapters">第 1 · 2 · 5 章及跨章资料</span></a>
+      </div>
+    </section>
+    <section class="wrap focus" aria-labelledby="focus-heading"><div class="section-title"><div><p class="eyebrow">02 / SAMPLE PATHS</p><h2 id="focus-heading">主题页阅读样版</h2></div><p>下列链接使用库内现有来源编号</p></div>
+      <article class="topic" id="strength"><div class="topic-head"><span class="topic-id">01 / MECHANICAL</span><h3>强度与承载</h3><p>从材料性能出发，沿积木式试验到结构强度与剩余强度，查看不同层级需要的证据。</p></div><div class="topic-body"><div class="path"><span>材料性能</span><b>→</b><span>结构验证</span><b>→</b><span>损伤后承载</span></div><h4>对应资料</h4><ul><li><a href="/chapters/ch03?source=CH03-S001">CCAR-25-R4 · 材料与强度条款 <small>CH03-S001</small></a></li><li><a href="/chapters/ch07?source=CH07-S002">运输类飞机审定 · 验证方法入口 <small>CH07-S002</small></a></li><li><a href="/chapters/ch08?source=CH08-S001">CCAR-25-R4 · 疲劳与损伤容限条款 <small>CH08-S001</small></a></li></ul></div></article>
+      <article class="topic" id="impact"><div class="topic-head"><span class="topic-id">03 / DAMAGE</span><h3>冲击与损伤</h3><p>将损伤识别、检测、剩余强度和修理放进同一条查阅路径。</p></div><div class="topic-body"><div class="path"><span>损伤威胁</span><b>→</b><span>可检性</span><b>→</b><span>容限与修理</span></div><h4>对应资料</h4><ul><li><a href="/chapters/ch07?source=CH07-S001">CCAR-25-R4 · 验证基础 <small>CH07-S001</small></a></li><li><a href="/chapters/ch08?source=CH08-S001">CCAR-25-R4 · 损伤容限 <small>CH08-S001</small></a></li><li><a href="/chapters/ch08?source=CH08-S006">持续结构完整性咨询资料 <small>CH08-S006</small></a></li></ul></div></article>
+      <article class="topic" id="fatigue"><div class="topic-head"><span class="topic-id">04 / DURABILITY</span><h3>疲劳与寿命</h3><p>串联试验数据、结构验证和持续适航中的检查资料。</p></div><div class="topic-body"><div class="path"><span>试验数据</span><b>→</b><span>结构评定</span><b>→</b><span>持续适航</span></div><h4>对应资料</h4><ul><li><a href="/chapters/ch09?source=CH09-S011">疲劳数据统计标准 · 状态信息 <small>CH09-S011</small></a></li><li><a href="/chapters/ch08?source=CH08-S001">CCAR-25-R4 · 25.571 <small>CH08-S001</small></a></li><li><a href="/chapters/ch08?source=CH08-S004">CCAR-26 · 持续适航 <small>CH08-S004</small></a></li></ul></div></article>
+      <article class="topic" id="environment"><div class="topic-head"><span class="topic-id">05 / ENVIRONMENT</span><h3>环境适应性</h3><p>高温是环境条件，需结合材料体系、结构形式和具体性能要求查阅证据。</p></div><div class="topic-body"><div class="path"><span>使用环境</span><b>→</b><span>材料状态</span><b>→</b><span>结构验证</span></div><h4>对应资料</h4><ul><li><a href="/chapters/ch03?source=CH03-S001">CCAR-25-R4 · 材料性能基础 <small>CH03-S001</small></a></li><li><a href="/chapters/ch03?source=CH03-S002">运输类飞机审定 · 材料与环境影响 <small>CH03-S002</small></a></li><li><a href="/chapters/ch04?source=CH04-S003">复合材料制造质量体系指南 <small>CH04-S003</small></a></li></ul></div></article>
+      <div class="compact-topics"><article id="stiffness"><span class="topic-id">02 / STIFFNESS</span><h3>刚度与稳定性</h3><p>从材料特性、分析与试验关联进入。</p><a href="/chapters/ch03?source=CH03-S002">查看材料与设计资料 ↗</a></article><article id="manufacturing"><span class="topic-id">06 / PRODUCTION</span><h3>制造与一致性</h3><p>从工艺控制、设计更改及生产质量体系进入。</p><a href="/chapters/ch04?source=CH04-S003">查看制造质量资料 ↗</a></article></div>
+    </section>
+    {% if property_groups %}
+    <section class="wrap full-index" aria-labelledby="full-index-heading">
+      <div class="section-title"><div><p class="eyebrow">03 / COMPLETE INDEX</p><h2 id="full-index-heading">九章来源 · 特性排序</h2></div><p>全部 189 条章节来源；归类待专业核验</p></div>
+      {% for group in property_groups %}
+      <details class="property-group" id="index-{{ group.property_id }}" {% if loop.first %}open{% endif %}>
+        <summary><span>{{ '%02d'|format(loop.index) }}　{{ group.name }}</span><small>{{ group.items|length }} 条来源</small></summary>
+        <ol>
+          {% for item in group.items %}
+          <li><a href="/chapters/{{ item.chapter_id }}?source={{ item.source_id }}"><span class="index-code">{{ item.source_id }}</span><span class="index-title">{{ item.title }}</span><span class="index-document">{{ item.document_code }}</span><span class="index-arrow">↗</span></a></li>
+          {% endfor %}
+        </ol>
+      </details>
+      {% endfor %}
+    </section>
+    {% endif %}
+  </main>
+  <footer><div class="wrap">目录样版 · 专题归类尚待专业核验　<a href="/">返回资源馆 ↗</a></div></footer>
+</body>
+</html>

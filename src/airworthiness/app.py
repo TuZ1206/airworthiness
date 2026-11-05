@@ -23,6 +23,11 @@ def create_app(settings=None):
     def home():
         return render_template("hall.html")
 
+    @app.get("/properties-preview")
+    def properties_preview():
+        """Read-only preview of a property-based entry to existing chapter sources."""
+        return render_template("properties-preview.html", property_groups=catalog.property_index(app.config["DATABASE"]))
+
     @app.get("/quality")
     def quality_page():
         return redirect(url_for("home"))
