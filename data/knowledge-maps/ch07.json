@@ -1,0 +1,18 @@
+{
+  "chapter_id":"ch07","title":"积木式验证方法","version":"v1","review_status":"pending",
+  "nodes":[
+    {"knowledge_node_id":"KM-CH07-N001","name":"积木式验证方法","category":"章节总览","summary":"组织法规基础、验证层级、证据传递、代表性和结构验证接口。","source_refs":[{"source_id":"CH07-S001","source_locator":""}],"review_status":"pending"},
+    {"knowledge_node_id":"KM-CH07-N002","name":"积木式验证的法规基础","category":"法规基础","summary":"从结构适航要求和审定资料建立积木式验证的法规入口。","source_refs":[{"source_id":"CH07-S001","source_locator":""},{"source_id":"CH07-S002","source_locator":""}],"review_status":"pending"},
+    {"knowledge_node_id":"KM-CH07-N003","name":"验证层级与各层级任务","category":"验证活动","summary":"组织试样、元件、典型结构件、组合件和部件的证据层级。","source_refs":[{"source_id":"CH07-S003","source_locator":""},{"source_id":"CH07-S002","source_locator":""}],"review_status":"pending"},
+    {"knowledge_node_id":"KM-CH07-N004","name":"低层级数据与高层级证据","category":"证据要求","summary":"说明低层级数据如何支撑高层级结构验证。","source_refs":[{"source_id":"CH07-S001","source_locator":""},{"source_id":"CH07-S005","source_locator":""}],"review_status":"pending"},
+    {"knowledge_node_id":"KM-CH07-N005","name":"环境影响与制造代表性","category":"证据要求","summary":"关注材料和工艺状态对试验代表性的约束。","source_refs":[{"source_id":"CH07-S006","source_locator":""},{"source_id":"CH07-S002","source_locator":""}],"review_status":"pending"},
+    {"knowledge_node_id":"KM-CH07-N006","name":"静强度、损伤容限与变更接口","category":"跨章接口","summary":"连接结构验证、损伤容限和变更后追加验证。","source_refs":[{"source_id":"CH07-S001","source_locator":""},{"source_id":"CH07-S005","source_locator":""}],"review_status":"pending"}
+  ],
+  "relations":[
+    {"knowledge_relation_id":"KM-CH07-R001","from_node_id":"KM-CH07-N001","type":"组成","to_node_id":"KM-CH07-N002","source_refs":[{"source_id":"CH07-S001","source_locator":""}],"review_status":"pending"},
+    {"knowledge_relation_id":"KM-CH07-R002","from_node_id":"KM-CH07-N002","type":"前提","to_node_id":"KM-CH07-N003","source_refs":[{"source_id":"CH07-S002","source_locator":""}],"review_status":"pending"},
+    {"knowledge_relation_id":"KM-CH07-R003","from_node_id":"KM-CH07-N003","type":"输出","to_node_id":"KM-CH07-N004","source_refs":[{"source_id":"CH07-S005","source_locator":""}],"review_status":"pending"},
+    {"knowledge_relation_id":"KM-CH07-R004","from_node_id":"KM-CH07-N005","type":"约束","to_node_id":"KM-CH07-N004","source_refs":[{"source_id":"CH07-S006","source_locator":""}],"review_status":"pending"},
+    {"knowledge_relation_id":"KM-CH07-R005","from_node_id":"KM-CH07-N004","type":"衔接","to_node_id":"KM-CH07-N006","source_refs":[{"source_id":"CH07-S001","source_locator":""}],"review_status":"pending"}
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "chapter_id":"ch06","title":"质量体系与供应链适航监管","version":"v1","review_status":"pending",
+  "nodes":[
+    {"knowledge_node_id":"KM-CH06-N001","name":"质量体系与供应链适航监管","category":"章节总览","summary":"组织生产质量、供应商控制、设计保证、委任监督和复合材料质量接口。","source_refs":[{"source_id":"CH06-S002","source_locator":""}],"review_status":"pending"},
+    {"knowledge_node_id":"KM-CH06-N002","name":"生产质量体系与质量手册","category":"责任体系","summary":"围绕生产组织的质量体系与质量手册建立阅读入口。","source_refs":[{"source_id":"CH06-S002","source_locator":""},{"source_id":"CH06-S003","source_locator":""}],"review_status":"pending"},
+    {"knowledge_node_id":"KM-CH06-N003","name":"供应商控制与供应链监管","category":"过程控制","summary":"覆盖供应商、直接发货和跨境协作等供应链资料边界。","source_refs":[{"source_id":"CH06-S004","source_locator":""},{"source_id":"CH06-S017","source_locator":""}],"review_status":"pending"},
+    {"knowledge_node_id":"KM-CH06-N004","name":"设计保证系统及设计供应商","category":"责任体系","summary":"区分设计保证系统和生产质量体系的责任边界。","source_refs":[{"source_id":"CH06-S005","source_locator":""},{"source_id":"CH06-S016","source_locator":""}],"review_status":"pending"},
+    {"knowledge_node_id":"KM-CH06-N005","name":"委任代表和委任单位监管","category":"责任体系","summary":"梳理规章、个人委任和单位委任程序的监管入口。","source_refs":[{"source_id":"CH06-S006","source_locator":""},{"source_id":"CH06-S007","source_locator":""}],"review_status":"pending"},
+    {"knowledge_node_id":"KM-CH06-N006","name":"生产监督与问题闭环","category":"监管活动","summary":"连接监督工具、不符合项和整改闭环的资料线索。","source_refs":[{"source_id":"CH06-S003","source_locator":""},{"source_id":"CH06-S011","source_locator":""}],"review_status":"pending"},
+    {"knowledge_node_id":"KM-CH06-N007","name":"复合材料质量体系接口","category":"跨章接口","summary":"将复合材料制造质量资料与其他质量体系要求衔接。","source_refs":[{"source_id":"CH06-S009","source_locator":""}],"review_status":"pending"}
+  ],
+  "relations":[
+    {"knowledge_relation_id":"KM-CH06-R001","from_node_id":"KM-CH06-N001","type":"组成","to_node_id":"KM-CH06-N002","source_refs":[{"source_id":"CH06-S002","source_locator":""}],"review_status":"pending"},
+    {"knowledge_relation_id":"KM-CH06-R002","from_node_id":"KM-CH06-N002","type":"约束","to_node_id":"KM-CH06-N003","source_refs":[{"source_id":"CH06-S004","source_locator":""}],"review_status":"pending"},
+    {"knowledge_relation_id":"KM-CH06-R003","from_node_id":"KM-CH06-N001","type":"组成","to_node_id":"KM-CH06-N004","source_refs":[{"source_id":"CH06-S005","source_locator":""}],"review_status":"pending"},
+    {"knowledge_relation_id":"KM-CH06-R004","from_node_id":"KM-CH06-N001","type":"组成","to_node_id":"KM-CH06-N005","source_refs":[{"source_id":"CH06-S006","source_locator":""}],"review_status":"pending"},
+    {"knowledge_relation_id":"KM-CH06-R005","from_node_id":"KM-CH06-N002","type":"输出","to_node_id":"KM-CH06-N006","source_refs":[{"source_id":"CH06-S003","source_locator":""}],"review_status":"pending"},
+    {"knowledge_relation_id":"KM-CH06-R006","from_node_id":"KM-CH06-N002","type":"衔接","to_node_id":"KM-CH06-N007","source_refs":[{"source_id":"CH06-S009","source_locator":""}],"review_status":"pending"}
+  ]
+}

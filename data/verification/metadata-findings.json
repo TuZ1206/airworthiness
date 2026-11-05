@@ -1,0 +1,2120 @@
+{
+  "schema_version": "1.2",
+  "checked_at": "2026-10-13T09:09:36Z",
+  "task": "官方法规来源元数据核验；只输出发现，不修改来源台账",
+  "input": {
+    "repository": "C:/Users/lenovo/Desktop/航空航天/tmp/github_airworthiness_inspection",
+    "branch": "feat/offline-resource-hall",
+    "baseline_commit": "a835c44a88f52ce589cd848fa5d5da8e72aa12b8",
+    "report": "docs/data-quality-report.md",
+    "report_generated_at": "2026-10-13T07:12:12.784141+00:00",
+    "warning_section": "元数据待核事项",
+    "warning_count": 26,
+    "source_records": 189,
+    "baseline_note": "开始核验时 git 工作树干净；old_values 取该 HEAD 的 sources.csv，与首次读取记录一致，避免并行任务后续修改覆盖核验起点。",
+    "cache_follow_up": {
+      "cache_root": ".cache/ci-acquisition-38367606768/.cache/acquisition",
+      "provided_by": "用户提供的 GitHub Actions 官方采集原始字节",
+      "manifest_files_checked": 135,
+      "html_files": 134,
+      "pdf_files": 1,
+      "size_and_sha256_mismatches": 0,
+      "relevant_cache_records": 19,
+      "checked_at": "2026-10-13T08:30:58Z",
+      "read_only": true,
+      "note": "字节哈希与大小经重算匹配清单；来源按清单 request_url/final url 为 gov.cn 记录。该校验保证缓存与清单一致，不是额外的数字签名认证。唯一 PDF 是适航委任单位代表管理程序，不是待核的设计保证系统建设指南。"
+    },
+    "second_cache_follow_up": {
+      "cache_root": ".cache/ci-acquisition-38368418797/.cache/acquisition",
+      "relevant_cache_records": 8,
+      "size_and_sha256_mismatches": 0,
+      "checked_at": "2026-10-13T09:09:36Z",
+      "read_only": true,
+      "note": "本轮只重算8份实际用于本任务的原始文件哈希/大小；设计指南封面和第6节已读文本与图像，CH08-S007扫描封面已视觉核验。没有宣称逐页专业审核59页/21页附件。"
+    }
+  },
+  "review_status": "pending",
+  "professional_review_required": true,
+  "semantics": {
+    "verified": "官方已打开的发布页或正文直接支持所列值；不是专业审核通过。",
+    "equivalent_title": "同一官方来源的题名仅有标点差异；记录官方完整题名并解释提示，不强制修改当前题名。",
+    "scope_distinction": "日期或题名差异来自通知/正文/语言版本，可解释且应保留层次。",
+    "equivalent_url": "已读取两端官方页面并确认同一发布记录；只有 byte_identity_verified=true 的指定附件对另经重算哈希证实字节相同，仍不授权共享正文。",
+    "unresolved": "证据不足或访问失败；verified_value 为 null，不以候选值替代确定值。",
+    "publish_date": "优先指当前登记 URL 的官方发文日期；通告下发日、公布日及施行日另列。",
+    "metadata": "补充的多字段核验；old_values 按 source_id 保留原字段，verified_value 仅列已确认字段。",
+    "warning_numbers": "按输入报告该节自上而下从 1 编号；每个提示恰由一条 priority finding 覆盖。",
+    "cache_evidence": "缓存清单路径、原始字节路径、请求/最终URL、采集时间、重算SHA-256与大小；附件列表表示HTML声明，不代表附件已下载。",
+    "resolution": "执行意图：corrected（允许修正）、explained（仅解释差异）、recorded（仅记录）、unresolved（待核）；result=verified 不单独构成修正授权。",
+    "source_urls": "按 source_id 绑定核验时登记的精确 URL；当前值或 URL 改变时修正层保守拒绝应用，不从别名自动延伸授权。"
+  },
+  "summary": {
+    "priority_warning_total": 26,
+    "priority_warning_resolved": 25,
+    "priority_warning_unresolved": 1,
+    "priority_grouped_findings": 12,
+    "url_alias_groups_checked": 7,
+    "url_alias_groups_verified": 7,
+    "url_alias_groups_unresolved": 0,
+    "supplementary_findings": 9,
+    "all_findings": 28,
+    "resolved_definition": "提示级已解决表示已形成确定纠错建议或明确解释差异；不表示已修改 sources.csv，也不表示完成最终专业审核。",
+    "registered_url_alias_groups_verified": 5,
+    "additional_url_alias_groups_verified": 2,
+    "correction_fields": 8,
+    "corrected_sources": 8,
+    "additional_title_corrections": 1,
+    "attachment_alias_pairs_byte_verified": 1
+  },
+  "findings": [
+    {
+      "finding_id": "P01",
+      "source_ids": [
+        "CH04-S010"
+      ],
+      "field": "publish_date",
+      "old_values": {
+        "CH04-S010": ""
+      },
+      "verified_value": null,
+      "evidence_url": [
+        "https://std.samr.gov.cn/search/stdPage?q=HB%207736%202004&tid="
+      ],
+      "evidence": {
+        "type": "paraphrase",
+        "text": "已读取 CI 缓存的官方检索页，页面显示相关结果为 0，且没有标准详情。该检索结果不能提供 HB 7736-2004 的发布日期。"
+      },
+      "checked_at": "2026-10-13T08:30:58Z",
+      "result": "unresolved",
+      "scope": "priority",
+      "warning_numbers": [
+        1
+      ],
+      "reason": "此前 web 访问失败已由缓存读取补足；当前缺口是该检索页没有对应标准详情或发布公告。零结果不能证明标准不存在。",
+      "next_action": "取得准确的官方标准详情页或发布公告后补核，不以其他编号、商业目录或年份推算日期。",
+      "previous_checked_at": "2026-10-13T08:15:27Z",
+      "cache_evidence_ids": [
+        "C19"
+      ],
+      "source_urls": {
+        "CH04-S010": "https://std.samr.gov.cn/search/stdPage?q=HB%207736%202004&tid="
+      },
+      "resolution": "unresolved"
+    },
+    {
+      "finding_id": "P02",
+      "source_ids": [
+        "CH02-S001",
+        "CH06-S016"
+      ],
+      "field": "document_code",
+      "old_values": {
+        "CH02-S001": "AC-21-48",
+        "CH06-S016": "官网未列编号"
+      },
+      "verified_value": "AC-21-48",
+      "evidence_url": [
+        "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202609/t20260921_231762.html",
+        "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202609/P020260921617424013037.pdf"
+      ],
+      "evidence": {
+        "type": "paraphrase",
+        "text": "正式59页附件封面显示编号 AC-21-48、题名设计保证系统建设指南、下发日期2026-09-17；已读取文本并视觉核对封面。网页空文号栏不否定附件明示编号。"
+      },
+      "checked_at": "2026-10-13T09:09:36Z",
+      "result": "verified",
+      "scope": "priority",
+      "warning_numbers": [
+        2,
+        3
+      ],
+      "evidence_locator": "正式 PDF 物理第1页封面（文本及图像）；HTML 名称、发文日期、有效性",
+      "reason": "新增官方原始 PDF 缓存填补前轮取证缺口；编号与 CH02-S001 相符，CH06-S016 的官网未列编号应修正。",
+      "previous_checked_at": "2026-10-13T08:30:58Z",
+      "cache_evidence_ids": [
+        "C07",
+        "C23",
+        "C22"
+      ],
+      "affected_corrections": [
+        "CH06-S016"
+      ],
+      "source_urls": {
+        "CH02-S001": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202609/t20260921_231762.html",
+        "CH06-S016": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202609/t20260921_231762.html"
+      },
+      "resolution": "corrected"
+    },
+    {
+      "finding_id": "P03",
+      "source_ids": [
+        "CH02-S037",
+        "CH05-S012"
+      ],
+      "field": "document_code",
+      "old_values": {
+        "CH02-S037": "官网未标注文号",
+        "CH05-S012": "民航规〔2023〕36号"
+      },
+      "verified_value": "民航规〔2023〕36号",
+      "evidence_url": [
+        "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202312/t20231223_222426.html",
+        "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/GFXWJ/202312/P020231223438346814379.pdf"
+      ],
+      "evidence": {
+        "type": "paraphrase",
+        "text": "网页字号栏给出民航规〔2023〕36号，PDF 首页的修订印发通知再次载明该号，并署 2023 年 12 月 4 日。"
+      },
+      "checked_at": "2026-10-13T08:30:58Z",
+      "result": "verified",
+      "scope": "priority",
+      "warning_numbers": [
+        4,
+        5
+      ],
+      "evidence_locator": "HTML 字号栏；PDF 第1页",
+      "normalization": "仅去除编号中排版空格；不要只检查网页的文号栏。",
+      "resource_distinction": "CH02-S037 的长标题对应发布通知；CH05-S012 的短标题对应同一 PDF 第2页起的细化要求正文。它们是通知与所附正文关系。",
+      "previous_checked_at": "2026-10-13T08:15:27Z",
+      "cache_evidence_ids": [
+        "C10"
+      ],
+      "source_urls": {
+        "CH02-S037": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202312/t20231223_222426.html",
+        "CH05-S012": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202312/t20231223_222426.html"
+      },
+      "resolution": "corrected"
+    },
+    {
+      "finding_id": "P04",
+      "source_ids": [
+        "CH01-S008",
+        "CH03-S001",
+        "CH04-S001",
+        "CH05-S001",
+        "CH07-S001",
+        "CH08-S001",
+        "CH09-S001"
+      ],
+      "field": "publish_date",
+      "old_values": {
+        "CH01-S008": "2016-03-17",
+        "CH03-S001": "2011-11-07",
+        "CH04-S001": "2016-03-17",
+        "CH05-S001": "2016-03-17",
+        "CH07-S001": "2016-03-17",
+        "CH08-S001": "2011-11-07",
+        "CH09-S001": "2011-11-07"
+      },
+      "verified_value": "2016-03-17",
+      "evidence_url": [
+        "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/201606/t20160622_38638.html",
+        "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/MHGZ/201606/t20160622_38638.html",
+        "https://www.caac.gov.cn/ZTZL/RDZT/2021BNWY/GGKF/202107/t20210707_208324.html",
+        "https://xxgk.mot.gov.cn/gz/202112/t20211227_3633506.html"
+      ],
+      "evidence": {
+        "type": "paraphrase",
+        "text": "两版 CAAC 网页的发文日期一致为 2016-03-17；官方历史说明指出 2011-11-07 曾颁发修订版，2016 年交通运输部颁布版本与其内容一致；交通运输部正文标明 2016-03-17 公布、2016-04-17 施行。"
+      },
+      "checked_at": "2026-10-13T08:30:58Z",
+      "result": "verified",
+      "scope": "priority",
+      "warning_numbers": [
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "evidence_locator": "CAAC 两页发文日期栏；历史说明正文第2段；交通运输部正文标题下公布说明",
+      "date_roles": {
+        "registered_source_publish_date": "2016-03-17",
+        "earlier_revision_publish_date": "2011-11-07",
+        "effective_date": "2016-04-17"
+      },
+      "affected_corrections": [
+        "CH03-S001",
+        "CH08-S001",
+        "CH09-S001"
+      ],
+      "note": "2011 日期有官方历史依据，但不匹配当前登记的 2016 来源页。不得将两年内容一致解释为两次颁布是同一次事件。",
+      "previous_checked_at": "2026-10-13T08:15:27Z",
+      "cache_evidence_ids": [
+        "C17",
+        "C04"
+      ],
+      "source_urls": {
+        "CH01-S008": "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/201606/t20160622_38638.html",
+        "CH03-S001": "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/MHGZ/201606/t20160622_38638.html",
+        "CH04-S001": "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/201606/t20160622_38638.html",
+        "CH05-S001": "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/MHGZ/201606/t20160622_38638.html",
+        "CH07-S001": "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/MHGZ/201606/t20160622_38638.html",
+        "CH08-S001": "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/MHGZ/201606/t20160622_38638.html",
+        "CH09-S001": "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/MHGZ/201606/t20160622_38638.html"
+      },
+      "resolution": "corrected"
+    },
+    {
+      "finding_id": "P05",
+      "source_ids": [
+        "CH01-S019",
+        "CH02-S036",
+        "CH05-S008"
+      ],
+      "field": "title",
+      "old_values": {
+        "CH01-S019": "颁发专用条件、批准豁免和做出等效安全水平结论的程序",
+        "CH02-S036": "颁发专用条件、批准豁免和做出等效安全水平结论的程序",
+        "CH05-S008": "颁发专用条件批准豁免和做出等效安全水平结论的程序"
+      },
+      "verified_value": "颁发专用条件、批准豁免和做出等效安全水平结论的程序",
+      "evidence_url": [
+        "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202312/t20231223_222428.html"
+      ],
+      "evidence": {
+        "type": "paraphrase",
+        "text": "官方标题在专用条件后保留顿号。三条记录链接、文号一致，CH05-S008 的差异仅为漏掉这一标点。"
+      },
+      "checked_at": "2026-10-13T08:30:58Z",
+      "result": "equivalent_title",
+      "scope": "priority",
+      "warning_numbers": [
+        13,
+        14,
+        15
+      ],
+      "evidence_locator": "HTML 名称、标题、文号和附件名称",
+      "punctuation_variants": [
+        "CH05-S008"
+      ],
+      "limitation": "附件桌面路径访问超时；结论依据已完整读取的官方发布页，不宣称完成附件逐字或版式核验。",
+      "previous_checked_at": "2026-10-13T08:15:27Z",
+      "cache_evidence_ids": [
+        "C02"
+      ],
+      "source_urls": {
+        "CH01-S019": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202312/t20231223_222428.html",
+        "CH02-S036": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202312/t20231223_222428.html",
+        "CH05-S008": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202312/t20231223_222428.html"
+      },
+      "resolution": "explained"
+    },
+    {
+      "finding_id": "P06",
+      "source_ids": [
+        "CH01-S021",
+        "CH06-S010"
+      ],
+      "field": "title",
+      "old_values": {
+        "CH01-S021": "关于公布《与我国建立双边适航关系的国家及有关文件目录》的通知",
+        "CH06-S010": "关于公布与我国建立双边适航关系的国家及有关文件目录的通知"
+      },
+      "verified_value": "关于公布《与我国建立双边适航关系的国家及有关文件目录》的通知",
+      "evidence_url": [
+        "https://www.caac.gov.cn/XXGK/XXGK/ZFGW/202503/t20250314_226931.html"
+      ],
+      "evidence": {
+        "type": "paraphrase",
+        "text": "官方通知标题使用书名号，正文说明公布的是截至 2024 年底整理的双边适航文件目录，并署 2025 年 2 月 14 日。CH06-S010 仅省略标题书名号。"
+      },
+      "checked_at": "2026-10-13T08:30:58Z",
+      "result": "equivalent_title",
+      "scope": "priority",
+      "warning_numbers": [
+        16,
+        17
+      ],
+      "evidence_locator": "HTML 名称、标题、完整通知正文及落款",
+      "punctuation_variants": [
+        "CH06-S010"
+      ],
+      "note": "通知与所附目录是不同文献层次；本项只确认两条通知题名的标点等价。",
+      "previous_checked_at": "2026-10-13T08:15:27Z",
+      "cache_evidence_ids": [
+        "C05"
+      ],
+      "source_urls": {
+        "CH01-S021": "https://www.caac.gov.cn/XXGK/XXGK/ZFGW/202503/t20250314_226931.html",
+        "CH06-S010": "https://www.caac.gov.cn/XXGK/XXGK/ZFGW/202503/t20250314_226931.html"
+      },
+      "resolution": "explained"
+    },
+    {
+      "finding_id": "P07",
+      "source_ids": [
+        "CH02-S070",
+        "CH08-S008"
+      ],
+      "field": "publish_date",
+      "old_values": {
+        "CH02-S070": "2012-07-02",
+        "CH08-S008": "2012-07-02"
+      },
+      "verified_value": "2012-07-02",
+      "evidence_url": [
+        "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201511/t20151102_8170.html",
+        "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201511/P020151103347114963684.pdf"
+      ],
+      "evidence": {
+        "type": "paraphrase",
+        "text": "通知网页的发文日期和正文落款都是 2012-07-02；其所附咨询通告封面下发日期为 2012-06-29，第4.2条亦规定该日实施。"
+      },
+      "checked_at": "2026-10-13T08:30:58Z",
+      "result": "scope_distinction",
+      "scope": "priority",
+      "warning_numbers": [
+        18,
+        20
+      ],
+      "evidence_locator": "通知发文日期和落款；中文 PDF 第1页、第2页第4.2条",
+      "date_roles": {
+        "notice_publish_date": "2012-07-02",
+        "document_issue_date": "2012-06-29",
+        "document_effective_date": "2012-06-29"
+      },
+      "note": "verified_value 对应登记 URL 的通知发布日期；若条目改以通告正文为对象，应独立保留正文下发日期，不把通知和正文日期强制合并。",
+      "previous_checked_at": "2026-10-13T08:15:27Z",
+      "cache_evidence_ids": [
+        "C11"
+      ],
+      "source_urls": {
+        "CH02-S070": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201511/t20151102_8170.html",
+        "CH08-S008": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201511/t20151102_8170.html"
+      },
+      "resolution": "explained"
+    },
+    {
+      "finding_id": "P08",
+      "source_ids": [
+        "CH02-S071"
+      ],
+      "field": "publish_date",
+      "old_values": {
+        "CH02-S071": "2012-06-29"
+      },
+      "verified_value": "2012-06-29",
+      "evidence_url": [
+        "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/GFXWJ/201511/t20151102_8258.html",
+        "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/GFXWJ/201511/P020151103347328337468.pdf",
+        "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201511/t20151102_8170.html",
+        "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201511/P020151103347114963684.pdf",
+        "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201511/t20151102_8258.html"
+      ],
+      "evidence": {
+        "type": "paraphrase",
+        "text": "官方英文版页发文日期是 2012-06-29，英文 PDF 封面的 Issue Date 和第4.2条相互印证；该值与中文通告下发日期一致，早于通知日期。"
+      },
+      "checked_at": "2026-10-13T08:30:58Z",
+      "result": "scope_distinction",
+      "scope": "priority",
+      "warning_numbers": [
+        19
+      ],
+      "evidence_locator": "英文手机版元数据；英文 PDF 第1页、第3页第4.2条",
+      "note": "保留现有日期；本轮缓存补足原桌面页，其日期与上轮已读官方 PHONE 页面和英文 PDF 一致。",
+      "previous_checked_at": "2026-10-13T08:15:27Z",
+      "cache_evidence_ids": [
+        "C11",
+        "C08"
+      ],
+      "source_urls": {
+        "CH02-S071": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201511/t20151102_8258.html"
+      },
+      "resolution": "explained"
+    },
+    {
+      "finding_id": "P09",
+      "source_ids": [
+        "CH02-S070"
+      ],
+      "field": "title",
+      "old_values": {
+        "CH02-S070": "关于发布咨询通告《运输类飞机持续适航和安全改进及点火源防护符合性指南》的通知"
+      },
+      "verified_value": "关于发布咨询通告《运输类飞机持续适航和安全改进及点火源防护符合性指南》的通知",
+      "evidence_url": [
+        "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201511/t20151102_8170.html",
+        "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201511/P020151103347114963684.pdf"
+      ],
+      "evidence": {
+        "type": "paraphrase",
+        "text": "登记长标题就是官方发布通知标题；通知明确发布所附 AC-26-AA-2012-01。通告封面有单独的正文题名。"
+      },
+      "checked_at": "2026-10-13T08:30:58Z",
+      "result": "scope_distinction",
+      "scope": "priority",
+      "warning_numbers": [
+        21
+      ],
+      "evidence_locator": "完整通知正文及中文 PDF 第1页",
+      "document_title": "运输类飞机持续适航和安全改进及点火源防护符合性指南",
+      "note": "保留发布通知标题，不与英文版标题强制统一。",
+      "previous_checked_at": "2026-10-13T08:15:27Z",
+      "cache_evidence_ids": [
+        "C11"
+      ],
+      "source_urls": {
+        "CH02-S070": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201511/t20151102_8170.html"
+      },
+      "resolution": "explained"
+    },
+    {
+      "finding_id": "P10",
+      "source_ids": [
+        "CH02-S071"
+      ],
+      "field": "title",
+      "old_values": {
+        "CH02-S071": "运输类飞机持续适航和安全改进及点火源防护符合性指南（英文版）"
+      },
+      "verified_value": "运输类飞机持续适航和安全改进及点火源防护符合性指南（英文版）",
+      "evidence_url": [
+        "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/GFXWJ/201511/t20151102_8258.html",
+        "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/GFXWJ/201511/P020151103347328337468.pdf",
+        "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201511/t20151102_8170.html",
+        "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201511/t20151102_8258.html"
+      ],
+      "evidence": {
+        "type": "paraphrase",
+        "text": "官方页明确标识英文版，并与通知互列相关链接；英文 PDF 的编号和下发日期与中文通告一致，属于语言版本关系。"
+      },
+      "checked_at": "2026-10-13T08:30:58Z",
+      "result": "scope_distinction",
+      "scope": "priority",
+      "warning_numbers": [
+        22
+      ],
+      "evidence_locator": "官方手机版名称、相关链接及英文 PDF 第1页",
+      "note": "保留英文版标识；不把该页当作同一 URL 的重复通知，也不宣称中英文附件字节相同。",
+      "previous_checked_at": "2026-10-13T08:15:27Z",
+      "cache_evidence_ids": [
+        "C11",
+        "C08"
+      ],
+      "source_urls": {
+        "CH02-S071": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201511/t20151102_8258.html"
+      },
+      "resolution": "explained"
+    },
+    {
+      "finding_id": "P11",
+      "source_ids": [
+        "CH08-S008"
+      ],
+      "field": "title",
+      "old_values": {
+        "CH08-S008": "运输类飞机的持续适航和安全改进规定符合性方法"
+      },
+      "verified_value": "关于发布咨询通告《运输类飞机持续适航和安全改进及点火源防护符合性指南》的通知",
+      "evidence_url": [
+        "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201511/t20151102_8170.html",
+        "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201511/P020151103347114963684.pdf"
+      ],
+      "evidence": {
+        "type": "paraphrase",
+        "text": "该记录与 CH02-S070 指向同一通知；官方通知及中文通告封面均未使用目前登记的符合性方法题名，且现题名遗漏了点火源防护这一部分。"
+      },
+      "checked_at": "2026-10-13T08:30:58Z",
+      "result": "verified",
+      "scope": "priority",
+      "warning_numbers": [
+        23
+      ],
+      "evidence_locator": "通知名称、完整正文、中文 PDF 第1页",
+      "value_scope": "登记 URL 的通知题名",
+      "alternative_document_title": "运输类飞机持续适航和安全改进及点火源防护符合性指南",
+      "note": "若后续台账明确以正文为登记对象，可使用 alternative_document_title，并另存通告下发日期 2012-06-29；不是单纯的标点差异。",
+      "previous_checked_at": "2026-10-13T08:15:27Z",
+      "cache_evidence_ids": [
+        "C11"
+      ],
+      "source_urls": {
+        "CH08-S008": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201511/t20151102_8170.html"
+      },
+      "resolution": "corrected"
+    },
+    {
+      "finding_id": "P12",
+      "source_ids": [
+        "CH03-S007",
+        "CH04-S009",
+        "CH07-S007"
+      ],
+      "field": "title",
+      "old_values": {
+        "CH03-S007": "型号合格审定程序历史版本",
+        "CH04-S009": "型号合格审定程序",
+        "CH07-S007": "型号合格审定程序"
+      },
+      "verified_value": "型号合格审定程序",
+      "evidence_url": [
+        "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/GFXWJ/202312/t20231223_222437.html",
+        "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202312/t20231223_222437.html"
+      ],
+      "evidence": {
+        "type": "paraphrase",
+        "text": "桌面页缓存与此前已读官方 PHONE 页均显示型号合格审定程序、AP-21-AA-2023-11R1、2023-12-06 和废止；历史版本属于台账说明。"
+      },
+      "checked_at": "2026-10-13T08:30:58Z",
+      "result": "verified",
+      "scope": "priority",
+      "warning_numbers": [
+        24,
+        25,
+        26
+      ],
+      "evidence_locator": "官方手机版名称、文号、发文日期、有效性",
+      "affected_corrections": [
+        "CH03-S007"
+      ],
+      "note": "旧版状态继续保留 abolished；本轮已补读桌面 HTML。旧版 PDF 不在本批缓存，尚未核定废止生效日及具体替代条款。",
+      "previous_checked_at": "2026-10-13T08:15:27Z",
+      "cache_evidence_ids": [
+        "C06"
+      ],
+      "source_urls": {
+        "CH03-S007": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202312/t20231223_222437.html",
+        "CH04-S009": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202312/t20231223_222437.html",
+        "CH07-S007": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202312/t20231223_222437.html"
+      },
+      "resolution": "corrected"
+    },
+    {
+      "finding_id": "M01",
+      "source_ids": [
+        "CH02-S001",
+        "CH06-S016"
+      ],
+      "field": "metadata",
+      "old_values": {
+        "CH02-S001": {
+          "title": "设计保证系统建设指南",
+          "publish_date": "2026-09-17",
+          "document_status": "effective"
+        },
+        "CH06-S016": {
+          "title": "设计保证系统建设指南",
+          "publish_date": "2026-09-17",
+          "document_status": "effective"
+        }
+      },
+      "verified_value": {
+        "title": "设计保证系统建设指南",
+        "publish_date": "2026-09-17",
+        "document_status": "effective",
+        "document_code": "AC-21-48",
+        "effective_date": "2026-09-01"
+      },
+      "evidence_url": [
+        "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202609/t20260921_231762.html",
+        "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202609/P020260921617424013037.pdf"
+      ],
+      "evidence": {
+        "type": "paraphrase",
+        "text": "官方发布页明示题名、发文日期2026-09-17及有效；正式PDF封面下发日期相同。物理第51页（页码47）第6节另写2026-09-01生效，已视觉核验，不将该生效日期覆盖发布日期。"
+      },
+      "checked_at": "2026-10-13T09:09:36Z",
+      "result": "verified",
+      "scope": "supplementary",
+      "warning_numbers": [],
+      "metadata_keys": [
+        "title",
+        "publish_date",
+        "document_status"
+      ],
+      "previous_checked_at": "2026-10-13T08:30:58Z",
+      "cache_evidence_ids": [
+        "C07",
+        "C23"
+      ],
+      "date_roles": {
+        "publish_date": "2026-09-17",
+        "document_issue_date": "2026-09-17",
+        "document_effective_date": "2026-09-01"
+      },
+      "evidence_locator": "HTML；PDF 物理第1页、物理第51页（印刷页码47）第6节",
+      "source_urls": {
+        "CH02-S001": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202609/t20260921_231762.html",
+        "CH06-S016": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202609/t20260921_231762.html"
+      },
+      "resolution": "recorded"
+    },
+    {
+      "finding_id": "M02",
+      "source_ids": [
+        "CH02-S037",
+        "CH05-S012"
+      ],
+      "field": "metadata",
+      "old_values": {
+        "CH02-S037": {
+          "title": "民航局关于修订印发 《关于民用航空产品合格审定的细化要求》的通知",
+          "publish_date": "2023-12-04",
+          "document_status": "effective"
+        },
+        "CH05-S012": {
+          "title": "关于民用航空产品合格审定的细化要求",
+          "publish_date": "2023-12-04",
+          "document_status": "effective"
+        }
+      },
+      "verified_value": {
+        "notice_title": "民航局关于修订印发《关于民用航空产品合格审定的细化要求》的通知",
+        "document_title": "关于民用航空产品合格审定的细化要求",
+        "publish_date": "2023-12-04",
+        "document_status": "effective"
+      },
+      "evidence_url": [
+        "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202312/t20231223_222426.html",
+        "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/GFXWJ/202312/P020231223438346814379.pdf"
+      ],
+      "evidence": {
+        "type": "paraphrase",
+        "text": "发布页的长标题与 PDF 首页通知相符，PDF 第2页起为细化要求；日期为 2023-12-04，发布页状态为有效。"
+      },
+      "checked_at": "2026-10-13T08:30:58Z",
+      "result": "verified",
+      "scope": "supplementary",
+      "warning_numbers": [],
+      "metadata_keys": [
+        "title",
+        "publish_date",
+        "document_status"
+      ],
+      "note": "网页长标题中印发与书名号间的空格属排版差异。短标题对应正文，不能仅按标题不同判为不同修订版。",
+      "previous_checked_at": "2026-10-13T08:15:27Z",
+      "cache_evidence_ids": [
+        "C10"
+      ],
+      "source_urls": {
+        "CH02-S037": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202312/t20231223_222426.html",
+        "CH05-S012": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202312/t20231223_222426.html"
+      },
+      "resolution": "recorded"
+    },
+    {
+      "finding_id": "M03",
+      "source_ids": [
+        "CH01-S008",
+        "CH03-S001",
+        "CH04-S001",
+        "CH05-S001",
+        "CH07-S001",
+        "CH08-S001",
+        "CH09-S001"
+      ],
+      "field": "metadata",
+      "old_values": {
+        "CH01-S008": {
+          "title": "运输类飞机适航标准",
+          "document_code": "CCAR-25-R4",
+          "document_status": "effective"
+        },
+        "CH03-S001": {
+          "title": "运输类飞机适航标准",
+          "document_code": "CCAR-25-R4",
+          "document_status": "effective"
+        },
+        "CH04-S001": {
+          "title": "运输类飞机适航标准",
+          "document_code": "CCAR-25-R4",
+          "document_status": "effective"
+        },
+        "CH05-S001": {
+          "title": "运输类飞机适航标准",
+          "document_code": "CCAR-25-R4",
+          "document_status": "effective"
+        },
+        "CH07-S001": {
+          "title": "运输类飞机适航标准",
+          "document_code": "CCAR-25-R4",
+          "document_status": "effective"
+        },
+        "CH08-S001": {
+          "title": "运输类飞机适航标准",
+          "document_code": "CCAR-25-R4",
+          "document_status": "effective"
+        },
+        "CH09-S001": {
+          "title": "运输类飞机适航标准",
+          "document_code": "CCAR-25-R4",
+          "document_status": "effective"
+        }
+      },
+      "verified_value": {
+        "title": "运输类飞机适航标准",
+        "document_code": "CCAR-25-R4",
+        "promulgating_order": "交通运输部令2016年第19号",
+        "document_status": "effective"
+      },
+      "evidence_url": [
+        "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/201606/t20160622_38638.html",
+        "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/MHGZ/201606/t20160622_38638.html",
+        "https://xxgk.mot.gov.cn/gz/202112/t20211227_3633506.html",
+        "https://www.caac.gov.cn/was5/web/search?channelid=269689&divShow=wenhao&fl=13&orderby=-fabuDate&outlinepage=7&page=13&perpage=10&selST=All&selYouxiao=All&was_custom_expr=+PARENTID%3D%2713%27+or+CLASSINFOID%3D%2713%27+"
+      ],
+      "evidence": {
+        "type": "paraphrase",
+        "text": "CAAC 详情页显示部号 CCAR-25-R4，但有效性字段为空；已打开的 CAAC 官方目录明确将此部号标为有效，交通运输部正文给出发布部令。"
+      },
+      "checked_at": "2026-10-13T08:30:58Z",
+      "result": "verified",
+      "scope": "supplementary",
+      "warning_numbers": [],
+      "metadata_keys": [
+        "title",
+        "document_code",
+        "document_status"
+      ],
+      "note": "不得把详情页空白状态直接解释为有效；本项状态依据官方目录的具体对应条目。部号与发布部令属于两个编号层次。",
+      "previous_checked_at": "2026-10-13T08:15:27Z",
+      "cache_evidence_ids": [
+        "C17",
+        "C04"
+      ],
+      "source_urls": {
+        "CH01-S008": "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/201606/t20160622_38638.html",
+        "CH03-S001": "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/MHGZ/201606/t20160622_38638.html",
+        "CH04-S001": "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/201606/t20160622_38638.html",
+        "CH05-S001": "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/MHGZ/201606/t20160622_38638.html",
+        "CH07-S001": "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/MHGZ/201606/t20160622_38638.html",
+        "CH08-S001": "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/MHGZ/201606/t20160622_38638.html",
+        "CH09-S001": "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/MHGZ/201606/t20160622_38638.html"
+      },
+      "resolution": "recorded"
+    },
+    {
+      "finding_id": "M04",
+      "source_ids": [
+        "CH01-S019",
+        "CH02-S036",
+        "CH05-S008"
+      ],
+      "field": "metadata",
+      "old_values": {
+        "CH01-S019": {
+          "document_code": "AP-21-AA-2023-17",
+          "publish_date": "2023-12-06",
+          "document_status": "effective"
+        },
+        "CH02-S036": {
+          "document_code": "AP-21-AA-2023-17",
+          "publish_date": "2023-12-06",
+          "document_status": "effective"
+        },
+        "CH05-S008": {
+          "document_code": "AP-21-AA-2023-17",
+          "publish_date": "2023-12-06",
+          "document_status": "effective"
+        }
+      },
+      "verified_value": {
+        "document_code": "AP-21-AA-2023-17",
+        "promulgating_notice": "民航规〔2023〕38号",
+        "publish_date": "2023-12-06",
+        "document_status": "effective"
+      },
+      "evidence_url": [
+        "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202312/t20231223_222428.html"
+      ],
+      "evidence": {
+        "type": "paraphrase",
+        "text": "官方发布页分别给出管理程序文号、印发字号、2023-12-06 发文日期和有效状态。"
+      },
+      "checked_at": "2026-10-13T08:30:58Z",
+      "result": "verified",
+      "scope": "supplementary",
+      "warning_numbers": [],
+      "metadata_keys": [
+        "document_code",
+        "publish_date",
+        "document_status"
+      ],
+      "previous_checked_at": "2026-10-13T08:15:27Z",
+      "cache_evidence_ids": [
+        "C02"
+      ],
+      "source_urls": {
+        "CH01-S019": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202312/t20231223_222428.html",
+        "CH02-S036": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202312/t20231223_222428.html",
+        "CH05-S008": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202312/t20231223_222428.html"
+      },
+      "resolution": "recorded"
+    },
+    {
+      "finding_id": "M05",
+      "source_ids": [
+        "CH01-S021",
+        "CH06-S010"
+      ],
+      "field": "metadata",
+      "old_values": {
+        "CH01-S021": {
+          "document_code": "民航适函〔2025〕25号",
+          "publish_date": "2025-02-14",
+          "document_status": "effective"
+        },
+        "CH06-S010": {
+          "document_code": "民航适函〔2025〕25号",
+          "publish_date": "2025-02-14",
+          "document_status": "effective"
+        }
+      },
+      "verified_value": {
+        "document_code": "民航适函〔2025〕25号",
+        "publish_date": "2025-02-14",
+        "document_status": "effective"
+      },
+      "evidence_url": [
+        "https://www.caac.gov.cn/XXGK/XXGK/ZFGW/202503/t20250314_226931.html"
+      ],
+      "evidence": {
+        "type": "paraphrase",
+        "text": "官方文号栏及有效性栏清晰，通知落款与发文日期均为 2025-02-14；附件目录的统计截止日不应作为发布日期。"
+      },
+      "checked_at": "2026-10-13T08:30:58Z",
+      "result": "verified",
+      "scope": "supplementary",
+      "warning_numbers": [],
+      "metadata_keys": [
+        "document_code",
+        "publish_date",
+        "document_status"
+      ],
+      "previous_checked_at": "2026-10-13T08:15:27Z",
+      "cache_evidence_ids": [
+        "C05"
+      ],
+      "source_urls": {
+        "CH01-S021": "https://www.caac.gov.cn/XXGK/XXGK/ZFGW/202503/t20250314_226931.html",
+        "CH06-S010": "https://www.caac.gov.cn/XXGK/XXGK/ZFGW/202503/t20250314_226931.html"
+      },
+      "resolution": "recorded"
+    },
+    {
+      "finding_id": "M06",
+      "source_ids": [
+        "CH02-S070",
+        "CH02-S071",
+        "CH08-S008"
+      ],
+      "field": "metadata",
+      "old_values": {
+        "CH02-S070": {
+          "document_code": "AC-26-AA-2012-01",
+          "document_status": "effective"
+        },
+        "CH02-S071": {
+          "document_code": "AC-26-AA-2012-01",
+          "document_status": "effective"
+        },
+        "CH08-S008": {
+          "document_code": "AC-26-AA-2012-01",
+          "document_status": "effective"
+        }
+      },
+      "verified_value": {
+        "document_code": "AC-26-AA-2012-01",
+        "document_status": "effective"
+      },
+      "evidence_url": [
+        "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201511/t20151102_8170.html",
+        "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/GFXWJ/201511/t20151102_8258.html",
+        "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201511/P020151103347114963684.pdf",
+        "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/GFXWJ/201511/P020151103347328337468.pdf",
+        "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201511/t20151102_8258.html"
+      ],
+      "evidence": {
+        "type": "paraphrase",
+        "text": "通知页与英文版页都标注有效，两份正文封面使用同一 AC 编号。发布通知、中文正文和英文正文应保持文献层次及语言关系。"
+      },
+      "checked_at": "2026-10-13T08:30:58Z",
+      "result": "verified",
+      "scope": "supplementary",
+      "warning_numbers": [],
+      "metadata_keys": [
+        "document_code",
+        "document_status"
+      ],
+      "previous_checked_at": "2026-10-13T08:15:27Z",
+      "cache_evidence_ids": [
+        "C11",
+        "C08"
+      ],
+      "source_urls": {
+        "CH02-S070": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201511/t20151102_8170.html",
+        "CH02-S071": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201511/t20151102_8258.html",
+        "CH08-S008": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201511/t20151102_8170.html"
+      },
+      "resolution": "recorded"
+    },
+    {
+      "finding_id": "M07",
+      "source_ids": [
+        "CH03-S007",
+        "CH04-S009",
+        "CH07-S007"
+      ],
+      "field": "metadata",
+      "old_values": {
+        "CH03-S007": {
+          "document_code": "AP-21-AA-2023-11R1",
+          "publish_date": "2023-12-06",
+          "document_status": "abolished"
+        },
+        "CH04-S009": {
+          "document_code": "AP-21-AA-2023-11R1",
+          "publish_date": "2023-12-06",
+          "document_status": "abolished"
+        },
+        "CH07-S007": {
+          "document_code": "AP-21-AA-2023-11R1",
+          "publish_date": "2023-12-06",
+          "document_status": "abolished"
+        }
+      },
+      "verified_value": {
+        "document_code": "AP-21-AA-2023-11R1",
+        "publish_date": "2023-12-06",
+        "document_status": "abolished",
+        "promulgating_notice": "民航规〔2023〕46号"
+      },
+      "evidence_url": [
+        "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/GFXWJ/202312/t20231223_222437.html",
+        "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202607/t20260701_231208.html",
+        "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202312/t20231223_222437.html"
+      ],
+      "evidence": {
+        "type": "paraphrase",
+        "text": "旧版桌面页缓存确认程序文号、印发字号民航规〔2023〕46号、2023-12-06 和废止。新版页面仍显示 AP-21-11R2、2026-06-25、有效，两个版本不能合并。"
+      },
+      "checked_at": "2026-10-13T08:30:58Z",
+      "result": "verified",
+      "scope": "supplementary",
+      "warning_numbers": [],
+      "metadata_keys": [
+        "document_code",
+        "publish_date",
+        "document_status"
+      ],
+      "note": "未读取新版 RAR，未核定替代条款或废止实施日期；只记录两页明示的版本与状态。",
+      "previous_checked_at": "2026-10-13T08:15:27Z",
+      "cache_evidence_ids": [
+        "C13",
+        "C06"
+      ],
+      "source_urls": {
+        "CH03-S007": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202312/t20231223_222437.html",
+        "CH04-S009": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202312/t20231223_222437.html",
+        "CH07-S007": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202312/t20231223_222437.html"
+      },
+      "resolution": "recorded"
+    },
+    {
+      "finding_id": "M08",
+      "source_ids": [
+        "CH04-S010"
+      ],
+      "field": "metadata",
+      "old_values": {
+        "CH04-S010": {
+          "title": "原稿引用HB 7736-2004（题名与状态待核验）",
+          "document_code": "HB 7736-2004",
+          "document_status": "unknown"
+        }
+      },
+      "verified_value": null,
+      "evidence_url": [
+        "https://std.samr.gov.cn/search/stdPage?q=HB%207736%202004&tid="
+      ],
+      "evidence": {
+        "type": "paraphrase",
+        "text": "已读官方检索页只有零结果，没有 HB 7736-2004 的题名、发布日期或效力详情，不能据此确认标准身份或状态。"
+      },
+      "checked_at": "2026-10-13T08:30:58Z",
+      "result": "unresolved",
+      "scope": "supplementary",
+      "warning_numbers": [],
+      "metadata_keys": [
+        "title",
+        "document_code",
+        "document_status"
+      ],
+      "reason": "访问已通过缓存补足，缺口是没有取得该编号对应的标准详情或发布公告。",
+      "next_action": "保留 unknown 和待核说明，不将未找到记录解释为废止或不存在。",
+      "previous_checked_at": "2026-10-13T08:15:27Z",
+      "cache_evidence_ids": [
+        "C19"
+      ],
+      "source_urls": {
+        "CH04-S010": "https://std.samr.gov.cn/search/stdPage?q=HB%207736%202004&tid="
+      },
+      "resolution": "unresolved"
+    },
+    {
+      "finding_id": "A01",
+      "source_ids": [
+        "CH01-S008",
+        "CH03-S001",
+        "CH04-S001",
+        "CH05-S001",
+        "CH07-S001",
+        "CH08-S001",
+        "CH09-S001"
+      ],
+      "field": "url_alias",
+      "old_values": {
+        "CH01-S008": "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/201606/t20160622_38638.html",
+        "CH03-S001": "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/MHGZ/201606/t20160622_38638.html",
+        "CH04-S001": "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/201606/t20160622_38638.html",
+        "CH05-S001": "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/MHGZ/201606/t20160622_38638.html",
+        "CH07-S001": "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/MHGZ/201606/t20160622_38638.html",
+        "CH08-S001": "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/MHGZ/201606/t20160622_38638.html",
+        "CH09-S001": "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/MHGZ/201606/t20160622_38638.html"
+      },
+      "verified_value": {
+        "canonical_url": "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/201606/t20160622_38638.html",
+        "aliases": [
+          "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/MHGZ/201606/t20160622_38638.html"
+        ],
+        "match_level": "official_publication_metadata",
+        "metadata": {
+          "title": "运输类飞机适航标准",
+          "document_code": "CCAR-25-R4",
+          "publish_date": "2016-03-17"
+        }
+      },
+      "evidence_url": [
+        "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/201606/t20160622_38638.html",
+        "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/MHGZ/201606/t20160622_38638.html"
+      ],
+      "evidence": {
+        "type": "paraphrase",
+        "text": "两个地址均已打开官方发布页，其题名、文号或部号、发文日期及附件名称一致；可确认是同一官方发布记录的桌面与移动展示。"
+      },
+      "checked_at": "2026-10-13T08:30:58Z",
+      "result": "equivalent_url",
+      "scope": "url_alias",
+      "warning_numbers": [],
+      "metadata_keys": [],
+      "byte_identity_verified": false,
+      "note": "此处只确认官方展示记录等价，未做两份附件二进制哈希比对。不要将全站所有同尾号路径自动归并。",
+      "alias_group_origin": "registered_sources",
+      "previous_checked_at": "2026-10-13T08:15:27Z",
+      "cache_evidence_ids": [
+        "C17",
+        "C04"
+      ],
+      "source_urls": {
+        "CH01-S008": "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/201606/t20160622_38638.html",
+        "CH03-S001": "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/MHGZ/201606/t20160622_38638.html",
+        "CH04-S001": "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/201606/t20160622_38638.html",
+        "CH05-S001": "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/MHGZ/201606/t20160622_38638.html",
+        "CH07-S001": "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/MHGZ/201606/t20160622_38638.html",
+        "CH08-S001": "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/MHGZ/201606/t20160622_38638.html",
+        "CH09-S001": "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/MHGZ/201606/t20160622_38638.html"
+      },
+      "resolution": "recorded"
+    },
+    {
+      "finding_id": "A02",
+      "source_ids": [
+        "CH01-S018",
+        "CH02-S059",
+        "CH03-S005",
+        "CH04-S003",
+        "CH05-S011",
+        "CH06-S009",
+        "CH07-S006",
+        "CH09-S005"
+      ],
+      "field": "url_alias",
+      "old_values": {
+        "CH01-S018": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201801/t20180124_48751.html",
+        "CH02-S059": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201801/t20180124_48751.html",
+        "CH03-S005": "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/GFXWJ/201801/t20180124_48751.html",
+        "CH04-S003": "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/GFXWJ/201801/t20180124_48751.html",
+        "CH05-S011": "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/GFXWJ/201801/t20180124_48751.html",
+        "CH06-S009": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201801/t20180124_48751.html",
+        "CH07-S006": "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/GFXWJ/201801/t20180124_48751.html",
+        "CH09-S005": "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/GFXWJ/201801/t20180124_48751.html"
+      },
+      "verified_value": {
+        "canonical_url": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201801/t20180124_48751.html",
+        "aliases": [
+          "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/GFXWJ/201801/t20180124_48751.html"
+        ],
+        "match_level": "official_publication_metadata",
+        "metadata": {
+          "title": "复合材料结构制造质量体系要求指南",
+          "document_code": "AC-21-AA-2017-39",
+          "publish_date": "2017-03-17",
+          "document_status": "effective"
+        }
+      },
+      "evidence_url": [
+        "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201801/t20180124_48751.html",
+        "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/GFXWJ/201801/t20180124_48751.html"
+      ],
+      "evidence": {
+        "type": "paraphrase",
+        "text": "两个地址均已打开官方发布页，其题名、文号或部号、发文日期及附件名称一致；可确认是同一官方发布记录的桌面与移动展示。"
+      },
+      "checked_at": "2026-10-13T08:30:58Z",
+      "result": "equivalent_url",
+      "scope": "url_alias",
+      "warning_numbers": [],
+      "metadata_keys": [],
+      "byte_identity_verified": false,
+      "note": "此处只确认官方展示记录等价，未做两份附件二进制哈希比对。不要将全站所有同尾号路径自动归并。",
+      "alias_group_origin": "registered_sources",
+      "previous_checked_at": "2026-10-13T08:15:27Z",
+      "cache_evidence_ids": [
+        "C12",
+        "C15"
+      ],
+      "source_urls": {
+        "CH01-S018": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201801/t20180124_48751.html",
+        "CH02-S059": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201801/t20180124_48751.html",
+        "CH03-S005": "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/GFXWJ/201801/t20180124_48751.html",
+        "CH04-S003": "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/GFXWJ/201801/t20180124_48751.html",
+        "CH05-S011": "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/GFXWJ/201801/t20180124_48751.html",
+        "CH06-S009": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201801/t20180124_48751.html",
+        "CH07-S006": "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/GFXWJ/201801/t20180124_48751.html",
+        "CH09-S005": "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/GFXWJ/201801/t20180124_48751.html"
+      },
+      "resolution": "recorded"
+    },
+    {
+      "finding_id": "A03",
+      "source_ids": [
+        "CH02-S065",
+        "CH05-S004"
+      ],
+      "field": "url_alias",
+      "old_values": {
+        "CH02-S065": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201511/t20151102_8262.html",
+        "CH05-S004": "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/GFXWJ/201511/t20151102_8262.html"
+      },
+      "verified_value": {
+        "canonical_url": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201511/t20151102_8262.html",
+        "aliases": [
+          "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/GFXWJ/201511/t20151102_8262.html"
+        ],
+        "match_level": "official_publication_metadata",
+        "metadata": {
+          "title": "航空产品设计更改审定基础的确定程序",
+          "document_code": "AP-21-AA-2014-36",
+          "publish_date": "2014-01-26",
+          "document_status": "effective"
+        }
+      },
+      "evidence_url": [
+        "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201511/t20151102_8262.html",
+        "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/GFXWJ/201511/t20151102_8262.html"
+      ],
+      "evidence": {
+        "type": "paraphrase",
+        "text": "两个地址均已打开官方发布页，其题名、文号或部号、发文日期及附件名称一致；可确认是同一官方发布记录的桌面与移动展示。"
+      },
+      "checked_at": "2026-10-13T08:30:58Z",
+      "result": "equivalent_url",
+      "scope": "url_alias",
+      "warning_numbers": [],
+      "metadata_keys": [],
+      "byte_identity_verified": false,
+      "note": "此处只确认官方展示记录等价，未做两份附件二进制哈希比对。不要将全站所有同尾号路径自动归并。",
+      "alias_group_origin": "registered_sources",
+      "previous_checked_at": "2026-10-13T08:15:27Z",
+      "cache_evidence_ids": [
+        "C01",
+        "C16"
+      ],
+      "source_urls": {
+        "CH02-S065": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201511/t20151102_8262.html",
+        "CH05-S004": "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/GFXWJ/201511/t20151102_8262.html"
+      },
+      "resolution": "recorded"
+    },
+    {
+      "finding_id": "A04",
+      "source_ids": [
+        "CH02-S045",
+        "CH08-S006"
+      ],
+      "field": "url_alias",
+      "old_values": {
+        "CH02-S045": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202207/t20220708_214043.html",
+        "CH08-S006": "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/GFXWJ/202207/t20220708_214043.html"
+      },
+      "verified_value": {
+        "canonical_url": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202207/t20220708_214043.html",
+        "aliases": [
+          "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/GFXWJ/202207/t20220708_214043.html"
+        ],
+        "match_level": "official_publication_metadata",
+        "metadata": {
+          "title": "运输类飞机持续结构完整性大纲",
+          "document_code": "AC-25-AA-2022-01",
+          "publish_date": "2022-06-06",
+          "document_status": "effective"
+        }
+      },
+      "evidence_url": [
+        "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202207/t20220708_214043.html",
+        "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/GFXWJ/202207/t20220708_214043.html"
+      ],
+      "evidence": {
+        "type": "paraphrase",
+        "text": "两个地址均已打开官方发布页，其题名、文号或部号、发文日期及附件名称一致；可确认是同一官方发布记录的桌面与移动展示。"
+      },
+      "checked_at": "2026-10-13T08:30:58Z",
+      "result": "equivalent_url",
+      "scope": "url_alias",
+      "warning_numbers": [],
+      "metadata_keys": [],
+      "byte_identity_verified": false,
+      "note": "此处只确认官方展示记录等价，未做两份附件二进制哈希比对。不要将全站所有同尾号路径自动归并。",
+      "alias_group_origin": "registered_sources",
+      "previous_checked_at": "2026-10-13T08:15:27Z",
+      "cache_evidence_ids": [
+        "C14",
+        "C09"
+      ],
+      "source_urls": {
+        "CH02-S045": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202207/t20220708_214043.html",
+        "CH08-S006": "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/GFXWJ/202207/t20220708_214043.html"
+      },
+      "resolution": "recorded"
+    },
+    {
+      "finding_id": "A05",
+      "source_ids": [
+        "CH01-S005",
+        "CH03-S003",
+        "CH04-S004",
+        "CH05-S003",
+        "CH06-S002",
+        "CH07-S004",
+        "CH08-S003",
+        "CH09-S003"
+      ],
+      "field": "url_alias",
+      "old_values": {
+        "CH01-S005": "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/202403/t20240313_223201.html",
+        "CH03-S003": "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/202403/t20240313_223201.html",
+        "CH04-S004": "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/202403/t20240313_223201.html",
+        "CH05-S003": "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/MHGZ/202403/t20240313_223201.html",
+        "CH06-S002": "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/202403/t20240313_223201.html",
+        "CH07-S004": "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/202403/t20240313_223201.html",
+        "CH08-S003": "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/202403/t20240313_223201.html",
+        "CH09-S003": "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/202403/t20240313_223201.html"
+      },
+      "verified_value": {
+        "canonical_url": "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/202403/t20240313_223201.html",
+        "aliases": [
+          "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/MHGZ/202403/t20240313_223201.html"
+        ],
+        "match_level": "official_publication_metadata",
+        "metadata": {
+          "title": "交通运输部关于修改《民用航空产品和零部件合格审定规定》的决定",
+          "document_code": "CCAR-21-R5",
+          "promulgating_order": "交通运输部令2024年第5号",
+          "publish_date": "2024-02-18",
+          "document_status": "effective"
+        }
+      },
+      "evidence_url": [
+        "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/202403/t20240313_223201.html",
+        "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/MHGZ/202403/t20240313_223201.html",
+        "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/202403/P020240313332916593770.pdf",
+        "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/MHGZ/202403/P020240313332916593770.pdf"
+      ],
+      "evidence": {
+        "type": "paraphrase",
+        "text": "新缓存的桌面和PHONE HTML均已完整读取，标题、编号、发文日期、有效状态、通知正文一致；两端所链修改决定PDF均为438100字节，重算SHA-256相同。"
+      },
+      "checked_at": "2026-10-13T09:09:36Z",
+      "result": "equivalent_url",
+      "scope": "url_alias",
+      "warning_numbers": [],
+      "metadata_keys": [],
+      "byte_identity_verified": true,
+      "note": "仅以指定官方URL及附件对为边界确认别名；metadata修正层不更换URL、不共享正文、不推断全站PHONE路径。CCAR-21合并全文仍由主任务负责。",
+      "alias_group_origin": "registered_sources",
+      "previous_checked_at": "2026-10-13T08:30:58Z",
+      "cache_evidence_ids": [
+        "C03",
+        "C18",
+        "C21",
+        "C27",
+        "C20",
+        "C25"
+      ],
+      "attachment_identity": {
+        "urls": [
+          "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/202403/P020240313332916593770.pdf",
+          "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/MHGZ/202403/P020240313332916593770.pdf"
+        ],
+        "sha256": "51b8f078c64d43750102b05404f901df698b2c77944a74537e86e6c63d119de3",
+        "size": 438100,
+        "verified_at": "2026-10-13T09:09:36Z",
+        "scope": "两端发布页指向的修改决定附件；不据此将修改决定与规定合并正文视为同一文献"
+      },
+      "source_urls": {
+        "CH01-S005": "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/202403/t20240313_223201.html",
+        "CH03-S003": "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/202403/t20240313_223201.html",
+        "CH04-S004": "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/202403/t20240313_223201.html",
+        "CH05-S003": "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/MHGZ/202403/t20240313_223201.html",
+        "CH06-S002": "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/202403/t20240313_223201.html",
+        "CH07-S004": "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/202403/t20240313_223201.html",
+        "CH08-S003": "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/202403/t20240313_223201.html",
+        "CH09-S003": "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/202403/t20240313_223201.html"
+      },
+      "resolution": "recorded"
+    },
+    {
+      "finding_id": "A06",
+      "source_ids": [
+        "CH03-S007",
+        "CH04-S009",
+        "CH07-S007"
+      ],
+      "field": "url_alias",
+      "old_values": {
+        "CH03-S007": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202312/t20231223_222437.html",
+        "CH04-S009": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202312/t20231223_222437.html",
+        "CH07-S007": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202312/t20231223_222437.html"
+      },
+      "verified_value": {
+        "canonical_url": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202312/t20231223_222437.html",
+        "aliases": [
+          "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/GFXWJ/202312/t20231223_222437.html"
+        ],
+        "match_level": "official_publication_metadata",
+        "metadata": {
+          "title": "型号合格审定程序",
+          "document_code": "AP-21-AA-2023-11R1",
+          "publish_date": "2023-12-06",
+          "document_status": "abolished"
+        }
+      },
+      "evidence_url": [
+        "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202312/t20231223_222437.html",
+        "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/GFXWJ/202312/t20231223_222437.html"
+      ],
+      "evidence": {
+        "type": "paraphrase",
+        "text": "本轮已读取桌面页原始 HTML 缓存，与上轮已读官方 PHONE 页的题名、文号、发文日期、有效性及附件名称一致，可确认同一官方发布记录。"
+      },
+      "checked_at": "2026-10-13T08:30:58Z",
+      "result": "equivalent_url",
+      "scope": "url_alias",
+      "warning_numbers": [],
+      "alias_group_origin": "evidence_fallback",
+      "byte_identity_verified": false,
+      "note": "这是核验过程中使用的补充官方地址，不属于台账中原已同时登记的5组双端链接；未做附件二进制哈希比对。",
+      "previous_checked_at": "2026-10-13T08:30:58Z",
+      "cache_evidence_ids": [
+        "C06"
+      ],
+      "source_urls": {
+        "CH03-S007": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202312/t20231223_222437.html",
+        "CH04-S009": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202312/t20231223_222437.html",
+        "CH07-S007": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202312/t20231223_222437.html"
+      },
+      "resolution": "recorded"
+    },
+    {
+      "finding_id": "A07",
+      "source_ids": [
+        "CH02-S071"
+      ],
+      "field": "url_alias",
+      "old_values": {
+        "CH02-S071": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201511/t20151102_8258.html"
+      },
+      "verified_value": {
+        "canonical_url": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201511/t20151102_8258.html",
+        "aliases": [
+          "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/GFXWJ/201511/t20151102_8258.html"
+        ],
+        "match_level": "official_publication_metadata",
+        "metadata": {
+          "title": "运输类飞机持续适航和安全改进及点火源防护符合性指南（英文版）",
+          "document_code": "AC-26-AA-2012-01",
+          "publish_date": "2012-06-29",
+          "document_status": "effective"
+        }
+      },
+      "evidence_url": [
+        "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201511/t20151102_8258.html",
+        "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/GFXWJ/201511/t20151102_8258.html"
+      ],
+      "evidence": {
+        "type": "paraphrase",
+        "text": "本轮已读取桌面页原始 HTML 缓存，与上轮已读官方 PHONE 页的题名、文号、发文日期、有效性及附件名称一致，可确认同一官方发布记录。"
+      },
+      "checked_at": "2026-10-13T08:30:58Z",
+      "result": "equivalent_url",
+      "scope": "url_alias",
+      "warning_numbers": [],
+      "alias_group_origin": "evidence_fallback",
+      "byte_identity_verified": false,
+      "note": "这是核验过程中使用的补充官方地址，不属于台账中原已同时登记的5组双端链接；未做附件二进制哈希比对。",
+      "previous_checked_at": "2026-10-13T08:30:58Z",
+      "cache_evidence_ids": [
+        "C08"
+      ],
+      "source_urls": {
+        "CH02-S071": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201511/t20151102_8258.html"
+      },
+      "resolution": "recorded"
+    },
+    {
+      "finding_id": "M09",
+      "source_ids": [
+        "CH08-S007"
+      ],
+      "field": "title",
+      "old_values": {
+        "CH08-S007": "持续适航文件"
+      },
+      "verified_value": "审定维修要求",
+      "evidence_url": [
+        "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/GFXWJ/201511/t20151102_8386.html",
+        "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/GFXWJ/201511/P020151103347692049750.pdf"
+      ],
+      "evidence": {
+        "type": "paraphrase",
+        "text": "官方HTML名称和附件标签均为审定维修要求、文号AC-25.1529-1、发文日期1996-09-18、有效；21页扫描PDF封面视觉核验同题名和编号，生效日期为1996-09-18。台账持续适航文件是错误题名。"
+      },
+      "checked_at": "2026-10-13T09:09:36Z",
+      "result": "verified",
+      "scope": "supplementary",
+      "warning_numbers": [],
+      "resolution": "corrected",
+      "evidence_locator": "完整官方PHONE HTML元数据；21页扫描PDF第1页封面（已视觉核验，无文字层）",
+      "cache_evidence_ids": [
+        "C24",
+        "C26"
+      ],
+      "affected_corrections": [
+        "CH08-S007"
+      ],
+      "identity_check": {
+        "initial_concern": "题名可能指错来源，原拟保留 unresolved_source_identity。",
+        "outcome": "封面与HTML编号一致，登记URL确属AC-25.1529-1；证据支持纠正题名，来源身份疑点已解除。",
+        "document_code": "AC-25.1529-1",
+        "publish_date": "1996-09-18",
+        "effective_date": "1996-09-18",
+        "document_status": "effective"
+      },
+      "note": "只纠正来源题名；不证明原上传摘录与这份扫描PDF逐字对应，不据同URL或题名共享正文。OCR机械提取及最终专业审核由主任务继续。",
+      "source_urls": {
+        "CH08-S007": "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/GFXWJ/201511/t20151102_8386.html"
+      }
+    }
+  ],
+  "access_limitations": [
+    {
+      "url": "https://std.samr.gov.cn/search/stdPage?q=HB%207736%202004&tid=",
+      "result": "retrieved_from_ci_cache_but_no_matching_detail",
+      "reason": "原 web 失败；本轮已读官方原始 HTML，显示0条结果，仍无对应标准详情。",
+      "first_check_result": "unresolved"
+    },
+    {
+      "url": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202609/P020260921617424013037.pdf",
+      "result": "recovered_via_second_ci_cache",
+      "reason": "此前附件超时及首批缓存缺失已由新缓存正式PDF解决，封面编号AC-21-48已核对。",
+      "first_check_result": "unresolved"
+    },
+    {
+      "url": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202312/P020231223438346814379.pdf",
+      "result": "recovered_via_official_phone_pdf",
+      "reason": "桌面 PDF 超时，PHONE PDF 可解析，已读取首页通知和第2页正文题名。",
+      "first_check_result": "recovered_via_official_phone_pdf"
+    },
+    {
+      "url": "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/201606/P020160622405532063536.pdf",
+      "result": "metadata_verified_via_other_official_text",
+      "reason": "桌面及 PHONE 附件超时；日期用两端 HTML、官方历史说明和交通运输部正文公布说明交叉验证。",
+      "first_check_result": "metadata_verified_via_other_official_text"
+    },
+    {
+      "url": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202312/P020231223441684823282.pdf",
+      "result": "metadata_page_only",
+      "reason": "桌面附件超时；PHONE 附件一次返回页数/索引，复取正文及截图超时，未作为正文证据；标题等元数据依据完整官方 HTML。",
+      "first_check_result": "metadata_page_only"
+    },
+    {
+      "url": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202312/t20231223_222437.html",
+      "result": "desktop_metadata_recovered_via_ci_cache",
+      "reason": "首次返回标题和索引，复取正文多次超时；官方 PHONE 页面可完整读取。旧版 PDF 两种路径均超时。 本轮已通过原始 HTML 缓存补读桌面元数据。",
+      "first_check_result": "recovered_metadata_via_official_phone_page"
+    },
+    {
+      "url": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201511/t20151102_8258.html",
+      "result": "desktop_metadata_recovered_via_ci_cache",
+      "reason": "桌面首次返回前段，复取超时；PHONE 页面及4页英文附件可读取。 本轮已通过原始 HTML 缓存补读桌面元数据。",
+      "first_check_result": "recovered_via_official_phone_page_and_pdf"
+    },
+    {
+      "url": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202207/t20220708_214043.html",
+      "result": "metadata_page_only",
+      "reason": "双端 HTML 可读，附件点击失败；别名结论仅限页面发布记录。",
+      "first_check_result": "metadata_page_only"
+    },
+    {
+      "url": "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/202403/t20240313_223201.html",
+      "result": "recovered_via_ci_cache",
+      "reason": "桌面和PHONE HTML已读；新缓存两端PDF经重算大小/哈希相同，限定这一附件对的字节一致性已确认。",
+      "first_check_result": "unresolved_alias"
+    },
+    {
+      "url": null,
+      "result": "pdf_visual_check_unavailable",
+      "reason": "AC-26 中文附件、民航规〔2023〕36号附件、专用条件程序附件的 web 截图均超时；没有宣称版式、印章或逐页图像已核验。",
+      "first_check_result": "pdf_visual_check_unavailable"
+    },
+    {
+      "url": null,
+      "result": "local_network_unavailable",
+      "reason": "本机 Invoke-WebRequest 的 HTTPS 连接失败；requests 报 TLS UNEXPECTED_EOF_WHILE_READING。未修改系统代理或网络设置。",
+      "first_check_result": "local_network_unavailable"
+    }
+  ],
+  "search_audit": {
+    "official_queries": [
+      "\"HB 7736-2004\" site:gov.cn",
+      "\"HB 7736\" site:std.samr.gov.cn",
+      "\"HB7736\" site:gov.cn",
+      "\"HB\" \"7736-2004\" site:miit.gov.cn",
+      "\"设计保证系统建设指南\" \"AC-21-48\" site:caac.gov.cn",
+      "\"设计保证系统建设指南\" site:caac.gov.cn"
+    ],
+    "policy": "搜索只用于发现官方链接；结论只取已打开并读取到相关位置的 gov.cn 网页/PDF。未命中不作为不存在的证明；草案不能替代正式发布文本。",
+    "hb_result": "已读取官方检索入口的原始 HTML，但只显示零结果；仍无对应标准详情。",
+    "design_result": "CI 缓存复核确认正式 HTML 编号栏为空；其正式附件不在本批缓存。"
+  },
+  "boundaries": {
+    "files_owned": [
+      "data/verification/metadata-findings.json",
+      "docs/metadata-verification.md",
+      "src/airworthiness/verification.py",
+      "tests/test_verification.py"
+    ],
+    "sources_csv_modified": false,
+    "original_text_modified": false,
+    "acquired_modified": false,
+    "application_code_modified": true,
+    "branch_switched": false,
+    "committed": false,
+    "pushed": false,
+    "approval_granted": false,
+    "cache_modified": false,
+    "application_code_scope": "仅新增 verification.py；ingest/catalog/CSV/manifest不在本任务写集，接入由主任务负责。"
+  },
+  "initial_checked_at": "2026-10-13T08:15:27Z",
+  "cache_evidence": [
+    {
+      "cache_id": "C01",
+      "metadata_path": ".cache/ci-acquisition-38367606768/.cache/acquisition/0938e2572d167e9fe717d71efe4c67fd765377cc55541b983fcccdce575df35e.json",
+      "bytes_path": ".cache/ci-acquisition-38367606768/.cache/acquisition/0938e2572d167e9fe717d71efe4c67fd765377cc55541b983fcccdce575df35e.bin",
+      "request_url": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201511/t20151102_8262.html",
+      "url": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201511/t20151102_8262.html",
+      "content_type": "text/html",
+      "crawled_at": "2026-10-13T08:13:36+00:00",
+      "redirects": [],
+      "original_sha256": "d2c6c7618d23bbda8725f47cbf6b8dbed7decd3d6570a82b554b41ba25726176",
+      "size": 49902,
+      "integrity_verified": true,
+      "attachments": [
+        {
+          "title": "航空产品设计更改审定基础的确定程序（中文版）.pdf",
+          "url": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201511/P020151103347341090106.pdf"
+        },
+        {
+          "title": "航空产品设计更改审定基础的确定程序（英文版).pdf",
+          "url": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201511/P020151103347341438184.pdf"
+        }
+      ],
+      "verified_at": "2026-10-13T08:30:58Z"
+    },
+    {
+      "cache_id": "C02",
+      "metadata_path": ".cache/ci-acquisition-38367606768/.cache/acquisition/34abf993e23a70f7bcd9bcbdefe9b678137f591d414e4a0263281bbb08408ff0.json",
+      "bytes_path": ".cache/ci-acquisition-38367606768/.cache/acquisition/34abf993e23a70f7bcd9bcbdefe9b678137f591d414e4a0263281bbb08408ff0.bin",
+      "request_url": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202312/t20231223_222428.html",
+      "url": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202312/t20231223_222428.html",
+      "content_type": "text/html",
+      "crawled_at": "2026-10-13T08:12:20+00:00",
+      "redirects": [],
+      "original_sha256": "e3575a45b74d85cac7d3cf12e75a7cca2babb734e19cbea6114e862c1c42a653",
+      "size": 48508,
+      "integrity_verified": true,
+      "attachments": [
+        {
+          "title": "颁发专用条件、批准豁免和做出等效安全水平结论的程序.pdf",
+          "url": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202312/P020231223441684823282.pdf"
+        }
+      ],
+      "verified_at": "2026-10-13T08:30:58Z"
+    },
+    {
+      "cache_id": "C03",
+      "metadata_path": ".cache/ci-acquisition-38367606768/.cache/acquisition/49e351d0055f37e033768b442c3b9654cc85a76754ad6355365bc051137a9fd0.json",
+      "bytes_path": ".cache/ci-acquisition-38367606768/.cache/acquisition/49e351d0055f37e033768b442c3b9654cc85a76754ad6355365bc051137a9fd0.bin",
+      "request_url": "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/202403/t20240313_223201.html",
+      "url": "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/202403/t20240313_223201.html",
+      "content_type": "text/html",
+      "crawled_at": "2026-10-13T08:12:05+00:00",
+      "redirects": [],
+      "original_sha256": "b34abe1b78e82f19aa51c12d70816947842bf274f7691ddba0bfdf970bac5442",
+      "size": 48930,
+      "integrity_verified": true,
+      "attachments": [
+        {
+          "title": "交通运输部关于修改《民用航空产品和零部件合格审定规定》的决定.pdf",
+          "url": "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/202403/P020240313332916593770.pdf"
+        }
+      ],
+      "verified_at": "2026-10-13T08:30:58Z"
+    },
+    {
+      "cache_id": "C04",
+      "metadata_path": ".cache/ci-acquisition-38367606768/.cache/acquisition/5113f9732d182e9ba973bc9652d12df095b2efd55ef7dd3e8d3e5d019d460d50.json",
+      "bytes_path": ".cache/ci-acquisition-38367606768/.cache/acquisition/5113f9732d182e9ba973bc9652d12df095b2efd55ef7dd3e8d3e5d019d460d50.bin",
+      "request_url": "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/MHGZ/201606/t20160622_38638.html",
+      "url": "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/MHGZ/201606/t20160622_38638.html",
+      "content_type": "text/html",
+      "crawled_at": "2026-10-13T08:13:57+00:00",
+      "redirects": [],
+      "original_sha256": "64abaae1e7a47b66f71cff09e1e5cbb5a80229a18078498e56b9608d3c7ab328",
+      "size": 12058,
+      "integrity_verified": true,
+      "attachments": [
+        {
+          "title": "运输类飞机适航标准.pdf",
+          "url": "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/MHGZ/201606/P020160622405532063536.pdf"
+        }
+      ],
+      "verified_at": "2026-10-13T08:30:58Z"
+    },
+    {
+      "cache_id": "C05",
+      "metadata_path": ".cache/ci-acquisition-38367606768/.cache/acquisition/5c31b6ef2ad16704e9d6eba05f85189f5555eace5ae60173979f0bbe9deaf610.json",
+      "bytes_path": ".cache/ci-acquisition-38367606768/.cache/acquisition/5c31b6ef2ad16704e9d6eba05f85189f5555eace5ae60173979f0bbe9deaf610.bin",
+      "request_url": "https://www.caac.gov.cn/XXGK/XXGK/ZFGW/202503/t20250314_226931.html",
+      "url": "https://www.caac.gov.cn/XXGK/XXGK/ZFGW/202503/t20250314_226931.html",
+      "content_type": "text/html",
+      "crawled_at": "2026-10-13T08:12:22+00:00",
+      "redirects": [],
+      "original_sha256": "e8e30ddbbfc13119b7a722d2e95950c9b6869d0124a46eb4e2a7e2a410704b8d",
+      "size": 49896,
+      "integrity_verified": true,
+      "attachments": [
+        {
+          "title": "与我国建立双边适航关系国家及有关文件目录.pdf",
+          "url": "https://www.caac.gov.cn/XXGK/XXGK/ZFGW/202503/P020250314324034428347.pdf"
+        }
+      ],
+      "verified_at": "2026-10-13T08:30:58Z"
+    },
+    {
+      "cache_id": "C06",
+      "metadata_path": ".cache/ci-acquisition-38367606768/.cache/acquisition/5cbf2a29d55381d25c7e3771865c2c4a75f60d713b4476e4e32ac475a096ff52.json",
+      "bytes_path": ".cache/ci-acquisition-38367606768/.cache/acquisition/5cbf2a29d55381d25c7e3771865c2c4a75f60d713b4476e4e32ac475a096ff52.bin",
+      "request_url": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202312/t20231223_222437.html",
+      "url": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202312/t20231223_222437.html",
+      "content_type": "text/html",
+      "crawled_at": "2026-10-13T08:13:58+00:00",
+      "redirects": [],
+      "original_sha256": "3dc33950c4613f50b28c6654afc6f4b46f78be5364c0fcf5cbd924f32ab82f7e",
+      "size": 48002,
+      "integrity_verified": true,
+      "attachments": [
+        {
+          "title": "型号合格审定程序.pdf",
+          "url": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202312/P020231223455710994771.pdf"
+        }
+      ],
+      "verified_at": "2026-10-13T08:30:58Z"
+    },
+    {
+      "cache_id": "C07",
+      "metadata_path": ".cache/ci-acquisition-38367606768/.cache/acquisition/6ab6a72f9c72742670624d4942a2bd9cd5b774bd424cbff97d3e53b23227aff9.json",
+      "bytes_path": ".cache/ci-acquisition-38367606768/.cache/acquisition/6ab6a72f9c72742670624d4942a2bd9cd5b774bd424cbff97d3e53b23227aff9.bin",
+      "request_url": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202609/t20260921_231762.html",
+      "url": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202609/t20260921_231762.html",
+      "content_type": "text/html",
+      "crawled_at": "2026-10-13T08:12:22+00:00",
+      "redirects": [],
+      "original_sha256": "df82b87dd2260609ea51bb8ce3f850047ea3d39109c6225a1a7bbe0f9b756f67",
+      "size": 47752,
+      "integrity_verified": true,
+      "attachments": [
+        {
+          "title": "设计保证系统建设指南.pdf",
+          "url": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202609/P020260921617424013037.pdf"
+        }
+      ],
+      "verified_at": "2026-10-13T08:30:58Z"
+    },
+    {
+      "cache_id": "C08",
+      "metadata_path": ".cache/ci-acquisition-38367606768/.cache/acquisition/717d1656ac5727d57edbcb64e22651176f721d6a903fabe073eed0cf7090e675.json",
+      "bytes_path": ".cache/ci-acquisition-38367606768/.cache/acquisition/717d1656ac5727d57edbcb64e22651176f721d6a903fabe073eed0cf7090e675.bin",
+      "request_url": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201511/t20151102_8258.html",
+      "url": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201511/t20151102_8258.html",
+      "content_type": "text/html",
+      "crawled_at": "2026-10-13T08:13:41+00:00",
+      "redirects": [],
+      "original_sha256": "4ad05f752c960f79c39d1e8ad4bf51514b838798fa0e8b9c62b7ef0f9cc3dbd0",
+      "size": 49671,
+      "integrity_verified": true,
+      "attachments": [
+        {
+          "title": "运输类飞机持续适航和安全改进及点火源防护符合性指南（英文版）.pdf",
+          "url": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201511/P020151103347328337468.pdf"
+        }
+      ],
+      "verified_at": "2026-10-13T08:30:58Z"
+    },
+    {
+      "cache_id": "C09",
+      "metadata_path": ".cache/ci-acquisition-38367606768/.cache/acquisition/86d4e0a24a590ce995abc7a0cddd59c57ee4c882f6f67b88e995c5d02a591bb0.json",
+      "bytes_path": ".cache/ci-acquisition-38367606768/.cache/acquisition/86d4e0a24a590ce995abc7a0cddd59c57ee4c882f6f67b88e995c5d02a591bb0.bin",
+      "request_url": "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/GFXWJ/202207/t20220708_214043.html",
+      "url": "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/GFXWJ/202207/t20220708_214043.html",
+      "content_type": "text/html",
+      "crawled_at": "2026-10-13T08:14:16+00:00",
+      "redirects": [],
+      "original_sha256": "6d15cf941e145036ffa7a809d66061ae3152c3d692425771574e1aac49499955",
+      "size": 11699,
+      "integrity_verified": true,
+      "attachments": [
+        {
+          "title": "运输类飞机持续结构完整性大纲.pdf",
+          "url": "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/GFXWJ/202207/P020220708405456400961.pdf"
+        }
+      ],
+      "verified_at": "2026-10-13T08:30:58Z"
+    },
+    {
+      "cache_id": "C10",
+      "metadata_path": ".cache/ci-acquisition-38367606768/.cache/acquisition/87a16f641b311decc91b3b5e2f91695dedd116b51602c84c8ffdf5d511403f82.json",
+      "bytes_path": ".cache/ci-acquisition-38367606768/.cache/acquisition/87a16f641b311decc91b3b5e2f91695dedd116b51602c84c8ffdf5d511403f82.bin",
+      "request_url": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202312/t20231223_222426.html",
+      "url": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202312/t20231223_222426.html",
+      "content_type": "text/html",
+      "crawled_at": "2026-10-13T08:13:04+00:00",
+      "redirects": [],
+      "original_sha256": "37e83edca8c4a650c90fc3d7f0555fd9b00c0abe0864013cbef5ece1135e1620",
+      "size": 48666,
+      "integrity_verified": true,
+      "attachments": [
+        {
+          "title": "民航局关于修订印发 《关于民用航空产品合格审定的细化要求》的通知.pdf",
+          "url": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202312/P020231223438346814379.pdf"
+        }
+      ],
+      "verified_at": "2026-10-13T08:30:58Z"
+    },
+    {
+      "cache_id": "C11",
+      "metadata_path": ".cache/ci-acquisition-38367606768/.cache/acquisition/96ee491754b6a4b728b16b60b6fd2b5a429ae2034469dde7014c976ce79031bc.json",
+      "bytes_path": ".cache/ci-acquisition-38367606768/.cache/acquisition/96ee491754b6a4b728b16b60b6fd2b5a429ae2034469dde7014c976ce79031bc.bin",
+      "request_url": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201511/t20151102_8170.html",
+      "url": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201511/t20151102_8170.html",
+      "content_type": "text/html",
+      "crawled_at": "2026-10-13T08:13:40+00:00",
+      "redirects": [],
+      "original_sha256": "b9a8f94d9ca9893202a72884d9729a98fd7a522c7c7c529c63223cc43bda8ade",
+      "size": 50744,
+      "integrity_verified": true,
+      "attachments": [
+        {
+          "title": "运输类飞机持续适航和安全改进及点火源防护符合性指南.pdf",
+          "url": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201511/P020151103347114963684.pdf"
+        }
+      ],
+      "verified_at": "2026-10-13T08:30:58Z"
+    },
+    {
+      "cache_id": "C12",
+      "metadata_path": ".cache/ci-acquisition-38367606768/.cache/acquisition/a3bb4066d7e1e8a40d3352b08cedae994a342fac92bb8400af10d448bfacab00.json",
+      "bytes_path": ".cache/ci-acquisition-38367606768/.cache/acquisition/a3bb4066d7e1e8a40d3352b08cedae994a342fac92bb8400af10d448bfacab00.bin",
+      "request_url": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201801/t20180124_48751.html",
+      "url": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201801/t20180124_48751.html",
+      "content_type": "text/html",
+      "crawled_at": "2026-10-13T08:12:19+00:00",
+      "redirects": [],
+      "original_sha256": "427c7baffc7fedf538c84232382ce34f83a03d4d9979a21940e824beecc5f5dd",
+      "size": 54070,
+      "integrity_verified": true,
+      "attachments": [
+        {
+          "title": "复合材料结构制造质量体系要求指南.pdf",
+          "url": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/201801/P020180124313658781083.pdf"
+        }
+      ],
+      "verified_at": "2026-10-13T08:30:58Z"
+    },
+    {
+      "cache_id": "C13",
+      "metadata_path": ".cache/ci-acquisition-38367606768/.cache/acquisition/ad5f2017e1804da9c4b17c85e9e0cc722dc9ac7c1ba5f62e62a12b94b567ae4d.json",
+      "bytes_path": ".cache/ci-acquisition-38367606768/.cache/acquisition/ad5f2017e1804da9c4b17c85e9e0cc722dc9ac7c1ba5f62e62a12b94b567ae4d.bin",
+      "request_url": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202607/t20260701_231208.html",
+      "url": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202607/t20260701_231208.html",
+      "content_type": "text/html",
+      "crawled_at": "2026-10-13T08:12:06+00:00",
+      "redirects": [],
+      "original_sha256": "68ce78acdcc0c26931f4ff784baf448f1283d5b0a17069ca7bdf4b19f185f10f",
+      "size": 47690,
+      "integrity_verified": true,
+      "attachments": [
+        {
+          "title": "型号合格审定程序.rar",
+          "url": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202607/P020260901517146096577.rar"
+        }
+      ],
+      "verified_at": "2026-10-13T08:30:58Z"
+    },
+    {
+      "cache_id": "C14",
+      "metadata_path": ".cache/ci-acquisition-38367606768/.cache/acquisition/b66bd2175929f907fc589c581f9f325ba8f470e1b16b5e016cd91bb593b41aff.json",
+      "bytes_path": ".cache/ci-acquisition-38367606768/.cache/acquisition/b66bd2175929f907fc589c581f9f325ba8f470e1b16b5e016cd91bb593b41aff.bin",
+      "request_url": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202207/t20220708_214043.html",
+      "url": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202207/t20220708_214043.html",
+      "content_type": "text/html",
+      "crawled_at": "2026-10-13T08:13:13+00:00",
+      "redirects": [],
+      "original_sha256": "9974691aff228a499eff2d643d75fdf802a580f35606c5f778fa32029ec2c952",
+      "size": 49640,
+      "integrity_verified": true,
+      "attachments": [
+        {
+          "title": "运输类飞机持续结构完整性大纲.pdf",
+          "url": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202207/P020220708405456400961.pdf"
+        }
+      ],
+      "verified_at": "2026-10-13T08:30:58Z"
+    },
+    {
+      "cache_id": "C15",
+      "metadata_path": ".cache/ci-acquisition-38367606768/.cache/acquisition/c68bcf1e037514babb9c23c20f53a59762c3618f9e330d0a4b23f687c40ecbe5.json",
+      "bytes_path": ".cache/ci-acquisition-38367606768/.cache/acquisition/c68bcf1e037514babb9c23c20f53a59762c3618f9e330d0a4b23f687c40ecbe5.bin",
+      "request_url": "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/GFXWJ/201801/t20180124_48751.html",
+      "url": "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/GFXWJ/201801/t20180124_48751.html",
+      "content_type": "text/html",
+      "crawled_at": "2026-10-13T08:13:58+00:00",
+      "redirects": [],
+      "original_sha256": "fe34cbca831bf59dad0dca610ae75f61521d046b535057f769be551e73e4a1bd",
+      "size": 12490,
+      "integrity_verified": true,
+      "attachments": [
+        {
+          "title": "复合材料结构制造质量体系要求指南.pdf",
+          "url": "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/GFXWJ/201801/P020180124313658781083.pdf"
+        }
+      ],
+      "verified_at": "2026-10-13T08:30:58Z"
+    },
+    {
+      "cache_id": "C16",
+      "metadata_path": ".cache/ci-acquisition-38367606768/.cache/acquisition/e2ccca8f28ce5bd35300ecfdeb11b5e4220ae5679971e2a420c5cabb90e3c4bb.json",
+      "bytes_path": ".cache/ci-acquisition-38367606768/.cache/acquisition/e2ccca8f28ce5bd35300ecfdeb11b5e4220ae5679971e2a420c5cabb90e3c4bb.bin",
+      "request_url": "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/GFXWJ/201511/t20151102_8262.html",
+      "url": "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/GFXWJ/201511/t20151102_8262.html",
+      "content_type": "text/html",
+      "crawled_at": "2026-10-13T08:14:00+00:00",
+      "redirects": [],
+      "original_sha256": "4de767073563b16891d7d1cb19a236fb380d3d638c7c62808fe1f44658fdf6c9",
+      "size": 11941,
+      "integrity_verified": true,
+      "attachments": [
+        {
+          "title": "航空产品设计更改审定基础的确定程序（中文版）.pdf",
+          "url": "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/GFXWJ/201511/P020151103347341090106.pdf"
+        },
+        {
+          "title": "航空产品设计更改审定基础的确定程序（英文版).pdf",
+          "url": "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/GFXWJ/201511/P020151103347341438184.pdf"
+        }
+      ],
+      "verified_at": "2026-10-13T08:30:58Z"
+    },
+    {
+      "cache_id": "C17",
+      "metadata_path": ".cache/ci-acquisition-38367606768/.cache/acquisition/f0a948bb1b94d74e485a4043245d541b1598a1c3ef4783e831d27e22d9df56c8.json",
+      "bytes_path": ".cache/ci-acquisition-38367606768/.cache/acquisition/f0a948bb1b94d74e485a4043245d541b1598a1c3ef4783e831d27e22d9df56c8.bin",
+      "request_url": "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/201606/t20160622_38638.html",
+      "url": "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/201606/t20160622_38638.html",
+      "content_type": "text/html",
+      "crawled_at": "2026-10-13T08:12:08+00:00",
+      "redirects": [],
+      "original_sha256": "f553b7c86e0120fdd534197280ea6af58c9626221caedc26992561970410446a",
+      "size": 50664,
+      "integrity_verified": true,
+      "attachments": [
+        {
+          "title": "运输类飞机适航标准.pdf",
+          "url": "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/201606/P020160622405532063536.pdf"
+        }
+      ],
+      "verified_at": "2026-10-13T08:30:58Z"
+    },
+    {
+      "cache_id": "C18",
+      "metadata_path": ".cache/ci-acquisition-38367606768/.cache/acquisition/f63e1af5e95d479debd48e96c8fc2fad29d7c2752aa26be0d213e7d0830dcf34.json",
+      "bytes_path": ".cache/ci-acquisition-38367606768/.cache/acquisition/f63e1af5e95d479debd48e96c8fc2fad29d7c2752aa26be0d213e7d0830dcf34.bin",
+      "request_url": "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/MHGZ/202403/t20240313_223201.html",
+      "url": "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/MHGZ/202403/t20240313_223201.html",
+      "content_type": "text/html",
+      "crawled_at": "2026-10-13T08:14:00+00:00",
+      "redirects": [],
+      "original_sha256": "2056aa9cf178dfa9e49c5416082e5fbc17df603df20c6017088cba5139291fae",
+      "size": 11883,
+      "integrity_verified": true,
+      "attachments": [
+        {
+          "title": "交通运输部关于修改《民用航空产品和零部件合格审定规定》的决定.pdf",
+          "url": "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/MHGZ/202403/P020240313332916593770.pdf"
+        }
+      ],
+      "verified_at": "2026-10-13T08:30:58Z"
+    },
+    {
+      "cache_id": "C19",
+      "metadata_path": ".cache/ci-acquisition-38367606768/.cache/acquisition/fdb02bb5a910f38328c22934c6e007c1771303dc98358f213cb082b16f2f9765.json",
+      "bytes_path": ".cache/ci-acquisition-38367606768/.cache/acquisition/fdb02bb5a910f38328c22934c6e007c1771303dc98358f213cb082b16f2f9765.bin",
+      "request_url": "https://std.samr.gov.cn/search/stdPage?q=HB%207736%202004&tid=",
+      "url": "https://std.samr.gov.cn/search/stdPage?q=HB%207736%202004&tid=",
+      "content_type": "text/html;charset=UTF-8",
+      "crawled_at": "2026-10-13T08:13:58+00:00",
+      "redirects": [],
+      "original_sha256": "77b39a1b2203499b2a166d31a4cdf5bec326e46088031c3dbe11fbdfb1dabd1a",
+      "size": 5937,
+      "integrity_verified": true,
+      "attachments": [],
+      "verified_at": "2026-10-13T08:30:58Z"
+    },
+    {
+      "request_url": "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/202403/P020240313332916593770.pdf",
+      "url": "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/202403/P020240313332916593770.pdf",
+      "content_type": "application/pdf",
+      "crawled_at": "2026-10-13T08:20:02+00:00",
+      "redirects": [],
+      "original_sha256": "51b8f078c64d43750102b05404f901df698b2c77944a74537e86e6c63d119de3",
+      "size": 438100,
+      "metadata_path": ".cache/ci-acquisition-38368418797/.cache/acquisition/1c4cd8c52f43c32421ba43a6d61cc8bfdd5396bb38decf6a472b67ebfa923bbd.json",
+      "bytes_path": ".cache/ci-acquisition-38368418797/.cache/acquisition/1c4cd8c52f43c32421ba43a6d61cc8bfdd5396bb38decf6a472b67ebfa923bbd.bin",
+      "cache_id": "C20",
+      "integrity_verified": true,
+      "verified_at": "2026-10-13T09:09:36Z"
+    },
+    {
+      "request_url": "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/202403/t20240313_223201.html",
+      "url": "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/202403/t20240313_223201.html",
+      "content_type": "text/html",
+      "crawled_at": "2026-10-13T08:19:51+00:00",
+      "redirects": [],
+      "original_sha256": "b34abe1b78e82f19aa51c12d70816947842bf274f7691ddba0bfdf970bac5442",
+      "size": 48930,
+      "metadata_path": ".cache/ci-acquisition-38368418797/.cache/acquisition/49e351d0055f37e033768b442c3b9654cc85a76754ad6355365bc051137a9fd0.json",
+      "bytes_path": ".cache/ci-acquisition-38368418797/.cache/acquisition/49e351d0055f37e033768b442c3b9654cc85a76754ad6355365bc051137a9fd0.bin",
+      "cache_id": "C21",
+      "integrity_verified": true,
+      "verified_at": "2026-10-13T09:09:36Z"
+    },
+    {
+      "request_url": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202609/t20260921_231762.html",
+      "url": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202609/t20260921_231762.html",
+      "content_type": "text/html",
+      "crawled_at": "2026-10-13T08:21:40+00:00",
+      "redirects": [],
+      "original_sha256": "df82b87dd2260609ea51bb8ce3f850047ea3d39109c6225a1a7bbe0f9b756f67",
+      "size": 47752,
+      "metadata_path": ".cache/ci-acquisition-38368418797/.cache/acquisition/6ab6a72f9c72742670624d4942a2bd9cd5b774bd424cbff97d3e53b23227aff9.json",
+      "bytes_path": ".cache/ci-acquisition-38368418797/.cache/acquisition/6ab6a72f9c72742670624d4942a2bd9cd5b774bd424cbff97d3e53b23227aff9.bin",
+      "cache_id": "C22",
+      "integrity_verified": true,
+      "verified_at": "2026-10-13T09:09:36Z"
+    },
+    {
+      "request_url": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202609/P020260921617424013037.pdf",
+      "url": "https://www.caac.gov.cn/XXGK/XXGK/GFXWJ/202609/P020260921617424013037.pdf",
+      "content_type": "application/pdf",
+      "crawled_at": "2026-10-13T08:21:54+00:00",
+      "redirects": [],
+      "original_sha256": "f1a0a74794b485cbdb6baf818d027a4d11be6e7431968e472ed6ff583924477a",
+      "size": 621056,
+      "metadata_path": ".cache/ci-acquisition-38368418797/.cache/acquisition/8b04115c4701d784b1f32d69c6c805f3a5049e7420e840cf370e4c8e028761ad.json",
+      "bytes_path": ".cache/ci-acquisition-38368418797/.cache/acquisition/8b04115c4701d784b1f32d69c6c805f3a5049e7420e840cf370e4c8e028761ad.bin",
+      "cache_id": "C23",
+      "integrity_verified": true,
+      "verified_at": "2026-10-13T09:09:36Z"
+    },
+    {
+      "request_url": "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/GFXWJ/201511/t20151102_8386.html",
+      "url": "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/GFXWJ/201511/t20151102_8386.html",
+      "content_type": "text/html",
+      "crawled_at": "2026-10-13T08:34:19+00:00",
+      "redirects": [],
+      "original_sha256": "6ea930fe95b0dabb8bb82bfcd906d44d744ed02a49a840c49b093707017bc79f",
+      "size": 10894,
+      "metadata_path": ".cache/ci-acquisition-38368418797/.cache/acquisition/b3f5fb7831a43f380bb28fb676b84d21e39125bf81f6dbd315ab5b082b1c09d4.json",
+      "bytes_path": ".cache/ci-acquisition-38368418797/.cache/acquisition/b3f5fb7831a43f380bb28fb676b84d21e39125bf81f6dbd315ab5b082b1c09d4.bin",
+      "cache_id": "C24",
+      "integrity_verified": true,
+      "verified_at": "2026-10-13T09:09:36Z"
+    },
+    {
+      "request_url": "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/MHGZ/202403/P020240313332916593770.pdf",
+      "url": "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/MHGZ/202403/P020240313332916593770.pdf",
+      "content_type": "application/pdf",
+      "crawled_at": "2026-10-13T08:32:58+00:00",
+      "redirects": [],
+      "original_sha256": "51b8f078c64d43750102b05404f901df698b2c77944a74537e86e6c63d119de3",
+      "size": 438100,
+      "metadata_path": ".cache/ci-acquisition-38368418797/.cache/acquisition/b54d41c9a43c8e40beca2f987f5be717ed605ccafc9dcc83a4b45671a8ceb286.json",
+      "bytes_path": ".cache/ci-acquisition-38368418797/.cache/acquisition/b54d41c9a43c8e40beca2f987f5be717ed605ccafc9dcc83a4b45671a8ceb286.bin",
+      "cache_id": "C25",
+      "integrity_verified": true,
+      "verified_at": "2026-10-13T09:09:36Z"
+    },
+    {
+      "request_url": "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/GFXWJ/201511/P020151103347692049750.pdf",
+      "url": "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/GFXWJ/201511/P020151103347692049750.pdf",
+      "content_type": "application/pdf",
+      "crawled_at": "2026-10-13T08:34:47+00:00",
+      "redirects": [],
+      "original_sha256": "d01b166bde42a42de531770ff1e046f07491b7bb8daaa2951f2cdbb5b3bc4ff8",
+      "size": 1628297,
+      "metadata_path": ".cache/ci-acquisition-38368418797/.cache/acquisition/b8c19829b350c8a0b2c51577e20b8adda16a85ec2e8673e6c272bd2cfa96c4a6.json",
+      "bytes_path": ".cache/ci-acquisition-38368418797/.cache/acquisition/b8c19829b350c8a0b2c51577e20b8adda16a85ec2e8673e6c272bd2cfa96c4a6.bin",
+      "cache_id": "C26",
+      "integrity_verified": true,
+      "verified_at": "2026-10-13T09:09:36Z"
+    },
+    {
+      "request_url": "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/MHGZ/202403/t20240313_223201.html",
+      "url": "https://www.caac.gov.cn/PHONE/XXGK_17/XXGK/MHGZ/202403/t20240313_223201.html",
+      "content_type": "text/html",
+      "crawled_at": "2026-10-13T08:32:49+00:00",
+      "redirects": [],
+      "original_sha256": "2056aa9cf178dfa9e49c5416082e5fbc17df603df20c6017088cba5139291fae",
+      "size": 11883,
+      "metadata_path": ".cache/ci-acquisition-38368418797/.cache/acquisition/f63e1af5e95d479debd48e96c8fc2fad29d7c2752aa26be0d213e7d0830dcf34.json",
+      "bytes_path": ".cache/ci-acquisition-38368418797/.cache/acquisition/f63e1af5e95d479debd48e96c8fc2fad29d7c2752aa26be0d213e7d0830dcf34.bin",
+      "cache_id": "C27",
+      "integrity_verified": true,
+      "verified_at": "2026-10-13T09:09:36Z"
+    }
+  ]
+}

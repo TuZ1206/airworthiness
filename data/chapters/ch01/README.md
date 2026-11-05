@@ -36,7 +36,7 @@
 
 - `sources.csv`：21项中国政府官方来源台账。
 - `documents/*.md`：各来源的官方元数据和本章相关核验摘录。
-- `nodes.csv`、`relations.csv`：第一章26个节点、26条关系组成的法规体系和生命周期接口待审核图谱数据。
+- `nodes.csv`、`relations.csv`：第一章26个节点、24条关系组成的法规资料与生命周期接口待审核图谱数据。
 - `glossary.csv`：第一章右侧名词索引。
 - `review.md`：版本纠错、国外引用隔离和专业签字记录。
 - `crawler_config.json`：已核实政府入口。

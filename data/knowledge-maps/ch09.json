@@ -1,0 +1,20 @@
+{
+  "chapter_id":"ch09","title":"试验与统计方法","version":"v1","review_status":"pending",
+  "nodes":[
+    {"knowledge_node_id":"KM-CH09-N001","name":"试验与统计方法","category":"章节总览","summary":"组织法规基础、取样代表性、试验方法、设计值、数据质量和试验分析闭环。","source_refs":[{"source_id":"CH09-S001","source_locator":""}],"review_status":"pending"},
+    {"knowledge_node_id":"KM-CH09-N002","name":"试验与统计的法规基础","category":"法规基础","summary":"从材料和工艺相关的适航要求与程序资料建立方法边界。","source_refs":[{"source_id":"CH09-S001","source_locator":""},{"source_id":"CH09-S002","source_locator":""}],"review_status":"pending"},
+    {"knowledge_node_id":"KM-CH09-N003","name":"试验设计、取样与制造代表性","category":"试验设计","summary":"组织取样、批次和制造代表性相关的证据线索。","source_refs":[{"source_id":"CH09-S004","source_locator":""},{"source_id":"CH09-S005","source_locator":""}],"review_status":"pending"},
+    {"knowledge_node_id":"KM-CH09-N004","name":"材料力学试验标准","category":"试验方法","summary":"汇集材料力学试验标准的资料入口，不将状态页替代为方法正文。","source_refs":[{"source_id":"CH09-S007","source_locator":""},{"source_id":"CH09-S008","source_locator":""}],"review_status":"pending"},
+    {"knowledge_node_id":"KM-CH09-N005","name":"A/B基准、容忍限与设计值","category":"统计处理","summary":"区分设计值法规要求、统计方法和材料应用边界。","source_refs":[{"source_id":"CH09-S001","source_locator":""},{"source_id":"CH09-S015","source_locator":""}],"review_status":"pending"},
+    {"knowledge_node_id":"KM-CH09-N006","name":"分布检验、离群值与数据质量","category":"统计处理","summary":"组织分布检验、离群值处理和数据质量的标准资料边界。","source_refs":[{"source_id":"CH09-S013","source_locator":""},{"source_id":"CH09-S014","source_locator":""}],"review_status":"pending"},
+    {"knowledge_node_id":"KM-CH09-N007","name":"疲劳数据与试验分析闭环","category":"跨章接口","summary":"将疲劳数据分析、试验支持和第七章验证证据衔接。","source_refs":[{"source_id":"CH09-S011","source_locator":""},{"source_id":"CH09-S012","source_locator":""}],"review_status":"pending"}
+  ],
+  "relations":[
+    {"knowledge_relation_id":"KM-CH09-R001","from_node_id":"KM-CH09-N001","type":"组成","to_node_id":"KM-CH09-N002","source_refs":[{"source_id":"CH09-S001","source_locator":""}],"review_status":"pending"},
+    {"knowledge_relation_id":"KM-CH09-R002","from_node_id":"KM-CH09-N002","type":"前提","to_node_id":"KM-CH09-N003","source_refs":[{"source_id":"CH09-S004","source_locator":""}],"review_status":"pending"},
+    {"knowledge_relation_id":"KM-CH09-R003","from_node_id":"KM-CH09-N003","type":"验证","to_node_id":"KM-CH09-N004","source_refs":[{"source_id":"CH09-S007","source_locator":""}],"review_status":"pending"},
+    {"knowledge_relation_id":"KM-CH09-R004","from_node_id":"KM-CH09-N004","type":"输出","to_node_id":"KM-CH09-N005","source_refs":[{"source_id":"CH09-S001","source_locator":""}],"review_status":"pending"},
+    {"knowledge_relation_id":"KM-CH09-R005","from_node_id":"KM-CH09-N005","type":"约束","to_node_id":"KM-CH09-N006","source_refs":[{"source_id":"CH09-S013","source_locator":""}],"review_status":"pending"},
+    {"knowledge_relation_id":"KM-CH09-R006","from_node_id":"KM-CH09-N004","type":"衔接","to_node_id":"KM-CH09-N007","source_refs":[{"source_id":"CH09-S011","source_locator":""}],"review_status":"pending"}
+  ]
+}

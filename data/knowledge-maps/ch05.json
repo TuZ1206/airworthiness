@@ -1,0 +1,18 @@
+{
+  "chapter_id":"ch05","title":"等同验证与变更管理","version":"v1","review_status":"pending",
+  "nodes":[
+    {"knowledge_node_id":"KM-CH05-N001","name":"等同验证与变更管理","category":"章节总览","summary":"组织变化识别、审定基础、证据、批准和证后接口的知识路径。","source_refs":[{"source_id":"CH05-S003","source_locator":""}],"review_status":"pending"},
+    {"knowledge_node_id":"KM-CH05-N002","name":"材料与工艺变化的法规基础","category":"法规基础","summary":"识别材料和制造方法变化可能触发的适航要求。","source_refs":[{"source_id":"CH05-S001","source_locator":""},{"source_id":"CH05-S002","source_locator":""}],"review_status":"pending"},
+    {"knowledge_node_id":"KM-CH05-N003","name":"设计更改分类与审定基础","category":"审定活动","summary":"先确定更改分类和适用审定基础，再选择符合性方法。","source_refs":[{"source_id":"CH05-S003","source_locator":""},{"source_id":"CH05-S004","source_locator":""}],"review_status":"pending"},
+    {"knowledge_node_id":"KM-CH05-N004","name":"等同证据与重新验证边界","category":"证据要求","summary":"将等同作为符合性证据，而非独立的批准结论。","source_refs":[{"source_id":"CH05-S001","source_locator":""},{"source_id":"CH05-S011","source_locator":""}],"review_status":"pending"},
+    {"knowledge_node_id":"KM-CH05-N005","name":"审定计划与批准路径","category":"审定活动","summary":"组织型号、补充型号和专用条件相关的审定路径。","source_refs":[{"source_id":"CH05-S006","source_locator":""},{"source_id":"CH05-S007","source_locator":""}],"review_status":"pending"},
+    {"knowledge_node_id":"KM-CH05-N006","name":"证后更改与持续适航接口","category":"跨章接口","summary":"连接批准资料、构型管理和后续持续适航资料。","source_refs":[{"source_id":"CH05-S003","source_locator":""},{"source_id":"CH05-S012","source_locator":""}],"review_status":"pending"}
+  ],
+  "relations":[
+    {"knowledge_relation_id":"KM-CH05-R001","from_node_id":"KM-CH05-N001","type":"组成","to_node_id":"KM-CH05-N002","source_refs":[{"source_id":"CH05-S001","source_locator":""}],"review_status":"pending"},
+    {"knowledge_relation_id":"KM-CH05-R002","from_node_id":"KM-CH05-N002","type":"前提","to_node_id":"KM-CH05-N003","source_refs":[{"source_id":"CH05-S003","source_locator":""}],"review_status":"pending"},
+    {"knowledge_relation_id":"KM-CH05-R003","from_node_id":"KM-CH05-N003","type":"验证","to_node_id":"KM-CH05-N004","source_refs":[{"source_id":"CH05-S011","source_locator":""}],"review_status":"pending"},
+    {"knowledge_relation_id":"KM-CH05-R004","from_node_id":"KM-CH05-N003","type":"流程","to_node_id":"KM-CH05-N005","source_refs":[{"source_id":"CH05-S006","source_locator":""}],"review_status":"pending"},
+    {"knowledge_relation_id":"KM-CH05-R005","from_node_id":"KM-CH05-N005","type":"衔接","to_node_id":"KM-CH05-N006","source_refs":[{"source_id":"CH05-S012","source_locator":""}],"review_status":"pending"}
+  ]
+}

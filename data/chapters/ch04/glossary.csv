@@ -8,5 +8,5 @@ term_id,term,aliases,definition,group,has_page,anchor_or_url,related_node_id,sou
 "CH04-T007","首件检验","FAI|First Article Inspection","通过产品审查确认制造文件、过程和首件实际状态一致的活动；程序子条款待专业复核。","制造符合性","true","#first-article-inspection","CH04-N026","CH04-S006","pending"
 "CH04-T008","制造符合性","Manufacturing Conformity","确认材料、零件、制造过程、构造和装配符合设计资料及试验要求。","制造符合性","true","#manufacturing-conformity","CH04-N013","CH04-S004","pending"
 "CH04-T009","无损检测","NDI|NDT|Nondestructive Inspection|Nondestructive Testing","在不破坏被检对象预期用途的前提下识别制造缺陷并按验收准则评定的检验活动。","检验","true","#nondestructive-inspection","CH04-N019","CH04-S003","pending"
-"CH04-T010","返工","Rework","按批准制造资料使不合格产品恢复至原规定状态的处置；具体边界待专业审核。","不合格品处置","true","#rework-repair","CH04-N027","CH04-S006","pending"
+"CH04-T010","返工","Rework","按批准制造资料使不合格产品恢复至原规定状态的处置；具体边界尚需核对。","不合格品处置","true","#rework-repair","CH04-N027","CH04-S006","pending"
 "CH04-T011","返修","Repair","通过经批准的修理资料使不合格产品达到可接受状态的处置；不得以返工规则替代设计批准。","不合格品处置","true","#rework-repair","CH04-N027","CH04-S006","pending"

@@ -1,0 +1,24 @@
+name: Offline resource hall
+on:
+  pull_request:
+  push:
+    branches: [feat/offline-resource-hall]
+permissions:
+  contents: read
+jobs:
+  offline-tests:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    env:
+      PYTHONUTF8: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install -e .
+      - run: python -m unittest discover -s tests -v
+      - run: python -m airworthiness.cli validate
+      - run: python -m airworthiness.cli build
