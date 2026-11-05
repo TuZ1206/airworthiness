@@ -30,6 +30,9 @@ button:disabled { cursor: not-allowed; opacity: .45; }
 a, button, input, select, summary { -webkit-tap-highlight-color: transparent; }
 a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, summary:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--teal); outline-offset: 4px; }
 .site-header :focus-visible, .chapter-rail :focus-visible { outline-color: var(--teal-bright); }
+.property-entry { display: inline-flex; align-items: center; justify-content: space-between; gap: 2.5rem; margin-top: 1.5rem; padding: .75rem 1rem; border: 1px solid #9fc0b4; background: #e6efea; color: #123b3c; font-weight: 600; }
+.property-entry small { display: block; color: #526b6a; font-size: .75rem; font-weight: 400; letter-spacing: .04em; }
+.property-entry:hover { background: #d7e9e0; border-color: #609b88; }
 button, a, summary { touch-action: manipulation; }
 h1, h2, h3, p, dl, dd { margin: 0; }
 h1, h2, h3 { font-weight: 600; line-height: 1.45; }

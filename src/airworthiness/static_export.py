@@ -34,6 +34,7 @@ STATIC_ASSETS = (
     "hall.css", "hall.js", "hall-core.js", "hall-app.js", "hall-home.js",
     "hall-content.js", "hall-document-view.js", "hall-graph.js", "hall-knowledge-map.js", "hall-reader.js",
     "hall-quality.js", "hall-static.js",
+    "properties-preview.css",
 )
 # Acquisition payloads also contain local paths and raw diagnostic logs.
 # Retain documentary facts; publishing those machine-local fields is unnecessary.
@@ -102,7 +103,7 @@ def _route(value, base):
         return value
     parts = urlsplit(value)
     path = parts.path
-    if path.rstrip("/") == "/quality" or re.fullmatch(r"/chapters/ch[0-9]{2}/?", path):
+    if path.rstrip("/") in {"/quality", "/properties"} or re.fullmatch(r"/chapters/ch[0-9]{2}/?", path):
         path = path.rstrip("/") + "/"
     elif path != "/" and not path.startswith("/static/"):
         return value
@@ -139,6 +140,21 @@ def _shell(client, base):
         for attribute in ("href", "src"):
             if node.has_attr(attribute):
                 node[attribute] = _route(node[attribute], base)
+    return str(soup).encode("utf-8")
+
+
+def _property_page(client, base):
+    response = client.get("/properties-preview")
+    if response.status_code != 200:
+        raise ValueError("The property directory could not be rendered")
+    soup = BeautifulSoup(response.get_data(as_text=True), "html.parser")
+    for node in soup.select("[href], [src]"):
+        for attribute in ("href", "src"):
+            if node.has_attr(attribute):
+                node[attribute] = _route(node[attribute], base)
+    for text in soup.find_all(string=True):
+        if "目录样版" in text:
+            text.replace_with(text.replace("目录样版 · 本地预览", "结构特性目录").replace("目录样版", "结构特性目录"))
     return str(soup).encode("utf-8")
 
 
@@ -220,6 +236,7 @@ def export_site(root, output, base_path="/airworthiness", include_originals=Fals
                 raise ValueError("Invalid source or chapter ID")
         html = _shell(client, base)
         write("index.html", html)
+        write("properties/index.html", _property_page(client, base))
         write("quality/index.html", html)
         write(".nojekyll", b"")
         write("404.html", (

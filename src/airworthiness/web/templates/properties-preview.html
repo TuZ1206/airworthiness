@@ -40,9 +40,9 @@
       <div class="section-title"><div><p class="eyebrow">03 / COMPLETE INDEX</p><h2 id="full-index-heading">九章来源 · 特性排序</h2></div><p>全部 189 条章节来源；归类待专业核验</p></div>
       {% for group in property_groups %}
       <details class="property-group" id="index-{{ group.property_id }}" {% if loop.first %}open{% endif %}>
-        <summary><span>{{ '%02d'|format(loop.index) }}　{{ group.name }}</span><small>{{ group.items|length }} 条来源</small></summary>
+        <summary><span>{{ '%02d'|format(loop.index) }}　{{ group.name }}</span><small>{{ group['items']|length }} 条来源</small></summary>
         <ol>
-          {% for item in group.items %}
+          {% for item in group['items'] %}
           <li><a href="/chapters/{{ item.chapter_id }}?source={{ item.source_id }}"><span class="index-code">{{ item.source_id }}</span><span class="index-title">{{ item.title }}</span><span class="index-document">{{ item.document_code }}</span><span class="index-arrow">↗</span></a></li>
           {% endfor %}
         </ol>

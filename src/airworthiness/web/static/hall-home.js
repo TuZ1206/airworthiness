@@ -76,6 +76,9 @@ function pagination(data, params) {
 
 async function renderHome(signal, generation) {
   const params = new URLSearchParams(location.search);
+  const propertyHref = staticMode
+    ? `${document.querySelector('meta[name="airworthiness-base"]')?.content || ''}/properties/`
+    : '/properties-preview';
   const search = homeSearch(params);
   const chapters = el('div', {}, loading('正在读取章节…'));
   const results = el('div', { 'aria-live': 'polite', 'aria-busy': 'true' }, loading('正在检索资料…'));
@@ -87,7 +90,10 @@ async function renderHome(signal, generation) {
       el('div', {}, el('p', { class: 'eyebrow' }, 'AIRWORTHINESS / RESOURCE HALL'),
         el('h1', { id: 'home-title' }, staticMode ? '适航法规资源馆' : '适航离线资源馆'),
         el('p', { class: 'hero-footnote' }, el('span', {}, '复合材料适航'), staticMode ? '在线验收 · 按章索引 · 来源可溯' : '本地收录 · 按章索引 · 来源可溯'),
-        staticMode ? el('p', { class: 'hero-footnote' }, '点击章节可查看适航资料；PDF 原件请从官方来源打开。') : null)),
+        staticMode ? el('p', { class: 'hero-footnote' }, '点击章节可查看适航资料；PDF 原件请从官方来源打开。') : null,
+        el('a', { class: 'property-entry', href: propertyHref },
+          el('span', {}, '按结构特性浏览', el('small', {}, '强度 · 刚度 · 冲击 · 疲劳 · 环境 · 制造')),
+          el('span', { 'aria-hidden': 'true' }, '↗')))),
     el('section', { class: 'search-section', 'aria-label': '资源检索与筛选' }, el('div', { class: 'page-width' }, search.form)),
     el('div', { class: 'page-width home-body' },
       el('section', { id: 'chapters', class: 'chapter-index', tabindex: '-1', 'aria-label': '九章索引' },

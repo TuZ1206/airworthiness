@@ -114,6 +114,13 @@ class StaticExportTests(unittest.TestCase):
     def export(self, **kwargs):
         return self.module.export_site(self.root, self.output, **kwargs)
 
+    def test_property_directory_is_published_with_chapter_links(self):
+        self.export()
+        page = (self.output / "properties/index.html").read_text(encoding="utf-8")
+        self.assertIn("结构特性目录", page)
+        self.assertIn("/airworthiness/chapters/ch01/?source=CH01-S001", page)
+        self.assertTrue((self.output / "static/properties-preview.css").is_file())
+
     def read_json(self, name):
         return json.loads((self.output / name).read_text(encoding="utf-8"))
 
